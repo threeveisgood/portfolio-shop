@@ -52,7 +52,7 @@ const SearchForm = styled.form`
   @media only screen and (max-width: ${(props) =>
       props.theme.responsive.phone}) {
     order: 1;
-    flex: 0 0 100%;
+    flex: 0 0 100%;    
   }
 `;
 
@@ -62,12 +62,12 @@ const SearchInput = styled.input`
   color: white;
   border: none;
   width: 90%;  
-  border: 2px solid ${(props) => props.theme.colors.mainColor};
+  border: 0.2rem solid black;
   color: black;
   transition: all 0.2s;
   padding: 1rem;
   margin-right: -3.25rem;
-  border-radius: 1.9rem;  
+  border-radius: 0.6rem;  
 
   &:focus {
     outline: none;

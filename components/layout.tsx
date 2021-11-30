@@ -15,7 +15,7 @@ const Layout = ({ children }: Props) => {
       <Header>
         <Link href="/">
           <a>
-            <Title>SandShop</Title>
+            <Title>SandoShop</Title>
           </a>
         </Link>
 
@@ -68,16 +68,12 @@ const Header = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
 
   background: ${(props) => props.theme.colors.mainColor};
-  background: linear-gradient(
-    0deg,
-    rgba(24, 166, 59, 1) 0%,
-    rgba(62, 158, 176, 1) 100%
-  );
+  background: linear-gradient(0deg, rgba(79,82,80,1) 0%, rgba(0,0,0,1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
