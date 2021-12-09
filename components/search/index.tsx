@@ -1,9 +1,9 @@
-import { useFormik } from "formik";
-import styled from "styled-components";
-import router from "next/router";
-import * as yup from "yup";
+import { useFormik } from "formik"
+import styled from "styled-components"
+import router from "next/router"
+import * as yup from "yup"
 
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai"
 
 const validationSchema = yup.object({
   search: yup.string().max(50).required("Required"),

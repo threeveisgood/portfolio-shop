@@ -56,8 +56,7 @@ const Header = styled.div`
 
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0rem 1rem;
+  align-items: center;  
 
   @media only screen and (max-width: ${(props) =>
       props.theme.responsive.phone}) {

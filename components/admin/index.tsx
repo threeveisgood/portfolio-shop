@@ -4,7 +4,7 @@ interface Props {
     
 }
 
-export default function admin({}: Props): ReactElement {
+export default function Admin({}: Props): ReactElement {
     return (
         <div>
             
