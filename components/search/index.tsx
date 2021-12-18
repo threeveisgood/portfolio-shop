@@ -43,7 +43,7 @@ export const Search = () => {
 };
 
 const SearchForm = styled.form`
-  flex: 0 0 40%;
+  flex: 0 0 30%;
 
   display: flex;
   align-items: center;
@@ -62,8 +62,8 @@ const SearchInput = styled.input`
   color: white;
   border: none;
   width: 90%;  
-  border: 0.2rem solid black;
-  color: black;
+  border: 0.2rem solid #1553CF;
+  color: #1553CF;
   transition: all 0.2s;
   padding: 1rem;
   margin-right: -3.25rem;

@@ -36,8 +36,7 @@ const FilesUpload = () => {
         <span>{progress}</span>
       </p>
       <UiFileInputButton
-        label="Upload Single File"
-        // acceptedFileTypes 로 파일 올릴 수 있는 것을 제한 가능
+        label="Upload Files"
         acceptedFileTypes="image/*"
         allowMultipleFiles={true}
         uploadFileName="file"
