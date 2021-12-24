@@ -1,13 +1,19 @@
 import React, { ReactElement, useState } from "react";
 import { useFormik } from "formik";
 import styled from "styled-components";
+import dynamic from "next/dynamic";
 import * as yup from "yup";
 
 import Container from "components/styled/container";
+import { StyledButton } from "components/styled/button";
 
-const ReactQuill =
-  typeof window === "object" ? require("react-quill") : () => false;
+const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
+
 import "react-quill/dist/quill.snow.css";
+import FilesUpload from "components/upload/filesUpload";
 
 interface Props {}
 
@@ -99,13 +105,17 @@ export default function AddPost({}: Props): ReactElement {
           <StyledLabel htmlFor="size">size</StyledLabel>
         </FormField>
 
-        <RichTextContainer>
-          <ReactQuill
+        <FieldContainer>
+          <FilesUpload />
+        </FieldContainer>
+
+        <FieldContainer>
+          <QuillNoSSRWrapper
             theme="snow"
             value={formik.values.details}
             onChange={formik.handleChange}
           />
-        </RichTextContainer>
+        </FieldContainer>
 
         <FormField>
           <StyledInput
@@ -118,7 +128,7 @@ export default function AddPost({}: Props): ReactElement {
           <StyledLabel htmlFor="link">link</StyledLabel>
         </FormField>
 
-        <StyledButton type="submit">submit</StyledButton>
+        <FormSubmitButton type="submit">submit</FormSubmitButton>
       </PostForm>
     </Container>
   );
@@ -144,7 +154,7 @@ const StyledLabel = styled.label`
   color: gray;
 `;
 
-const RichTextContainer = styled.div`
+const FieldContainer = styled.div`
   margin-top: 3rem;
 `;
 
@@ -188,31 +198,6 @@ const StyledInput = styled.input`
   }
 `;
 
-const StyledButton = styled.button`
+const FormSubmitButton = styled(StyledButton)`
   margin-top: 4rem;
-  border-radius: 0.2rem;
-  background-image: linear-gradient(to bottom, #1553cf 0%, #4dcfcb 100%);
-  border: 0;
-  border-radius: 0.25rem;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-size: 1.8rem;
-  font-weight: 600;
-  //line-height: 2.8rem;
-  padding: 1rem 1.25rem;
-  text-align: center;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-
-  &:hover {
-    box-shadow: none;
-  }
-
-  @media (min-width: 1024px) {
-    font-size: 1.6rem;
-    padding: 0.8rem 1.1rem;
-    line-height: 2.2rem;
-  }
 `;

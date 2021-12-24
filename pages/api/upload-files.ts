@@ -9,10 +9,10 @@ const app = nextConnect({
   onError(error: any, req: any, res: any) {
     res
       .status(501)
-      .json({ error: `Sorry something Happened! ${error.message}` });
+      .json({ error: `Sorry something Happened! ${error.message}` })
   },
   onNoMatch(req: any, res: any) {
-    res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
+    res.status(405).json({ error: `Method '${req.method}' Not Allowed` })
   },
 });
 
@@ -28,13 +28,14 @@ const upload = multer({
     bucket: process.env.BUCKET_NAME,
     key(req: any, file: any, cb: any) {
       const nowDate = dayjs(Date.now()).format("YYMMDDHHMM");
-      cb(null, `original/${nowDate}_${file.originalname}`);
+      cb(null, `${nowDate}_${file.originalname}`)
     },
-  })
+  }),
+  limits: { fileSize:  (1024 * 1024) * 100 },
 });
 
 app.post(upload.array("file"), function (req, res) {
-  return res.json(req.files.map((v: any) => v.location));  
+  return res.json(req.files.map((v: any) => v.location)); 
 });
 
 export default app;

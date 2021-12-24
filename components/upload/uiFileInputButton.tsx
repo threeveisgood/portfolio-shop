@@ -1,4 +1,6 @@
+import { StyledButton } from "components/styled/button";
 import React from "react";
+import styled from "styled-components";
 
 export interface IProps {
   acceptedFileTypes?: string;
@@ -34,9 +36,9 @@ export const UiFileInputButton: React.FC<IProps> = (props) => {
 
   return (
     <form ref={formRef}>
-      <button type="button" onClick={onClickHandler}>
+      <UploadButton type="button" onClick={onClickHandler}>
         {props.label}
-      </button>
+      </UploadButton>
       <input
         accept={props.acceptedFileTypes}
         multiple={props.allowMultipleFiles}
@@ -54,3 +56,9 @@ UiFileInputButton.defaultProps = {
   acceptedFileTypes: "",
   allowMultipleFiles: false,
 };
+
+const UploadButton = styled(StyledButton)`
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  padding: .3rem .5rem;
+`
