@@ -1,8 +1,8 @@
-import { applyMiddleware, createStore, Middleware, StoreEnhancer } from 'redux';
+import { applyMiddleware, combineReducers, createStore, Middleware, StoreEnhancer } from 'redux';
 import { createWrapper, MakeStore } from 'next-redux-wrapper';
 import createSagaMiddleware from 'redux-saga';
 
-import rootReducer from './reducer';
+import addPost from 'modules/addPost'
 import rootSaga from './saga';
 import { AppState } from './interfaces';
 
@@ -14,8 +14,10 @@ const bindMiddleware = (middleware: Middleware[]): StoreEnhancer => {
   return applyMiddleware(...middleware);
 };
 
-export const makeStore: MakeStore<AppState> = () => {
+export const makeStore: MakeStore<any, any> = () => {
   const sagaMiddleware = createSagaMiddleware();
+
+  const rootReducer = combineReducers({ addPost })
 
   const store = createStore(rootReducer, bindMiddleware([sagaMiddleware]));
 
@@ -24,4 +26,4 @@ export const makeStore: MakeStore<AppState> = () => {
   return store;
 };
 
-export const wrapper = createWrapper<AppState>(makeStore, { debug: true });
+export const wrapper = createWrapper<any, any>(makeStore, { debug: true });

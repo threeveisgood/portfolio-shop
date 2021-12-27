@@ -7,6 +7,7 @@ export const exampleInitialState: AppState = {
   lastUpdate: 0,
   light: false,
   placeholderData: null,
+  ThumbnailLinks: []
 };
 
 const reducer = (
@@ -52,6 +53,11 @@ const reducer = (
         ...state,
         ...{ lastUpdate: action.ts, light: !!action.light },
       };
+
+    case actionTypes.THUMBNAIL_LINKS:
+      return {
+        ...state,        
+      }
 
     default:
       return state;

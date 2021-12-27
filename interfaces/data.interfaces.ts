@@ -28,4 +28,5 @@ export interface User {
     lastUpdate: number;
     light: boolean;
     placeholderData: User[] | null;
+    ThumbnailLinks: string[] | null
   }

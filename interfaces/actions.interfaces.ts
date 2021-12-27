@@ -9,6 +9,7 @@ export enum actionTypes {
   LOAD_DATA_SUCCESS = 'LOAD_DATA_SUCCESS',
   START_CLOCK = 'START_CLOCK',
   TICK_CLOCK = 'TICK_CLOCK',
+  THUMBNAIL_LINKS = 'THUMBNAIL_LINKS'
 }
 
 export type Action =
@@ -19,7 +20,8 @@ export type Action =
   | LoadData
   | LoadDataSuccess
   | StartClock
-  | TickClock;
+  | TickClock
+  | ThumbnailLinks
 
 export interface Failure {
   type: actionTypes.FAILURE;
@@ -55,4 +57,8 @@ export interface TickClock {
   type: actionTypes.TICK_CLOCK;
   light: boolean;
   ts: number;
+}
+
+export interface ThumbnailLinks {
+  type: actionTypes.THUMBNAIL_LINKS;
 }
