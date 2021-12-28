@@ -39,7 +39,6 @@ export default function AddPost({}: Props): ReactElement {
       color: [],
       size: [],
       details: "",
-      link: "",
     },
     validationSchema: validationSchema,
     onSubmit: () => {},

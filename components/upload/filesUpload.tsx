@@ -1,11 +1,14 @@
 import React, { useCallback, useState } from "react";
 import axios from "axios";
+import { useDispatch } from 'react-redux'
 import { UiFileInputButton } from "components/upload/uiFileInputButton";
 import ChangeToThumbnail from "lib/changeToThumbnail"
 
 const FilesUpload = () => {
+  const dispatch = useDispatch()
   const [thumb, setThumb] = useState<string[]>([]);
   const [progress, setProgress] = useState<number>(0);
+
   const onChange = useCallback(
     async (formData: FormData) => {
       const config = {
@@ -20,6 +23,8 @@ const FilesUpload = () => {
     },
     [thumb]
   );
+
+  const setImageLinks: any = useCallback(() => dispatch(setImageLinks()), [dispatch])
 
   return (
     <>
