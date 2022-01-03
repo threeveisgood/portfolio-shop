@@ -48,11 +48,10 @@ export default async function handler(
     
       try {
         result = await insertDocument(client, 'posts', newPost)
+        res.status(201).json({ message: 'Added Post.', post: newPost })
       } catch (err) {
         res.status(500).json({ message: 'adding post failed!'})
-      }
-        
-      res.status(201).json({ message: 'Added Post.', post: newPost })
+      }          
   }
 
   client.close();

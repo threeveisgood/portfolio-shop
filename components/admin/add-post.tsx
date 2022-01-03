@@ -3,9 +3,12 @@ import { useFormik } from "formik";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import * as yup from "yup";
+import { useAddPost } from "hooks/useAddPost";
 
 import Container from "components/styled/container";
 import { StyledButton } from "components/styled/button";
+
+import FilesUpload from "components/upload/files-upload";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -13,23 +16,24 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
 });
 
 import "react-quill/dist/quill.snow.css";
-import FilesUpload from "components/upload/filesUpload";
 
 interface Props {}
 
 const validationSchema = yup.object().shape({
   name: yup.string().max(100).required("Required"),
-  price: yup.string().max(50).required("Required"),
+  price: yup.string().max(50),
   imgUrl: yup.mixed().required(),
   recommended: yup.number(),
   color: yup.array().of(yup.string()),
   size: yup.array().of(yup.string()),
   details: yup.string(),
   brand: yup.string(),
-  link: yup.string().required("Required"),
-});
+  link: yup.string()
+})
 
 export default function AddPost({}: Props): ReactElement {
+  const { mutate } = useAddPost()
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -41,11 +45,13 @@ export default function AddPost({}: Props): ReactElement {
       details: "",
     },
     validationSchema: validationSchema,
-    onSubmit: () => {},
+    onSubmit: (values: any) => {
+      mutate(values)
+    },
   });
 
   return (
-    <Container>
+    <Container>      
       <PostForm onSubmit={formik.handleSubmit} autoComplete="off">
         <FormField>
           <StyledInput

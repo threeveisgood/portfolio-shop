@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import axios from "axios";
 import { useDispatch } from 'react-redux'
-import { UiFileInputButton } from "components/upload/uiFileInputButton";
-import ChangeToThumbnail from "lib/changeToThumbnail"
+import { UiFileInputButton } from "components/upload/ui-file-input-button";
+import ChangeToThumbnail from "lib/change-to-thumbnail"
 
 const FilesUpload = () => {
   const dispatch = useDispatch()
@@ -19,12 +19,12 @@ const FilesUpload = () => {
       };
       axios.post<any>("/api/upload-files", formData, config).then((res) => {
         setThumb([...thumb, ...res.data]);
+        const setImageLinks: any = useCallback(() => dispatch(setImageLinks(thumb)), [dispatch])
+        setImageLinks()
       });
     },
     [thumb]
   );
-
-  const setImageLinks: any = useCallback(() => dispatch(setImageLinks()), [dispatch])
 
   return (
     <>

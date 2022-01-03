@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import AddPost from 'components/admin/addPost'
+import AddPost from 'components/admin/add-post'
 interface Props {
     
 }
