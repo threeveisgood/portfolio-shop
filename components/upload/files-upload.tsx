@@ -3,25 +3,27 @@ import axios from "axios";
 import { useDispatch } from 'react-redux'
 import { UiFileInputButton } from "components/upload/ui-file-input-button";
 import ChangeToThumbnail from "lib/change-to-thumbnail"
+import { setImageLinks } from "modules/addPost";
 
 const FilesUpload = () => {
   const dispatch = useDispatch()
   const [thumb, setThumb] = useState<string[]>([]);
   const [progress, setProgress] = useState<number>(0);
 
+  const addImageLinks: any = useCallback((link: string) => dispatch(setImageLinks(link)), [dispatch])
+
   const onChange = useCallback(
     async (formData: FormData) => {
       const config = {
         headers: { "content-type": "multipart/form-data" },
         onUploadProgress: (event: { loaded: number; total: number }) => {
-          setProgress(Math.round((event.loaded * 100) / event.total));
+          setProgress(Math.round((event.loaded * 100) / event.total))
         },
       };
       axios.post<any>("/api/upload-files", formData, config).then((res) => {
-        setThumb([...thumb, ...res.data]);
-        const setImageLinks: any = useCallback(() => dispatch(setImageLinks(thumb)), [dispatch])
-        setImageLinks()
-      });
+        setThumb([...thumb, ...res.data])                       
+        addImageLinks(res.data)
+      })
     },
     [thumb]
   );
@@ -41,9 +43,8 @@ const FilesUpload = () => {
       />
       <ul>
         {thumb &&
-          thumb.map((item: string, i: number) => {
+          thumb.map((item: string, i: number) => {            
             const changedItem = ChangeToThumbnail(item)
-
             console.log("item", item);
             return (
               <li key={i}>                
@@ -56,4 +57,4 @@ const FilesUpload = () => {
   );
 };
 
-export default FilesUpload;
+export default React.memo(FilesUpload)

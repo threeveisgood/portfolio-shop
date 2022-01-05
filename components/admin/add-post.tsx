@@ -4,6 +4,7 @@ import styled from "styled-components";
 import dynamic from "next/dynamic";
 import * as yup from "yup";
 import { useAddPost } from "hooks/useAddPost";
+import { useSelector } from 'react-redux'
 
 import Container from "components/styled/container";
 import { StyledButton } from "components/styled/button";
@@ -33,6 +34,8 @@ const validationSchema = yup.object().shape({
 
 export default function AddPost({}: Props): ReactElement {
   const { mutate } = useAddPost()
+  const ThumbnailLinks = useSelector((state: any) => state.addPost.imageLinks)
+  console.log("add-post value: " + ThumbnailLinks)
 
   const formik = useFormik({
     initialValues: {
@@ -40,14 +43,14 @@ export default function AddPost({}: Props): ReactElement {
       price: "",
       imgUrl: [],
       recommended: 0,
-      color: [],
-      size: [],
+      // color: [],
+      // size: [],
       details: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values: any) => {
       mutate(values)
-    },
+    }
   });
 
   return (
@@ -83,12 +86,13 @@ export default function AddPost({}: Props): ReactElement {
             id="imgUrl"
             name="imgUrl"
             placeholder="imgUrl"
+            value={ThumbnailLinks}
             onChange={formik.handleChange}
           />
           <StyledLabel htmlFor="imgUrl">imgUrl</StyledLabel>
         </FormField>
 
-        <FormField>
+        {/* <FormField>
           <StyledInput
             type="text"
             id="color"
@@ -108,7 +112,7 @@ export default function AddPost({}: Props): ReactElement {
             onChange={formik.handleChange}
           />
           <StyledLabel htmlFor="size">size</StyledLabel>
-        </FormField>
+        </FormField> */}
 
         <FieldContainer>
           <FilesUpload />
@@ -122,7 +126,7 @@ export default function AddPost({}: Props): ReactElement {
           />
         </FieldContainer>
 
-        <FormField>
+        {/* <FormField>
           <StyledInput
             type="text"
             id="link"
@@ -131,7 +135,7 @@ export default function AddPost({}: Props): ReactElement {
             onChange={formik.handleChange}
           />
           <StyledLabel htmlFor="link">link</StyledLabel>
-        </FormField>
+        </FormField> */}
 
         <FormSubmitButton type="submit">submit</FormSubmitButton>
       </PostForm>
