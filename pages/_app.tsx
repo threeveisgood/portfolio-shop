@@ -8,7 +8,7 @@ import { theme } from "styled/theme";
 import { wrapper } from "store";
 import Layout from "components/layout";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
-
+import { Provider } from "next-auth/client";
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = useState(() => new QueryClient());
@@ -20,17 +20,19 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
-        />                
+        />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        </Hydrate>
+        <Provider session={pageProps.session}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <ThemeProvider theme={theme}>
+              <GlobalStyle />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ThemeProvider>
+          </Hydrate>
+        </Provider>
       </QueryClientProvider>
     </>
   );

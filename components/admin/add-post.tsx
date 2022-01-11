@@ -1,22 +1,21 @@
 import React, { ReactElement, useState } from "react";
 import { useFormik } from "formik";
-import styled from "styled-components";
 import dynamic from "next/dynamic";
 import * as yup from "yup";
 import { useAddPost } from "hooks/useAddPost";
 import { useSelector } from 'react-redux'
 
 import Container from "components/styled/container";
-import { StyledButton } from "components/styled/button";
+import { FormField, StyledInput, StyledLabel, FieldContainer, FormSubmitButton } from "components/styled/form";
 
 import FilesUpload from "components/upload/files-upload";
+
+import "react-quill/dist/quill.snow.css";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
-
-import "react-quill/dist/quill.snow.css";
 
 interface Props {}
 
@@ -25,11 +24,11 @@ const validationSchema = yup.object().shape({
   price: yup.string().max(50),
   imgUrl: yup.mixed().required(),
   recommended: yup.number(),
-  color: yup.array().of(yup.string()),
-  size: yup.array().of(yup.string()),
+  // color: yup.array().of(yup.string()),
+  // size: yup.array().of(yup.string()),
   details: yup.string(),
-  brand: yup.string(),
-  link: yup.string()
+  // brand: yup.string(),
+  // link: yup.string()
 })
 
 export default function AddPost({}: Props): ReactElement {
@@ -55,7 +54,7 @@ export default function AddPost({}: Props): ReactElement {
 
   return (
     <Container>      
-      <PostForm onSubmit={formik.handleSubmit} autoComplete="off">
+      <form onSubmit={formik.handleSubmit} autoComplete="off">
         <FormField>
           <StyledInput
             type="text"
@@ -138,75 +137,8 @@ export default function AddPost({}: Props): ReactElement {
         </FormField> */}
 
         <FormSubmitButton type="submit">submit</FormSubmitButton>
-      </PostForm>
+      </form>
     </Container>
   );
 }
 
-const PostForm = styled.form``;
-
-const FormField = styled.div`
-  position: relative;
-  padding: 15px 0 0;
-
-  &:not(:first-child) {
-    margin-top: 1rem;
-  }
-`;
-
-const StyledLabel = styled.label`
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: gray;
-`;
-
-const FieldContainer = styled.div`
-  margin-top: 3rem;
-`;
-
-const StyledInput = styled.input`
-  width: 30rem;
-  border: 0;
-  border-bottom: 2px solid grey;
-  border-image: linear-gradient(to right, #1553cf 0%, #4dcfcb 100%);
-  border-image-slice: 1;
-  outline: 0;
-  font-size: 1.5rem;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: transparent;
-  }
-
-  &:placeholder-shown ~ ${StyledLabel} {
-    font-size: 1.3rem;
-    cursor: text;
-    top: 20px;
-  }
-
-  &:focus {
-    ~ ${StyledLabel} {
-      position: absolute;
-      top: 0;
-      display: block;
-      transition: 0.2s;
-      font-size: 1rem;
-      color: #1553cf;
-      font-weight: 500;
-    }
-    padding-bottom: 6px;
-    font-weight: 500;
-    border-width: 3px;
-    border-image: linear-gradient(to right, #1553cf 0%, #4dcfcb 100%);
-    border-image-slice: 1;
-  }
-`;
-
-const FormSubmitButton = styled(StyledButton)`
-  margin-top: 4rem;
-`;

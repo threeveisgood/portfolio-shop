@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import axios from "axios";
-import { UiFileInputButton } from "components/upload/uiFileInputButton";
+import { UiFileInputButton } from "components/upload/ui-file-input-button";
 
 const IndexPage = () => {
   const [thumb, setThumb] = useState<string[]>([]);

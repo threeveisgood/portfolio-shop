@@ -3,6 +3,9 @@ import Link from "next/link";
 
 import { AiOutlineUser } from "react-icons/ai";
 import { IoCartOutline } from "react-icons/io5";
+import { MdVpnKey } from "react-icons/md";
+import { MdAppRegistration } from "react-icons/md";
+import { useSession, signOut } from "next-auth/client";
 import { Search } from "./search";
 import NavBar from "./header/navBar";
 
@@ -11,6 +14,15 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
+  const [session, loading] = useSession();
+
+  function logoutHandler() {
+    signOut();
+  }
+
+  console.log(loading);
+  console.log(session);
+
   return (
     <>
       <Header>
@@ -25,18 +37,28 @@ const Layout = ({ children }: Props) => {
           <Link href="/">
             <a>
               <UserNavIcon>
-                <IoCartOutline />
+                <MdVpnKey />
+                <IconName>Login</IconName>
               </UserNavIcon>
             </a>
           </Link>
 
-          <Link href="/">
+          <Link href="/auth">
             <a>
               <UserNavIcon className="last">
-                <AiOutlineUser />
+                <MdAppRegistration />
+                <IconName>Register</IconName>
               </UserNavIcon>
             </a>
           </Link>
+          {session && (       
+            <button onClick={logoutHandler}>
+                <UserNavIcon className="last">
+                  <MdAppRegistration />
+                  <IconName>Logout</IconName>
+                </UserNavIcon>              
+                </button>                     
+          )}
         </UserNav>
       </Header>
       <NavBar />
@@ -83,7 +105,6 @@ const Title = styled.div`
 `;
 
 const UserNav = styled.nav`
-  //align-self: stretch;  
   display: flex;
   align-items: center;
 
@@ -92,13 +113,14 @@ const UserNav = styled.nav`
     /* padding: 0 2rem;      
       height: 100%;
       display: flex;
-      align-items: center; */      
+      align-items: center; */
   }
 `;
 
 const UserNavIcon = styled.div`
+  display: flex;
   font-size: 2.8rem;
-  color: #1553CF;
+  color: #1553cf;
 
   margin-right: 1.2rem;
 
@@ -107,4 +129,10 @@ const UserNavIcon = styled.div`
   }
   /* height: 3rem;
   width: 3rem; */
+`;
+
+const IconName = styled.p`
+  font-size: 1.5rem;
+  margin-left: 0.3rem;
+  align-items: center;
 `;
