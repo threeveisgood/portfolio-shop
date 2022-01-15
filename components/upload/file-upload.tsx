@@ -23,7 +23,7 @@ const IndexPage = () => {
   return (
     <>
       <p>
-        <span>이미지 업로드</span>
+        <span>upload images</span>
         <span>{progress}</span>
       </p>
       <UiFileInputButton

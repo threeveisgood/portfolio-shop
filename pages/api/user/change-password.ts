@@ -22,21 +22,21 @@ export default async function handler(
   const oldPassword: any = req.body.oldPassword
   const newPassword: any = req.body.newPassword
 
-  const client = await connectToDatabase()
+  const client: any = await connectToDatabase()
 
-  const usersCollection = client.db().collection('users')
+  const usersCollection: any = client.db().collection('users')
 
-  const user = await usersCollection.findOne({email: userEmail})
+  const user: any = await usersCollection.findOne({ email: userEmail })
 
   if (!user) {
-      res.status(404).json({message: 'User not found.'})
+      res.status(404).json({ message: 'User not found.' })
       client.close()
       return
   }
 
-  const currentPassword = user.password
+  const currentPassword: any = user.password
 
-  const passwordsAreEqual = await verifyPassword(oldPassword, currentPassword)
+  const passwordsAreEqual: any = await verifyPassword(oldPassword, currentPassword)
 
   if (!passwordsAreEqual) {
       res.status(403).json({ message: 'Invalid password.' })
@@ -44,9 +44,9 @@ export default async function handler(
       return
   }
 
-  const hashedPassword = await hashPassword(newPassword) 
+  const hashedPassword: any = await hashPassword(newPassword) 
 
-  const result = await usersCollection.updateOne(
+  const result: any = await usersCollection.updateOne(
       { email: userEmail },
       { $set: { password: hashedPassword }}
   )

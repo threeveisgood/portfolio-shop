@@ -6,7 +6,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return;
   }
-  const data = req.body;
+  const data: any = req.body;
 
   const { email, password } = data;
 
@@ -26,9 +26,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return
   }
 
-  const client = await connectToDatabase();
+  const client: any = await connectToDatabase();
 
-  const db = client.db();
+  const db: any = client.db();
 
   const existingUser: any = await db.collection('users').findOne({email: email})
 
@@ -37,9 +37,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       client.close()
       return 
   }
-  const hashedPassword = await hashPassword(password);
+  const hashedPassword: any = await hashPassword(password);
 
-  const result = await db.collection('users').insertOne({
+  const result: any = await db.collection('users').insertOne({
     email: email,
     password: hashedPassword,
   });

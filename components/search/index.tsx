@@ -32,7 +32,7 @@ export const Search = () => {
           type="text"
           value={formik.values.search}
           onChange={formik.handleChange}
-          placeholder="Search anything!"
+          placeholder="Search artworks!"
         />
         <SearchButton type="submit">
           <AiOutlineSearch />
@@ -62,12 +62,12 @@ const SearchInput = styled.input`
   color: white;
   border: none;
   width: 90%;  
-  border: 0.2rem solid #1553CF;
-  color: #1553CF;
+  border: 0.2rem solid #333030;
+  color: #333030;
   transition: all 0.2s;
   padding: 1rem;
   margin-right: -3.25rem;
-  border-radius: 0.6rem;  
+  border-radius: 2.5rem;  
 
   &:focus {
     outline: none;

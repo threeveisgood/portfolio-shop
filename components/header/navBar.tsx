@@ -39,7 +39,7 @@ const Nav = styled.nav`
   display: flex;
   justify-content: center;
   
-  background: linear-gradient(to right, #1553cf 0%, #4dcfcb 100%);
+  background: linear-gradient(0deg, rgba(100,101,101,1) 0%, rgba(0,0,0,1) 54%);
   color: white; 
 `
 

@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import Link from "next/link";
-
-import { AiOutlineUser } from "react-icons/ai";
-import { IoCartOutline } from "react-icons/io5";
-import { MdVpnKey } from "react-icons/md";
-import { MdAppRegistration } from "react-icons/md";
 import { useSession, signOut } from "next-auth/client";
 import { Search } from "./search";
 import NavBar from "./header/navBar";
+import { AuthButton, NavButton, StyledButton } from "./styled/button";
+import { CgProfile } from "react-icons/cg";
+import { IoCartOutline } from "react-icons/io5";
 
 type Props = {
   children: JSX.Element;
@@ -34,31 +32,32 @@ const Layout = ({ children }: Props) => {
 
         <Search />
         <UserNav>
-          <Link href="/">
-            <a>
-              <UserNavIcon>
-                <MdVpnKey />
-                <IconName>Login</IconName>
-              </UserNavIcon>
-            </a>
-          </Link>
-
-          <Link href="/auth">
-            <a>
-              <UserNavIcon className="last">
-                <MdAppRegistration />
-                <IconName>Register</IconName>
-              </UserNavIcon>
-            </a>
-          </Link>
-          {session && (       
-            <button onClick={logoutHandler}>
-                <UserNavIcon className="last">
-                  <MdAppRegistration />
-                  <IconName>Logout</IconName>
-                </UserNavIcon>              
-                </button>                     
+          {session && (
+            <Link href="/cart">
+              <a>
+                <UserProfileIcon>
+                  <IoCartOutline />
+                </UserProfileIcon>
+              </a>
+            </Link>
           )}
+          {session && (
+            <Link href="/profile">
+              <a>
+                <UserProfileIcon className="last">
+                  <CgProfile />
+                </UserProfileIcon>
+              </a>
+            </Link>
+          )}
+          {!session && (
+            <Link href="/auth">
+              <a>
+                <AuthButton>Log in</AuthButton>
+              </a>
+            </Link>
+          )}
+          {/* {session && <AuthButton onClick={logoutHandler}>Log out</AuthButton>} */}
         </UserNav>
       </Header>
       <NavBar />
@@ -96,10 +95,21 @@ const Title = styled.div`
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
 
-  background: #1553cf;
-  background: -webkit-linear-gradient(to right, #1553cf 0%, #4dcfcb 100%);
-  background: -moz-linear-gradient(to right, #1553cf 0%, #4dcfcb 100%);
-  background: linear-gradient(to right, #1553cf 0%, #4dcfcb 100%);
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(100, 101, 101, 1) 0%,
+    rgba(0, 0, 0, 1) 54%
+  );
+  background: -moz-linear-gradient(
+    0deg,
+    rgba(100, 101, 101, 1) 0%,
+    rgba(0, 0, 0, 1) 54%
+  );
+  background: linear-gradient(
+    0deg,
+    rgba(100, 101, 101, 1) 0%,
+    rgba(0, 0, 0, 1) 54%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
@@ -117,12 +127,12 @@ const UserNav = styled.nav`
   }
 `;
 
-const UserNavIcon = styled.div`
+const UserProfileIcon = styled.div`
   display: flex;
   font-size: 2.8rem;
-  color: #1553cf;
-
-  margin-right: 1.2rem;
+  color: black;
+  
+  margin-right: 1.4rem;
 
   &.last {
     margin-right: 0;

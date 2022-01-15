@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledButton = styled.button`
   border-radius: 0.2rem;
-  background-image: linear-gradient(to bottom, #1553cf 0%, #4dcfcb 100%);
+  background-image: linear-gradient(0deg, rgba(100,101,101,1) 0%, rgba(0,0,0,1) 54%);
   border: 0;
   border-radius: 0.25rem;
   box-sizing: border-box;
@@ -22,7 +22,21 @@ export const StyledButton = styled.button`
 
   @media (min-width: 1024px) {
     font-size: 1.6rem;
-    padding: 0.8rem 1.1rem;
+    padding: 0.6rem 0.8rem;
     line-height: 2.2rem;
   }
 `;
+
+
+export const NavButton = styled.button`
+  border: none;
+  background: #fff;
+`
+
+export const AuthButton = styled(StyledButton)`
+ background: linear-gradient(0deg, rgba(100,101,101,1) 0%, rgba(0,0,0,1) 54%);
+ font-size: 1.3rem;
+ font-weight: 500;
+ color:#fff5f5;
+ padding: 0.5rem 1.3rem;
+`
