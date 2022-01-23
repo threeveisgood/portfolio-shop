@@ -23,25 +23,17 @@ export default async function handler(
     const {
       name,
       price,
-      imageUrl,
-      recommended,
-      color,
-      size,
-      details,
-      brand,
-      link,
+      imgUrl,
+      recommended,      
+      details,      
     } = req.body
 
     const newPost: Post = {
         name,
         price,
-        imageUrl,
-        recommended,
-        color,
-        size,
-        details,
-        brand,
-        link,  
+        imgUrl,
+        recommended,        
+        details
       }
     
       let result

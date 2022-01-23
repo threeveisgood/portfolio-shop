@@ -1,59 +1,96 @@
 import React, { ReactElement, useState } from "react";
 import { useFormik } from "formik";
-import dynamic from "next/dynamic";
 import * as yup from "yup";
-import { useAddPost } from "hooks/useAddPost";
-import { useSelector } from 'react-redux'
-
+import { useSelector } from "react-redux";
 import Container from "components/styled/container";
-import { FormField, StyledInput, StyledLabel, FieldContainer, FormSubmitButton } from "components/styled/form";
+import {
+  FormField,
+  StyledInput,
+  StyledLabel,
+  FieldContainer,
+  FormSubmitButton,
+} from "components/styled/form";
 
 import FilesUpload from "components/upload/files-upload";
 
-import "react-quill/dist/quill.snow.css";
+// import dynamic from "next/dynamic";
+// import "react-quill/dist/quill.snow.css";
 
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
+// const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+//   ssr: false,
+//   loading: () => <p>Loading ...</p>,
+// });
 
 interface Props {}
 
+async function addPost(
+  name: any,
+  price: any,
+  imgUrl: any,
+  recommended: any,
+  details: any
+) {
+  const response = await fetch("/api/admin/add-post", {
+    method: "POST",
+    body: JSON.stringify({ name, price, imgUrl, recommended, details }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Something went wrong!");
+  }
+
+  return data;
+}
+
 const validationSchema = yup.object().shape({
   name: yup.string().max(100).required("Required"),
-  price: yup.string().max(50),
-  imgUrl: yup.mixed().required(),
+  price: yup.string().max(50),  
   recommended: yup.number(),
-  // color: yup.array().of(yup.string()),
-  // size: yup.array().of(yup.string()),
   details: yup.string(),
-  // brand: yup.string(),
-  // link: yup.string()
-})
+});
 
 export default function AddPost({}: Props): ReactElement {
-  const { mutate } = useAddPost()
-  const ThumbnailLinks = useSelector((state: any) => state.addPost.imageLinks)
-  console.log("add-post value: " + ThumbnailLinks)
+  const thumbnailLinks = useSelector((state: any) => state.addPost.imageLinks);
 
   const formik = useFormik({
     initialValues: {
       name: "",
       price: "",
-      imgUrl: [],
+      //imgUrl: [],
       recommended: 0,
-      // color: [],
-      // size: [],
       details: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values: any) => {
-      mutate(values)
-    }
+    onSubmit: async (values, { setSubmitting }) => {
+      const enteredName = values.name;
+      const enteredPrice = values.price;
+      const enteredImageUrl = thumbnailLinks;
+      const enteredRecommended = values.recommended;
+      const enteredDetail = values.details;
+
+      try {
+        const result = await addPost(
+          enteredName,
+          enteredPrice,
+          enteredImageUrl,
+          enteredRecommended,
+          enteredDetail
+        );
+      } catch (error) {
+        console.log(error);
+      }
+
+      setSubmitting(false);
+    },
   });
 
   return (
-    <Container>      
+    <Container>
       <form onSubmit={formik.handleSubmit} autoComplete="off">
         <FormField>
           <StyledInput
@@ -79,66 +116,34 @@ export default function AddPost({}: Props): ReactElement {
           <StyledLabel htmlFor="price">price</StyledLabel>
         </FormField>
 
-        <FormField>
+        {/* <FormField>
           <StyledInput
             type="text"
             id="imgUrl"
             name="imgUrl"
             placeholder="imgUrl"
-            value={ThumbnailLinks}
+            value={thumbnailLinks}
             onChange={formik.handleChange}
           />
           <StyledLabel htmlFor="imgUrl">imgUrl</StyledLabel>
-        </FormField>
-
-        {/* <FormField>
-          <StyledInput
-            type="text"
-            id="color"
-            name="color"
-            placeholder="color"
-            onChange={formik.handleChange}
-          />
-          <StyledLabel htmlFor="color">color</StyledLabel>
-        </FormField>
-
-        <FormField>
-          <StyledInput
-            type="text"
-            id="size"
-            name="size"
-            placeholder="size"
-            onChange={formik.handleChange}
-          />
-          <StyledLabel htmlFor="size">size</StyledLabel>
         </FormField> */}
 
         <FieldContainer>
           <FilesUpload />
         </FieldContainer>
 
-        <FieldContainer>
-          <QuillNoSSRWrapper
-            theme="snow"
+        <FormField>
+          <h5>details</h5>
+          <textarea
+            id="details"
+            name="details"
             value={formik.values.details}
             onChange={formik.handleChange}
           />
-        </FieldContainer>
-
-        {/* <FormField>
-          <StyledInput
-            type="text"
-            id="link"
-            name="link"
-            placeholder="link"
-            onChange={formik.handleChange}
-          />
-          <StyledLabel htmlFor="link">link</StyledLabel>
-        </FormField> */}
+        </FormField>
 
         <FormSubmitButton type="submit">submit</FormSubmitButton>
       </form>
     </Container>
   );
 }
-
