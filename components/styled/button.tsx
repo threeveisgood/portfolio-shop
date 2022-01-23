@@ -4,7 +4,7 @@ export const StyledButton = styled.button`
   border-radius: 0.2rem;
   background-image: linear-gradient(0deg, rgba(100,101,101,1) 0%, rgba(0,0,0,1) 54%);
   border: 0;
-  border-radius: 0.25rem;
+  border-radius: 0.4rem;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
@@ -22,7 +22,7 @@ export const StyledButton = styled.button`
 
   @media (min-width: 1024px) {
     font-size: 1.6rem;
-    padding: 0.6rem 0.8rem;
+    padding: 0.6rem 1.2rem;
     line-height: 2.2rem;
   }
 `;
@@ -38,5 +38,5 @@ export const AuthButton = styled(StyledButton)`
  font-size: 1.3rem;
  font-weight: 500;
  color:#fff5f5;
- padding: 0.5rem 1.3rem;
+ padding: 0.6rem 1.2rem;
 `

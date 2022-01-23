@@ -4,7 +4,6 @@ import createSagaMiddleware from 'redux-saga';
 
 import addPost from 'modules/addPost'
 import rootSaga from './saga';
-import { AppState } from './interfaces';
 
 const bindMiddleware = (middleware: Middleware[]): StoreEnhancer => {
   if (process.env.NODE_ENV !== 'production') {

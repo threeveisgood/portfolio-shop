@@ -59,6 +59,5 @@ UiFileInputButton.defaultProps = {
 
 const UploadButton = styled(StyledButton)`
   margin-top: 1rem;
-  font-size: 1.2rem;
-  padding: .3rem .5rem;
+  font-size: 1.2rem;  
 `

@@ -61,7 +61,6 @@ export default function AddPost({}: Props): ReactElement {
     initialValues: {
       name: "",
       price: "",
-      //imgUrl: [],
       recommended: 0,
       details: "",
     },
@@ -116,18 +115,6 @@ export default function AddPost({}: Props): ReactElement {
           <StyledLabel htmlFor="price">price</StyledLabel>
         </FormField>
 
-        {/* <FormField>
-          <StyledInput
-            type="text"
-            id="imgUrl"
-            name="imgUrl"
-            placeholder="imgUrl"
-            value={thumbnailLinks}
-            onChange={formik.handleChange}
-          />
-          <StyledLabel htmlFor="imgUrl">imgUrl</StyledLabel>
-        </FormField> */}
-
         <FieldContainer>
           <FilesUpload />
         </FieldContainer>
@@ -142,7 +129,7 @@ export default function AddPost({}: Props): ReactElement {
           />
         </FormField>
 
-        <FormSubmitButton type="submit">submit</FormSubmitButton>
+        <FormSubmitButton type="submit">Submit</FormSubmitButton>
       </form>
     </Container>
   );

@@ -13,7 +13,7 @@ const Index: NextPage = () => {
 
   useEffect(() => {
     dispatch(startClock());
-  });
+  });  
 
   return <Page title="Index Page" linkTo="/other" NavigateTo="Other Page" />;
 };
