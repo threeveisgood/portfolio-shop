@@ -32,7 +32,7 @@ export const Search = () => {
           type="text"
           value={formik.values.search}
           onChange={formik.handleChange}
-          placeholder="Search artworks!"
+          placeholder="&nbsp;Search"
         />
         <SearchButton type="submit">
           <AiOutlineSearch />

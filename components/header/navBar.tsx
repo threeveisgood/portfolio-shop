@@ -52,8 +52,7 @@ const InformationUl = styled.ul`
   line-height: 2.2;
 `
 
-const InformationLi = styled.li`  
-  font-weight: 300;
+const InformationLi = styled.li`    
   &:not(:last-child) {
     margin-right: 2rem;
   }

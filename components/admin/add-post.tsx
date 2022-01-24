@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from "react";
+import { useRouter } from 'next/router'
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
@@ -55,6 +56,7 @@ const validationSchema = yup.object().shape({
 });
 
 export default function AddPost({}: Props): ReactElement {
+  const router = useRouter()
   const thumbnailLinks = useSelector((state: any) => state.addPost.imageLinks);
 
   const formik = useFormik({
@@ -83,6 +85,8 @@ export default function AddPost({}: Props): ReactElement {
       } catch (error) {
         console.log(error);
       }
+
+      router.push('/')
 
       setSubmitting(false);
     },
