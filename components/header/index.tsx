@@ -9,50 +9,31 @@ import { AiOutlineUser } from "react-icons/ai";
 import { Search } from "components/search";
 import { AuthButton, NavButton, StyledButton } from "components/styled/button";
 import {
-    DropdownText,
-    ProfileDropdown,
-    ProfileDropdownMenu,
-  } from "components/styled/dropdown";
-  import { UserProfileIcon } from "components/styled/icons";
-  
-
+  DropdownText,
+  ProfileDropdown,
+  ProfileDropdownMenu,
+} from "components/styled/dropdown";
+import { UserProfileIcon } from "components/styled/icons";
 
 const Header: React.FunctionComponent = () => {
   const [session, loading] = useSession();
   const [isProfileClick, setIsProfileClick] = useState(false);
-  const modalRef = useRef<any>()
 
   const handleClick = () => {
     setIsProfileClick(!isProfileClick);
   };
 
-  const handleClickOutside = (e: any) => {
-    if (modalRef && !modalRef?.current?.contains(e.target)) {
-      setIsProfileClick(false)
-    } else {
-      setIsProfileClick(true)
-    }
-  }
-
   const logoutHandler = () => {
     signOut();
-  }
+  };
 
   console.log(loading);
   console.log(session);
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside)
-
-    return () => {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-  })
-
-
-  return <>
-    <StyledHeader>
-    <Link href="/">
+  return (
+    <>
+      <StyledHeader>
+        <Link href="/">
           <a>
             <Title>SandoShop</Title>
           </a>
@@ -76,45 +57,52 @@ const Header: React.FunctionComponent = () => {
               isProfileClick={isProfileClick}
             >
               <CgProfile />
-              {isProfileClick && <ProfileDropdown ref={modalRef}>
-                <ProfileDropdownMenu className="top">
-                  <AiOutlineUser />
-                  <Link href="profile">
-                    <a>
-                      <DropdownText>&nbsp;Profile</DropdownText>
-                    </a>
-                  </Link>
-                </ProfileDropdownMenu>
-                <ProfileDropdownMenu className="bottom" onClick={logoutHandler}>
-                  <HiOutlineLogout />
-                  <Link href="profile">
-                    <a>
-                      <DropdownText>&nbsp;Logout</DropdownText>
-                    </a>
-                  </Link>
-                </ProfileDropdownMenu>
-              </ProfileDropdown>
-              }
+              {isProfileClick && (
+                <ProfileDropdown>
+                  <ProfileDropdownMenu className="top">
+                    <div>
+                      <AiOutlineUser />
+                    </div>
+                    <Link href="profile">
+                      <a>
+                        <DropdownText>&nbsp;프로필</DropdownText>
+                      </a>
+                    </Link>
+                  </ProfileDropdownMenu>
+                  <ProfileDropdownMenu
+                    className="bottom"
+                    onClick={logoutHandler}
+                  >
+                    <HiOutlineLogout />
+                    <Link href="profile">
+                      <a>
+                        <DropdownText>&nbsp;로그아웃</DropdownText>
+                      </a>
+                    </Link>
+                  </ProfileDropdownMenu>
+                </ProfileDropdown>
+              )}
             </UserProfileIcon>
           )}
           {!session && (
             <Link href="/auth">
               <a>
-                <AuthButton>Log in</AuthButton>
+                <AuthButton>로그인</AuthButton>
               </a>
             </Link>
-          )}         
+          )}
         </UserNav>
-    </StyledHeader>
-  </>;
+      </StyledHeader>
+    </>
+  );
 };
 
-export default Header
+export default Header;
 
 const StyledHeader = styled.div`
   max-width: 100vw;
   font-size: 1.4rem;
-  height: 7rem;
+  height: 6rem;
   padding: 0 2vw;
 
   display: flex;
@@ -130,7 +118,7 @@ const StyledHeader = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 2.8rem;
+  font-size: 2.4rem;
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
 

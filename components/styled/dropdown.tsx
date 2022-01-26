@@ -5,7 +5,7 @@ export const ProfileDropdown = styled.ul`
   display: flex;
   flex-direction: column;
   position: absolute;
-  //width: 100%;  
+  min-width: 10rem;
 
   top: 2.8rem;  
   right: 0.1rem;    
@@ -18,7 +18,7 @@ export const ProfileDropdownMenu = styled.li`
  
   color: white;
   height: 3.4rem;    
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   background: black;
   padding: 0.2rem 0.2rem;
   align-items: center;

@@ -9,7 +9,7 @@ export const UserProfileIcon = styled.div<ProfileMenuProps>`
   display: flex;
   font-size: 2.8rem;
   color: black;
-  margin-right: 1.4rem;
+  margin-right: 1.6rem;
 
   &.dropdown {
     position: relative;

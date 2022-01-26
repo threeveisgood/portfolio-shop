@@ -22,7 +22,7 @@ function ProfileForm(props: any) {
   return (
     <Container>
       <form onSubmit={submitHandler}>
-      <h1>Change Password</h1>
+      <h1>비밀번호 변경</h1>
         <FormField>
           <StyledInput
             type="password"
@@ -30,7 +30,7 @@ function ProfileForm(props: any) {
             placeholder="new password"
             ref={newPasswordRef}
           />
-          <StyledLabel htmlFor="new-password">New Password</StyledLabel>
+          <StyledLabel htmlFor="new-password">새 비밀번호</StyledLabel>
         </FormField>
         <FormField>
           <StyledInput
@@ -39,11 +39,11 @@ function ProfileForm(props: any) {
             placeholder="old password"
             ref={oldPasswordRef}
           />
-          <StyledLabel htmlFor="old-password">Old Password</StyledLabel>
+          <StyledLabel htmlFor="old-password">예전 비밀번호</StyledLabel>
         </FormField>
 
         <div>
-          <FormSubmitButton>Change Password</FormSubmitButton>
+          <FormSubmitButton>비밀번호 변경</FormSubmitButton>
         </div>
       </form>
     </Container>

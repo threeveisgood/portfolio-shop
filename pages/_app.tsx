@@ -16,23 +16,23 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <title>Jonghwi Choi Portfolio</title>
+        <title>SandoShop</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Provider session={pageProps.session}>
-          <Hydrate state={pageProps.dehydratedState}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Provider session={pageProps.session}>
             <ThemeProvider theme={theme}>
               <GlobalStyle />
               <Layout>
                 <Component {...pageProps} />
               </Layout>
             </ThemeProvider>
-          </Hydrate>
-        </Provider>
+          </Provider>
+        </Hydrate>
       </QueryClientProvider>
     </>
   );
