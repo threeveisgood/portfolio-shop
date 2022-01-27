@@ -29,11 +29,14 @@ async function addPost(
   price: any,
   imgUrl: any,
   recommended: any,
-  details: any
+  details: any,
+  link: any,
+  comments: any,
+  shopName: any
 ) {
   const response = await fetch("/api/admin/add-post", {
     method: "POST",
-    body: JSON.stringify({ name, price, imgUrl, recommended, details }),
+    body: JSON.stringify({ name, price, imgUrl, recommended, details, link, comments, shopName }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -65,14 +68,19 @@ export default function AddPost({}: Props): ReactElement {
       price: "",
       recommended: 0,
       details: "",
+      link: "",
+      shopName: "",      
     },
     validationSchema: validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      const enteredName = values.name;
-      const enteredPrice = values.price;
-      const enteredImageUrl = thumbnailLinks;
-      const enteredRecommended = values.recommended;
-      const enteredDetail = values.details;
+      const enteredName = values.name
+      const enteredPrice = values.price
+      const enteredImageUrl = thumbnailLinks
+      const enteredRecommended = values.recommended
+      const enteredDetail = values.details
+      const enteredLink = values.link
+      const enteredComments = ""
+      const enteredShopName = values.shopName
 
       try {
         const result = await addPost(
@@ -80,7 +88,10 @@ export default function AddPost({}: Props): ReactElement {
           enteredPrice,
           enteredImageUrl,
           enteredRecommended,
-          enteredDetail
+          enteredDetail,
+          enteredLink,
+          enteredComments,
+          enteredShopName
         );
       } catch (error) {
         console.log(error);
