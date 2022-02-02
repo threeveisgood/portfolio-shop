@@ -1,15 +1,25 @@
+import Card from "components/styled/card";
 import React, { ReactElement } from "react";
-import FilesUpload from "components/upload/files-upload";
+import styled from 'styled-components'
 
 export default function test(): ReactElement {  
 
   return (
     <div>
-      <FilesUpload />      
+      <CardUl>
+       <Card />
+       <Card />
+      </CardUl>     
     </div>
   );
 }
 
+const CardUl = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  gap: 1.3rem;
+`
 // import React, { useCallback, ReactElement } from "react";
 // import { useDispatch } from 'react-redux'
 // import { setImageLinks } from "modules/addPost";
