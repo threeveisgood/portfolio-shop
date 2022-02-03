@@ -9,6 +9,8 @@ export default function test(): ReactElement {
       <CardUl>
        <Card />
        <Card />
+       <Card />
+       <Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card />
       </CardUl>     
     </div>
   );
@@ -18,7 +20,7 @@ const CardUl = styled.ul`
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
-  gap: 1.3rem;
+  gap: 1.3rem;  
 `
 // import React, { useCallback, ReactElement } from "react";
 // import { useDispatch } from 'react-redux'
