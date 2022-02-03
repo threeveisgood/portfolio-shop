@@ -21,7 +21,7 @@ export default Layout;
 const Container = styled.div`
   //margin: 3rem auto;
   padding-top: 3rem;
-  background: #f8f9fa;
+  background: #ebecee;
 `;
 
 const IconName = styled.p`
