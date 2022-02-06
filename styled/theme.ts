@@ -22,5 +22,8 @@ export const theme: DefaultTheme = {
   },
   line: {
     gray: '1px solid #f4f2f2'
-  }    
+  },
+  gap: {
+    card: '1.3rem'
+  }
 }

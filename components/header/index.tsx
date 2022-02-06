@@ -109,8 +109,7 @@ const StyledHeader = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media only screen and (max-width: ${(props) =>
-      props.theme.responsive.phone}) {
+  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {
     flex-wrap: wrap;
     align-content: space-between;
     height: 11rem;

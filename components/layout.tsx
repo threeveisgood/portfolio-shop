@@ -19,9 +19,9 @@ const Layout = ({ children }: Props) => {
 export default Layout;
 
 const Container = styled.div`
-  //margin: 3rem auto;
-  padding-top: 3rem;
-  background: #ebecee;
+  //margin: 3rem auto;  
+  padding: 3rem 0;
+  background: #ebecee;    
 `;
 
 const IconName = styled.p`

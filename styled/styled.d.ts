@@ -27,6 +27,10 @@ declare module 'styled-components' {
 
     line: {
       gray: string;
-    }   
+    }
+    
+    gap: {
+      card: string;
+    }
   }
 }

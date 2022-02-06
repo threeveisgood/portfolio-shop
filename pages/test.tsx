@@ -1,3 +1,4 @@
+import Aside from "components/styled/aside";
 import Card from "components/styled/card";
 import React, { ReactElement } from "react";
 import styled from 'styled-components'
@@ -5,22 +6,29 @@ import styled from 'styled-components'
 export default function test(): ReactElement {  
 
   return (
-    <div>
+    <MainContainer>      
       <CardUl>
        <Card />
        <Card />
        <Card />
        <Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card />
       </CardUl>     
-    </div>
+    </MainContainer>
   );
 }
+
+const MainContainer = styled.div`
+  max-width: 133rem;
+  margin: 0 auto;
+`
 
 const CardUl = styled.ul`
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
-  gap: 1.3rem;  
+  gap: ${props => props.theme.gap.card};
+  
+  justify-content: center;
 `
 // import React, { useCallback, ReactElement } from "react";
 // import { useDispatch } from 'react-redux'

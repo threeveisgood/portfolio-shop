@@ -1,23 +1,23 @@
 import * as React from 'react';
 import styled from "styled-components";
-import { BiChevronDown } from 'react-icons/bi'
+//import { BiChevronDown } from 'react-icons/bi'
 
 const navbarInformation = [
   {
     id: 0,
-    name: 'women'
+    name: '음식'
   },
   {
     id: 1,
-    name: 'men'
+    name: 'PC제품'
   },  
   {
     id: 2,
-    name: 'food'
+    name: '가전제품'
   },
   {
     id: 3,
-    name: 'rumble'
+    name: '화장품'
   }
 ]
 
@@ -26,7 +26,7 @@ const NavBar: React.FunctionComponent = (props) => {
     <Nav>
       <InformationUl>
         {navbarInformation.map((info) => {
-          return <InformationLi key={info.id}>{info.name}&nbsp;<BiChevronDown /></InformationLi>          
+          return <InformationLi key={info.id}>{info.name}</InformationLi>          
         })}
       </InformationUl>
     </Nav>
@@ -53,7 +53,8 @@ const InformationUl = styled.ul`
 `
 
 const InformationLi = styled.li`    
+  font-size: 1.4rem;
   &:not(:last-child) {
-    margin-right: 2rem;
+    margin-right: 2.4rem;
   }
 `

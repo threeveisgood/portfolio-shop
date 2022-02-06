@@ -21,8 +21,7 @@ export default function Card(): ReactElement {
         <PriceContainer>
           <CardPrice>
             5,900,000<CardBill>원</CardBill>&nbsp;
-          </CardPrice>
-          <CardOriginalPrice>6,700,000원</CardOriginalPrice>
+          </CardPrice>          
         </PriceContainer>
         <NoteContainer>
           <CardNote>배송비 2500원</CardNote>
@@ -76,7 +75,7 @@ const CardTitleA = styled.a`
   line-height: 1.5rem;
   font-size: 1.4rem;
   overflow: hidden;
-  margin-top: 2rem;
+  margin-top: 1.3rem;
 
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -84,11 +83,11 @@ const CardTitleA = styled.a`
   overflow: hidden;
 `;
 const PriceContainer = styled.span`
-  margin-top: 0.4rem;
+  margin-top: 0.6rem;
 `;
 
 const CardPrice = styled.span`
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
