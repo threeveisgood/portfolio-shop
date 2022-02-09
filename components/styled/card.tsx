@@ -112,7 +112,7 @@ const NoteContainer = styled.span`
 
 const CardNote = styled.div`
   color: #2e2828;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
