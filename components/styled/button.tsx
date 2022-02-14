@@ -1,8 +1,12 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const StyledButton = styled.button`
+const buttonStyle = css`
   border-radius: 0.2rem;
-  background-image: linear-gradient(0deg, rgba(100,101,101,1) 0%, rgba(0,0,0,1) 54%);
+  background-image: linear-gradient(
+    0deg,
+    rgba(100, 101, 101, 1) 0%,
+    rgba(0, 0, 0, 1) 54%
+  );
   border: 0;
   border-radius: 0.4rem;
   box-sizing: border-box;
@@ -27,16 +31,23 @@ export const StyledButton = styled.button`
   }
 `;
 
+export const StyledButton = styled.button`
+  ${buttonStyle}
+`;
 
 export const NavButton = styled.button`
   border: none;
   background: #fff;
-`
+`;
 
 export const AuthButton = styled(StyledButton)`
- background: linear-gradient(0deg, rgba(100,101,101,1) 0%, rgba(0,0,0,1) 54%);
- font-size: 1.3rem;
- font-weight: 500;
- color:#fff5f5;
- padding: 0.6rem 1.2rem;
-`
+  background: linear-gradient(
+    0deg,
+    rgba(100, 101, 101, 1) 0%,
+    rgba(0, 0, 0, 1) 54%
+  );
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #fff5f5;
+  padding: 0.6rem 1.2rem;
+`;

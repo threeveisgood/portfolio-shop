@@ -9,7 +9,7 @@ const StyledCarousel: React.FunctionComponent = () => {
     <CarouselContainer>
       <Carousel
         infiniteLoop={true}
-        showThumbs={true}
+        showThumbs={false}
         dynamicHeight={true}
         showStatus={false}
       >

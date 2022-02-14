@@ -14,13 +14,13 @@ import {
 
 import FilesUpload from "components/upload/files-upload";
 
-// import dynamic from "next/dynamic";
-// import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
 
-// const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-//   ssr: false,
-//   loading: () => <p>Loading ...</p>,
-// });
+const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
 
 interface Props {}
 
