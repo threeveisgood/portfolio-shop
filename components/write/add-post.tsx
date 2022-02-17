@@ -34,7 +34,7 @@ async function addPost(
   comments: any,
   shopName: any
 ) {
-  const response = await fetch("/api/admin/add-post", {
+  const response = await fetch("/api/write/add-post", {
     method: "POST",
     body: JSON.stringify({ name, price, imgUrl, recommended, details, link, comments, shopName }),
     headers: {

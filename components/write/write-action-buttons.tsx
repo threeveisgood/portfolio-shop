@@ -1,11 +1,37 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { StyledButton } from 'components/styled/button'
+import { useDispatch, useSelector } from 'react-redux';
+import { useMutation } from 'react-query';
+import axios from 'axios'
+import write from 'modules/write';
+import { useAddPost } from 'hooks/useAddPost';
 
 interface IWriteActionButtonsProps {
 }
 
-const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> = ({ onCancel, onPublish }) => {
+const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> = () => {
+  const dispatch = useDispatch()
+  const mutation = useMutation((post: any) => {
+    return axios.post('/api/add-post', post)
+  })
+
+  const { title, body, price, productURL, imageLinks } = useSelector(({ write }: any) => ({
+    title: write.title,
+    body: write.body,
+    price: write.price,
+    productURL: write.productURL,
+    imageLinks: write.imageLinks
+  }))
+
+  const onPublish = (e: any) => {
+    mutation.mutate({ title, body, price, productURL })
+  }
+
+  const onCancel = () => {
+    
+  }
+
   return (
     <WriteActionButtonsBlock>
       <Button onClick={onPublish}>

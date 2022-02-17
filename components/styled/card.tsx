@@ -120,7 +120,7 @@ const CardNote = styled.div`
 
 const CardFooter = styled.footer`
   display: flex;
-  margin-top: 0.7rem;
+  margin-top: 1rem;
 `;
 
 const CardFooterIcon = styled.span`

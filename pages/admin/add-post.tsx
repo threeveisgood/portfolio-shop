@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react'
-import AddPost from 'components/admin/add-post'
 import Responsive from 'components/styled/responsive'
 import Editor from 'components/write/editor'
 import WriteActionButtons from 'components/write/write-action-buttons'
