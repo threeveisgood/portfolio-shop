@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { StyledButton } from 'components/styled/button'
 import { useDispatch, useSelector } from 'react-redux';
 import { useMutation } from 'react-query';
+import { useRouter } from 'next/router'
 import axios from 'axios'
 import write from 'modules/write';
 import { useAddPost } from 'hooks/useAddPost';
@@ -11,6 +12,7 @@ interface IWriteActionButtonsProps {
 }
 
 const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> = () => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const mutation = useMutation((post: any) => {
     return axios.post('/api/add-post', post)
@@ -29,7 +31,7 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> = ()
   }
 
   const onCancel = () => {
-    
+    return router.back()
   }
 
   return (

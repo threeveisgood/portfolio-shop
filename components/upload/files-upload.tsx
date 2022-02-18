@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { UiFileInputButton } from "components/upload/ui-file-input-button";
 import { ChangeToThumbnail, ChangeToFrontURL } from "lib/change-to-thumbnail"
 import { setImageLinks } from "modules/addPost";
+import styled from 'styled-components'
 
 const FilesUpload = () => {
   const dispatch = useDispatch()  
@@ -32,30 +33,39 @@ const FilesUpload = () => {
   return (
     <>
       <p>
-        <span>Images Upload&nbsp;</span>
-        <span>{progress}%</span>
+        <span>이미지 업로드&nbsp;</span>        
+        {progress != 100 && <span>{progress}%</span>}
       </p>
       <UiFileInputButton
-        label="Upload Files"
+        label="상품 이미지 업로드"
         acceptedFileTypes="image/*"
         allowMultipleFiles={true}
         uploadFileName="file"
         onChange={onChange}
       />
-      <ul>
+      <ThumbnailUl>
         {thumb &&
           thumb.map((item: string, i: number) => {            
             const changedItem = ChangeToThumbnail(item)
             console.log("item", item);
             return (
-              <li key={i}>                
-                  <img src={changedItem} width="300" alt="Uploaded Image" />                                
-              </li>
+              <ThumbnailLi key={i}>                
+                  <img src={changedItem} width="100" alt="Uploaded Image" />                                
+              </ThumbnailLi>
             );
           })}
-      </ul>
+      </ThumbnailUl>
     </>
   );
 };
 
 export default React.memo(FilesUpload)
+
+export const ThumbnailUl = styled.ul`
+  
+`
+
+export const ThumbnailLi = styled.li`
+  display: inline;
+  margin-right: 0.8rem;
+`

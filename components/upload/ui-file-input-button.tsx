@@ -35,7 +35,7 @@ export const UiFileInputButton: React.FC<IProps> = (props) => {
   };
 
   return (
-    <form ref={formRef}>
+    <UploadForm ref={formRef}>
       <UploadButton type="button" onClick={onClickHandler}>
         {props.label}
       </UploadButton>
@@ -48,7 +48,7 @@ export const UiFileInputButton: React.FC<IProps> = (props) => {
         style={{ display: "none" }}
         type="file"
       />
-    </form>
+    </UploadForm>
   );
 };
 
@@ -60,4 +60,8 @@ UiFileInputButton.defaultProps = {
 const UploadButton = styled(StyledButton)`
   margin-top: 1rem;
   font-size: 1.2rem;  
+`
+
+const UploadForm = styled.form`
+  margin-bottom: 2rem;
 `

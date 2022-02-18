@@ -4,7 +4,7 @@ export function ChangeToThumbnail(item: string) {
 
   const thumbnailLink: string = item
     .replace(S3_URL, CLOUDFRONT_URL)
-    .concat("?w=300&q=90");
+    .concat("?w=100&q=90");
 
   return thumbnailLink;
 }

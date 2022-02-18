@@ -76,7 +76,7 @@ const Editor: React.FunctionComponent = () => {
     title: write.title,
     body: write.body,
     price: write.price,
-    productURL: write.productURL
+    productURL: write.productURL,
   }));
 
   const onChangeField = useCallback(
@@ -93,12 +93,12 @@ const Editor: React.FunctionComponent = () => {
   };
 
   const onChangePrice = (e: any) => {
-    onChangeField({ key: "price", value: e.target.value })
-  }
+    onChangeField({ key: "price", value: e.target.value });
+  };
 
   const onChangeProductURL = (e: any) => {
-    onChangeField({ key: "productURL", value: e.target.value })
-  }
+    onChangeField({ key: "productURL", value: e.target.value });
+  };
 
   const modules = {
     toolbar: [
@@ -175,7 +175,7 @@ const Editor: React.FunctionComponent = () => {
             />
             <StyledLabel htmlFor="price">가격</StyledLabel>
           </FormField>
-          
+
           <FormField>
             <StyledInput
               type="text"
@@ -187,6 +187,11 @@ const Editor: React.FunctionComponent = () => {
             />
             <StyledLabel htmlFor="realtedURL">상품 관련 URL</StyledLabel>
           </FormField>
+
+          <FieldContainer>
+            <FilesUpload />
+          </FieldContainer>
+
           <QuillWrapper>
             <ReactQuill
               theme="snow"
@@ -197,12 +202,6 @@ const Editor: React.FunctionComponent = () => {
             />
           </QuillWrapper>
         </EditorBlock>
-
-        <FieldContainer>
-          <FilesUpload />
-        </FieldContainer>
-
-        <FormSubmitButton type="submit">Submit</FormSubmitButton>
       </form>
     </Container>
   );
