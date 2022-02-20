@@ -11,14 +11,14 @@ import {
 import { useFormik } from "formik";
 import Container from "components/styled/container";
 
-async function createUser(email: any, password: any) {
+async function createUser(email: any, password: any, nickname: any) {
   const response = await fetch("/api/auth/signup", {
-    method: 'POST',
-    body: JSON.stringify({ email, password }),
+    method: "POST",
+    body: JSON.stringify({ email, password, nickname }),
     headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+      "Content-Type": "application/json",
+    },
+  });
 
   const data = await response.json();
 
@@ -41,10 +41,12 @@ function AuthForm() {
     initialValues: {
       email: "",
       password: "",
+      nickname: ""
     },
     onSubmit: async (values, { setSubmitting }) => {
-      const enteredEmail = values.email;
-      const enteredPassword = values.password;
+      const enteredEmail = values.email
+      const enteredPassword = values.password
+      const enteredNickname = values.nickname
 
       if (isLogin) {
         const result: any = await signIn("credentials", {
@@ -58,7 +60,7 @@ function AuthForm() {
         }
       } else {
         try {
-          const result = await createUser(enteredEmail, enteredPassword);
+          const result = await createUser(enteredEmail, enteredPassword, enteredNickname);
           console.log(result);
         } catch (error) {
           console.log(error);
@@ -83,7 +85,7 @@ function AuthForm() {
               value={formik.values.email}
               onChange={formik.handleChange}
             />
-            <StyledLabel htmlFor="email">email</StyledLabel>
+            <StyledLabel htmlFor="email">이메일</StyledLabel>
           </FormField>
 
           <FormField>
@@ -95,13 +97,29 @@ function AuthForm() {
               value={formik.values.password}
               onChange={formik.handleChange}
             />
-            <StyledLabel htmlFor="password">Your Password</StyledLabel>
+            <StyledLabel htmlFor="password">비밀번호</StyledLabel>
           </FormField>
 
+          {isLogin ? null : (
+            <FormField>
+              <StyledInput
+                type="text"
+                id="nickname"
+                name="nickname"
+                placeholder="nickname"
+                value={formik.values.nickname}
+                onChange={formik.handleChange}
+              />
+              <StyledLabel htmlFor="nickname">닉네임</StyledLabel>
+            </FormField>
+          )}
+
           <div>
-            <FormSubmitButton>{isLogin ? "Login" : "Create Account"}</FormSubmitButton>
+            <FormSubmitButton>
+              {isLogin ? "로그인" : "계정 만들기"}
+            </FormSubmitButton>
             <FormSubmitLastButton type="button" onClick={switchAuthModeHandler}>
-              {isLogin ? "Create new account" : "Login with existing account"}
+              {isLogin ? "새 계정 만들기" : "계정이 이미 있으신가요?"}
             </FormSubmitLastButton>
           </div>
         </form>

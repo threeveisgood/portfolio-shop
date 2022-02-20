@@ -25,7 +25,7 @@ const buttonStyle = css`
   }
 
   @media (min-width: 1024px) {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     padding: 0.6rem 1.2rem;
     line-height: 2.2rem;
   }
