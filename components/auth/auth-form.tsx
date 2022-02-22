@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 import {
-  FormField,
+  Field,
   StyledInput,
   StyledLabel,
   FormSubmitLastButton,
@@ -11,10 +11,10 @@ import {
 import { useFormik } from "formik";
 import Container from "components/styled/container";
 
-async function createUser(email: any, password: any, nickname: any) {
+async function createUser(email: any, password: any, name: any) {
   const response = await fetch("/api/auth/signup", {
     method: "POST",
-    body: JSON.stringify({ email, password, nickname }),
+    body: JSON.stringify({ email, password, name }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -41,12 +41,12 @@ function AuthForm() {
     initialValues: {
       email: "",
       password: "",
-      nickname: ""
+      name: ""
     },
     onSubmit: async (values, { setSubmitting }) => {
       const enteredEmail = values.email
       const enteredPassword = values.password
-      const enteredNickname = values.nickname
+      const enteredname = values.name
 
       if (isLogin) {
         const result: any = await signIn("credentials", {
@@ -60,7 +60,7 @@ function AuthForm() {
         }
       } else {
         try {
-          const result = await createUser(enteredEmail, enteredPassword, enteredNickname);
+          const result = await createUser(enteredEmail, enteredPassword, enteredname);
           console.log(result);
         } catch (error) {
           console.log(error);
@@ -76,7 +76,7 @@ function AuthForm() {
       <section>
         <h1>{isLogin ? "Login" : "Sign Up"}</h1>
         <form onSubmit={formik.handleSubmit}>
-          <FormField>
+          <Field>
             <StyledInput
               type="email"
               id="email"
@@ -86,9 +86,9 @@ function AuthForm() {
               onChange={formik.handleChange}
             />
             <StyledLabel htmlFor="email">이메일</StyledLabel>
-          </FormField>
+          </Field>
 
-          <FormField>
+          <Field>
             <StyledInput
               type="password"
               id="password"
@@ -98,20 +98,20 @@ function AuthForm() {
               onChange={formik.handleChange}
             />
             <StyledLabel htmlFor="password">비밀번호</StyledLabel>
-          </FormField>
+          </Field>
 
           {isLogin ? null : (
-            <FormField>
+            <Field>
               <StyledInput
                 type="text"
-                id="nickname"
-                name="nickname"
-                placeholder="nickname"
-                value={formik.values.nickname}
+                id="name"
+                name="name"
+                placeholder="name"
+                value={formik.values.name}
                 onChange={formik.handleChange}
               />
-              <StyledLabel htmlFor="nickname">닉네임</StyledLabel>
-            </FormField>
+              <StyledLabel htmlFor="name">닉네임</StyledLabel>
+            </Field>
           )}
 
           <div>

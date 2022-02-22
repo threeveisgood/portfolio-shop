@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { StyledButton } from "components/styled/button";
 
-export const FormField = styled.div`
+export const Field = styled.div`
   position: relative;
   padding: 15px 0 0;
 

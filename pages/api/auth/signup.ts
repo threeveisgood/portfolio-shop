@@ -8,16 +8,16 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
   const data: any = req.body;
 
-  const { email, password, nickname } = data;
+  const { email, password, name } = data;
 
   if (
     !email ||
     !email.includes("@") ||
     !password ||
     password.trim().length < 7 ||
-    !nickname ||
-    nickname.trim().length < 2 ||
-    nickname.trim().length > 13
+    !name ||
+    name.trim().length < 2 ||
+    name.trim().length > 13                              
   ) {
     res
       .status(422)
@@ -41,10 +41,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return 
   }
 
-  const existingNickname: any = await db.collection('users').findOne({nickname: nickname})
+  const existingname: any = await db.collection('users').findOne({name: name})
 
-  if (existingNickname) {
-    res.status(422).json({ message: 'Nickname exists already!' })
+  if (existingname) {
+    res.status(422).json({ message: 'name exists already!' })
     client.close()
     return 
   }
@@ -54,7 +54,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const result: any = await db.collection('users').insertOne({
     email: email,
     password: hashedPassword,
-    nickname: nickname
+    name: name
   });
 
   res.status(201).json({ message: "Created user!" });

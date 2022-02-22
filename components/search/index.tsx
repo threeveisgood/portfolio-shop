@@ -49,8 +49,7 @@ const SearchForm = styled.form`
   align-items: center;
   justify-content: center;
 
-  @media only screen and (max-width: ${(props) =>
-      props.theme.responsive.phone}) {
+  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {
     order: 1;
     flex: 0 0 100%;    
   }

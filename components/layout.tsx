@@ -24,8 +24,8 @@ const Container = styled.div`
   background: #ebecee;    
 `;
 
-const IconName = styled.p`
-  font-size: 1.5rem;
-  margin-left: 0.3rem;
-  align-items: center;
-`;
+// const IconName = styled.p`
+//   font-size: 1.5rem;
+//   margin-left: 0.3rem;
+//   align-items: center;
+// `;

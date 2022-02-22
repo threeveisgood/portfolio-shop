@@ -121,16 +121,6 @@ const Title = styled.div`
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
 
-  background: -webkit-linear-gradient(
-    0deg,
-    rgba(100, 101, 101, 1) 0%,
-    rgba(0, 0, 0, 1) 54%
-  );
-  background: -moz-linear-gradient(
-    0deg,
-    rgba(100, 101, 101, 1) 0%,
-    rgba(0, 0, 0, 1) 54%
-  );
   background: linear-gradient(
     0deg,
     rgba(100, 101, 101, 1) 0%,

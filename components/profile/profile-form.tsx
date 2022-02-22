@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { FormField, StyledInput, StyledLabel } from "components/styled/form";
+import { Field, StyledInput, StyledLabel } from "components/styled/form";
 import { FormSubmitButton } from "components/styled/form";
 import Container from "components/styled/container";
 
@@ -23,7 +23,7 @@ function ProfileForm(props: any) {
     <Container>
       <form onSubmit={submitHandler}>
       <h1>비밀번호 변경</h1>
-        <FormField>
+        <Field>
           <StyledInput
             type="password"
             id="new-password"
@@ -31,8 +31,8 @@ function ProfileForm(props: any) {
             ref={newPasswordRef}
           />
           <StyledLabel htmlFor="new-password">새 비밀번호</StyledLabel>
-        </FormField>
-        <FormField>
+        </Field>
+        <Field>
           <StyledInput
             type="password"
             id="old-password"
@@ -40,7 +40,7 @@ function ProfileForm(props: any) {
             ref={oldPasswordRef}
           />
           <StyledLabel htmlFor="old-password">예전 비밀번호</StyledLabel>
-        </FormField>
+        </Field>
 
         <div>
           <FormSubmitButton>비밀번호 변경</FormSubmitButton>

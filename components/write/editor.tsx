@@ -1,19 +1,17 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import dynamic from "next/dynamic";
-import { useFormik } from "formik";
-import * as yup from "yup";
 import Responsive from "components/styled/responsive";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { useSession } from "next-auth/client"
 import { changeField, initialize } from "modules/write";
 import Container from "components/styled/container";
 import {
-  FormField,
+  Field,
   StyledInput,
   StyledLabel,
-  FieldContainer,
-  FormSubmitButton,
+  FieldContainer,  
 } from "components/styled/form";
 import FilesUpload from "components/upload/files-upload";
 
@@ -30,47 +28,10 @@ const ReactQuill = dynamic(
   }
 );
 
-async function addPost(
-  name: any,
-  price: any,
-  imgUrl: any,
-  recommended: any,
-  details: any,
-  link: any,
-  comments: any,
-  shopName: any
-) {
-  const response = await fetch("/api/write/add-post", {
-    method: "POST",
-    body: JSON.stringify({
-      name,
-      price,
-      imgUrl,
-      recommended,
-      details,
-      link,
-      comments,
-      shopName,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Something went wrong!");
-  }
-
-  return data;
-}
-
-const Editor: React.FunctionComponent = () => {
+const Editor: React.FunctionComponent = () => {  
+  const [session, loading] = useSession()
   const dispatch = useDispatch();
   const quillRef = useRef<any>(null);
-
-  const thumbnailLinks = useSelector((state: any) => state.addPost.imageLinks);
 
   const { title, body, price, productURL } = useSelector(({ write }: any) => ({
     title: write.title,
@@ -105,7 +66,7 @@ const Editor: React.FunctionComponent = () => {
       [{ header: "1" }, { header: "2" }],
       ["bold", "italic", "underline", "strike"],
       [{ list: "ordered" }, { list: "bullet" }],
-      ["blockquote", "code-block", "link", "image"],
+      ["blockquote", "code-block", "link"],
     ],
   };
 
@@ -115,56 +76,15 @@ const Editor: React.FunctionComponent = () => {
     };
   }, [dispatch]);
 
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      price: "",
-      recommended: 0,
-      details: "",
-      link: "",
-      shopName: "",
-    },
-    onSubmit: async (values, { setSubmitting }) => {
-      const enteredName = values.name;
-      const enteredPrice = values.price;
-      const enteredImageUrl = thumbnailLinks;
-      const enteredRecommended = values.recommended;
-      const enteredDetail = values.details;
-      const enteredLink = values.link;
-      const enteredComments = "";
-      const enteredShopName = values.shopName;
-
-      try {
-        const result = await addPost(
-          enteredName,
-          enteredPrice,
-          enteredImageUrl,
-          enteredRecommended,
-          enteredDetail,
-          enteredLink,
-          enteredComments,
-          enteredShopName
-        );
-      } catch (error) {
-        console.log(error);
-      }
-
-      //router.push('/')
-
-      setSubmitting(false);
-    },
-  });
-
   return (
     <Container>
-      <form onSubmit={formik.handleSubmit} autoComplete="off">
         <EditorBlock>
           <TitleInput
             placeholder="제목을 입력하세요"
             onChange={onChangeTitle}
             value={title}
           />
-          <FormField>
+          <Field>
             <StyledInput
               type="text"
               id="price"
@@ -174,9 +94,9 @@ const Editor: React.FunctionComponent = () => {
               onChange={onChangePrice}
             />
             <StyledLabel htmlFor="price">가격</StyledLabel>
-          </FormField>
+          </Field>
 
-          <FormField>
+          <Field>
             <StyledInput
               type="text"
               id="realtedURL"
@@ -186,7 +106,7 @@ const Editor: React.FunctionComponent = () => {
               onChange={onChangeProductURL}
             />
             <StyledLabel htmlFor="realtedURL">상품 관련 URL</StyledLabel>
-          </FormField>
+          </Field>
 
           <FieldContainer>
             <FilesUpload />
@@ -202,7 +122,6 @@ const Editor: React.FunctionComponent = () => {
             />
           </QuillWrapper>
         </EditorBlock>
-      </form>
     </Container>
   );
 };
