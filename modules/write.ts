@@ -33,6 +33,7 @@ const initialState = {
   price: "",
   productURL: "",
   imageLinks: [],
+  username: ""
 }
 
 const write = handleActions(

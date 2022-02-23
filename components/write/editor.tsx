@@ -15,6 +15,10 @@ import {
 } from "components/styled/form";
 import FilesUpload from "components/upload/files-upload";
 
+interface Props {
+  username: string
+}
+
 const ReactQuill = dynamic(
   async () => {
     const { default: RQ } = await import("react-quill");
@@ -28,8 +32,7 @@ const ReactQuill = dynamic(
   }
 );
 
-const Editor: React.FunctionComponent = () => {  
-  const [session, loading] = useSession()
+const Editor: React.FunctionComponent<Props> = ({ username }: Props) => {  
   const dispatch = useDispatch();
   const quillRef = useRef<any>(null);
 
@@ -69,12 +72,14 @@ const Editor: React.FunctionComponent = () => {
       ["blockquote", "code-block", "link"],
     ],
   };
-
+  
   useEffect(() => {
+    dispatch(changeField({ key: "username", value: username }))    
+
     return () => {
       dispatch(initialize());
     };
-  }, [dispatch]);
+  }, [dispatch, username]);
 
   return (
     <Container>

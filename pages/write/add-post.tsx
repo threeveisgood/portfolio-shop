@@ -5,31 +5,32 @@ import WriteActionButtons from 'components/write/write-action-buttons'
 import { getSession } from 'next-auth/client'
 
 interface Props {
-    
+  username: string
 }
 
-export default function addPost({}: Props): ReactElement {  
+export default function addPost({ username }: Props): ReactElement {  
     return (
         <Responsive>
-          <Editor />
+          <Editor username={username} />
           <WriteActionButtons />
         </Responsive>
     )
 }
 
-// export async function getServerSideProps(context: any) {
-//   const session = await getSession({req: context.req})
+export async function getServerSideProps(context: any) {
+  const session = await getSession({req: context.req})
+  const username = session?.user?.name
 
-//   if (!session) {
-//       return {
-//           redirect: {
-//               destination: '/',
-//               permanent: false
-//           }
-//       }
-//   }
+  if (!session) {
+      return {
+          redirect: {
+              destination: '/',
+              permanent: false
+          }
+      }
+  }
 
-//   return {
-//       props: { session }
-//   }
-// }
+  return {
+      props: { session, username }
+  }
+}

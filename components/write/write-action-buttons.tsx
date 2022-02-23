@@ -13,15 +13,15 @@ interface IWriteActionButtonsProps {}
 const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
   () => {
     const router = useRouter();
-    const dispatch = useDispatch();
 
-    const { title, body, price, productURL, imageLinks } = useSelector(
+    const { title, body, price, productURL, imageLinks, username } = useSelector(
       ({ write }: any) => ({
         title: write.title,
         body: write.body,
         price: write.price,
         productURL: write.productURL,
         imageLinks: write.imageLinks,
+        username: write.username
       })
     );
 
@@ -36,7 +36,7 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
     );
 
     const onPublish = (e: any) => {
-      mutation.mutate({ title, body, price, productURL, imageLinks });
+      mutation.mutate({ title, body, price, productURL, imageLinks, username });
     };
 
     const onCancel = () => {
