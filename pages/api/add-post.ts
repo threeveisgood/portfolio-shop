@@ -2,7 +2,7 @@ import { connectToDatabase } from 'lib/db-utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
 
-export default async function handler(
+async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -15,10 +15,35 @@ export default async function handler(
     return 
   }
 
-  const { title, body, price, productURL, imageLinks } = req.body
+  const { title, body, price, productURL, imageLinks, _id } = req.body
+
+  const username: any = session?.user?.name
+
+  if(
+    !title ||
+    !body    
+  ) {
+    res.status(422).json({ message: "an error occured!" });
+
+    return
+  }
 
   const client: any = await connectToDatabase()
 
+  const db: any = client.db()
+  
+  const result: any = await db.collection('posts').insertOne({
+    title: title,
+    body: body,
+    price: price,
+    productURL: productURL,
+    imageLinks: imageLinks,
+    username: username,
+    _id: _id
+  })
 
-  res.status(200).json({ name: 'John Doe' })
+  res.status(201).json({ message: "Added post!", data: username })
+  client.close()
 }
+
+export default handler

@@ -4,14 +4,10 @@ import Editor from 'components/write/editor'
 import WriteActionButtons from 'components/write/write-action-buttons'
 import { getSession } from 'next-auth/client'
 
-interface Props {
-  username: string
-}
-
-export default function addPost({ username }: Props): ReactElement {  
+export default function addPost(): ReactElement {  
     return (
         <Responsive>
-          <Editor username={username} />
+          <Editor />
           <WriteActionButtons />
         </Responsive>
     )
@@ -19,7 +15,6 @@ export default function addPost({ username }: Props): ReactElement {
 
 export async function getServerSideProps(context: any) {
   const session = await getSession({req: context.req})
-  const username = session?.user?.name
 
   if (!session) {
       return {
@@ -31,6 +26,6 @@ export async function getServerSideProps(context: any) {
   }
 
   return {
-      props: { session, username }
+      props: { session }
   }
 }

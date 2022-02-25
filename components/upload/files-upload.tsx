@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch } from 'react-redux'
 import { UiFileInputButton } from "components/upload/ui-file-input-button";
 import { ChangeToThumbnail, ChangeToFrontURL } from "lib/change-to-thumbnail"
-import { setImageLinks } from "modules/addPost";
+import { setImageLinks } from "modules/write";
 import styled from 'styled-components'
 
 const FilesUpload = () => {
