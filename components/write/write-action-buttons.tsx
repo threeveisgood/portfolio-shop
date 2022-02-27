@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 import { useMutation } from "react-query";
 import { useRouter } from "next/router";
 import axios from "axios";
-import write from "modules/write";
-import { useAddPost } from "hooks/useAddPost";
 
 const bson = require('bson');
 
@@ -16,8 +14,6 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
   () => {
     const router = useRouter();
     const _id = bson.ObjectId()
-
-    console.log(_id)
 
     const { title, body, price, productURL, imageLinks, username } = useSelector(
       ({ write }: any) => ({
@@ -35,7 +31,7 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
       {
         onError: () => {},
         onSuccess: () => {
-          router.push(`/`)
+          router.push(`/post/${_id}`)
         },
       }
     );

@@ -31,7 +31,7 @@ const upload = multer({
       cb(null, `${nowDate}_${file.originalname}`)
     },
   }),
-  limits: { fileSize:  (1024 * 1024) * 100 },
+  limits: { fileSize:  (1024 * 1024) },
 });
 
 app.post(upload.array("file"), function (req, res) {

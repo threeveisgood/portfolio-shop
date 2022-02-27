@@ -39,7 +39,8 @@ async function handler(
     productURL: productURL,
     imageLinks: imageLinks,
     username: username,
-    _id: _id
+    _id: _id,
+    date: new Date()
   })
 
   res.status(201).json({ message: "Added post!", data: username })
