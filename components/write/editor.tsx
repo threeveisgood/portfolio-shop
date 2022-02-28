@@ -4,7 +4,6 @@ import Responsive from "components/styled/responsive";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { useSession } from "next-auth/client"
 import { changeField, initialize } from "modules/write";
 import Container from "components/styled/container";
 import {
@@ -32,11 +31,13 @@ const Editor: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const quillRef = useRef<any>(null);
 
-  const { title, body, price, productURL } = useSelector(({ write }: any) => ({
+  const { title, body, price, productURL, shipping, store } = useSelector(({ write }: any) => ({
     title: write.title,
     body: write.body,
     price: write.price,
     productURL: write.productURL,
+    shipping: write.shipping,
+    store: write.store
   }));
 
   const onChangeField = useCallback(
@@ -59,6 +60,14 @@ const Editor: React.FunctionComponent = () => {
   const onChangeProductURL = (e: any) => {
     onChangeField({ key: "productURL", value: e.target.value });
   };
+
+  const onChangeShipping = (e: any) => {
+    onChangeField({ key: "shipping", value: e.target.value });
+  }
+
+  const onChangeStore = (e: any) => {
+    onChangeField({ key: "store", value: e.target.value });
+  }
 
   const modules = {
     toolbar: [
@@ -89,6 +98,7 @@ const Editor: React.FunctionComponent = () => {
               id="price"
               name="price"
               placeholder="가격"
+              autoComplete="off"
               value={price}
               onChange={onChangePrice}
             />
@@ -101,10 +111,37 @@ const Editor: React.FunctionComponent = () => {
               id="realtedURL"
               name="realtedURL"
               placeholder="상품 관련 URL"
+              autoComplete="off"
               value={productURL}
               onChange={onChangeProductURL}
             />
             <StyledLabel htmlFor="realtedURL">상품 관련 URL</StyledLabel>
+          </Field>
+
+          <Field>
+            <StyledInput
+              type="text"
+              id="store"
+              name="store"
+              placeholder="쇼핑몰"
+              autoComplete="off"
+              value={store}
+              onChange={onChangeStore}
+            />
+            <StyledLabel htmlFor="realtedURL">쇼핑몰</StyledLabel>
+          </Field>
+
+          <Field>
+            <StyledInput
+              type="text"
+              id="shipping"
+              name="shipping"
+              placeholder="배송비"
+              autoComplete="off"
+              value={shipping}
+              onChange={onChangeShipping}
+            />
+            <StyledLabel htmlFor="realtedURL">배송비</StyledLabel>
           </Field>
 
           <FieldContainer>

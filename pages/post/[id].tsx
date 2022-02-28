@@ -9,7 +9,7 @@ const fetchPost = (id: string) =>
   axios.get(`api/post/${id}`).then(({ data }) => data);
 
 
-const Post: React.FunctionComponent = (props) => {
+const Post: React.FunctionComponent = () => {
   const router = useRouter();
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
 
@@ -21,10 +21,33 @@ const Post: React.FunctionComponent = (props) => {
       staleTime: Infinity
     }
   )
+
+  if (isSuccess) {
+    return (
+      <Contents
+        title={data.title}
+        body={data.body}
+        price={data.price}
+        productURL={data.productURL}
+        imageLinks={data.imageLinks}
+        username={data.username}
+        date={data.date}
+      />
+    )
+  }
+
+  if (isLoading) {
+    return <div>로딩 중...</div>
+  }
   
+  if (isError) {
+    return (
+      <div>오류가 발생하였습니다.</div>
+    )
+  }
+
   return (
-    <>
-      <Contents />
+    <>      
     </>
   );
 };

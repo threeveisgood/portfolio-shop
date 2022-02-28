@@ -6,23 +6,30 @@ import { MdRemoveRedEye, MdThumbUp } from "react-icons/md";
 import { BiCommentDetail } from "react-icons/bi";
 import StyledCarousel from "components/styled/carousel";
 
-interface IContentsProps {}
+interface IContentsProps {
+  title: string;
+  body: any;
+  price: string;
+  productURL: string;
+  imageLinks: string[];
+  username: string;
+  date: Date;
+}
 
-const Contents: React.FunctionComponent<IContentsProps> = (props) => {
+const Contents: React.FunctionComponent<IContentsProps> = ({ title, body, price, productURL, imageLinks, username, date}) => {
   return (
     <ContentsContianer>
       <ContentsLayout>
         <TitleContainer>
           <Title>
-            Lenovo ThinkBook 13s Gen 3 Laptop: Ryzen 5 5600U, 13.3" IPS, 16GB
-            RAM, 512GB SSD
+            {title}
           </Title>
         </TitleContainer>
 
         <DetailContainer>
           <PriceAndShopContainer>
             <FlexContainer>
-              <Price>690,000원</Price>
+              <Price>{price}</Price>
               <Feature>배송비: 무료배송</Feature>
               <StoreName>쇼핑몰: G마켓</StoreName>
             </FlexContainer>
@@ -31,7 +38,7 @@ const Contents: React.FunctionComponent<IContentsProps> = (props) => {
           <InformationContainer>
             <FlexContainer>
               <IoPersonCircleOutline />
-              <UserNameInformation>아두</UserNameInformation>
+              <UserNameInformation>{username}</UserNameInformation>
             </FlexContainer>
             <FlexContainer>
               <Count>
@@ -49,15 +56,15 @@ const Contents: React.FunctionComponent<IContentsProps> = (props) => {
                 <CountNumber>0</CountNumber>
               </Count>
               <Count>
-                <CountNumber>2022.02.07 18:32</CountNumber>
+                <CountNumber>{date}</CountNumber>
               </Count>
             </FlexContainer>
           </InformationContainer>
 
           <ProductURLContainer>
-            <Link href="/"><a>&nbsp;링크: {"http://localhost:3000/content-test"}</a></Link>
+            <Link href="/"><a>&nbsp;링크: {productURL}</a></Link>
           </ProductURLContainer>
-
+    
           <StyledCarousel />
         </DetailContainer>
       </ContentsLayout>
