@@ -5,7 +5,7 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const postId = req.query.id
+  const { id } = req.query
 
   if (req.method !== 'GET') return
 
@@ -13,9 +13,10 @@ async function handler(
 
   const db: any = client.db()
   
-  const result: any = await db.collection('posts').find({ _id: postId })
+  const result: any = await db.collection('posts').findOne({ _id: id })
 
-  res.status(201).json({ message: "got a post!" })
+  res.status(201).json({ message: "got a post!", result })
+
   client.close()
 }
 

@@ -62,7 +62,7 @@ const Contents: React.FunctionComponent<IContentsProps> = ({ title, body, price,
           </InformationContainer>
 
           <ProductURLContainer>
-            <Link href="/"><a>&nbsp;링크: {productURL}</a></Link>
+          URL :&nbsp;<Link href="/"><a>{productURL}</a></Link>
           </ProductURLContainer>
     
           <StyledCarousel />
