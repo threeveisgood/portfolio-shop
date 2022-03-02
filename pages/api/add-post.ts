@@ -15,7 +15,7 @@ async function handler(
     return 
   }
 
-  const { title, body, price, productURL, imageLinks, _id } = req.body
+  const { title, body, price, productURL, imageLinks, store, shipping, _id } = req.body
 
   const username: any = session?.user?.name
 
@@ -39,8 +39,10 @@ async function handler(
     productURL: productURL,
     imageLinks: imageLinks,
     username: username,
+    store: store,
+    shipping: shipping,
     _id: _id,
-    date: new Date()
+    date: new Date(),
   })
 
   res.status(201).json({ message: "Added post!", data: username })

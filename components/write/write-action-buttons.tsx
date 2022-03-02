@@ -15,14 +15,16 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
     const router = useRouter();
     const _id = bson.ObjectId()
 
-    const { title, body, price, productURL, imageLinks, username } = useSelector(
+    const { title, body, price, productURL, imageLinks, username, store, shipping } = useSelector(
       ({ write }: any) => ({
         title: write.title,
         body: write.body,
-        price: write.price,
+        price: write.price,        
         productURL: write.productURL,
         imageLinks: write.imageLinks,
-        username: write.username
+        username: write.username,
+        store: write.store,
+        shipping: write.shipping
       })
     );
 
@@ -37,7 +39,7 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
     );
 
     const onPublish = (e: any) => {
-      mutation.mutate({ title, body, price, productURL, imageLinks, username, _id });
+      mutation.mutate({ title, body, price, productURL, imageLinks, username, store, shipping, _id });
     };
 
     const onCancel = () => {

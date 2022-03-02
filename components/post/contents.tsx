@@ -1,10 +1,16 @@
 import * as React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ko";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { MdRemoveRedEye, MdThumbUp } from "react-icons/md";
 import { BiCommentDetail } from "react-icons/bi";
 import StyledCarousel from "components/styled/carousel";
+
+dayjs.extend(relativeTime);
+dayjs.locale("ko");
 
 interface IContentsProps {
   title: string;
@@ -13,25 +19,40 @@ interface IContentsProps {
   productURL: string;
   imageLinks: string[];
   username: string;
+  store: string;
+  shipping: string;
   date: Date;
 }
 
-const Contents: React.FunctionComponent<IContentsProps> = ({ title, body, price, productURL, imageLinks, username, date}) => {
+const Contents: React.FunctionComponent<IContentsProps> = ({
+  title,
+  body,
+  price,
+  productURL,
+  imageLinks,
+  username,
+  date,
+  store,
+  shipping,
+}) => {
+  const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
+  const mobileDate = dayjs().to(dayjs(date));
+
+  console.log(mobileDate);
+
   return (
     <ContentsContianer>
       <ContentsLayout>
         <TitleContainer>
-          <Title>
-            {title}
-          </Title>
+          <Title>{title}</Title>
         </TitleContainer>
 
         <DetailContainer>
           <PriceAndShopContainer>
             <FlexContainer>
               <Price>{price}</Price>
-              <Feature>배송비: 무료배송</Feature>
-              <StoreName>쇼핑몰: G마켓</StoreName>
+              <Feature>배송비: {shipping}</Feature>
+              <StoreName>쇼핑몰: {store}</StoreName>
             </FlexContainer>
           </PriceAndShopContainer>
 
@@ -56,15 +77,23 @@ const Contents: React.FunctionComponent<IContentsProps> = ({ title, body, price,
                 <CountNumber>0</CountNumber>
               </Count>
               <Count>
-                <CountNumber>{date}</CountNumber>
+                <CountNumber>
+                  <DateInfo>{postDate}</DateInfo>
+                </CountNumber>
+                <CountNumber>
+                  <MobileDateInfo>{mobileDate}</MobileDateInfo>
+                </CountNumber>
               </Count>
             </FlexContainer>
           </InformationContainer>
 
           <ProductURLContainer>
-          URL :&nbsp;<Link href="/"><a>{productURL}</a></Link>
+            URL :&nbsp;
+            <Link href="/">
+              <a>{productURL}</a>
+            </Link>
           </ProductURLContainer>
-    
+
           <StyledCarousel />
         </DetailContainer>
       </ContentsLayout>
@@ -76,7 +105,7 @@ export default Contents;
 
 const ContentsContianer = styled.div`
   max-width: 1200px;
-  background: #fff;
+  background: #faf7f0;
   margin: 0 auto;
   box-sizing: border-box;
 `;
@@ -113,16 +142,12 @@ const Price = styled.span`
 `;
 
 const Feature = styled.span`
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-left: 1.5rem;
   color: #3b3838;
 `;
 
-const StoreName = styled.span`
-  font-size: 1.3rem;
-  margin-left: 1.5rem;
-  color: #3b3838;
-`;
+const StoreName = styled(Feature)``;
 
 const InformationContainer = styled.div`
   display: flex;
@@ -154,6 +179,7 @@ const Count = styled.span`
 `;
 
 const CountNumber = styled.span`
+  font-size: 1.4rem;
   padding-left: 0.4rem;
 `;
 
@@ -167,4 +193,18 @@ const ProductURLContainer = styled.div`
   padding: 0.8rem 0;
   margin-bottom: 3rem;
   font-size: 1.4rem;
+`;
+
+const MobileDateInfo = styled.p`
+  font-size: 1.3rem;
+  @media screen and (min-width: 680px) {
+    display: none;
+  }
+`;
+
+const DateInfo = styled.p`
+  font-size: 1.3rem;
+  @media screen and (max-width: 680px) {
+    display: none;
+  }
 `;

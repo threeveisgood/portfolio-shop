@@ -33,6 +33,8 @@ const Post: React.FunctionComponent = () => {
         productURL={result.productURL}
         imageLinks={result.imageLinks}
         username={result.username}
+        shipping={result.shipping}
+        store={result.store}
         date={result.date}
       />
     )
