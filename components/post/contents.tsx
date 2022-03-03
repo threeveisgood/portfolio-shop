@@ -51,10 +51,23 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
           <PriceAndShopContainer>
             <FlexContainer>
               <Price>{price}</Price>
-              <Feature>배송비: {shipping}</Feature>
-              <StoreName>쇼핑몰: {store}</StoreName>
             </FlexContainer>
           </PriceAndShopContainer>
+
+          <InformationContainer>
+            <Count className="no-padding-left">
+              <Feature>배송비: {shipping}</Feature>
+              <StoreName>쇼핑몰: {store}</StoreName>
+            </Count>
+            <Count>
+              <CountNumber>
+                <DateInfo>{postDate}</DateInfo>
+              </CountNumber>
+              <CountNumber>
+                <MobileDateInfo>{mobileDate}</MobileDateInfo>
+              </CountNumber>
+            </Count>
+          </InformationContainer>
 
           <InformationContainer>
             <FlexContainer>
@@ -75,14 +88,6 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
               <Count>
                 <MdThumbUp />
                 <CountNumber>0</CountNumber>
-              </Count>
-              <Count>
-                <CountNumber>
-                  <DateInfo>{postDate}</DateInfo>
-                </CountNumber>
-                <CountNumber>
-                  <MobileDateInfo>{mobileDate}</MobileDateInfo>
-                </CountNumber>
               </Count>
             </FlexContainer>
           </InformationContainer>
@@ -142,12 +147,13 @@ const Price = styled.span`
 `;
 
 const Feature = styled.span`
-  font-size: 1.2rem;
-  margin-left: 1.5rem;
+  font-size: 1.2rem;  
   color: #3b3838;
 `;
 
-const StoreName = styled(Feature)``;
+const StoreName = styled(Feature)`
+  margin-left: 1.5rem;
+`;
 
 const InformationContainer = styled.div`
   display: flex;
@@ -155,10 +161,14 @@ const InformationContainer = styled.div`
   line-height: 2.2rem;
   border-top: 1px solid #e9e9e9;
   border-bottom: 1px solid #e9e9e9;
-  padding: 0.8rem 0;
   margin: 1.5rem 0 0rem;
+  padding: 0.8rem 0;
   justify-content: space-between;
   font-size: 2.2rem;
+
+  & + & {
+    margin: 0;
+  }
 `;
 
 const UserNameInformation = styled.span`
@@ -176,11 +186,15 @@ const Count = styled.span`
   align-items: center;
   padding-left: 1rem;
   font-size: 1.5rem;
+
+  &.no-padding-left {
+    padding-left: 0;
+  }
 `;
 
 const CountNumber = styled.span`
   font-size: 1.4rem;
-  padding-left: 0.4rem;
+  padding-left: 0.2rem;
 `;
 
 const InformationMidDot = styled.span`
