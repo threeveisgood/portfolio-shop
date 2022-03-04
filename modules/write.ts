@@ -18,14 +18,15 @@ export const changeField = createAction(
 export const setImageLinks = createAction(SET_IMAGE_LINKS);
 export const writePost = createAction(
   WRITE_POST,
-  ({ title, body, price, productURL, imageLinks, shipping, store }: any) => ({
+  ({ title, body, price, productURL, imageLinks, shipping, store, category }: any) => ({
     title,
     body,
     price,
     productURL,
     imageLinks,
     shipping,
-    store
+    store,
+    category
   })
 )
 
@@ -38,6 +39,7 @@ const initialState = {
   username: "",
   shipping: "",
   store: "",
+  category: ""
 }
 
 const write = handleActions(

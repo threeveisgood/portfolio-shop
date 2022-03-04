@@ -24,7 +24,7 @@ export const FieldContainer = styled.div`
 `;
 
 export const StyledInput = styled.input`
-  width: 30rem;
+  width: 300px;
   border: 0;
   border-bottom: 2px solid grey;
   background-image: linear-gradient(0deg, rgba(100,101,101,1) 0%, rgba(0,0,0,1) 54%);

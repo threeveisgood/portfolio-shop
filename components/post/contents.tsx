@@ -21,6 +21,7 @@ interface IContentsProps {
   username: string;
   store: string;
   shipping: string;
+  category: string;
   date: Date;
 }
 
@@ -34,11 +35,10 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
   date,
   store,
   shipping,
+  category,
 }) => {
   const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
   const mobileDate = dayjs().to(dayjs(date));
-
-  console.log(mobileDate);
 
   return (
     <ContentsContianer>
@@ -48,11 +48,10 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
         </TitleContainer>
 
         <DetailContainer>
-          <PriceAndShopContainer>
-            <FlexContainer>
-              <Price>{price}</Price>
-            </FlexContainer>
-          </PriceAndShopContainer>
+          <PriceAndCategoryContainer>
+            <Price>{price}</Price>
+            <Category>{category}</Category>
+          </PriceAndCategoryContainer>
 
           <InformationContainer>
             <Count className="no-padding-left">
@@ -99,7 +98,11 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
             </Link>
           </ProductURLContainer>
 
-          <StyledCarousel />
+          {imageLinks.length != 0 ? (
+            <StyledCarousel imageLinks={imageLinks} />
+          ) : null}
+
+          <PostContent dangerouslySetInnerHTML={{ __html: body }} />
         </DetailContainer>
       </ContentsLayout>
     </ContentsContianer>
@@ -134,10 +137,12 @@ const Title = styled.h1`
 `;
 
 const DetailContainer = styled.div`
-  padding: 2.5rem 2.4rem;
+  padding: 2.3rem 2.4rem;
 `;
 
-const PriceAndShopContainer = styled.span`
+const PriceAndCategoryContainer = styled.span`
+  display: flex;
+  justify-content: space-between;
   overflow: hidden;
 `;
 
@@ -146,8 +151,12 @@ const Price = styled.span`
   font-weight: 600;
 `;
 
+const Category = styled.span`
+  font-size: 1.3rem;
+`;
+
 const Feature = styled.span`
-  font-size: 1.2rem;  
+  font-size: 1.2rem;
   color: #3b3838;
 `;
 
@@ -173,7 +182,7 @@ const InformationContainer = styled.div`
 
 const UserNameInformation = styled.span`
   padding-left: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 `;
 
 const FlexContainer = styled.span`
@@ -185,7 +194,7 @@ const Count = styled.span`
   display: flex;
   align-items: center;
   padding-left: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 
   &.no-padding-left {
     padding-left: 0;
@@ -210,15 +219,20 @@ const ProductURLContainer = styled.div`
 `;
 
 const MobileDateInfo = styled.p`
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   @media screen and (min-width: 680px) {
     display: none;
   }
 `;
 
 const DateInfo = styled.p`
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   @media screen and (max-width: 680px) {
     display: none;
   }
+`;
+
+const PostContent = styled.div`
+  font-size: 1.3125rem;
+  color: #333130;
 `;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 const navbarInformation = [
   {
     id: 0,
-    name: '음식'
+    name: '식품'
   },
   {
     id: 1,

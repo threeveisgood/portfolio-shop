@@ -36,6 +36,7 @@ const Post: React.FunctionComponent = () => {
         shipping={result.shipping}
         store={result.store}
         date={result.date}
+        category={result.category}
       />
     )
   }

@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Responsive from "components/styled/responsive";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
+import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import { changeField, initialize } from "modules/write";
 import Container from "components/styled/container";
@@ -10,9 +11,17 @@ import {
   Field,
   StyledInput,
   StyledLabel,
-  FieldContainer,  
+  FieldContainer,
 } from "components/styled/form";
 import FilesUpload from "components/upload/files-upload";
+
+const options = [
+  { value: "식품", label: "식품" },
+  { value: "PC제품", label: "PC제품" },
+  { value: "가전제품", label: "가전제품" },
+  { value: "화장품", label: "화장품" },
+  { value: "패션", label: "패션" },
+];
 
 const ReactQuill = dynamic(
   async () => {
@@ -27,46 +36,36 @@ const ReactQuill = dynamic(
   }
 );
 
-const Editor: React.FunctionComponent = () => {  
+const Editor: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const quillRef = useRef<any>(null);
 
-  const { title, body, price, productURL, shipping, store } = useSelector(({ write }: any) => ({
-    title: write.title,
-    body: write.body,
-    price: write.price,
-    productURL: write.productURL,
-    shipping: write.shipping,
-    store: write.store
-  }));
+  const { title, body, price, productURL, shipping, store, category } =
+    useSelector(({ write }: any) => ({
+      title: write.title,
+      body: write.body,
+      price: write.price,
+      productURL: write.productURL,
+      shipping: write.shipping,
+      store: write.store,
+      category: write.category,
+    }));
 
   const onChangeField = useCallback(
     (payload) => dispatch(changeField(payload)),
     [dispatch]
   );
 
-  const onChangeTitle = (e: any) => {
-    onChangeField({ key: "title", value: e.target.value });
+  const handleChange = (key: string) => {
+    return (e: any) => onChangeField({ key: key, value: e.target.value });
   };
 
   const onChangeText = (text: any) => {
     onChangeField({ key: "body", value: text });
   };
 
-  const onChangePrice = (e: any) => {
-    onChangeField({ key: "price", value: e.target.value });
-  };
-
-  const onChangeProductURL = (e: any) => {
-    onChangeField({ key: "productURL", value: e.target.value });
-  };
-
-  const onChangeShipping = (e: any) => {
-    onChangeField({ key: "shipping", value: e.target.value });
-  }
-
-  const onChangeStore = (e: any) => {
-    onChangeField({ key: "store", value: e.target.value });
+  const onChangeCategory = (category: any) => {
+    onChangeField({ key: "category", value: category.value })
   }
 
   const modules = {
@@ -77,7 +76,7 @@ const Editor: React.FunctionComponent = () => {
       ["blockquote", "code-block", "link"],
     ],
   };
-  
+
   useEffect(() => {
     return () => {
       dispatch(initialize());
@@ -86,78 +85,87 @@ const Editor: React.FunctionComponent = () => {
 
   return (
     <Container>
-        <EditorBlock>
-          <TitleInput
-            placeholder="제목을 입력하세요"
-            onChange={onChangeTitle}
-            value={title}
+      <EditorBlock>
+        <TitleInput
+          placeholder="제목을 입력하세요"
+          onChange={handleChange("title")}
+          value={title}
+        />
+
+        <Field>
+          <CategorySelect
+            defaultValue={category}
+            onChange={onChangeCategory}
+            options={options}
           />
-          <Field>
-            <StyledInput
-              type="text"
-              id="price"
-              name="price"
-              placeholder="가격"
-              autoComplete="off"
-              value={price}
-              onChange={onChangePrice}
-            />
-            <StyledLabel htmlFor="price">가격</StyledLabel>
-          </Field>
+        </Field>
 
-          <Field>
-            <StyledInput
-              type="text"
-              id="realtedURL"
-              name="realtedURL"
-              placeholder="상품 관련 URL"
-              autoComplete="off"
-              value={productURL}
-              onChange={onChangeProductURL}
-            />
-            <StyledLabel htmlFor="realtedURL">상품 관련 URL</StyledLabel>
-          </Field>
+        <Field>
+          <StyledInput
+            type="text"
+            id="price"
+            name="price"
+            placeholder="가격"
+            autoComplete="off"
+            value={price}
+            onChange={handleChange("price")}
+          />
+          <StyledLabel htmlFor="price">가격</StyledLabel>
+        </Field>
 
-          <Field>
-            <StyledInput
-              type="text"
-              id="store"
-              name="store"
-              placeholder="쇼핑몰"
-              autoComplete="off"
-              value={store}
-              onChange={onChangeStore}
-            />
-            <StyledLabel htmlFor="realtedURL">쇼핑몰</StyledLabel>
-          </Field>
+        <Field>
+          <StyledInput
+            type="text"
+            id="realtedURL"
+            name="realtedURL"
+            placeholder="상품 관련 URL"
+            autoComplete="off"
+            value={productURL}
+            onChange={handleChange("productURL")}
+          />
+          <StyledLabel htmlFor="realtedURL">상품 관련 URL</StyledLabel>
+        </Field>
 
-          <Field>
-            <StyledInput
-              type="text"
-              id="shipping"
-              name="shipping"
-              placeholder="배송비"
-              autoComplete="off"
-              value={shipping}
-              onChange={onChangeShipping}
-            />
-            <StyledLabel htmlFor="realtedURL">배송비</StyledLabel>
-          </Field>
+        <Field>
+          <StyledInput
+            type="text"
+            id="store"
+            name="store"
+            placeholder="쇼핑몰"
+            autoComplete="off"
+            value={store}
+            onChange={handleChange("store")}
+          />
+          <StyledLabel htmlFor="realtedURL">쇼핑몰</StyledLabel>
+        </Field>
 
-          <FieldContainer>
-            <FilesUpload />
-          </FieldContainer>
+        <Field>
+          <StyledInput
+            type="text"
+            id="shipping"
+            name="shipping"
+            placeholder="배송비"
+            autoComplete="off"
+            value={shipping}
+            onChange={handleChange("shipping")}
+          />
+          <StyledLabel htmlFor="realtedURL">배송비</StyledLabel>
+        </Field>
 
-          <QuillWrapper>
-            <ReactQuill
-              theme="snow"
-              placeholder="내용을 입력하세요"
-              modules={modules}
-              forwardedRef={quillRef}
-              onChange={onChangeText}
-            />
-          </QuillWrapper>
-        </EditorBlock>
+        <FieldContainer>
+          <FilesUpload />
+        </FieldContainer>
+
+        <QuillWrapper>
+          <ReactQuill
+            theme="snow"
+            placeholder="내용을 입력하세요"
+            modules={modules}
+            forwardedRef={quillRef}
+            onChange={onChangeText}
+          />
+        </QuillWrapper>
+      </EditorBlock>
     </Container>
   );
 };
@@ -192,3 +200,11 @@ const QuillWrapper = styled.div`
     left: 0px;
   }
 `;
+
+const CategorySelect = styled(Select)`
+  width: 300px;
+  
+  & > div {
+    font-size: 1.2rem;
+  }
+`

@@ -4,7 +4,11 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { Carousel } from "react-responsive-carousel";
 
-const StyledCarousel: React.FunctionComponent = () => {
+interface Props {
+  [imageLinks: string]: any;
+}
+
+const StyledCarousel: React.FunctionComponent<Props> = ({ imageLinks }) => {
   return (
     <CarouselContainer>
       <Carousel
@@ -13,12 +17,9 @@ const StyledCarousel: React.FunctionComponent = () => {
         dynamicHeight={true}
         showStatus={false}
       >
-        <div>
-          <img src="/1.jpg" />
-        </div>
-        <div>
-          <img src="/3.jpg" />
-        </div>
+        {imageLinks?.map((imageLink: string) => (
+          <img src={imageLink} />
+        ))}
       </Carousel>
     </CarouselContainer>
   );

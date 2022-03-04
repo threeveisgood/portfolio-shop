@@ -15,7 +15,7 @@ async function handler(
     return 
   }
 
-  const { title, body, price, productURL, imageLinks, store, shipping, _id } = req.body
+  const { title, body, price, productURL, imageLinks, store, shipping, category, _id } = req.body
 
   const username: any = session?.user?.name
 
@@ -41,6 +41,7 @@ async function handler(
     username: username,
     store: store,
     shipping: shipping,
+    category: category,
     _id: _id,
     date: new Date(),
   })
