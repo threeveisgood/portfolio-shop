@@ -18,6 +18,7 @@ import FilesUpload from "components/upload/files-upload";
 const options = [
   { value: "식품", label: "식품" },
   { value: "PC제품", label: "PC제품" },
+  { value: "S/W", label: "S/W" },
   { value: "가전제품", label: "가전제품" },
   { value: "화장품", label: "화장품" },
   { value: "패션", label: "패션" },
@@ -97,6 +98,7 @@ const Editor: React.FunctionComponent = () => {
             defaultValue={category}
             onChange={onChangeCategory}
             options={options}
+            placeholder="카테고리 선택"
           />
         </Field>
 
@@ -202,7 +204,7 @@ const QuillWrapper = styled.div`
 `;
 
 const CategorySelect = styled(Select)`
-  width: 300px;
+  width: 30em;
   
   & > div {
     font-size: 1.2rem;

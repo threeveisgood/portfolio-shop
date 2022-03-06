@@ -18,6 +18,7 @@ async function handler(
   const { title, body, price, productURL, imageLinks, store, shipping, category, _id } = req.body
 
   const username: any = session?.user?.name
+  const email: any = session?.user?.email
 
   if(
     !title ||
@@ -43,6 +44,7 @@ async function handler(
     shipping: shipping,
     category: category,
     _id: _id,
+    email: email,
     date: new Date(),
   })
 

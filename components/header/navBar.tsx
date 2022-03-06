@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from "styled-components";
-//import { BiChevronDown } from 'react-icons/bi'
 
 const navbarInformation = [
   {
@@ -13,15 +12,23 @@ const navbarInformation = [
   },  
   {
     id: 2,
-    name: '가전제품'
+    name: 'S/W'
   },
   {
     id: 3,
+    name: '가전제품'
+  },
+  {
+    id: 4,
     name: '화장품'
+  },
+  {
+    id: 5,
+    name: '패션'
   }
 ]
 
-const NavBar: React.FunctionComponent = (props) => {
+const NavBar: React.FunctionComponent = () => {
   return <>
     <Nav>
       <InformationUl>

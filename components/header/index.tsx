@@ -27,7 +27,6 @@ const Header: React.FunctionComponent = () => {
     signOut();
   };
 
-  console.log(loading);
   console.log(session);
 
   return (
