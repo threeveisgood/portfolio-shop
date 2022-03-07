@@ -8,6 +8,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { MdRemoveRedEye, MdThumbUp } from "react-icons/md";
 import { BiCommentDetail } from "react-icons/bi";
 import StyledCarousel from "components/styled/carousel";
+import AddComments from "components/comments/add-comment";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -103,7 +104,8 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
           ) : null}
 
           <PostContent dangerouslySetInnerHTML={{ __html: body }} />
-        </DetailContainer>
+          <AddComments />
+        </DetailContainer>        
       </ContentsLayout>
     </ContentsContianer>
   );

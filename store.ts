@@ -2,8 +2,8 @@ import { applyMiddleware, combineReducers, createStore, Middleware, StoreEnhance
 import { createWrapper, MakeStore } from 'next-redux-wrapper';
 import createSagaMiddleware from 'redux-saga';
 
-import addPost from 'modules/addPost'
 import write from 'modules/write'
+import comment from 'modules/comment'
 
 import rootSaga from './saga';
 
@@ -18,7 +18,7 @@ const bindMiddleware = (middleware: Middleware[]): StoreEnhancer => {
 export const makeStore: MakeStore<any, any> = () => {
   const sagaMiddleware = createSagaMiddleware();
 
-  const rootReducer = combineReducers({ addPost, write })
+  const rootReducer = combineReducers({ write, comment })
 
   const store = createStore(rootReducer, bindMiddleware([sagaMiddleware]));
 

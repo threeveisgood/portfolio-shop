@@ -204,7 +204,7 @@ const QuillWrapper = styled.div`
 `;
 
 const CategorySelect = styled(Select)`
-  width: 30em;
+  width: 30rem;
   
   & > div {
     font-size: 1.2rem;

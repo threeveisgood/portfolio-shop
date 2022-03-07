@@ -26,6 +26,7 @@ const Post: React.FunctionComponent = () => {
     const result = data.result
 
     return (
+      <>
       <Contents
         title={result.title}
         body={result.body}
@@ -37,7 +38,11 @@ const Post: React.FunctionComponent = () => {
         store={result.store}
         date={result.date}
         category={result.category}
-      />
+      />      
+      {/* <Comments 
+        id={postID}
+      /> */}
+      </>
     )
   }
 
