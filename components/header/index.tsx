@@ -34,13 +34,13 @@ const Header: React.FunctionComponent = () => {
       <StyledHeader>
         <Link href="/">
           <a>
-            <Title>SandoShop</Title>
+            <Title>SandoDeal</Title>
           </a>
         </Link>
 
         <Search />
         <UserNav>
-          {session && (
+          {/* {session && (
             <UserProfileIcon>
               <Link href="/cart">
                 <a>
@@ -48,7 +48,7 @@ const Header: React.FunctionComponent = () => {
                 </a>
               </Link>
             </UserProfileIcon>
-          )}
+          )} */}
           {session && (
             <UserProfileIcon
               className="last dropdown"
@@ -120,13 +120,12 @@ const Title = styled.div`
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
 
-  background: linear-gradient(
-    0deg,
-    rgba(100, 101, 101, 1) 0%,
-    rgba(0, 0, 0, 1) 54%
-  );
+  background: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  
+  background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;  
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
 `;
 
 const UserNav = styled.nav`

@@ -4,8 +4,8 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
       primary: string;
-      logoColor: string;
-      darkColor: string;
+      purple: string;
+      cyan: string;
       mainColor: string;
     }
 

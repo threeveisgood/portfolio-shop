@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { StyledButton } from "components/styled/button";
 
 export const Field = styled.div`
@@ -16,18 +16,18 @@ export const StyledLabel = styled.label`
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: gray;
+  color: ${props => props.theme.colors.primary};
+  font-weight: 700;
 `;
 
 export const FieldContainer = styled.div`
   margin-top: 3rem;
 `;
 
-export const StyledInput = styled.input`
+export const InputStyle = css`
   width: 300px;
   border: 0;
-  border-bottom: 2px solid grey;
-  background-image: linear-gradient(0deg, rgba(100,101,101,1) 0%, rgba(0,0,0,1) 54%);
+  border-bottom: 2px solid ${props => props.theme.colors.primary};
   border-image-slice: 1;
   outline: 0;
   font-size: 1.5rem;
@@ -52,7 +52,7 @@ export const StyledInput = styled.input`
       display: block;
       transition: 0.2s;
       font-size: 1rem;
-      color: #000000;
+      color: ${props => props.theme.colors.primary};
       font-weight: 500;
     }
     padding-bottom: 6px;
@@ -60,6 +60,10 @@ export const StyledInput = styled.input`
     border-width: 3px;
     border-image-slice: 1;
   }
+`
+
+export const StyledInput = styled.input`
+  ${InputStyle}
 `;
 
 export const FormSubmitButton = styled(StyledButton)`
@@ -70,3 +74,4 @@ export const FormSubmitButton = styled(StyledButton)`
 export const FormSubmitLastButton = styled(FormSubmitButton)`
   margin-left: 2rem;
 `
+

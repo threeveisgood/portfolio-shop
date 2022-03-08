@@ -42,10 +42,10 @@ const FilesUpload = () => {
         uploadFileName="file"
         onChange={onChange}
       />
-      <p>
+      <PrimaryP>
         <span>이미지 업로드 (10MB 미만)&nbsp;</span>
         {progress != 100 && <span>{progress}%</span>}
-      </p>
+      </PrimaryP>
       <ThumbnailUl>
         {thumb &&
           thumb.map((item: string, i: number) => {
@@ -70,3 +70,8 @@ export const ThumbnailLi = styled.li`
   display: inline;
   margin-right: 0.8rem;
 `;
+
+const PrimaryP = styled.p`
+  color: ${props => props.theme.colors.primary};
+  font-size: 1.2rem;
+`

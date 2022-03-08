@@ -2,9 +2,9 @@ import { DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
   colors: {
-    primary: '#000000',
-    logoColor: '#c79a3b',
-    darkColor: '#010f19',
+    primary: '#5B42F3',
+    purple: '#AF40FF',
+    cyan: '#00DDEB',
     mainColor: 'rgb(24, 166, 59)'      
   },
   padding: '12px',

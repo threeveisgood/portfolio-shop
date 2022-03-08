@@ -46,7 +46,7 @@ const Nav = styled.nav`
   display: flex;
   justify-content: center;
   
-  background: linear-gradient(0deg, rgba(100,101,101,1) 0%, rgba(0,0,0,1) 54%);
+  background: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
   color: white; 
 `
 

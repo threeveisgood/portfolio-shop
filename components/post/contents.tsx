@@ -124,7 +124,7 @@ const ContentsLayout = styled.div`
   border-radius: 0.4rem;
   border: 1px solid #d6d6d6;
   margin: 1rem 0 0;
-  border-top: 6px solid #000;
+  border-top: 6px solid ${props => props.theme.colors.primary};
 `;
 
 const TitleContainer = styled.div`
@@ -135,7 +135,7 @@ const TitleContainer = styled.div`
 
 const Title = styled.h1`
   font-size: 2.3rem;
-  font-weight: 400;
+  font-weight: 600;
 `;
 
 const DetailContainer = styled.div`
@@ -155,14 +155,12 @@ const Price = styled.span`
 
 const Category = styled.span`
   font-size: 1.3rem;
+  font-weight: 600;
 `;
 
-const Feature = styled.span`
-  font-size: 1.2rem;
-  color: #3b3838;
-`;
+const Feature = styled(Category)``;
 
-const StoreName = styled(Feature)`
+const StoreName = styled(Category)`
   margin-left: 1.5rem;
 `;
 
@@ -197,6 +195,7 @@ const Count = styled.span`
   align-items: center;
   padding-left: 1rem;
   font-size: 1.6rem;
+  font-weight: 600;
 
   &.no-padding-left {
     padding-left: 0;
@@ -218,6 +217,7 @@ const ProductURLContainer = styled.div`
   padding: 0.8rem 0;
   margin-bottom: 3rem;
   font-size: 1.4rem;
+  font-weight: 600;
 `;
 
 const MobileDateInfo = styled.p`

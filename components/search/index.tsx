@@ -31,8 +31,7 @@ export const Search = () => {
           name="search"
           type="text"
           value={formik.values.search}
-          onChange={formik.handleChange}
-          placeholder="&nbsp;검색"
+          onChange={formik.handleChange}          
         />
         <SearchButton type="submit">
           <AiOutlineSearch />
@@ -56,13 +55,13 @@ const SearchForm = styled.form`
 `;
 
 const SearchInput = styled.input`
+  background: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
   font-family: inherit;
   font-size: inherit;
   color: white;
   border: none;
-  width: 90%;  
-  border: 0.2rem solid #333030;
-  color: #333030;
+  width: 90%;    
+  color: #fff;
   transition: all 0.2s;
   padding: 1rem;
   margin-right: -3.25rem;

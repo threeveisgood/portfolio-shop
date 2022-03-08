@@ -175,7 +175,7 @@ const Editor: React.FunctionComponent = () => {
 export default Editor;
 
 const EditorBlock = styled(Responsive)`
-  padding: 3rem 0 1rem;
+  padding: 3rem 0 1rem;  
 `;
 
 const TitleInput = styled.input`
@@ -184,9 +184,13 @@ const TitleInput = styled.input`
   outline: none;
   padding-bottom: 0.5rem;
   border: none;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid ${props => props.theme.colors.primary};
   margin-bottom: 1rem;
   width: 100%;
+  
+  ::placeholder {
+    color: ${props => props.theme.colors.primary};
+  }
 `;
 
 const QuillWrapper = styled.div`
@@ -205,8 +209,13 @@ const QuillWrapper = styled.div`
 
 const CategorySelect = styled(Select)`
   width: 30rem;
-  
+  border-color: ${props => props.theme.colors.primary};
+    
   & > div {
     font-size: 1.2rem;
+  }
+
+  & > div > div > div {
+    color: ${props => props.theme.colors.primary};
   }
 `

@@ -9,8 +9,7 @@ export const PictureContainer = styled.div`
 export const PictureThumbnail = styled.div`
   margin: 1.5rem;
 
-  @media only screen and (max-width: ${(props) =>
-      props.theme.responsive.phoneLg}) {
+  @media only screen and (max-width: ${(props) => props.theme.responsive.phoneLg}) {
     margin: 1rem;
   }
 `
