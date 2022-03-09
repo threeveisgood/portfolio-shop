@@ -1,36 +1,34 @@
-import 'styled-components';
+import "styled-components";
 
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
-    colors: {
-      primary: string;
-      purple: string;
-      cyan: string;
-      mainColor: string;
-    }
+    primary: string;
+    purple: string;
+    cyan: string;
+    black: string;
 
     padding: string;
 
     fontSize: {
-        large: string;
-        medium: string;
-        small: string;
-        micro: string;       
-    }
+      large: string;
+      medium: string;
+      small: string;
+      micro: string;
+    };
 
     responsive: {
       phone: string;
       phoneLg: string;
       tablet: string;
       tabletLg: string;
-    }
+    };
 
     line: {
       gray: string;
-    }
-    
+    };
+
     gap: {
       card: string;
-    }
+    };
   }
 }

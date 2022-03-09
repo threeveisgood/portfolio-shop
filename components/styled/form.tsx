@@ -16,7 +16,7 @@ export const StyledLabel = styled.label`
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.primary};
   font-weight: 700;
 `;
 
@@ -27,7 +27,7 @@ export const FieldContainer = styled.div`
 export const InputStyle = css`
   width: 300px;
   border: 0;
-  border-bottom: 2px solid ${props => props.theme.colors.primary};
+  border-bottom: 2px solid ${props => props.theme.primary};
   border-image-slice: 1;
   outline: 0;
   font-size: 1.5rem;
@@ -52,7 +52,7 @@ export const InputStyle = css`
       display: block;
       transition: 0.2s;
       font-size: 1rem;
-      color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.primary};
       font-weight: 500;
     }
     padding-bottom: 6px;

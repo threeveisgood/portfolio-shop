@@ -1,29 +1,27 @@
-import { DefaultTheme } from 'styled-components';
+import { DefaultTheme } from "styled-components";
 
 export const theme: DefaultTheme = {
-  colors: {
-    primary: '#5B42F3',
-    purple: '#AF40FF',
-    cyan: '#00DDEB',
-    mainColor: 'rgb(24, 166, 59)'      
-  },
-  padding: '12px',
+  primary: "#5B42F3",
+  purple: "#AF40FF",
+  cyan: "#00DDEB",
+  black: "#474747",
+  padding: "12px",
   fontSize: {
-      large: '18px',
-      medium: '14px',
-      small: '12px',
-      micro: '10px'        
+    large: "18px",
+    medium: "14px",
+    small: "12px",
+    micro: "10px",
   },
   responsive: {
-    phone: '37.5em',
-    phoneLg: '56.25em',
-    tablet: '68.75em',
-    tabletLg: '75em'
+    phone: "37.5em",
+    phoneLg: "56.25em",
+    tablet: "68.75em",
+    tabletLg: "75em",
   },
   line: {
-    gray: '1px solid #f4f2f2'
+    gray: "1px solid #f4f2f2",
   },
   gap: {
-    card: '1.3rem'
-  }
-}
+    card: "1.3rem",
+  },
+};

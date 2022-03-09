@@ -9,7 +9,7 @@ export const buttonStyle = css`
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 600;
   padding: 1rem 1.25rem;
   text-align: center;
@@ -21,7 +21,7 @@ export const buttonStyle = css`
     box-shadow: none;
   }
 
-  @media (min-width: 1024px) {
+  @media (max-width: 1024px) {
     font-size: 1.2rem;
     padding: 0.6rem 1.2rem;
     line-height: 2.2rem;

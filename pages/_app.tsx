@@ -8,6 +8,7 @@ import { theme } from "styled/theme";
 import { wrapper } from "store";
 import Layout from "components/layout";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { Provider } from "next-auth/client";
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
@@ -23,8 +24,9 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
+        <Hydrate state={pageProps.dehydratedState}>          
           <Provider session={pageProps.session}>
+            <ReactQueryDevtools initialIsOpen={false} />
             <ThemeProvider theme={theme}>
               <GlobalStyle />
               <Layout>

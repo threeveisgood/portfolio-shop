@@ -6,6 +6,7 @@ import styled from "styled-components";
 interface AddCommentsProps {}
 
 const AddComments: React.FunctionComponent<AddCommentsProps> = (props) => {
+  
   return (
     <AddCommentContainer>            
       <Field>
@@ -13,8 +14,8 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = (props) => {
       <CommentLabel>댓글 입력</CommentLabel>
       </Field>
       <ButtonBox>
-        <LinearButton>취소</LinearButton>
-        <LinearButton>입력</LinearButton>
+        <SubmitButton>취소</SubmitButton>
+        <SubmitButton>입력</SubmitButton>
       </ButtonBox>
     </AddCommentContainer>
   );
@@ -30,51 +31,38 @@ const AddCommentContainer = styled.div`
   padding-top: 2rem;  
 `;
 
-const CommentName = styled.div`
-  margin-bottom: 1.2rem;
-  font-size: 1.4rem;
-  font-weight: 600;  
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
+
+const SubmitButton = styled(LinearButton)`
+  display: flex;
+  color: ${props => props.theme.black};
+  background-image: none;
+  background: none;
 `
 
 const CommentTextArea = styled.textarea`
   ${InputStyle}
   width: 100%;
   resize: none;
-  border-bottom: 1px solid #403f3b;      
+  border-bottom: 1px solid ${props => props.theme.black};      
 
   &:focus {
     ~ ${StyledLabel} {
       position: absolute;
       top: 0;
       display: block;
-      color: black;
-    }    
+      color: ${props => props.theme.black};
+    }   
+
     border-width: 2px;
-  }  
+  }
 `
 
 const CommentLabel = styled(StyledLabel)`
   top: 38px; 
   font-size: 1.4rem;
   color: black;
-`
-
-const TextArea = styled.textarea`
-  resize: none;
-  border-radius: 0.4rem;
-  padding: 0.5rem 1rem;
-  height: 68px;
-
-  &:focus {
-    outline: none;
-    border: 2px solid #61605c;
-  }
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`
-const SumbitButton = styled.button`
-
 `

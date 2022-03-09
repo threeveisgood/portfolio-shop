@@ -56,8 +56,8 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
 
           <InformationContainer>
             <Count className="no-padding-left">
-              <Feature>배송비: {shipping}</Feature>
-              <StoreName>쇼핑몰: {store}</StoreName>
+              <Feature>배송비: <LightWeight>{shipping}</LightWeight></Feature>
+              <StoreName>쇼핑몰: <LightWeight>{store}</LightWeight></StoreName>
             </Count>
             <Count>
               <CountNumber>
@@ -95,7 +95,7 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
           <ProductURLContainer>
             URL :&nbsp;
             <Link href="/">
-              <a>{productURL}</a>
+              <a><LightWeight>{productURL}</LightWeight></a>
             </Link>
           </ProductURLContainer>
 
@@ -124,7 +124,8 @@ const ContentsLayout = styled.div`
   border-radius: 0.4rem;
   border: 1px solid #d6d6d6;
   margin: 1rem 0 0;
-  border-top: 6px solid ${props => props.theme.colors.primary};
+  border-top: 6px solid ${props => props.theme.primary};
+  color: ${props => props.theme.black};
 `;
 
 const TitleContainer = styled.div`
@@ -195,7 +196,7 @@ const Count = styled.span`
   align-items: center;
   padding-left: 1rem;
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 400;
 
   &.no-padding-left {
     padding-left: 0;
@@ -220,8 +221,13 @@ const ProductURLContainer = styled.div`
   font-weight: 600;
 `;
 
+const LightWeight = styled.span`
+  font-weight: 400;
+`
+
 const MobileDateInfo = styled.p`
   font-size: 1.2rem;
+  font-weight: 400;
   @media screen and (min-width: 680px) {
     display: none;
   }
@@ -229,6 +235,7 @@ const MobileDateInfo = styled.p`
 
 const DateInfo = styled.p`
   font-size: 1.4rem;
+  font-weight: 400;
   @media screen and (max-width: 680px) {
     display: none;
   }
