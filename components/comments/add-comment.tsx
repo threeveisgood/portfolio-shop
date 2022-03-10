@@ -1,22 +1,53 @@
 import { LinearButton } from "components/styled/button";
-import { Field, InputStyle, StyledInput, StyledLabel } from "components/styled/form";
-import * as React from "react";
+import {
+  Field,
+  InputStyle,
+  StyledInput,
+  StyledLabel,
+} from "components/styled/form";
+import React from "react";
+import { Formik, Field as FormikField, Form } from "formik";
+import * as Yup from "yup";
 import styled from "styled-components";
 
 interface AddCommentsProps {}
 
+const CommentSchema = Yup.object().shape({
+  comment: Yup.string()
+    .min(2, "2글자 이상 입력해주세요.")
+    .max(500, "500자 제한을 초과하였습니다.")
+    .required("내용을 입력해주세요."),
+});
+
 const AddComments: React.FunctionComponent<AddCommentsProps> = (props) => {
-  
   return (
-    <AddCommentContainer>            
-      <Field>
-      <CommentTextArea />      
-      <CommentLabel>댓글 입력</CommentLabel>
-      </Field>
-      <ButtonBox>
-        <SubmitButton>취소</SubmitButton>
-        <SubmitButton>입력</SubmitButton>
-      </ButtonBox>
+    <AddCommentContainer>
+      <Formik
+        initialValues={{
+          comment: "",
+        }}
+        validationSchema={CommentSchema}
+        onSubmit={(values: any, actions: any) => {
+          console.log(values.comment);
+          
+          actions.resetForm({
+            values: {
+              comment: '',
+            }
+          });
+        }}
+      >
+        <Form>
+          <Field>
+            <CommentTextArea id="comment" name="comment" component="textarea" />
+            <CommentLabel>댓글 입력</CommentLabel>
+          </Field>
+          <ButtonBox>
+            <SubmitButton type="reset">취소</SubmitButton>
+            <SubmitButton type="submit">입력</SubmitButton>
+          </ButtonBox>
+        </Form>
+      </Formik>
     </AddCommentContainer>
   );
 };
@@ -24,45 +55,50 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = (props) => {
 export default AddComments;
 
 const AddCommentContainer = styled.div`
-  display: flex;  
+  display: flex;
   flex-direction: column;
   border-top: 1px solid #d6d6d6;
   margin: 1rem 0 0;
-  padding-top: 2rem;  
+  padding-top: 2rem;
 `;
 
 const ButtonBox = styled.div`
   display: flex;
   justify-content: flex-end;
-`
+`;
 
 const SubmitButton = styled(LinearButton)`
   display: flex;
-  color: ${props => props.theme.black};
+  color: ${(props) => props.theme.black};
   background-image: none;
   background: none;
-`
+  transition: all 0.3s ease;
 
-const CommentTextArea = styled.textarea`
+  &:hover {
+    color: #fff;
+    background: ${(props) => props.theme.primary};
+  }
+`;
+
+const CommentTextArea = styled(FormikField)`
   ${InputStyle}
   width: 100%;
   resize: none;
-  border-bottom: 1px solid ${props => props.theme.black};      
+  border-bottom: 1px solid ${(props) => props.theme.black};
 
   &:focus {
     ~ ${StyledLabel} {
       position: absolute;
       top: 0;
       display: block;
-      color: ${props => props.theme.black};
-    }   
-
+      color: ${(props) => props.theme.black};
+    }
     border-width: 2px;
   }
-`
+`;
 
 const CommentLabel = styled(StyledLabel)`
-  top: 38px; 
+  top: 3.7rem;
   font-size: 1.4rem;
-  color: black;
-`
+  color: ${(props) => props.theme.black};
+`;

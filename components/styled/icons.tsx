@@ -8,7 +8,7 @@ interface ProfileMenuProps {
 export const UserProfileIcon = styled.div<ProfileMenuProps>`
   display: flex;
   font-size: 2.8rem;
-  color: #5B42F3;
+  color: ${props => props.theme.primary};
   margin-right: 1.6rem;
 
   &.dropdown {
