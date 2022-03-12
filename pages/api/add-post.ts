@@ -6,16 +6,16 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== 'POST') return
+  if (req.method !== 'POST') return;
 
-  const session: any = await getSession({req: req})
+  const session: any = await getSession({req: req});
 
   if (!session) {
     res.status(401).json({ message: 'Not authenticated!' })
-    return 
+    return; 
   }
 
-  const { title, body, price, productURL, imageLinks, store, shipping, category, _id } = req.body
+  const { title, body, price, productURL, imageLinks, store, shipping, category, _id } = req.body;
 
   const username: any = session?.user?.name
   const email: any = session?.user?.email
@@ -26,12 +26,12 @@ async function handler(
   ) {
     res.status(422).json({ message: "an error occured!" });
 
-    return
+    return;
   }
 
-  const client: any = await connectToDatabase()
+  const client: any = await connectToDatabase();
 
-  const db: any = client.db()
+  const db: any = client.db();
   
   const result: any = await db.collection('posts').insertOne({
     title: title,
@@ -46,10 +46,11 @@ async function handler(
     _id: _id,
     email: email,
     date: new Date(),
-  })
+    comments: [],
+  });
 
-  res.status(201).json({ message: "Added post!", data: username })
-  client.close()
+  res.status(201).json({ message: "Added post!", data: username });
+  client.close();
 }
 
-export default handler
+export default handler;

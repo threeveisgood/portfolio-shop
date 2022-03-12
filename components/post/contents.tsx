@@ -24,6 +24,8 @@ interface IContentsProps {
   shipping: string;
   category: string;
   date: Date;
+  postID: string;
+  commentsData: any;
 }
 
 const Contents: React.FunctionComponent<IContentsProps> = ({
@@ -37,6 +39,7 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
   store,
   shipping,
   category,
+  postID
 }) => {
   const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
   const mobileDate = dayjs().to(dayjs(date));
@@ -104,7 +107,7 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
           ) : null}
 
           <PostContent dangerouslySetInnerHTML={{ __html: body }} />
-          <AddComments />
+          <AddComments postID={postID} />
         </DetailContainer>        
       </ContentsLayout>
     </ContentsContianer>

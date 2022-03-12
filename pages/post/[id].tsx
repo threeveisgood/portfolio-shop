@@ -2,11 +2,11 @@ import axios from "axios";
 import Contents from "components/post/contents";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 
-const fetchPost = (id: string) =>
-  axios.get(`/api/post/${id}`).then(({ data }) => data);
+const fetchAxios = (id: string, document: string) =>
+  axios.get(`/api/${document}/${id}`).then(({ data }) => data);
 
 
 const Post: React.FunctionComponent = () => {
@@ -15,51 +15,56 @@ const Post: React.FunctionComponent = () => {
 
   const { isSuccess, data, isLoading, isError } = useQuery(
     ["getPost", postID],
-    () => fetchPost(postID),
+    () => fetchAxios(postID, "post"),
     {
       enabled: postID.length > 0,
-      staleTime: Infinity
+      staleTime: Infinity,
     }
-  )
+  );
+
+  const {
+    isSuccess: commentsIsSuccess,
+    data: commentsData,
+    isLoading: commentsIsLoading,
+    isError: commentsIsError,
+  } = useQuery(["getComment", postID], 
+    () => fetchAxios(postID, "comments"), {
+    enabled: postID.length > 0,
+    staleTime: Infinity,
+  });
 
   if (isSuccess) {
-    const result = data.result
+    const result = data.result;    
 
     return (
       <>
-      <Contents
-        title={result.title}
-        body={result.body}
-        price={result.price}
-        productURL={result.productURL}
-        imageLinks={result.imageLinks}
-        username={result.username}
-        shipping={result.shipping}
-        store={result.store}
-        date={result.date}
-        category={result.category}
-      />      
-      {/* <Comments 
-        id={postID}
-      /> */}
+        <Contents
+          title={result.title}
+          body={result.body}
+          price={result.price}
+          productURL={result.productURL}
+          imageLinks={result.imageLinks}
+          username={result.username}
+          shipping={result.shipping}
+          store={result.store}
+          date={result.date}
+          category={result.category}
+          postID={postID}
+          commentsData={commentsData}
+        />
       </>
-    )
+    );
   }
 
   if (isLoading) {
-    return <div>로딩 중...</div>
-  }
-  
-  if (isError) {
-    return (
-      <div>오류가 발생하였습니다.</div>
-    )
+    return <div>로딩 중...</div>;
   }
 
-  return (
-    <>      
-    </>
-  );
+  if (isError) {
+    return <div>오류가 발생하였습니다.</div>;
+  }
+
+  return <></>;
 };
 
 export default Post;
@@ -68,8 +73,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
   const id = context.params?.id as string;
   const queryClient = new QueryClient();
 
-
-  await queryClient.prefetchQuery(["getPost", id], () => fetchPost(id));
+  await queryClient.prefetchQuery(["getPost", id], () => fetchAxios(id, 'post'));
 
   return {
     props: {

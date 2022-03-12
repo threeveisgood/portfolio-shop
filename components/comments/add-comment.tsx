@@ -5,12 +5,19 @@ import {
   StyledInput,
   StyledLabel,
 } from "components/styled/form";
+import { useRouter } from 'next/router'
 import React from "react";
 import { Formik, Field as FormikField, Form } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
+import { useMutation } from "react-query";
+import axios from "axios";
 
-interface AddCommentsProps {}
+const bson = require('bson');
+
+interface AddCommentsProps {
+  postID: string;
+}
 
 const CommentSchema = Yup.object().shape({
   comment: Yup.string()
@@ -19,7 +26,19 @@ const CommentSchema = Yup.object().shape({
     .required("내용을 입력해주세요."),
 });
 
-const AddComments: React.FunctionComponent<AddCommentsProps> = (props) => {
+const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {  
+  const _id = bson.ObjectId()  
+
+  const mutation = useMutation(
+    (comment: any) => axios.post(`/api/comments/${_id}`, comment),
+    {
+      onError: () => {},
+      onSuccess: (data: any) => {
+        
+      }
+    }
+  );
+
   return (
     <AddCommentContainer>
       <Formik
@@ -27,9 +46,10 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = (props) => {
           comment: "",
         }}
         validationSchema={CommentSchema}
-        onSubmit={(values: any, actions: any) => {
-          console.log(values.comment);
-          
+        onSubmit={async (values: any, actions: any) => {
+          const comment = values.comment                    
+          mutation.mutate({ comment, postID, _id })
+
           actions.resetForm({
             values: {
               comment: '',
