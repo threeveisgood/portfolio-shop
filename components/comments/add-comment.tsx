@@ -5,7 +5,6 @@ import {
   StyledInput,
   StyledLabel,
 } from "components/styled/form";
-import { useRouter } from 'next/router'
 import React from "react";
 import { Formik, Field as FormikField, Form } from "formik";
 import * as Yup from "yup";
@@ -76,10 +75,7 @@ export default AddComments;
 
 const AddCommentContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  border-top: 1px solid #d6d6d6;
-  margin: 1rem 0 0;
-  padding-top: 2rem;
+  flex-direction: column;      
 `;
 
 const ButtonBox = styled.div`

@@ -8,7 +8,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { MdRemoveRedEye, MdThumbUp } from "react-icons/md";
 import { BiCommentDetail } from "react-icons/bi";
 import StyledCarousel from "components/styled/carousel";
-import AddComments from "components/comments/add-comment";
+import Comments from "components/comments";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -39,7 +39,8 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
   store,
   shipping,
   category,
-  postID
+  postID,
+  commentsData
 }) => {
   const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
   const mobileDate = dayjs().to(dayjs(date));
@@ -106,8 +107,8 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
             <StyledCarousel imageLinks={imageLinks} />
           ) : null}
 
-          <PostContent dangerouslySetInnerHTML={{ __html: body }} />
-          <AddComments postID={postID} />
+          <PostContent dangerouslySetInnerHTML={{ __html: body }} />          
+          <Comments commentsData={commentsData} postID={postID} />
         </DetailContainer>        
       </ContentsLayout>
     </ContentsContianer>
