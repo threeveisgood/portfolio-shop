@@ -1,7 +1,5 @@
 import {
   connectToDatabase,
-  insertDocument,
-  getAllDocuments,
 } from "lib/db-utils";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
@@ -40,6 +38,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       email: email,
       _id: _id,
       date: new Date(),
+      replies: [],
+      upVote: 0
     });
 
     res.status(201).json({ message: "Added comment!" });

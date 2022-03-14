@@ -1,21 +1,28 @@
 import * as React from "react";
-import { useEffect } from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
+import AddComments from "./add-comment";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
 interface CommentsListProps {
   commentsData: any;
+  commentsIsLoading: any;
+  commentsIsError: any;
+  commentsIsSuccess: any;
 }
 
 const CommentsList: React.FunctionComponent<CommentsListProps> = ({
   commentsData,
-}) => {
-  let list = commentsData.comments;
+  commentsIsLoading,
+  commentsIsError,
+  commentsIsSuccess
+}) => {  
+  if (commentsIsSuccess) {
+  const list = commentsData.comments;
 
   return (
     <ListBox>
@@ -30,7 +37,7 @@ const CommentsList: React.FunctionComponent<CommentsListProps> = ({
               </CtDate>
             </CtInfo>
             <CtContents dangerouslySetInnerHTML={{ __html: data.comment }} />
-            <CtVote>
+            <CtSub>
               <CtVoteButton className="up-vote">
                 <BiUpvote />
               </CtVoteButton>
@@ -38,12 +45,25 @@ const CommentsList: React.FunctionComponent<CommentsListProps> = ({
               <CtVoteButton className="down-vote">
                 <BiDownvote />
               </CtVoteButton>
-            </CtVote>
+            </CtSub>
+            <div>
+              <AddComments postID={data._id} apiURL="reply" _id={data._id} repliedName={data.username} />
+            </div>
           </CtCard>
-        );
-      })}
+        );      
+      })}    
     </ListBox>
   );
+ }
+
+ if (commentsIsLoading) {
+   return <div>로딩 중...</div>
+ }
+
+ if (commentsIsError) {
+   return <div>오류가 발생하였습니다...</div>
+ }
+ return <></>
 };
 
 export default CommentsList;
@@ -71,7 +91,7 @@ const CtUsername = styled.span`
 `;
 
 const CtDate = styled.span`
-  margin-left: 1rem;
+  margin-left: 0.7rem;
   font-size: 1.1rem;
   color: ${(props) => props.theme.gray};
 `;
@@ -83,7 +103,7 @@ const CtDot = styled.span`
   margin-right: 0.7rem;
 `;
 
-const CtVote = styled.div`
+const CtSub = styled.div`
   display: flex;
   margin-top: 1.1rem;
 `;
@@ -95,7 +115,7 @@ const CtVoteButton = styled.button`
   font-size: 2rem;
 
   &.up-vote {
-    color: #a6946d;
+    color: ${props => props.theme.gold};
   }
 
   &.down-vote {

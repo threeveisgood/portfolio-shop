@@ -1,19 +1,37 @@
-import * as React from 'react';
-import AddComments from './add-comment';
-import CommentsList from './comments-list';
+import * as React from "react";
+import AddComments from "./add-comment";
+import CommentsList from "./comments-list";
+
+const bson = require('bson');
 
 interface CommentsProps {
-  commentsData: any;
   postID: string;
+  commentsData: any;
+  commentsIsLoading: any;
+  commentsIsError: any;
+  commentsIsSuccess: any;
 }
 
-const Comments: React.FunctionComponent<CommentsProps> = ({ commentsData, postID }) => {
+const Comments: React.FunctionComponent<CommentsProps> = ({
+  postID,
+  commentsData,
+  commentsIsLoading,
+  commentsIsError,
+  commentsIsSuccess,  
+}) => {
+  const _id = bson.ObjectId();
+
   return (
-      <div>
-        <CommentsList commentsData={commentsData} />
-        <AddComments postID={postID} />
-      </div>
-  )
+    <div>
+      <CommentsList
+        commentsData={commentsData}
+        commentsIsLoading={commentsIsLoading}
+        commentsIsError={commentsIsError}
+        commentsIsSuccess={commentsIsSuccess}
+      />
+      <AddComments postID={postID} apiURL="comments" _id={_id} />
+    </div>
+  );
 };
 
 export default Comments;

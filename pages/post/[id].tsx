@@ -51,6 +51,9 @@ const Post: React.FunctionComponent = () => {
           category={result.category}
           postID={postID}
           commentsData={commentsData}
+          commentsIsLoading={commentsIsLoading}
+          commentsIsError={commentsIsError}
+          commentsIsSuccess={commentsIsSuccess}
         />
       </>
     );

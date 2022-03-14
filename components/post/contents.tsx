@@ -26,6 +26,9 @@ interface IContentsProps {
   date: Date;
   postID: string;
   commentsData: any;
+  commentsIsLoading: any;
+  commentsIsError: any;
+  commentsIsSuccess: any;
 }
 
 const Contents: React.FunctionComponent<IContentsProps> = ({
@@ -40,7 +43,10 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
   shipping,
   category,
   postID,
-  commentsData
+  commentsData,
+  commentsIsLoading,
+  commentsIsError,
+  commentsIsSuccess,
 }) => {
   const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
   const mobileDate = dayjs().to(dayjs(date));
@@ -60,8 +66,12 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
 
           <InformationContainer>
             <Count className="no-padding-left">
-              <Feature>배송비: <LightWeight>{shipping}</LightWeight></Feature>
-              <StoreName>쇼핑몰: <LightWeight>{store}</LightWeight></StoreName>
+              <Feature>
+                배송비: <LightWeight>{shipping}</LightWeight>
+              </Feature>
+              <StoreName>
+                쇼핑몰: <LightWeight>{store}</LightWeight>
+              </StoreName>
             </Count>
             <Count>
               <CountNumber>
@@ -99,7 +109,9 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
           <ProductURLContainer>
             URL :&nbsp;
             <Link href="/">
-              <a><LightWeight>{productURL}</LightWeight></a>
+              <a>
+                <LightWeight>{productURL}</LightWeight>
+              </a>
             </Link>
           </ProductURLContainer>
 
@@ -107,9 +119,15 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
             <StyledCarousel imageLinks={imageLinks} />
           ) : null}
 
-          <PostContent dangerouslySetInnerHTML={{ __html: body }} />          
-          <Comments commentsData={commentsData} postID={postID} />
-        </DetailContainer>        
+          <PostContent dangerouslySetInnerHTML={{ __html: body }} />
+          <Comments
+            commentsData={commentsData}
+            postID={postID}
+            commentsIsLoading={commentsIsLoading}
+            commentsIsError={commentsIsError}
+            commentsIsSuccess={commentsIsSuccess}
+          />
+        </DetailContainer>
       </ContentsLayout>
     </ContentsContianer>
   );
@@ -128,8 +146,8 @@ const ContentsLayout = styled.div`
   border-radius: 0.4rem;
   border: 1px solid #d6d6d6;
   margin: 1rem 0 0;
-  border-top: 6px solid ${props => props.theme.primary};
-  color: ${props => props.theme.black};
+  border-top: 6px solid ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.black};
 `;
 
 const TitleContainer = styled.div`
@@ -227,7 +245,7 @@ const ProductURLContainer = styled.div`
 
 const LightWeight = styled.span`
   font-weight: 400;
-`
+`;
 
 const MobileDateInfo = styled.p`
   font-size: 1.2rem;

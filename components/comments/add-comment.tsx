@@ -12,10 +12,11 @@ import styled from "styled-components";
 import { useMutation } from "react-query";
 import axios from "axios";
 
-const bson = require('bson');
-
 interface AddCommentsProps {
   postID: string;
+  apiURL: string;
+  _id: string;
+  repliedName?: string;
 }
 
 const CommentSchema = Yup.object().shape({
@@ -25,11 +26,9 @@ const CommentSchema = Yup.object().shape({
     .required("내용을 입력해주세요."),
 });
 
-const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {  
-  const _id = bson.ObjectId()  
-
+const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID, apiURL, _id, repliedName }) => {  
   const mutation = useMutation(
-    (comment: any) => axios.post(`/api/comments/${_id}`, comment),
+    (comment: any) => axios.post(`/api/${apiURL}/${_id}`, comment),
     {
       onError: () => {},
       onSuccess: (data: any) => {
@@ -47,7 +46,7 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
         validationSchema={CommentSchema}
         onSubmit={async (values: any, actions: any) => {
           const comment = values.comment                    
-          mutation.mutate({ comment, postID, _id })
+          mutation.mutate({ comment, postID, _id, repliedName })
 
           actions.resetForm({
             values: {
