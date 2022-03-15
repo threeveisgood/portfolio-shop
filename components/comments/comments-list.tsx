@@ -1,8 +1,11 @@
 import * as React from "react";
+import { useState, useEffect, useCallback } from 'react';
 import styled from "styled-components";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { changeField, initialize } from "modules/comment";
 import AddReply from "./add-reply";
 import { SubmitButton } from "components/styled/comment";
 import { VscComment } from "react-icons/vsc";
@@ -23,6 +26,27 @@ const CommentsList: React.FunctionComponent<CommentsListProps> = ({
   commentsIsError,
   commentsIsSuccess,
 }) => {
+  const dispatch = useDispatch();
+
+  const { replyToggle } = useSelector(({ comment }: any) => ({
+    replyToggle: comment.replyToggle
+  }))
+
+  useEffect(() => {
+    return () => {
+      dispatch(initialize());
+    };
+  }, [dispatch]);
+
+  const onChangeField = useCallback(
+    (payload) => dispatch(changeField(payload)),
+    [dispatch]
+  );
+
+  const onChangeToggle = (id: any) => {    
+    return (e: any) => onChangeField({key: "replyToggle", value: { _id: id, toggle: !replyToggle.toggle }})
+  }
+
   if (commentsIsSuccess) {
     const list = commentsData.comments;
 
@@ -50,7 +74,7 @@ const CommentsList: React.FunctionComponent<CommentsListProps> = ({
                   <CtVoteButton className="down-vote">
                     <BiDownvote />
                   </CtVoteButton>
-                  <CtReplyButton>
+                  <CtReplyButton onClick={onChangeToggle(data._id)}>
                     <CtReplyIcon />
                     &nbsp;답글
                   </CtReplyButton>
@@ -64,7 +88,6 @@ const CommentsList: React.FunctionComponent<CommentsListProps> = ({
                   />
                 </CtReply>
               </CtCard>
-
               <div>
                 {/* {data.replise.map((data: any) => {
 
@@ -157,6 +180,7 @@ const CtReplyButton = styled(SubmitButton)`
   font-size: 1.2rem;
   display: flex;
   align-items: center;
+  background: transparent;
   color: ${(props) => props.theme.gray};
   padding: 1rem 0.8rem;
   margin-left: 0.2rem;

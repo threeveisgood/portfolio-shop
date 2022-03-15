@@ -16,13 +16,15 @@ export const changeField = createAction(
 );
 export const commentsPost = createAction(
   COMMENTS_POST,
-  ({ contents }: any) => ({
-    contents
+  ({ contents, replyToggle }: any) => ({
+    contents, 
+    replyToggle
   })
 )
 
 const initialState = {
   contents: "",
+  replyToggle: { _id: '', toggle: false }
 }
 
 const comment = handleActions(

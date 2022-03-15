@@ -1,6 +1,8 @@
 import { Field } from "components/styled/form";
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Formik, Form } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { changeField, initialize } from "modules/comment";
 import styled from "styled-components";
 import * as Yup from "yup";
 import { useMutation } from "react-query";
@@ -18,6 +20,12 @@ interface AddCommentsProps {
   apiURL: string;
   _id: string;
   repliedName?: string;
+  // onToggle: boolean;
+  // setterToggle: any;
+}
+
+interface ReplyProps {
+  readonly onCancel?: boolean
 }
 
 const CommentSchema = Yup.object().shape({
@@ -41,14 +49,23 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
     }
   );
 
-  const [onCancel, setOnCancel] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleClick = () => {
-    setOnCancel(!onCancel);
-  };
+  const { replyToggle } = useSelector(({ comment }: any) => ({
+    replyToggle: comment.replyToggle
+  }))
+
+  const onChangeField = useCallback(
+    (payload) => dispatch(changeField(payload)),
+    [dispatch]
+  );
+
+  const onChangeToggle = (id: any) => {  
+    return (e: any) => onChangeField({key: "replyToggle", value: { _id: id, toggle: !replyToggle.toggle }})
+  }
 
   return (
-    <>              
+    <ReplyBox onCancel={(replyToggle._id === '' || replyToggle._id === _id ) ? replyToggle.toggle : null}>              
         <Formik
           initialValues={{
             comment: "",
@@ -75,13 +92,18 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
               <CommentLabel>답글 입력</CommentLabel>
             </Field>
             <ButtonBox>
-              <SubmitButton type="reset">취소</SubmitButton>
+              <SubmitButton onClick={onChangeToggle(_id)}>취소</SubmitButton>
               <SubmitButton type="submit">입력</SubmitButton>
             </ButtonBox>
           </Form>
         </Formik>      
-    </>
+    </ReplyBox>
   );
 };
 
 export default AddReply;
+
+const ReplyBox = styled.div<ReplyProps>`
+
+  display: ${props => props.onCancel ? "block" : "none"}
+`
