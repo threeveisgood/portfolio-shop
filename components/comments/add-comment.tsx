@@ -16,7 +16,6 @@ interface AddCommentsProps {
   postID: string;
   apiURL: string;
   _id: string;
-  repliedName?: string;
 }
 
 const CommentSchema = Yup.object().shape({
@@ -26,7 +25,7 @@ const CommentSchema = Yup.object().shape({
     .required("내용을 입력해주세요."),
 });
 
-const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID, apiURL, _id, repliedName }) => {  
+const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID, apiURL, _id }) => {  
   const mutation = useMutation(
     (comment: any) => axios.post(`/api/${apiURL}/${_id}`, comment),
     {
@@ -37,6 +36,10 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID, apiURL
     }
   );
 
+  const handleClick = () => {
+
+  }
+
   return (
     <AddCommentContainer>
       <Formik
@@ -46,7 +49,7 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID, apiURL
         validationSchema={CommentSchema}
         onSubmit={async (values: any, actions: any) => {
           const comment = values.comment                    
-          mutation.mutate({ comment, postID, _id, repliedName })
+          mutation.mutate({ comment, postID, _id })
 
           actions.resetForm({
             values: {

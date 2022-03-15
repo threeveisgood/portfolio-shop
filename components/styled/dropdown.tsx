@@ -16,7 +16,7 @@ export const ProfileDropdownMenu = styled.li`
   position: relative;
   top: 0px;  
  
-  color: white;
+  color: #fff;
   height: 3.4rem;    
   font-size: 1.4rem;
   background: black;
@@ -26,7 +26,7 @@ export const ProfileDropdownMenu = styled.li`
 
   &.top {
     border-radius: 0.4rem 0.4rem 0 0;
-    border-bottom: 1px solid gray;    
+    border-bottom: 1px solid ${props => props.theme.gray};    
   }
 
   &.bottom {
