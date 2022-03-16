@@ -9,6 +9,7 @@ import { changeField, initialize } from "modules/comment";
 import AddReply from "./add-reply";
 import { SubmitButton } from "components/styled/comment";
 import { VscComment } from "react-icons/vsc";
+import RepliesList from "./replies-list";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -53,9 +54,10 @@ const CommentsList: React.FunctionComponent<CommentsListProps> = ({
     return (
       <ListBox>
         {list.map((data: any) => {
+          console.log(data.replies[0].comment)
           return (
-            <div>
-              <CtCard key={data._id}>
+            <div key={data._id}>
+              <CtCard>
                 <CtInfo>
                   <CtUsername>{data.username}</CtUsername>
                   <CtDate>
@@ -87,12 +89,8 @@ const CommentsList: React.FunctionComponent<CommentsListProps> = ({
                     repliedName={data.username}
                   />
                 </CtReply>
+                <RepliesList replies={data.replies} />
               </CtCard>
-              <div>
-                {/* {data.replise.map((data: any) => {
-
-              })} */}
-              </div>
             </div>
           );
         })}

@@ -15,13 +15,13 @@ import {
 } from "components/styled/comment";
 import { BsReplyFill } from "react-icons/bs";
 
+const bson = require('bson');
+
 interface AddCommentsProps {
   postID: string;
   apiURL: string;
   _id: string;
   repliedName?: string;
-  // onToggle: boolean;
-  // setterToggle: any;
 }
 
 interface ReplyProps {
@@ -50,6 +50,14 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
   );
 
   const dispatch = useDispatch();
+  
+  const replyID = bson.ObjectId();
+
+  useEffect(() => {
+    return () => {
+      dispatch(initialize());
+    };
+  }, [dispatch]);
 
   const { replyToggle } = useSelector(({ comment }: any) => ({
     replyToggle: comment.replyToggle
@@ -64,8 +72,9 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
     return (e: any) => onChangeField({key: "replyToggle", value: { _id: id, toggle: !replyToggle.toggle }})
   }
 
-  return (
-    <ReplyBox onCancel={(replyToggle._id === '' || replyToggle._id === _id ) ? replyToggle.toggle : null}>              
+  return (   
+    replyToggle._id && (replyToggle._id === '' || replyToggle._id === _id ) && (replyToggle.toggle === true) ?
+    <ReplyBox>              
         <Formik
           initialValues={{
             comment: "",
@@ -73,7 +82,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
           validationSchema={CommentSchema}
           onSubmit={async (values: any, actions: any) => {
             const comment = values.comment;
-            mutation.mutate({ comment, postID, _id, repliedName });
+            mutation.mutate({ comment, postID, repliedName, replyID });
 
             actions.resetForm({
               values: {
@@ -98,12 +107,11 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
           </Form>
         </Formik>      
     </ReplyBox>
-  );
+    : <div></div>
+   );
 };
 
 export default AddReply;
 
-const ReplyBox = styled.div<ReplyProps>`
-
-  display: ${props => props.onCancel ? "block" : "none"}
+const ReplyBox = styled.div`
 `

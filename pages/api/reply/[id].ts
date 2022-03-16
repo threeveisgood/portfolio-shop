@@ -1,6 +1,8 @@
+import { ObjectID } from "bson";
 import {
   connectToDatabase,
 } from "lib/db-utils";
+import { ObjectId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 
@@ -32,7 +34,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const db: any = client.db();
 
-  const { comment, postID, repliedName } = req.body;
+  const { comment, postID, repliedName, replyID } = req.body;
 
   const result: any = await db
     .collection("comments")
@@ -40,13 +42,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       _id: id
      },
      {
-       $push: { replies: {
+       $push: { replies: {   
+           _id: replyID,        
            comment: comment,
            postID: postID,
            username: username,
            email: email,
            date: new Date(),   
-           repliedName: repliedName,           
+           repliedName: repliedName,
+           isDeleted: false,           
         }} 
      }
     );
