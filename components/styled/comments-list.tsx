@@ -1,16 +1,21 @@
 import styled from "styled-components";
 import { SubmitButton } from "components/styled/comment";
 import { VscComment } from "react-icons/vsc";
+import { BsReplyFill } from "react-icons/bs";
 
 export const CtCard = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 1rem 0rem;
 `;
 
-export const CtInfo = styled.div`
+export const CtInfo = styled.div` 
+  display: flex;
   margin-bottom: 1.1rem;
 `;
 
 export const CtUsername = styled.span`
+  display: flex;
   font-weight: 700;
   font-size: 1.4rem;
   color: ${(props) => props.theme.black};
@@ -73,3 +78,8 @@ export const CtReplyIcon = styled(VscComment)`
 `;
 
 export const CtReply = styled.div``;
+
+export const CtReplyTailIcon = styled(BsReplyFill)`
+  transform: rotate( 180deg );
+  font-size: 1.7rem;
+`

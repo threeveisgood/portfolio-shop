@@ -42,13 +42,10 @@ export default function Card(): ReactElement {
 }
 
 const CardLi = styled.li`
-  display: flex;  
-  border: 1px solid lightgray;
+  display: flex;    
   box-shadow: none;
   padding: 1.2rem;
-  width: 18rem;
-  border-radius: 0.8rem;
-  background: #fff;
+  width: 18rem;  
 `;
 
 const ThumbnailContainer = styled.div`

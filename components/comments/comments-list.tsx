@@ -129,8 +129,3 @@ const ListBox = styled.div`
   margin-top: 3.5rem;
   font-size: 1.3rem;
 `;
-
-// const CtReplyIcon = styled(BsReplyFill)`
-//   transform: rotate( 180deg );
-//   font-size: 1.7rem;
-// `

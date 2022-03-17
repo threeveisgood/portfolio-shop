@@ -18,7 +18,7 @@ export default function test(): ReactElement {
 }
 
 const MainContainer = styled.div`
-  max-width: 133rem;
+  max-width: 1330px;
   margin: 0 auto;
 `
 

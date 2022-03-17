@@ -12,14 +12,14 @@ import {
   CtReplyButton,
   CtReplyIcon,
   CtReply,
+  CtReplyTailIcon,
 } from "components/styled/comments-list";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { changeField, initialize } from "modules/comment";
 import { BiDownvote, BiUpvote } from "react-icons/bi";
-import { BsReplyFill } from "react-icons/bs";
 import AddReply from "./add-reply";
-
+import styled from 'styled-components';
 
 interface IRepliesListProps {
   replies: any;
@@ -57,15 +57,19 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
     <>
       {replies && replies.map((data: any) => {
         return (
-          <CtCard key={data._id}>
-            <CtInfo>
+          <RepliesBox>
+          <CtCard key={data._id}>            
+            <CtInfo>              
               <CtUsername>{data.username}</CtUsername>
               <CtDate>
                 <CtDot>&#183;</CtDot>
                 {dayjs().to(dayjs(data.date))}{" "}
               </CtDate>
             </CtInfo>
+            <div>
+            <CtRepliedName>@{data.repliedName}</CtRepliedName>
             <CtContents dangerouslySetInnerHTML={{ __html: data.comment }} />
+            </div>
             <CtSub>
               <CtVoteButton className="up-vote">
                 <BiUpvote />
@@ -76,7 +80,7 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
               </CtVoteButton>
               <CtReplyButton onClick={onChangeToggle(data._id)}>
                 <CtReplyIcon />
-                &nbsp;답답글
+                &nbsp;답글
               </CtReplyButton>
             </CtSub>
             <CtReply>
@@ -88,6 +92,7 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
               />
             </CtReply>
           </CtCard>
+          </RepliesBox>
         );
       })}
     </>
@@ -95,3 +100,26 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
 };
 
 export default RepliesList;
+
+const RepliesBox = styled.div`
+  margin-left: 2.2rem;
+`;
+
+const TailBox = styled.span`
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+`
+
+const RepliesCtCard = styled.span`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0rem;
+`;
+
+const CtRepliedName = styled.span`  
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  color: ${props => props.theme.gold};
+  font-weight: 700;
+`

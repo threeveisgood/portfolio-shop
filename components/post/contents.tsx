@@ -136,7 +136,7 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
 export default Contents;
 
 const ContentsContianer = styled.div`
-  max-width: 1200px;
+  max-width: 1000px;
   background: #faf7f0;
   margin: 0 auto;
   box-sizing: border-box;
