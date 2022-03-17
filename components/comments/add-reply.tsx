@@ -19,6 +19,7 @@ const bson = require('bson');
 interface AddCommentsProps {
   apiURL: string;
   _id: string;
+  postID: string;
   repliedName?: string;
 }
 
@@ -33,9 +34,10 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
   apiURL,
   _id,
   repliedName,
+  postID
 }) => {
   const mutation = useMutation(
-    (comment: any) => axios.post(`/api/${apiURL}/${_id}`, comment),
+    (comment: any) => axios.post(`/api/${apiURL}/${postID}`, comment),
     {
       onError: () => {},
       onSuccess: (data: any) => {},

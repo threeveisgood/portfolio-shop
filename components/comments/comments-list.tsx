@@ -97,6 +97,7 @@ const CommentsList: React.FunctionComponent<CommentsListProps> = ({
                 <AddReply            
                   apiURL="reply"
                   _id={data._id}
+                  postID={data.postID}
                   repliedName={data.username}
                 />
               </CtReply>
