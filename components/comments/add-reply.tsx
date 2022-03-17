@@ -13,19 +13,13 @@ import {
   CommentTextArea,
   CommentLabel,
 } from "components/styled/comment";
-import { BsReplyFill } from "react-icons/bs";
 
 const bson = require('bson');
 
 interface AddCommentsProps {
-  postID: string;
   apiURL: string;
   _id: string;
   repliedName?: string;
-}
-
-interface ReplyProps {
-  readonly onCancel?: boolean
 }
 
 const CommentSchema = Yup.object().shape({
@@ -36,7 +30,6 @@ const CommentSchema = Yup.object().shape({
 });
 
 const AddReply: React.FunctionComponent<AddCommentsProps> = ({
-  postID,
   apiURL,
   _id,
   repliedName,
@@ -82,7 +75,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
           validationSchema={CommentSchema}
           onSubmit={async (values: any, actions: any) => {
             const comment = values.comment;
-            mutation.mutate({ comment, postID, repliedName, replyID });
+            mutation.mutate({ comment, repliedName, replyID });
 
             actions.resetForm({
               values: {
