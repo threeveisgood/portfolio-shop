@@ -20,8 +20,7 @@ export default Layout;
 
 const Container = styled.div`
   //margin: 3rem auto;  
-  padding: 3rem 0;
-  background: #ebecee;    
+  padding: 3rem 0;  
 `;
 
 // const IconName = styled.p`

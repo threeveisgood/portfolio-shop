@@ -27,8 +27,6 @@ const Header: React.FunctionComponent = () => {
     signOut();
   };
 
-  console.log(session);
-
   return (
     <>
       <StyledHeader>

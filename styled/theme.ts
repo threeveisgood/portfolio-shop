@@ -5,6 +5,7 @@ export const theme: DefaultTheme = {
   purple: "#AF40FF",
   cyan: "#00DDEB",
   black: "#474747",
+  lowblack: "#222222",  
   gray: "#737373",
   gold: "#a6946d",
   padding: "12px",

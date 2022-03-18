@@ -27,7 +27,7 @@ export const FieldContainer = styled.div`
 export const InputStyle = css`
   width: 300px;
   border: 0;
-  border-bottom: 2px solid ${props => props.theme.primary};
+  border-bottom: 1px solid ${props => props.theme.primary};
   border-image-slice: 1;
   outline: 0;
   font-size: 1.5rem;
@@ -57,7 +57,7 @@ export const InputStyle = css`
     }
     padding-bottom: 6px;
     font-weight: 500;
-    border-width: 3px;
+    border-width: 2px;
     border-image-slice: 1;
   }
 `

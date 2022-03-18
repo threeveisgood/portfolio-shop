@@ -44,7 +44,7 @@ const FilesUpload = () => {
       />
       <PrimaryP>
         <span>이미지 업로드 (10MB 미만)&nbsp;</span>
-        {progress != 100 && <span>{progress}%</span>}
+        {progress < 100 && <span>{progress}%</span>}
       </PrimaryP>
       <ThumbnailUl>
         {thumb &&
@@ -64,7 +64,9 @@ const FilesUpload = () => {
 
 export default React.memo(FilesUpload);
 
-export const ThumbnailUl = styled.ul``;
+export const ThumbnailUl = styled.ul`
+ 
+`;
 
 export const ThumbnailLi = styled.li`
   display: inline;
@@ -74,4 +76,5 @@ export const ThumbnailLi = styled.li`
 const PrimaryP = styled.p`
   color: ${props => props.theme.primary};
   font-size: 1.2rem;
+  margin-bottom: 1rem;
 `

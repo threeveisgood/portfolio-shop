@@ -193,8 +193,7 @@ const TitleInput = styled.input`
   }
 `;
 
-const QuillWrapper = styled.div`
-  background: #f7f7f7;
+const QuillWrapper = styled.div`  
   margin-top: 3rem;
   .ql-editor {
     padding: 0;
@@ -209,6 +208,7 @@ const QuillWrapper = styled.div`
 
 const CategorySelect = styled(Select)`
   width: 30rem;
+  font-weight: 700;
   border-color: ${props => props.theme.primary};
     
   & > div {

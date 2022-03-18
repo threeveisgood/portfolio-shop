@@ -14,8 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 50%;
   }
   
-  overflow-y:scroll;
-  background: #ebecee;
+  overflow-y:scroll;  
   }
 
   body {
@@ -28,7 +27,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a {
-   color: #000000;
+   
    text-decoration: none;
   }
 

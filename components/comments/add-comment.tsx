@@ -36,10 +36,6 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID, apiURL
     }
   );
 
-  const handleClick = () => {
-
-  }
-
   return (
     <AddCommentContainer>
       <Formik

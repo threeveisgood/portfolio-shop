@@ -10,6 +10,8 @@ export default Responsive;
 const ResponsiveBlock = styled.div`
   /* padding-left: 1rem;
   padding-right: 1rem; */
+  display: flex;
+  flex-direction: column;
   width: 102.4rem;
   margin: 0 auto; 
   

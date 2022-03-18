@@ -7,6 +7,7 @@ declare module "styled-components" {
     cyan: string;
     gray: string;
     black: string;
+    lowblack: string;
     gold: string;
     
     padding: string;

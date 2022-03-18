@@ -24,10 +24,10 @@ export default function Card(): ReactElement {
           </CardPrice>          
         </PriceContainer>
         <NoteContainer>
-          <CardNote>배송비 2500원</CardNote>
-          <CardNote>옥션</CardNote>
+          <CardNote>배송비 <CardWeightFont>2500원</CardWeightFont></CardNote>
+          <CardNote><CardWeightFont>옥션</CardWeightFont></CardNote>
         </NoteContainer>
-        <CardNote>파운더: 아두</CardNote>
+        <CardNote>파운더: <CardWeightFont>아두</CardWeightFont></CardNote>
         <CardFooter>
           <CardFooterIcon>
             <MdThumbUp /> &nbsp;0
@@ -68,7 +68,8 @@ const CardImage = styled.img`
 `;
 
 const CardTitleA = styled.a`
-  min-height: 4.5rem;
+  color: ${props => props.theme.lowblack};
+  min-height: 3.5rem;
   line-height: 1.5rem;
   font-size: 1.4rem;
   overflow: hidden;
@@ -80,7 +81,7 @@ const CardTitleA = styled.a`
   overflow: hidden;
 `;
 const PriceContainer = styled.span`
-  margin-top: 0.6rem;
+  padding-top: 0.5rem;
 `;
 
 const CardPrice = styled.span`
@@ -108,6 +109,7 @@ const NoteContainer = styled.span`
 `;
 
 const CardNote = styled.div`
+  padding-top: 0.3rem;
   color: #2e2828;
   font-size: 1.1rem;
   text-overflow: ellipsis;
@@ -125,5 +127,9 @@ const CardFooterIcon = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 `;
+
+const CardWeightFont = styled.span`
+  font-weight: 600;
+`
