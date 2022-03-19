@@ -27,8 +27,9 @@ const FilesUpload = () => {
       axios.post<any>("/api/upload-files", formData, config).then((res) => {
         const url = ChangeToFrontURL(res.data);
         setThumb([...thumb, ...res.data]);
+        
         addImageLinks(url);
-      });
+      })
     },
     [thumb]
   );
@@ -50,6 +51,7 @@ const FilesUpload = () => {
         {thumb &&
           thumb.map((item: string, i: number) => {
             const changedItem = ChangeToThumbnail(item);
+
             console.log("item", item);
             return (
               <ThumbnailLi key={i}>

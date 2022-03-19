@@ -9,11 +9,13 @@ export function ChangeToThumbnail(item: string) {
   return thumbnailLink;
 }
 
-export function ChangeToFrontURL(item: string) {
+export function ChangeToFrontURL(items: string[]) {
   const S3_URL = String(process.env.NEXT_PUBLIC_S3_URL);
   const CLOUDFRONT_URL = String(process.env.NEXT_PUBLIC_CLOUDFRONT_URL);
 
-  const thumbnailLink: string = item.toString().replace(S3_URL, CLOUDFRONT_URL);
+  const thumbnailLinks: string[] = items.map((item: string) => {
+    return item.toString().replace(S3_URL, CLOUDFRONT_URL);
+  });
 
-  return thumbnailLink;
+  return thumbnailLinks;
 }

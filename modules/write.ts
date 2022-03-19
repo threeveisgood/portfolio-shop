@@ -52,7 +52,7 @@ const write = handleActions(
     }),
     [SET_IMAGE_LINKS]: (state: any, { payload }) =>
       produce(state, (draft: any) => {
-        draft.imageLinks.push(payload);
+        draft.imageLinks = [...payload];
       }),
   },
   initialState
