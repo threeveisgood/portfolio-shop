@@ -46,7 +46,7 @@ const write = handleActions(
   {
     [HYDRATE]: (state: any, { payload: hydrate }) => ({ ...state, hydrate }),
     [INITIALIZE]: (state) => initialState,
-    [CHANGE_FIELD]: (state, { payload: { key, value } }: any) => ({
+    [CHANGE_FIELD]: (state: any, { payload: { key, value } }: any) => ({
       ...state,
       [key]: value,
     }),

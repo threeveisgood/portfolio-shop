@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import axios from "axios";
+import { NextPage } from 'next';
 
 interface Props {}
 
