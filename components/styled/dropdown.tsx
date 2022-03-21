@@ -1,4 +1,3 @@
-import link from "next/link";
 import styled from "styled-components";
 
 export const ProfileDropdown = styled.ul`
@@ -36,5 +35,5 @@ export const ProfileDropdownMenu = styled.li`
 
 
 export const DropdownText = styled.p`
-  color: white;
+  color: #fff;
 `
