@@ -45,6 +45,8 @@ function List({
   );
 }
 
+export default List;
+
 const MainContainer = styled.div`
   max-width: 1330px;
   margin: 0 auto;
@@ -59,4 +61,3 @@ const CardUl = styled.ul`
   justify-content: center;
 `;
 
-export default List;

@@ -81,7 +81,7 @@ const Header: React.FunctionComponent = () => {
               )}
             </UserProfileIcon>
           )}
-          {!session && (
+          {!session && !loading && (
             <Link href="/auth">
               <a>
                 <AuthButton>로그인</AuthButton>

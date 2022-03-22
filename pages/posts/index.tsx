@@ -6,26 +6,24 @@ import List from "components/post/list";
 
 interface Props {}
 
-export default function posts({}: Props): ReactElement | string {  
+export default function posts({}: Props): ReactElement | string {
   const [currentPage, setCurrentPage] = useState(1);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const { isLoading, isError, data, isSuccess } = usePosts(currentPage);
-
-  console.log(data)
+  const { isLoading, isError, data, isSuccess } = usePosts(currentPage);  
 
   if (isSuccess) {
     const { count, result } = data;
 
     return (
-    <List
-      result={result}      
-      count={count}
-      paginate={paginate}
-      currentPage={currentPage}
-    />
-    )
+      <List
+        result={result}
+        count={count}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
+    );
   }
 
   if (isLoading) {
@@ -51,4 +49,3 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
   };
 };
 
-//닉네임, 제목, 내용(리치 텍스트), 쇼핑몰, 링크, 추천 수, 덧글, 이미지 링크
