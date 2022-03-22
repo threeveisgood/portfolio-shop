@@ -6,7 +6,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  //const { page } = req.query;
+  const { page } = req.query;
 
   let client;
 
@@ -19,40 +19,27 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const db: any = client.db();
 
-  const { category, postsPerPage, indexOfFirstPost } = req.body;
 
-  let postCount;
+  const postsPerPage = 3;
+  const currentPage = Number(page);
+  const index_last = currentPage * postsPerPage;
+  const index_first = index_last - postsPerPage;
+
+  let count;
   let result;
 
   try {
-    if (category != undefined) {
-      postCount = await db
-        .collection("posts")
-        .find({ category: category })
-        .count();
-
-      result = await db
-        .collection("posts")
-        .find({ category: category })
-        .limit(postsPerPage)
-        .skip(indexOfFirstPost)
-        .sort({ _id: -1 })
-        .toArray();
-    } else {
-      postCount = await db.collection("posts").count();
+      count = await db.collection("posts").count();
 
       result = await db
         .collection("posts")
         .find()
         .limit(postsPerPage)
-        .skip(indexOfFirstPost)
+        .skip(index_first)
         .sort({ _id: -1 })
         .toArray();
-    }
 
-    postCount;
-
-    res.status(200).json({ postCount, result });
+    res.status(200).json({ count, result });
   } catch {
     res.status(500).json({ message: "Getting Post Lists failed." });
   }

@@ -1,39 +1,60 @@
 import React, { ReactElement } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { MdComment, MdThumbUp } from 'react-icons/md'
+import { MdComment, MdThumbUp } from "react-icons/md";
 
-export default function Card(): ReactElement {
+interface CardProps {
+  title: string;
+  imageLinks: any;
+  price: string;
+  shipping: string;
+  store: string;
+  username: string;
+}
+
+export default function Card({
+  title,
+  imageLinks,
+  price,
+  shipping,
+  store,
+  username,
+}: CardProps): ReactElement {
   return (
     <CardLi>
       <ThumbnailContainer>
         <Link href="/" passHref>
           <CardImageA>
-            <CardImage src="11118565.png" />
+            <CardImage src={imageLinks[0]} />
           </CardImageA>
         </Link>
         <Link href="/" passHref>
-          <CardTitleA>
-            MECO Cordless Air Duster Computer Keyboard Cleaner Blower Electric
-            for Computer 45000RPM Replaces Compressed Air Cans $37.99...
-          </CardTitleA>
+          <CardTitleA>{title}</CardTitleA>
         </Link>
         <PriceContainer>
           <CardPrice>
-            5,900,000<CardBill>원</CardBill>&nbsp;
-          </CardPrice>          
+            {price}
+            &nbsp;
+          </CardPrice>
         </PriceContainer>
         <NoteContainer>
-          <CardNote>배송비 <CardWeightFont>2500원</CardWeightFont></CardNote>
-          <CardNote><CardWeightFont>옥션</CardWeightFont></CardNote>
+          <CardNote>
+            배송비 <CardWeightFont>{shipping}</CardWeightFont>
+          </CardNote>
+          <CardNote>
+            <CardWeightFont>{store}</CardWeightFont>
+          </CardNote>
         </NoteContainer>
-        <CardNote>파운더: <CardWeightFont>아두</CardWeightFont></CardNote>
+        <CardNote>
+          파운더: <CardWeightFont>{username}</CardWeightFont>
+        </CardNote>
         <CardFooter>
           <CardFooterIcon>
             <MdThumbUp /> &nbsp;0
           </CardFooterIcon>
           <CardFooterIcon>
-            <MdComment />&nbsp;0
+            <MdComment />
+            &nbsp;0
           </CardFooterIcon>
         </CardFooter>
       </ThumbnailContainer>
@@ -42,10 +63,10 @@ export default function Card(): ReactElement {
 }
 
 const CardLi = styled.li`
-  display: flex;    
+  display: flex;
   box-shadow: none;
   padding: 1.2rem;
-  width: 18rem;  
+  width: 18rem;
 `;
 
 const ThumbnailContainer = styled.div`
@@ -68,7 +89,7 @@ const CardImage = styled.img`
 `;
 
 const CardTitleA = styled.a`
-  color: ${props => props.theme.lowblack};
+  color: ${(props) => props.theme.lowblack};
   min-height: 3.5rem;
   line-height: 1.5rem;
   font-size: 1.4rem;
@@ -132,4 +153,4 @@ const CardFooterIcon = styled.span`
 
 const CardWeightFont = styled.span`
   font-weight: 600;
-`
+`;

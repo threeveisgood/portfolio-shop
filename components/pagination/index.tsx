@@ -8,8 +8,7 @@ import {
   FiChevronsRight,
 } from "react-icons/fi";
 
-interface PaginationProps {
-  postsPerPage: number;
+interface PaginationProps {  
   totalPosts: number;
   paginate: any;
   currentPage: number;
@@ -21,14 +20,14 @@ interface PaginateLiProps {
   readonly currentPage?: any;
 }
 
-const Pagination: React.FunctionComponent<PaginationProps> = ({
-  postsPerPage,
+const Pagination: React.FunctionComponent<PaginationProps> = ({  
   totalPosts,
   paginate,
   currentPage,
   pathName,
 }) => {
   const pageNumbers = [];
+  const postsPerPage = 3;
 
   const pageDivider = Math.ceil(totalPosts / postsPerPage);
 
@@ -152,8 +151,7 @@ const PaginateLi = styled.li<PaginateLiProps>`
   ${(props) =>
     props.page === props.currentPage &&
     css`
-      border: 1px solid gray;
-      background-color: #0a2f4a;
+      border: 1px solid gray;      
       pointer-events: none;
       border-radius: 2px;
     `}
