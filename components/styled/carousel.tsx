@@ -17,8 +17,8 @@ const StyledCarousel: React.FunctionComponent<Props> = ({ imageLinks }) => {
         dynamicHeight={true}
         showStatus={false}
       >
-        {imageLinks?.map((imageLink: string) => (
-          <img src={imageLink} />
+        {imageLinks?.map((imageLink: string, index: any) => (
+          <img key={index} src={imageLink} />
         ))}
       </Carousel>
     </CarouselContainer>

@@ -25,7 +25,11 @@ export default function Card({
       <ThumbnailContainer>
         <Link href="/" passHref>
           <CardImageA>
-            <CardImage src={imageLinks[0]} />
+            {imageLinks.length < 1 ? (
+              <CardImage src='/default.png' alt={title} />
+            ) : (
+              <CardImage src={imageLinks[0]} alt={title} />
+            )}
           </CardImageA>
         </Link>
         <Link href="/" passHref>

@@ -47,7 +47,7 @@ const Nav = styled.nav`
   justify-content: center;
   
   background: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-  color: white; 
+  color: #fff; 
 `
 
 const InformationUl = styled.ul`

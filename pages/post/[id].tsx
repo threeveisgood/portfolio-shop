@@ -1,5 +1,5 @@
 import axios from "axios";
-import Contents from "components/post/contents";
+import Post from "components/post";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
 import { useRouter } from "next/router";
@@ -9,7 +9,7 @@ const fetchAxios = (id: string, document: string) =>
   axios.get(`/api/${document}/${id}`).then(({ data }) => data);
 
 
-const Post: React.FunctionComponent = () => {
+const Index: React.FunctionComponent = () => {
   const router = useRouter();
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
 
@@ -38,7 +38,7 @@ const Post: React.FunctionComponent = () => {
 
     return (
       <>
-        <Contents
+        <Post
           title={result.title}
           body={result.body}
           price={result.price}
@@ -70,7 +70,7 @@ const Post: React.FunctionComponent = () => {
   return <></>;
 };
 
-export default Post;
+export default Index;
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
   const id = context.params?.id as string;

@@ -5,11 +5,19 @@ import * as yup from "yup"
 
 import { AiOutlineSearch } from "react-icons/ai"
 
+interface SearchProps {
+  isMobile: boolean
+}
+
+interface SearchStyledProps {
+  readonly isMobile?: boolean; 
+}
+
 const validationSchema = yup.object({
   search: yup.string().max(50).required("Required"),
 });
 
-export const Search = () => {
+export const Search = ({ isMobile }: SearchProps) => {
   const formik = useFormik({
     initialValues: {
       search: "",
@@ -24,8 +32,7 @@ export const Search = () => {
   });
 
   return (
-    <>
-      <SearchForm onSubmit={formik.handleSubmit} autoComplete="off">
+      <SearchForm isMobile={isMobile} onSubmit={formik.handleSubmit} autoComplete="off">
         <SearchInput
           id="search"
           name="search"
@@ -37,20 +44,22 @@ export const Search = () => {
           <AiOutlineSearch />
         </SearchButton>
       </SearchForm>
-    </>
   );
 };
 
-const SearchForm = styled.form`
-  flex: 0 0 24%;
-
-  display: flex;
+const SearchForm = styled.form<SearchStyledProps>`
+  flex: 0 0 24%;  
+  display: ${props => props.isMobile ? 'none' : 'flex'};
+  position: relative;
   align-items: center;
   justify-content: center;
 
-  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {
-    order: 1;
-    flex: 0 0 100%;    
+  @media only screen and (min-width: ${(props) => props.theme.responsive.phoneLg}) {
+    
+  }
+  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
+      display: ${props => props.isMobile ? 'flex' : 'none'};
+      margin-bottom: 0.7rem;
   }
 `;
 
@@ -58,27 +67,36 @@ const SearchInput = styled.input`
   background: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
   font-family: inherit;
   font-size: inherit;
-  color: white;
-  border: none;
-  width: 90%;    
   color: #fff;
+  border: none;
+  width: 90%;      
   transition: all 0.2s;
-  padding: 1rem;
-  margin-right: -3.25rem;
+  padding: 1rem;  
   border-radius: 2.3rem;  
   height: 1.5rem;
 
   &:focus {
     outline: none;
-    width: 100%;
+    width: 100%;    
+
+    @media only screen and (min-width: ${(props) => props.theme.responsive.phone}) {
+    & + button {
+        right: 2%;
+    }
+  }
+    @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
+      width: 90%;      
+    }
   }
 `;
 
 const SearchButton = styled.button`
+  position: absolute;
   font-size: 1.9rem;
   border: none;
   background-color: inherit;
   cursor: pointer;
+  right: 5%;
 
   &:focus {
     outline: none;

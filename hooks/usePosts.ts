@@ -9,6 +9,7 @@ const fetchPosts = async (page: any) => {
 
 const usePosts = (page: any) => {
   return useQuery(["posts", page], () => fetchPosts(page), {
+    enabled: true,
     keepPreviousData: true
   });
 };

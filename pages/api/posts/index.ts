@@ -7,7 +7,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const { page } = req.query;
-
+  const postsPerPage = 3;
+  const currentPage = Number(page);
+  const index_last = currentPage * postsPerPage;
+  const index_first = index_last - postsPerPage;
+  
   let client;
 
   try {
@@ -18,12 +22,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const db: any = client.db();
-
-
-  const postsPerPage = 3;
-  const currentPage = Number(page);
-  const index_last = currentPage * postsPerPage;
-  const index_first = index_last - postsPerPage;
 
   let count;
   let result;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useSession, signOut } from "next-auth/client";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import { HiOutlineLogout } from "react-icons/hi";
 import { AiOutlineUser } from "react-icons/ai";
 import { Search } from "components/search";
-import { AuthButton, NavButton, StyledButton } from "components/styled/button";
+import { AuthButton } from "components/styled/button";
 import {
   DropdownText,
   ProfileDropdown,
@@ -36,7 +36,7 @@ const Header: React.FunctionComponent = () => {
           </a>
         </Link>
 
-        <Search />
+        <Search isMobile={false} />
         <UserNav>
           {/* {session && (
             <UserProfileIcon>
@@ -49,7 +49,7 @@ const Header: React.FunctionComponent = () => {
           )} */}
           {session && (
             <UserProfileIcon
-              className="last dropdown"
+              className="dropdown last"
               onClick={handleClick}
               isProfileClick={isProfileClick}
             >
@@ -90,6 +90,9 @@ const Header: React.FunctionComponent = () => {
           )}
         </UserNav>
       </StyledHeader>
+      <div>
+      <Search isMobile={true} />
+      </div>
     </>
   );
 };
@@ -107,9 +110,8 @@ const StyledHeader = styled.div`
   align-items: center;
 
   @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {
-    flex-wrap: wrap;
-    align-content: space-between;
-    height: 11rem;
+    /* flex-wrap: wrap;
+    align-content: space-between;     */
   }
 `;
 

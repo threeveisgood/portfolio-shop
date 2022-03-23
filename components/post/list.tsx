@@ -15,14 +15,15 @@ function List({
   count,
   paginate,
   currentPage,
-}: ListProps): ReactElement {
+}: ListProps): ReactElement {  
   console.log(result);
-  return (
+  return (    
     <MainContainer>
       <CardUl>
         {result.map((data: any) => {
           return (
             <Card
+              key={data._id}
               title={data.title}
               imageLinks={data.imageLinks}
               price={data.price}
