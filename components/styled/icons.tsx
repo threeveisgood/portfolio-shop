@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { ProfileDropdown, ProfileDropdownMenu } from "./dropdown";
 
 interface ProfileMenuProps {
-  readonly isProfileClick?: boolean
+  readonly isProfileClick?: boolean;
+  readonly isMobile?: boolean;
 }
 
 export const UserProfileIcon = styled.div<ProfileMenuProps>`
@@ -27,4 +28,13 @@ export const UserProfileIcon = styled.div<ProfileMenuProps>`
     margin-right: 0;
   }
   
+  @media only screen and (min-width: ${(props) => props.theme.responsive.phone}) {    
+    display: ${props => props.isMobile ? 'none' : 'flex'};
+  }
+
+  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
+    font-size: 2.4rem;
+    margin-right: 1rem;
+  }
 `;
+

@@ -5,6 +5,7 @@ export const ProfileDropdown = styled.ul`
   flex-direction: column;
   position: absolute;
   min-width: 10rem;
+  z-index: 1;
 
   top: 2.8rem;  
   right: 0.1rem;    

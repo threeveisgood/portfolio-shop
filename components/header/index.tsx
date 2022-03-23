@@ -14,6 +14,7 @@ import {
   ProfileDropdownMenu,
 } from "components/styled/dropdown";
 import { UserProfileIcon } from "components/styled/icons";
+import { AiOutlineSearch } from "react-icons/ai"
 
 const Header: React.FunctionComponent = () => {
   const [session, loading] = useSession();
@@ -47,11 +48,17 @@ const Header: React.FunctionComponent = () => {
               </Link>
             </UserProfileIcon>
           )} */}
+          {
+            <UserProfileIcon isMobile={true}>
+             <AiOutlineSearch />
+            </UserProfileIcon>
+          }
           {session && (
             <UserProfileIcon
               className="dropdown last"
               onClick={handleClick}
               isProfileClick={isProfileClick}
+              isMobile={false}
             >
               <CgProfile />
               {isProfileClick && (
@@ -126,6 +133,10 @@ const Title = styled.div`
   -moz-background-clip: text;  
   -webkit-text-fill-color: transparent; 
   -moz-text-fill-color: transparent;
+
+  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
+    font-size: 2rem;
+  }
 `;
 
 const UserNav = styled.nav`

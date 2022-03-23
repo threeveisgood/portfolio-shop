@@ -72,7 +72,7 @@ const SearchInput = styled.input`
   width: 90%;      
   transition: all 0.2s;
   padding: 1rem;  
-  border-radius: 2.3rem;  
+  border-radius: 2.6rem;  
   height: 1.5rem;
 
   &:focus {
