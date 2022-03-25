@@ -6,18 +6,20 @@ import * as yup from "yup"
 import { AiOutlineSearch } from "react-icons/ai"
 
 interface SearchProps {
-  isMobile: boolean
+  isMobile: boolean;
+  searchToggle?: boolean;
 }
 
 interface SearchStyledProps {
   readonly isMobile?: boolean; 
+  readonly searchToggle?: boolean;
 }
 
 const validationSchema = yup.object({
   search: yup.string().max(50).required("Required"),
 });
 
-export const Search = ({ isMobile }: SearchProps) => {
+export const Search = ({ isMobile, searchToggle }: SearchProps) => {
   const formik = useFormik({
     initialValues: {
       search: "",
@@ -32,7 +34,7 @@ export const Search = ({ isMobile }: SearchProps) => {
   });
 
   return (
-      <SearchForm isMobile={isMobile} onSubmit={formik.handleSubmit} autoComplete="off">
+      <SearchForm isMobile={isMobile} searchToggle={searchToggle} onSubmit={formik.handleSubmit} autoComplete="off">
         <SearchInput
           id="search"
           name="search"
@@ -60,6 +62,8 @@ const SearchForm = styled.form<SearchStyledProps>`
   @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
       display: ${props => props.isMobile ? 'flex' : 'none'};
       margin-bottom: 0.7rem;
+
+      display: ${props => props.searchToggle ? 'flex': 'none'};
   }
 `;
 

@@ -33,7 +33,7 @@ export const UserProfileIcon = styled.div<ProfileMenuProps>`
   }
 
   @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     margin-right: 1rem;
   }
 `;

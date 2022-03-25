@@ -19,10 +19,15 @@ import { AiOutlineSearch } from "react-icons/ai"
 const Header: React.FunctionComponent = () => {
   const [session, loading] = useSession();
   const [isProfileClick, setIsProfileClick] = useState(false);
+  const [searchToggle, setSearchToggle] = useState(false);
 
-  const handleClick = () => {
+  const handleProfileClick = () => { 
     setIsProfileClick(!isProfileClick);
   };
+
+  const handleSerachToggleClick = () => {
+    setSearchToggle(!searchToggle)
+  }
 
   const logoutHandler = () => {
     signOut();
@@ -49,14 +54,14 @@ const Header: React.FunctionComponent = () => {
             </UserProfileIcon>
           )} */}
           {
-            <UserProfileIcon isMobile={true}>
+            <UserProfileIcon isMobile={true} onClick={handleSerachToggleClick}>
              <AiOutlineSearch />
             </UserProfileIcon>
           }
           {session && (
             <UserProfileIcon
               className="dropdown last"
-              onClick={handleClick}
+              onClick={handleProfileClick}
               isProfileClick={isProfileClick}
               isMobile={false}
             >
@@ -98,7 +103,7 @@ const Header: React.FunctionComponent = () => {
         </UserNav>
       </StyledHeader>
       <div>
-      <Search isMobile={true} />
+      <Search isMobile={true} searchToggle={searchToggle} />
       </div>
     </>
   );

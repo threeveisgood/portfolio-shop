@@ -43,17 +43,23 @@ const NavBar: React.FunctionComponent = () => {
 export default NavBar;
 
 const Nav = styled.nav`
-  display: flex;
-  justify-content: center;
-  
+  display: flex;  
+  padding: 0 2.8rem;
+  overflow-x: auto;
+  overflow-y: auto;
+  text-align: center;
+
   background: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-  color: #fff; 
+  color: #fff;   
+
+  @media only screen and (min-width: ${(props) => props.theme.responsive.phone}) {    
+    justify-content: center;
+  }
 `
 
 const InformationUl = styled.ul`
   display: flex;
-  flex-direction: row;
-
+  white-space: nowrap;
   text-transform: uppercase;
   font-size: 1.6rem;     
   line-height: 2.2;
@@ -62,6 +68,6 @@ const InformationUl = styled.ul`
 const InformationLi = styled.li`    
   font-size: 1.4rem;
   &:not(:last-child) {
-    margin-right: 2.4rem;
+    margin-right: 2.4rem;        
   }
 `
