@@ -1,9 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-interface IAsideProps {}
-
-const Aside: React.FunctionComponent<IAsideProps> = (props) => {
+const Aside: React.FunctionComponent = () => {
   return <AsideContainer>
     <StyledAside>
       <img src="68.jpg" width="160px" height="600px" />

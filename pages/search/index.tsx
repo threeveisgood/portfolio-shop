@@ -1,25 +1,26 @@
-import React, { ReactElement, useState, useEffect, useCallback } from "react";
+import React, { ReactElement } from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { GetStaticProps } from "next";
-import { fetchPosts } from "hooks/usePosts";
+import { fetchSearch } from "hooks/useSearch";
 import List from "components/post/list";
 
-interface Props {}
-
-export default function posts({}: Props): ReactElement | string {
+export default function posts(): ReactElement | string {
   return (
     <>
-     <List isSearch={false}/>
+     <List isSearch={true} />
     </>
   );
 }
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
   const page = (context.params?.page as string) || "1";
+  const value = context.params?.value;
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(["posts", page], () => fetchPosts(page));
+  await queryClient.prefetchQuery(["search", value, page], () =>
+    fetchSearch(value, page)
+  );
 
   return {
     props: {

@@ -1,4 +1,4 @@
-import { connectToDatabase, getCount, getPosts } from "lib/db-utils";
+import { connectToDatabase, getFindCount, getPosts } from "lib/db-utils";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -6,7 +6,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const { page } = req.query;
+  const { page, category } = req.query;
   const postsPerPage = 3;
   const currentPage = Number(page);
   const index_last = currentPage * postsPerPage;
@@ -27,9 +27,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   let result;
 
   try {
-    count = await getCount(client, "posts");
+    count = await getFindCount(client, "posts", { category: category });
 
-    result = await getPosts(client, "posts", postsPerPage, index_first);
+    result = await getPosts(client, "posts", postsPerPage, index_first, { category: category });
 
     res.status(200).json({ count, result });
   } catch {

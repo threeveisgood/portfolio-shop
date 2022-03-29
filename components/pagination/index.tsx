@@ -1,5 +1,5 @@
 import * as React from "react";
-import router from "next/router";
+import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import {
   FiChevronLeft,
@@ -13,6 +13,7 @@ interface PaginationProps {
   paginate: any;
   currentPage: number;
   pathName: string;
+  isSearch?: boolean;
 }
 
 interface PaginateLiProps {
@@ -25,7 +26,10 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
   paginate,
   currentPage,
   pathName,
+  isSearch
 }) => {
+  const router = useRouter();
+  const { value } = router.query; 
   const pageNumbers = [];
   const postsPerPage = 3;
 
@@ -57,7 +61,7 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
               paginate(1);
               router.push({
                 pathname: pathName,
-                query: { page: 1 },
+                query: { page: 1, value: isSearch ? value : null },
               });
             }
           }}
@@ -72,7 +76,7 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
               paginate(currentPage - 1);
               router.push({
                 pathname: pathName,
-                query: { page: currentPage - 1 },
+                query: { page: currentPage - 1, value: isSearch ? value : null },
               });
             }
           }}
@@ -88,7 +92,7 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
               paginate(number);
               router.push({
                 pathname: pathName,
-                query: { page: number },
+                query: { page: number, value: isSearch ? value : null },
               });
             }}
             page={number}
@@ -104,7 +108,7 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
               paginate(currentPage + 1);
               router.push({
                 pathname: pathName,
-                query: { page: currentPage + 1 },
+                query: { page: currentPage + 1, value: isSearch ? value : null },
               });
             }
           }}
@@ -118,7 +122,7 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
             paginate(pageDivider);
             router.push({
               pathname: pathName,
-              query: { page: pageDivider },
+              query: { page: pageDivider, value: isSearch ? value : null },
             });
           }}
           page={null}
@@ -145,15 +149,17 @@ const PaginateLi = styled.li<PaginateLiProps>`
   color: ${(props) => props.theme.black};
   cursor: pointer;
   font-size: 1.5rem;
-  padding: 0.1rem 0.4rem;
+  padding: 0.1rem 0.6rem;
   margin: 0.1rem 0.3rem;
   text-align: center;
   ${(props) =>
     props.page === props.currentPage &&
     css`
-      border: 1px solid gray;      
+      border-bottom: 1px solid gray;      
       pointer-events: none;
       border-radius: 2px;
+      background: ${props => props.theme.primary};
+      color: white;
     `}
 `;
 

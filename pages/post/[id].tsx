@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
 import { useRouter } from "next/router";
 import { dehydrate, QueryClient, useQuery } from "react-query";
+import LoadingSpinner from "components/styled/loading-spinner";
 
 const fetchAxios = (id: string, document: string) =>
   axios.get(`/api/${document}/${id}`).then(({ data }) => data);
@@ -60,7 +61,7 @@ const Index: React.FunctionComponent = () => {
   }
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <LoadingSpinner />;
   }
 
   if (isError) {
