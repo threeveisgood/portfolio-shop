@@ -14,6 +14,7 @@ interface PaginationProps {
   currentPage: number;
   pathName: string;
   isSearch?: boolean;
+  isCategory?: boolean;
 }
 
 interface PaginateLiProps {
@@ -26,7 +27,8 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
   paginate,
   currentPage,
   pathName,
-  isSearch
+  isSearch,
+  isCategory,
 }) => {
   const router = useRouter();
   const { value } = router.query; 
@@ -59,10 +61,18 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
           onClick={() => {
             if (currentPage != 1) {
               paginate(1);
-              router.push({
-                pathname: pathName,
-                query: { page: 1, value: isSearch ? value : null },
-              });
+              
+              if(isSearch || isCategory) {
+                router.push({
+                  pathname: pathName,
+                  query: { page: 1, value: value},
+                });
+              } else {
+                router.push({
+                  pathname: pathName,
+                  query: { page: 1}
+                });
+              }     
             }
           }}
           page={null}
@@ -74,10 +84,18 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
           onClick={() => {
             if (currentPage != 1) {
               paginate(currentPage - 1);
-              router.push({
-                pathname: pathName,
-                query: { page: currentPage - 1, value: isSearch ? value : null },
-              });
+
+              if(isSearch || isCategory) {
+                router.push({
+                  pathname: pathName,
+                  query: { page: currentPage - 1, value: value},
+                });
+              } else {
+                router.push({
+                  pathname: pathName,
+                  query: { page: currentPage - 1 }
+                });
+              }   
             }
           }}
           page={null}
@@ -90,10 +108,18 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
             key={number}
             onClick={() => {
               paginate(number);
-              router.push({
-                pathname: pathName,
-                query: { page: number, value: isSearch ? value : null },
-              });
+
+              if(isSearch || isCategory) {
+                router.push({
+                  pathname: pathName,
+                  query: { page: number, value: value},
+                });
+              } else {
+                router.push({
+                  pathname: pathName,
+                  query: { page: number }
+                });
+              }   
             }}
             page={number}
             currentPage={currentPage}
@@ -106,10 +132,18 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
           onClick={() => {
             if (currentPage < pageNumbersLastValue) {
               paginate(currentPage + 1);
-              router.push({
-                pathname: pathName,
-                query: { page: currentPage + 1, value: isSearch ? value : null },
-              });
+
+              if(isSearch || isCategory) {
+                router.push({
+                  pathname: pathName,
+                  query: { page: currentPage + 1, value: value},
+                });
+              } else {
+                router.push({
+                  pathname: pathName,
+                  query: { page: currentPage + 1 }
+                });
+              }   
             }
           }}
           page={null}
@@ -120,10 +154,18 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
           key="last"
           onClick={() => {
             paginate(pageDivider);
-            router.push({
-              pathname: pathName,
-              query: { page: pageDivider, value: isSearch ? value : null },
-            });
+
+            if(isSearch || isCategory) {
+              router.push({
+                pathname: pathName,
+                query: { page: pageDivider, value: value},
+              });
+            } else {
+              router.push({
+                pathname: pathName,
+                query: { page: pageDivider }
+              });
+            }   
           }}
           page={null}
         >

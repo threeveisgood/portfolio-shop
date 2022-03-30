@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { fetchSearch } from "hooks/useSearch";
 import List from "components/post/list";
 
-export default function posts(): ReactElement | string {
+export default function search(): ReactElement | string {
   return (
     <>
      <List isSearch={true} />

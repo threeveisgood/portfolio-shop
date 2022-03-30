@@ -6,12 +6,14 @@ import { useSearch } from "hooks/useSearch";
 import { useRouter } from "next/router";
 import { usePosts } from "hooks/usePosts";
 import LoadingSpinner from "components/styled/loading-spinner";
+import { useCategory } from "hooks/useCategory";
 
 interface ListProps {
   isSearch?: boolean;
+  isCategory?: boolean;
 }
 
-function List({ isSearch }: ListProps): ReactElement {
+function List({ isSearch, isCategory }: ListProps): ReactElement {
   const router = useRouter();
   const { value } = router.query;
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,10 +31,11 @@ function List({ isSearch }: ListProps): ReactElement {
     }
   }, []);
 
-  const { isLoading, isError, data, isFetching } = isSearch ? useSearch(
-    value,
-    currentPage
-  ) : usePosts(currentPage);
+  const { isLoading, isError, data, isFetching } = isSearch
+    ? useSearch(value, currentPage)
+    : isCategory
+    ? useCategory(value, currentPage)
+    : usePosts(currentPage);
 
   return (
     <>
@@ -43,27 +46,29 @@ function List({ isSearch }: ListProps): ReactElement {
       ) : (
         <MainContainer>
           <CardUl>
-            {data && data.result.map((data: any) => {
-              return (
-                <Card
-                  key={data._id}
-                  title={data.title}
-                  imageLinks={data.imageLinks}
-                  price={data.price}
-                  shipping={data.shipping}
-                  store={data.store}
-                  username={data.username}
-                />
-              );
-            })}
+            {data.result &&
+              data.result.map((data: any) => {
+                return (
+                  <Card
+                    key={data._id}
+                    title={data.title}
+                    imageLinks={data.imageLinks}
+                    price={data.price}
+                    shipping={data.shipping}
+                    store={data.store}
+                    username={data.username}
+                  />
+                );
+              })}
           </CardUl>
           <div>
             <Pagination
               totalPosts={data.count}
               paginate={paginate}
               currentPage={currentPage}
-              pathName={``}
+              pathName={isSearch ? 'search' : isCategory ? 'category' : ``}
               isSearch={isSearch}
+              isCategory={isCategory}
             />
           </div>
           {isFetching ? <span></span> : null}

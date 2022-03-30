@@ -6,7 +6,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const { page, category } = req.query;
+  const { page, value } = req.query;
   const postsPerPage = 3;
   const currentPage = Number(page);
   const index_last = currentPage * postsPerPage;
@@ -27,9 +27,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   let result;
 
   try {
-    count = await getFindCount(client, "posts", { category: category });
+    count = await getFindCount(client, "posts", { category: value });
 
-    result = await getPosts(client, "posts", postsPerPage, index_first, { category: category });
+    result = await getPosts(client, "posts", postsPerPage, index_first, { category: value });
 
     res.status(200).json({ count, result });
   } catch {
