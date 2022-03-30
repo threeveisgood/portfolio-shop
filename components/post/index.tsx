@@ -1,5 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -9,134 +10,143 @@ import { MdRemoveRedEye, MdThumbUp } from "react-icons/md";
 import { BiCommentDetail } from "react-icons/bi";
 import StyledCarousel from "components/styled/carousel";
 import Comments from "components/comments";
+import LoadingSpinner from "components/styled/loading-spinner";
+import { usePost } from "hooks/usePost";
+import { useComments } from "hooks/useComments";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
-interface PostProps {
-  title: string;
-  body: any;
-  price: string;
-  productURL: string;
-  imageLinks: string[];
-  username: string;
-  store: string;
-  shipping: string;
-  category: string;
-  date: Date;
-  postID: string;
-  commentsData: any;
-  commentsIsLoading: any;
-  commentsIsError: any;
-  commentsIsSuccess: any;
-}
+interface PostProps {}
 
-const Post: React.FunctionComponent<PostProps> = ({
-  title,
-  body,
-  price,
-  productURL,
-  imageLinks,
-  username,
-  date,
-  store,
-  shipping,
-  category,
-  postID,
-  commentsData,
-  commentsIsLoading,
-  commentsIsError,
-  commentsIsSuccess,
-}) => {
-  const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
-  const mobileDate = dayjs().to(dayjs(date));
+const Post: React.FunctionComponent<PostProps> = ({}) => {
+  const router = useRouter();
+  const postID = typeof router.query?.id === "string" ? router.query.id : "";
 
-  return (
-    <ContentsContianer>
-      <ContentsLayout>
-        <TitleContainer>
-          <Title>{title}</Title>
-        </TitleContainer>
+  const { isSuccess, data, isLoading, isError } = usePost(postID);
+  
+  const {
+    isSuccess: commentsIsSuccess,
+    data: commentsData,
+    isLoading: commentsIsLoading,
+    isError: commentsIsError,
+  } = useComments(postID);
 
-        <DetailContainer>
-          <PriceAndCategoryContainer>
-            <Price>{price}</Price>
-            <Category>{category}</Category>
-          </PriceAndCategoryContainer>
+  if (isSuccess) {
+    const {
+      title,
+      price,
+      category,
+      shipping,
+      store,
+      date,
+      username,
+      postID,
+      productURL,
+      imageLinks,
+      body
+    } = data.result;
 
-          <InformationContainer>
-            <Count className="no-padding-left">
-              <Feature>
-                배송비: <LightWeight>{shipping}</LightWeight>
-              </Feature>
-              <StoreName>
-                쇼핑몰: <LightWeight>{store}</LightWeight>
-              </StoreName>
-            </Count>
-            <Count>
-              <CountNumber>
-                <DateInfo>{postDate}</DateInfo>
-              </CountNumber>
-              <CountNumber>
-                <MobileDateInfo>{mobileDate}</MobileDateInfo>
-              </CountNumber>
-            </Count>
-          </InformationContainer>
+    const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
+    const mobileDate = dayjs().to(dayjs(date));
 
-          <InformationContainer>
-            <FlexContainer>
-              <IoPersonCircleOutline />
-              <UserNameInformation>{username}</UserNameInformation>
-            </FlexContainer>
-            <FlexContainer>
-              <Count>
-                <MdRemoveRedEye />
-                <CountNumber>0</CountNumber>
+    return (
+      <ContentsContianer>
+        <ContentsLayout>
+          <TitleContainer>
+            <Title>{title}</Title>
+          </TitleContainer>
+
+          <DetailContainer>
+            <PriceAndCategoryContainer>
+              <Price>{price}</Price>
+              <Category>{category}</Category>
+            </PriceAndCategoryContainer>
+
+            <InformationContainer>
+              <Count className="no-padding-left">
+                <Feature>
+                  배송비: <LightWeight>{shipping}</LightWeight>
+                </Feature>
+                <StoreName>
+                  쇼핑몰: <LightWeight>{store}</LightWeight>
+                </StoreName>
               </Count>
-              <InformationMidDot>&#183;</InformationMidDot>
               <Count>
-                <BiCommentDetail />
-                <CountNumber>0</CountNumber>
+                <CountNumber>
+                  <DateInfo>{postDate}</DateInfo>
+                </CountNumber>
+                <CountNumber>
+                  <MobileDateInfo>{mobileDate}</MobileDateInfo>
+                </CountNumber>
               </Count>
-              <InformationMidDot>&#183;</InformationMidDot>
-              <Count>
-                <MdThumbUp />
-                <CountNumber>0</CountNumber>
-              </Count>
-            </FlexContainer>
-          </InformationContainer>
+            </InformationContainer>
 
-          <ProductURLContainer>
-            URL :&nbsp;
-            <Link href="/">
-              <a>
-                <LightWeight>{productURL}</LightWeight>
-              </a>
-            </Link>
-          </ProductURLContainer>
+            <InformationContainer>
+              <FlexContainer>
+                <IoPersonCircleOutline />
+                <UserNameInformation>{username}</UserNameInformation>
+              </FlexContainer>
+              <FlexContainer>
+                <Count>
+                  <MdRemoveRedEye />
+                  <CountNumber>0</CountNumber>
+                </Count>
+                <InformationMidDot>&#183;</InformationMidDot>
+                <Count>
+                  <BiCommentDetail />
+                  <CountNumber>0</CountNumber>
+                </Count>
+                <InformationMidDot>&#183;</InformationMidDot>
+                <Count>
+                  <MdThumbUp />
+                  <CountNumber>0</CountNumber>
+                </Count>
+              </FlexContainer>
+            </InformationContainer>
 
-          {imageLinks && imageLinks.length != 0 ? (
-            <StyledCarousel imageLinks={imageLinks} />
-          ) : null}
+            <ProductURLContainer>
+              URL :&nbsp;
+              <Link href="/">
+                <a>
+                  <LightWeight>{productURL}</LightWeight>
+                </a>
+              </Link>
+            </ProductURLContainer>
 
-          <PostContent dangerouslySetInnerHTML={{ __html: body }} />
-          <Comments
-            commentsData={commentsData}
-            postID={postID}
-            commentsIsLoading={commentsIsLoading}
-            commentsIsError={commentsIsError}
-            commentsIsSuccess={commentsIsSuccess}
-          />
-        </DetailContainer>
-      </ContentsLayout>
-    </ContentsContianer>
-  );
+            {imageLinks && imageLinks.length != 0 ? (
+              <StyledCarousel imageLinks={imageLinks} />
+            ) : null}
+
+            <PostContent dangerouslySetInnerHTML={{ __html: body }} />
+            <Comments
+              commentsData={commentsData}
+              postID={postID}
+              commentsIsLoading={commentsIsLoading}
+              commentsIsError={commentsIsError}
+              commentsIsSuccess={commentsIsSuccess}
+            />
+          </DetailContainer>
+        </ContentsLayout>
+      </ContentsContianer>
+    );
+  }
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (isError) {
+    return <div>오류가 발생하였습니다.</div>;
+  }
+
+  return <></>;
 };
 
 export default Post;
 
 const ContentsContianer = styled.div`
-  max-width: 980px;  
+  max-width: 980px;
   margin: 0 auto;
   box-sizing: border-box;
 `;
