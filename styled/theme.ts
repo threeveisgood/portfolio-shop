@@ -4,9 +4,11 @@ export const theme: DefaultTheme = {
   primary: "#5B42F3",
   purple: "#AF40FF",
   cyan: "#00DDEB",
+  white: "#e9e9e9",
   black: "#474747",
   lowblack: "#222222",  
   gray: "#737373",
+  lowgray: "#d6d6d6",
   gold: "#a6946d",
   padding: "12px",
   fontSize: {

@@ -12,7 +12,8 @@ import StyledCarousel from "components/styled/carousel";
 import Comments from "components/comments";
 import LoadingSpinner from "components/styled/loading-spinner";
 import { usePost } from "hooks/usePost";
-import { useComments } from "hooks/useComments";
+import { fetchComments } from "hooks/useComments";
+import { useQuery } from "react-query";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -24,13 +25,16 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
 
   const { isSuccess, data, isLoading, isError } = usePost(postID);
-  
+
   const {
     isSuccess: commentsIsSuccess,
     data: commentsData,
     isLoading: commentsIsLoading,
     isError: commentsIsError,
-  } = useComments(postID);
+  } = useQuery(["getComments", postID], () => fetchComments(postID), {
+    enabled: postID.length > 0,
+    staleTime: Infinity,
+  });
 
   if (isSuccess) {
     const {
@@ -41,10 +45,9 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
       store,
       date,
       username,
-      postID,
       productURL,
       imageLinks,
-      body
+      body,
     } = data.result;
 
     const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
@@ -119,12 +122,12 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
             ) : null}
 
             <PostContent dangerouslySetInnerHTML={{ __html: body }} />
-            <Comments
-              commentsData={commentsData}
+            <Comments              
+              data={commentsData}
+              isLoading={commentsIsLoading}
+              isError={commentsIsError}
+              isSuccess={commentsIsSuccess}
               postID={postID}
-              commentsIsLoading={commentsIsLoading}
-              commentsIsError={commentsIsError}
-              commentsIsSuccess={commentsIsSuccess}
             />
           </DetailContainer>
         </ContentsLayout>
@@ -153,7 +156,7 @@ const ContentsContianer = styled.div`
 
 const ContentsLayout = styled.div`
   border-radius: 0.4rem;
-  border: 1px solid #d6d6d6;
+  border: 1px solid ${(props) => props.theme.lowgray};
   margin: 1rem 0 0;
   border-top: 6px solid ${(props) => props.theme.primary};
   color: ${(props) => props.theme.black};
@@ -200,8 +203,8 @@ const InformationContainer = styled.div`
   display: flex;
   align-items: center;
   line-height: 2.2rem;
-  border-top: 1px solid #e9e9e9;
-  border-bottom: 1px solid #e9e9e9;
+  border-top: 1px solid ${props => props.theme.white};
+  border-bottom: 1px solid ${props => props.theme.white};
   margin: 1.5rem 0 0rem;
   padding: 0.8rem 0;
   justify-content: space-between;
@@ -245,7 +248,7 @@ const InformationMidDot = styled.span`
 
 const ProductURLContainer = styled.div`
   display: flex;
-  border-bottom: 1px solid #e9e9e9;
+  border-bottom: 1px solid ${props => props.theme.white};
   padding: 0.8rem 0;
   margin-bottom: 3rem;
   font-size: 1.4rem;

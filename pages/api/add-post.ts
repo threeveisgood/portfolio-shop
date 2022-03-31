@@ -46,7 +46,8 @@ async function handler(
     _id: _id,
     email: email,
     date: new Date(),
-    comments: [],
+    likeCount: 0,
+    comments: [],    
   });
 
   res.status(201).json({ message: "Added post!", data: username });

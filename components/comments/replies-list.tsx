@@ -22,10 +22,12 @@ import AddReply from "./add-reply";
 import styled from 'styled-components';
 
 interface IRepliesListProps {
+  repliedId: any;
   replies: any;
 }
 
 const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
+  repliedId,
   replies,
 }) => {
   const dispatch = useDispatch();
@@ -84,11 +86,11 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
               </CtReplyButton>
             </CtSub>
             <CtReply>
-              <AddReply
-                apiURL="reply"
-                _id={data._id}
+              <AddReply                             
+                _id={repliedId}
+                toggleID={data._id}                                                   
                 postID={data.postID}
-                repliedName={data.username}                
+                repliedName={data.username}                           
               />
             </CtReply>
           </CtCard>

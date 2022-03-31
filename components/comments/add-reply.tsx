@@ -17,10 +17,10 @@ import {
 const bson = require('bson');
 
 interface AddCommentsProps {
-  apiURL: string;
   _id: string;
   postID: string;
-  repliedName?: string;
+  repliedName?: string;  
+  toggleID?: string;
 }
 
 const CommentSchema = Yup.object().shape({
@@ -30,23 +30,25 @@ const CommentSchema = Yup.object().shape({
     .required("내용을 입력해주세요."),
 });
 
-const AddReply: React.FunctionComponent<AddCommentsProps> = ({
-  apiURL,
+const AddReply: React.FunctionComponent<AddCommentsProps> = ({  
   _id,
   repliedName,
-  postID
-}) => {
+  postID,
+  toggleID
+}) => {  
+  const replyID = bson.ObjectId();    
+
   const mutation = useMutation(
-    (comment: any) => axios.post(`/api/${apiURL}/${postID}`, comment),
+    (comment: any) => axios.post(`/api/reply/${_id}`, comment),
     {
       onError: () => {},
-      onSuccess: (data: any) => {},
+      onSuccess: (data: any) => {
+        console.log(data)
+      },
     }
   );
 
   const dispatch = useDispatch();
-  
-  const replyID = bson.ObjectId();
 
   useEffect(() => {
     return () => {
@@ -65,10 +67,10 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
 
   const onChangeToggle = (id: any) => {  
     return (e: any) => onChangeField({key: "replyToggle", value: { _id: id, toggle: !replyToggle.toggle }})
-  }
+  }  
 
   return (   
-    replyToggle._id && (replyToggle._id === '' || replyToggle._id === _id ) && (replyToggle.toggle === true) ?
+    replyToggle._id && (replyToggle._id === '' || replyToggle._id === (toggleID ? toggleID : _id) ) && (replyToggle.toggle === true) ?
     <ReplyBox>              
         <Formik
           initialValues={{
@@ -77,7 +79,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
           validationSchema={CommentSchema}
           onSubmit={async (values: any, actions: any) => {
             const comment = values.comment;
-            mutation.mutate({ comment, repliedName, replyID });
+            mutation.mutate({ comment, postID, repliedName, replyID });
 
             actions.resetForm({
               values: {
@@ -96,7 +98,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
               <CommentLabel>답글 입력</CommentLabel>
             </Field>
             <ButtonBox>
-              <SubmitButton onClick={onChangeToggle(_id)}>취소</SubmitButton>
+              <SubmitButton onClick={onChangeToggle(toggleID ? toggleID : _id)}>취소</SubmitButton>
               <SubmitButton type="submit">입력</SubmitButton>
             </ButtonBox>
           </Form>

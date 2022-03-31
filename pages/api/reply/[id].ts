@@ -32,7 +32,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const db: any = client.db();
 
-  const { comment, repliedName, replyID } = req.body;
+  const { comment, postID, repliedName, replyID } = req.body;
 
   const result: any = await db
     .collection("comments")
@@ -43,13 +43,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
        $push: { replies: {   
            _id: replyID,        
            comment: comment,
-           postID: id,
+           postID: postID,
            username: username,
            email: email,
            date: new Date(),   
            repliedName: repliedName,
-           isDeleted: false, 
-           upVote: 0           
+           isDeleted: false,           
         }} 
      }
     );
