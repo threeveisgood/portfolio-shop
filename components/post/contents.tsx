@@ -121,11 +121,11 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
 
           <PostContent dangerouslySetInnerHTML={{ __html: body }} />
           <Comments
-            commentsData={commentsData}
+            data={commentsData}
             postID={postID}
-            commentsIsLoading={commentsIsLoading}
-            commentsIsError={commentsIsError}
-            commentsIsSuccess={commentsIsSuccess}
+            isLoading={commentsIsLoading}
+            isError={commentsIsError}
+            isSuccess={commentsIsSuccess}
           />
         </DetailContainer>
       </ContentsLayout>

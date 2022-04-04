@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -13,7 +14,8 @@ import Comments from "components/comments";
 import LoadingSpinner from "components/styled/loading-spinner";
 import { usePost } from "hooks/usePost";
 import { fetchComments } from "hooks/useComments";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
+import axios from "axios";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -23,6 +25,14 @@ interface PostProps {}
 const Post: React.FunctionComponent<PostProps> = ({}) => {
   const router = useRouter();
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
+
+  const mutation = useMutation(
+    () => axios.put(`/api/views/${postID}`)
+  )
+
+  useEffect(() => {
+    mutation.mutate();
+  }, [])
 
   const { isSuccess, data, isLoading, isError } = usePost(postID);
 

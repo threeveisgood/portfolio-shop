@@ -43,7 +43,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
     {
       onError: () => {},
       onSuccess: (data: any) => {
-        console.log(data)
+        
       },
     }
   );

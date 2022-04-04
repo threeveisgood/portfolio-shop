@@ -48,6 +48,7 @@ async function handler(
     date: new Date(),
     likeCount: 0,
     comments: [],    
+    viewsCount: 0
   });
 
   res.status(201).json({ message: "Added post!", data: username });
