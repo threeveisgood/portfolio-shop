@@ -3,8 +3,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  //if (req.method !== "PUT") return;
-
   const { id } = req.query;
 
   let client;

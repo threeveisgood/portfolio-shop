@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -16,6 +16,7 @@ import { usePost } from "hooks/usePost";
 import { fetchComments } from "hooks/useComments";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
+import Recommend from "./recommend";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -58,6 +59,8 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
       productURL,
       imageLinks,
       body,
+      viewsCount,
+      likeCount
     } = data.result;
 
     const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
@@ -103,16 +106,11 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
               <FlexContainer>
                 <Count>
                   <MdRemoveRedEye />
-                  <CountNumber>0</CountNumber>
+                  <CountNumber>{viewsCount}</CountNumber>
                 </Count>
                 <InformationMidDot>&#183;</InformationMidDot>
                 <Count>
                   <BiCommentDetail />
-                  <CountNumber>0</CountNumber>
-                </Count>
-                <InformationMidDot>&#183;</InformationMidDot>
-                <Count>
-                  <MdThumbUp />
                   <CountNumber>0</CountNumber>
                 </Count>
               </FlexContainer>
@@ -132,6 +130,8 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
             ) : null}
 
             <PostContent dangerouslySetInnerHTML={{ __html: body }} />
+
+            <Recommend likeCount={likeCount} />
             <Comments              
               data={commentsData}
               isLoading={commentsIsLoading}
@@ -162,11 +162,11 @@ const ContentsContianer = styled.div`
   max-width: 980px;
   margin: 0 auto;
   box-sizing: border-box;
+  background: #fff;
 `;
 
 const ContentsLayout = styled.div`
-  border-radius: 0.4rem;
-  border: 1px solid ${(props) => props.theme.lowgray};
+  border-radius: 0.4rem;  
   margin: 1rem 0 0;
   border-top: 6px solid ${(props) => props.theme.primary};
   color: ${(props) => props.theme.black};
@@ -174,8 +174,12 @@ const ContentsLayout = styled.div`
 
 const TitleContainer = styled.div`
   display: flex;
-  padding: 3rem 2.4rem 0;
+  padding: 2.5rem 4rem 0px;
   overflow: hidden;
+
+  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
+    padding: 2.5rem 2rem 0px;
+  }
 `;
 
 const Title = styled.h1`
@@ -184,13 +188,18 @@ const Title = styled.h1`
 `;
 
 const DetailContainer = styled.div`
-  padding: 2.3rem 2.4rem;
+  padding: 2rem 4rem;
+
+  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
+    padding: 2rem 2rem;
+  }
 `;
 
 const PriceAndCategoryContainer = styled.span`
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+  align-items: center;
 `;
 
 const Price = styled.span`
@@ -213,9 +222,7 @@ const InformationContainer = styled.div`
   display: flex;
   align-items: center;
   line-height: 2.2rem;
-  border-top: 1px solid ${props => props.theme.white};
-  border-bottom: 1px solid ${props => props.theme.white};
-  margin: 1.5rem 0 0rem;
+  margin: 1.2rem 0 0rem;
   padding: 0.8rem 0;
   justify-content: space-between;
   font-size: 2.2rem;
@@ -258,7 +265,7 @@ const InformationMidDot = styled.span`
 
 const ProductURLContainer = styled.div`
   display: flex;
-  border-bottom: 1px solid ${props => props.theme.white};
+  //border-bottom: 1px solid ${props => props.theme.white};
   padding: 0.8rem 0;
   margin-bottom: 3rem;
   font-size: 1.4rem;

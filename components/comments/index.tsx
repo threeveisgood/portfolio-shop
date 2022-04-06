@@ -132,8 +132,6 @@ export default Comments;
 
 const ListBox = styled.div`
   display: flex;
-  flex-direction: column;
-  border-top: 1px solid ${(props) => props.theme.lowgray};
-  margin-top: 3.5rem;
+  flex-direction: column;  
   font-size: 1.3rem;
 `;

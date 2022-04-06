@@ -45,10 +45,11 @@ async function handler(
     category: category,
     _id: _id,
     email: email,
-    date: new Date(),
+    date: new Date(),    
     likeCount: 0,
+    likeUsers: [],
     comments: [],    
-    viewsCount: 0
+    viewsCount: 0,
   });
 
   res.status(201).json({ message: "Added post!", data: username });
