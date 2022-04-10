@@ -9,7 +9,7 @@ import React from "react";
 import { Formik, Field as FormikField, Form } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
 const bson = require('bson');
@@ -26,14 +26,15 @@ const CommentSchema = Yup.object().shape({
 });
 
 const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {    
+  const queryClient = useQueryClient();
   const _id = bson.ObjectId();
 
   const mutation = useMutation(
     (comment: any) => axios.post(`/api/comments/${_id}`, comment),
     {
       onError: () => {},
-      onSuccess: (data: any) => {
-        
+      onSuccess: () => {
+        queryClient.invalidateQueries(["getComments", postID]);
       }
     }
   );

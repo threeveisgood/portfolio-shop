@@ -2,7 +2,7 @@ import { FlexBox } from "components/styled/flexbox";
 import * as React from "react";
 import styled from "styled-components";
 import { MdThumbUp, MdThumbUpOffAlt } from "react-icons/md";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useSession } from 'next-auth/client';
@@ -13,6 +13,7 @@ interface IRecommendProps {
 }
 
 const Recommend: React.FunctionComponent<IRecommendProps> = ({ likeCount, likeUsers }) => {
+  const queryClient = useQueryClient();
   const [session, loading] = useSession();
   const router = useRouter();
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
@@ -21,8 +22,8 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({ likeCount, likeUs
   const mutation = useMutation(
     (isAlready: any) => axios.patch(`/api/recommend/${postID}`, isAlready),
     {
-      onSuccess: (data: any) => {
-        
+      onSuccess: () => {
+        queryClient.invalidateQueries(["getPost", postID]);
       },
     }
   );

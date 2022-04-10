@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeField, initialize } from "modules/comment";
 import styled from "styled-components";
 import * as Yup from "yup";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import {  
   ButtonBox,
@@ -36,14 +36,15 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
   postID,
   toggleID
 }) => {  
+  const queryClient = useQueryClient();
   const replyID = bson.ObjectId();    
 
   const mutation = useMutation(
     (comment: any) => axios.post(`/api/reply/${_id}`, comment),
     {
       onError: () => {},
-      onSuccess: (data: any) => {
-        
+      onSuccess: () => {
+        queryClient.invalidateQueries(["getComments", postID]);
       },
     }
   );

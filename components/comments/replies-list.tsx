@@ -107,18 +107,6 @@ const RepliesBox = styled.div`
   margin-left: 2.2rem;
 `;
 
-const TailBox = styled.span`
-  display: flex;
-  align-items: center;
-  margin-right: 1rem;
-`
-
-const RepliesCtCard = styled.span`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0rem;
-`;
-
 const CtRepliedName = styled.span`  
   margin-right: 0.5rem;
   font-size: 1.2rem;
