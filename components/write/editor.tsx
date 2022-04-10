@@ -184,12 +184,12 @@ const TitleInput = styled.input`
   outline: none;
   padding-bottom: 0.5rem;
   border: none;
-  border-bottom: 1px solid ${props => props.theme.primary};
+  border-bottom: 1px solid ${props => props.theme.black};
   margin-bottom: 1rem;
   width: 100%;
   
   ::placeholder {
-    color: ${props => props.theme.primary};
+    color: ${props => props.theme.black};
   }
 `;
 
@@ -209,13 +209,13 @@ const QuillWrapper = styled.div`
 const CategorySelect = styled(Select)`
   width: 30rem;
   font-weight: 700;
-  border-color: ${props => props.theme.primary};
+  border-color: ${props => props.theme.black};
     
   & > div {
     font-size: 1.2rem;
   }
 
   & > div > div > div {
-    color: ${props => props.theme.primary};
+    color: ${props => props.theme.black};
   }
 `

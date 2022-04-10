@@ -19,7 +19,7 @@ export const ProfileDropdownMenu = styled.li`
   color: #fff;
   height: 3.4rem;    
   font-size: 1.4rem;
-  background: ${props => props.theme.primary};
+  background: ${props => props.theme.black};
   padding: 0.2rem 0.2rem;
   align-items: center;
   padding: 0.5rem 1rem 1rem;

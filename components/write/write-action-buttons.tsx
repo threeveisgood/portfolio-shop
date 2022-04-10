@@ -66,7 +66,7 @@ const WriteActionButtonsBlock = styled.div`
   justify-content: center;
 `;
 
-const Button = styled(StyledButton)`
+const Button = styled(StyledButton)`  
   font-size: 1.5rem;
   & + & {
     margin-left: 0.8rem;

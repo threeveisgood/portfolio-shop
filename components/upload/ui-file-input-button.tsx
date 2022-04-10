@@ -60,6 +60,7 @@ UiFileInputButton.defaultProps = {
 const UploadButton = styled(StyledButton)`
   margin-top: 1rem;
   font-size: 1.2rem;  
+  background: ${props => props.theme.black};
 `
 
 const UploadForm = styled.form`

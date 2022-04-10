@@ -76,7 +76,7 @@ export const ThumbnailLi = styled.li`
 `;
 
 const PrimaryP = styled.p`
-  color: ${props => props.theme.primary};
+  ${props => props.theme.black};
   font-size: 1.2rem;
   margin-bottom: 1rem;
 `

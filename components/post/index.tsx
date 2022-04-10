@@ -28,7 +28,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
 
   const mutation = useMutation(
-    () => axios.put(`/api/views/${postID}`)
+    () => axios.patch(`/api/views/${postID}`)
   )
 
   useEffect(() => {
@@ -60,7 +60,8 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
       imageLinks,
       body,
       viewsCount,
-      likeCount
+      likeCount,
+      likeUsers
     } = data.result;
 
     const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
@@ -131,7 +132,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
 
             <PostContent dangerouslySetInnerHTML={{ __html: body }} />
 
-            <Recommend likeCount={likeCount} />
+            <Recommend likeCount={likeCount} likeUsers={likeUsers} />
             <Comments              
               data={commentsData}
               isLoading={commentsIsLoading}
@@ -168,7 +169,7 @@ const ContentsContianer = styled.div`
 const ContentsLayout = styled.div`
   border-radius: 0.4rem;  
   margin: 1rem 0 0;
-  border-top: 6px solid ${(props) => props.theme.primary};
+  border-top: 6px solid ${props => props.theme.black};
   color: ${(props) => props.theme.black};
 `;
 

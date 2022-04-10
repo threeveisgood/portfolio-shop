@@ -92,7 +92,7 @@ const SubmitButton = styled(LinearButton)`
 
   &:hover {
     color: #fff;
-    background: ${(props) => props.theme.primary};
+    background: ${props => props.theme.black};
   }
 `;
 

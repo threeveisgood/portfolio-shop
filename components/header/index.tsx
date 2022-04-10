@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useSession, signOut } from "next-auth/client";
 import Link from "next/link";
-import { IoCartOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { HiOutlineLogout } from "react-icons/hi";
 import { AiOutlineUser } from "react-icons/ai";
@@ -14,20 +13,20 @@ import {
   ProfileDropdownMenu,
 } from "components/styled/dropdown";
 import { UserProfileIcon } from "components/styled/icons";
-import { AiOutlineSearch } from "react-icons/ai"
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Header: React.FunctionComponent = () => {
   const [session, loading] = useSession();
   const [isProfileClick, setIsProfileClick] = useState(false);
   const [searchToggle, setSearchToggle] = useState(false);
 
-  const handleProfileClick = () => { 
+  const handleProfileClick = useCallback(() => {
     setIsProfileClick(!isProfileClick);
-  };
+  }, [isProfileClick]);
 
   const handleSerachToggleClick = () => {
-    setSearchToggle(!searchToggle)
-  }
+    setSearchToggle(!searchToggle);
+  };
 
   const logoutHandler = () => {
     signOut();
@@ -55,7 +54,7 @@ const Header: React.FunctionComponent = () => {
           )} */}
           {
             <UserProfileIcon isMobile={true} onClick={handleSerachToggleClick}>
-             <AiOutlineSearch />
+              <AiOutlineSearch />
             </UserProfileIcon>
           }
           {session && (
@@ -72,7 +71,7 @@ const Header: React.FunctionComponent = () => {
                     <div>
                       <AiOutlineUser />
                     </div>
-                    <Link href="profile">
+                    <Link href="/profile">
                       <a>
                         <DropdownText>&nbsp;프로필</DropdownText>
                       </a>
@@ -83,7 +82,7 @@ const Header: React.FunctionComponent = () => {
                     onClick={logoutHandler}
                   >
                     <HiOutlineLogout />
-                    <Link href="profile">
+                    <Link href="/profile">
                       <a>
                         <DropdownText>&nbsp;로그아웃</DropdownText>
                       </a>
@@ -103,7 +102,7 @@ const Header: React.FunctionComponent = () => {
         </UserNav>
       </StyledHeader>
       <div>
-      <Search isMobile={true} searchToggle={searchToggle} />
+        <Search isMobile={true} searchToggle={searchToggle} />
       </div>
     </>
   );
@@ -120,11 +119,6 @@ const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {
-    /* flex-wrap: wrap;
-    align-content: space-between;     */
-  }
 `;
 
 const Title = styled.div`
@@ -132,14 +126,14 @@ const Title = styled.div`
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
 
-  background: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  
+  background: ${(props) => props.theme.black};
   background-clip: text;
   -webkit-background-clip: text;
-  -moz-background-clip: text;  
-  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 
-  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
+  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {
     font-size: 2rem;
   }
 `;
@@ -150,9 +144,5 @@ const UserNav = styled.nav`
 
   & > * {
     cursor: pointer;
-    /* padding: 0 2rem;      
-      height: 100%;
-      display: flex;
-      align-items: center; */
   }
 `;

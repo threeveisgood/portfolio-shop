@@ -49,7 +49,7 @@ const Nav = styled.nav`
   overflow-y: auto;
   text-align: center;
 
-  background: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  background: ${props => props.theme.black};
   color: #fff;   
 
   @media only screen and (min-width: ${(props) => props.theme.responsive.phone}) {    

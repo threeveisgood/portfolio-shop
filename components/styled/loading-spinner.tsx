@@ -22,7 +22,7 @@ export const LoadingCt = styled.div`
 export const Spinner = styled.div`
   width: 4.8rem;
   height: 4.8rem;
-  border: 5px solid ${(props) => props.theme.primary};
+  border: 5px solid ${(props) => props.theme.black};
   border-bottom-color: transparent;
   border-radius: 50%;
   display: flex;

@@ -51,6 +51,7 @@ function List({ isSearch, isCategory }: ListProps): ReactElement {
                 return (
                   <Card
                     key={data._id}
+                    id={data._id}
                     title={data.title}
                     imageLinks={data.imageLinks}
                     price={data.price}

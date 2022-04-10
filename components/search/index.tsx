@@ -68,7 +68,7 @@ const SearchForm = styled.form<SearchStyledProps>`
 `;
 
 const SearchInput = styled.input`
-  background: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  background: ${props => props.theme.black};
   font-family: inherit;
   font-size: inherit;
   color: #fff;
@@ -99,6 +99,7 @@ const SearchButton = styled.button`
   font-size: 1.9rem;
   border: none;
   background-color: inherit;
+  color: #fff;
   cursor: pointer;
   right: 5%;
 

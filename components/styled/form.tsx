@@ -16,7 +16,7 @@ export const StyledLabel = styled.label`
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: ${props => props.theme.primary};
+  color: ${(props) => props.theme.black};
   font-weight: 700;
 `;
 
@@ -27,7 +27,7 @@ export const FieldContainer = styled.div`
 export const InputStyle = css`
   width: 300px;
   border: 0;
-  border-bottom: 1px solid ${props => props.theme.primary};
+  border-bottom: 1px solid ${(props) => props.theme.black};
   border-image-slice: 1;
   outline: 0;
   font-size: 1.5rem;
@@ -52,7 +52,7 @@ export const InputStyle = css`
       display: block;
       transition: 0.2s;
       font-size: 1rem;
-      color: ${props => props.theme.primary};
+      color: ${(props) => props.theme.black};
       font-weight: 500;
     }
     padding-bottom: 6px;
@@ -69,6 +69,7 @@ export const StyledInput = styled.input`
 export const FormSubmitButton = styled(StyledButton)`
   font-size: 1.3rem;
   margin-top: 3rem;
+  background: ${(props) => props.theme.black};
 `;
 
 export const FormSubmitLastButton = styled(FormSubmitButton)`

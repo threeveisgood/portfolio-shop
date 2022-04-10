@@ -200,7 +200,7 @@ const PaginateLi = styled.li<PaginateLiProps>`
       border-bottom: 1px solid gray;      
       pointer-events: none;
       border-radius: 2px;
-      background: ${props => props.theme.primary};
+      background: ${(props) => props.theme.black};
       color: white;
     `}
 `;

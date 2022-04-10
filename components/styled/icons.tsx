@@ -9,7 +9,7 @@ interface ProfileMenuProps {
 export const UserProfileIcon = styled.div<ProfileMenuProps>`
   display: flex;
   font-size: 2.8rem;
-  color: ${props => props.theme.primary};
+  color: ${props => props.theme.black};
   margin-right: 1.6rem;
 
   &.dropdown {

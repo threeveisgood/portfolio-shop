@@ -2,17 +2,20 @@ import React, { ReactElement } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { MdComment, MdThumbUp } from "react-icons/md";
+import { useRouter } from "next/router";
 
 interface CardProps {
+  id: string;
   title: string;
   imageLinks: any;
   price: string;
   shipping: string;
   store: string;
-  username: string;
+  username: string;  
 }
 
 export default function Card({
+  id,
   title,
   imageLinks,
   price,
@@ -20,9 +23,16 @@ export default function Card({
   store,
   username,
 }: CardProps): ReactElement {
+  const router = useRouter();
+
+  const handleClick = (e: any) => {
+    e.preventDefault()
+    router.push(`/post/${id}`);
+  };
+
   return (
     <CardLi>
-      <ThumbnailContainer>
+      <ThumbnailContainer onClick={handleClick}>
         <Link href="/" passHref>
           <CardImageA>
             {imageLinks.length < 1 ? (
