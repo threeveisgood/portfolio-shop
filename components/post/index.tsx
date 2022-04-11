@@ -36,7 +36,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
   }, [])
 
   const { isSuccess, data, isLoading, isError } = usePost(postID);
-
+  
   const {
     isSuccess: commentsIsSuccess,
     data: commentsData,
@@ -47,7 +47,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
     staleTime: Infinity,
   });
 
-  if (isSuccess) {
+  if (isSuccess) {    
     const {
       title,
       price,
@@ -63,6 +63,8 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
       likeCount,
       likeUsers
     } = data.result;
+
+    const commentsCount = data.commentsCount;
 
     const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
     const mobileDate = dayjs().to(dayjs(date));
@@ -112,7 +114,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
                 <InformationMidDot>&#183;</InformationMidDot>
                 <Count>
                   <BiCommentDetail />
-                  <CountNumber>0</CountNumber>
+                  <CountNumber>{commentsCount}</CountNumber>
                 </Count>
               </FlexContainer>
             </InformationContainer>

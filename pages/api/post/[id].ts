@@ -1,30 +1,31 @@
-import { connectToDatabase } from 'lib/db-utils'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { connectToDatabase } from "lib/db-utils";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const { id } = req.query
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { id } = req.query;
 
-  if (req.method !== 'GET') return
+  if (req.method !== "GET") return;
 
   let client;
 
   try {
-    client = await connectToDatabase()
+    client = await connectToDatabase();
   } catch (error) {
-      res.status(500).json({ message: 'Connecting to the database failed!' })
-      return ;
+    res.status(500).json({ message: "Connecting to the database failed!" });
+    return;
   }
 
-  const db: any = client.db()
-  
-  const result: any = await db.collection('posts').findOne({ _id: id })
+  const db: any = client.db();
 
-  res.status(201).json({ message: "got a post!", result })
+  const result: any = await db.collection("posts").findOne({ _id: id });
 
-  client.close()
+  const comments: any = await db.collection("comments").find({ postID: id }).count();
+
+  const commentsCount = result.repliesCount + comments;
+
+  res.status(201).json({ message: "got a post!", result, commentsCount });
+
+  client.close();
 }
 
-export default handler
+export default handler;

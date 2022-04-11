@@ -39,7 +39,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       _id: _id,
       date: new Date(),
       replies: [],
-      upVote: 0
+      upVote: 0,
+      isDeleted: false
     });
 
     res.status(201).json({ message: "Added comment!" });
