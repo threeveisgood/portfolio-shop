@@ -58,6 +58,8 @@ function List({ isSearch, isCategory }: ListProps): ReactElement {
                     shipping={data.shipping}
                     store={data.store}
                     username={data.username}
+                    likeCount={data.likeCount}
+                    repliesCount={data.repliesCount}
                   />
                 );
               })}

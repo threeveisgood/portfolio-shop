@@ -33,7 +33,7 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
   const router = useRouter();
   const { value } = router.query; 
   const pageNumbers = [];
-  const postsPerPage = 3;
+  const postsPerPage = 20;
 
   const pageDivider = Math.ceil(totalPosts / postsPerPage);
 

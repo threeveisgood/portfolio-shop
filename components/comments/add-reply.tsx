@@ -1,5 +1,5 @@
 import { Field } from "components/styled/form";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { Formik, Form } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { changeField, initialize } from "modules/comment";
@@ -38,13 +38,15 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
 }) => {  
   const queryClient = useQueryClient();
   const replyID = bson.ObjectId();    
+  const cancelRef = useRef<any>(null);
 
   const mutation = useMutation(
     (comment: any) => axios.post(`/api/reply/${_id}`, comment),
     {
       onError: () => {},
-      onSuccess: () => {
-        queryClient.invalidateQueries(["getComments", postID]);
+      onSuccess: () => {        
+        cancelRef.current.click();
+        queryClient.invalidateQueries(["getComments", postID]);                
       },
     }
   );
@@ -81,7 +83,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
           onSubmit={async (values: any, actions: any) => {
             const comment = values.comment;
             mutation.mutate({ comment, postID, repliedName, replyID });
-
+            
             actions.resetForm({
               values: {
                 comment: "",
@@ -99,7 +101,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
               <CommentLabel>답글 입력</CommentLabel>
             </Field>
             <ButtonBox>
-              <SubmitButton onClick={onChangeToggle(toggleID ? toggleID : _id)}>취소</SubmitButton>
+              <SubmitButton ref={cancelRef} onClick={onChangeToggle(toggleID ? toggleID : _id)}>취소</SubmitButton>
               <SubmitButton type="submit">입력</SubmitButton>
             </ButtonBox>
           </Form>

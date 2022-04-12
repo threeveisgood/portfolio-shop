@@ -43,6 +43,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       isDeleted: false
     });
 
+    const increaseCount = await db.collection('posts').updateOne({
+      _id: postID
+    }, 
+    {
+      $inc: {
+        repliesCount: 1,
+      },
+    });
+
     res.status(201).json({ message: "Added comment!" });
   }
 

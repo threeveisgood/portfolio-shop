@@ -19,11 +19,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const result: any = await db.collection("posts").findOne({ _id: id });
 
-  const comments: any = await db.collection("comments").find({ postID: id }).count();
+  const comments: any = await db.collection("comments").find({ postID: id }).count();  
 
-  const commentsCount = result.repliesCount + comments;
-
-  res.status(201).json({ message: "got a post!", result, commentsCount });
+  res.status(201).json({ message: "got a post!", result });
 
   client.close();
 }

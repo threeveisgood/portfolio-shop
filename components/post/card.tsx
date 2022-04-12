@@ -12,6 +12,8 @@ interface CardProps {
   shipping: string;
   store: string;
   username: string;  
+  likeCount: any;
+  repliesCount: any;
 }
 
 export default function Card({
@@ -22,6 +24,8 @@ export default function Card({
   shipping,
   store,
   username,
+  likeCount,
+  repliesCount
 }: CardProps): ReactElement {
   const router = useRouter();
 
@@ -64,11 +68,11 @@ export default function Card({
         </CardNote>
         <CardFooter>
           <CardFooterIcon>
-            <MdThumbUp /> &nbsp;0
+            <MdThumbUp /> &nbsp;{likeCount}
           </CardFooterIcon>
           <CardFooterIcon>
             <MdComment />
-            &nbsp;0
+            &nbsp;{repliesCount}
           </CardFooterIcon>
         </CardFooter>
       </ThumbnailContainer>

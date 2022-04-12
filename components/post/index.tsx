@@ -61,10 +61,9 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
       body,
       viewsCount,
       likeCount,
-      likeUsers
-    } = data.result;
-
-    const commentsCount = data.commentsCount;
+      likeUsers,
+      repliesCount
+    } = data.result;    
 
     const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
     const mobileDate = dayjs().to(dayjs(date));
@@ -114,7 +113,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
                 <InformationMidDot>&#183;</InformationMidDot>
                 <Count>
                   <BiCommentDetail />
-                  <CountNumber>{commentsCount}</CountNumber>
+                  <CountNumber>{repliesCount}</CountNumber>
                 </Count>
               </FlexContainer>
             </InformationContainer>

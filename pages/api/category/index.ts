@@ -7,7 +7,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const { page, value } = req.query;
-  const postsPerPage = 3;
+  const postsPerPage = 20;
   const currentPage = Number(page);
   const index_last = currentPage * postsPerPage;
   const index_first = index_last - postsPerPage;
