@@ -46,6 +46,7 @@ export const CtVoteButton = styled.button`
   outline: 0;
   background-color: transparent;
   font-size: 2rem;
+  cursor: pointer;
 
   &.up-vote {
     color: ${(props) => props.theme.gold};

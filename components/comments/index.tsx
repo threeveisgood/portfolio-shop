@@ -22,6 +22,7 @@ import RepliesList from "./replies-list";
 import { useDispatch, useSelector } from "react-redux";
 import { changeField, initialize } from "modules/comment";
 import AddComments from "./add-comment";
+import Recommend from "./recommend";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -88,13 +89,7 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({
                       dangerouslySetInnerHTML={{ __html: data.comment }}
                     />
                     <CtSub>
-                      <CtVoteButton className="up-vote">
-                        <BiUpvote />
-                      </CtVoteButton>
-                      <CtVoteCount>{data.upVote}</CtVoteCount>
-                      <CtVoteButton className="down-vote">
-                        <BiDownvote />
-                      </CtVoteButton>
+                      <Recommend _id={data._id} postID={data.postID} upVote={data.upVote} likeUsers={data.likeUsers} />
                       <CtReplyButton onClick={onChangeToggle(data._id)}>
                         <CtReplyIcon />
                         &nbsp;답글

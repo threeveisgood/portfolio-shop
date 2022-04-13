@@ -139,7 +139,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
               isLoading={commentsIsLoading}
               isError={commentsIsError}
               isSuccess={commentsIsSuccess}
-              postID={postID}
+              postID={postID}              
             />
           </DetailContainer>
         </ContentsLayout>

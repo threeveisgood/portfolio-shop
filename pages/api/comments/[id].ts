@@ -40,7 +40,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       date: new Date(),
       replies: [],
       upVote: 0,
-      isDeleted: false
+      isDeleted: false,
+      likeUsers: [],
     });
 
     const increaseCount = await db.collection('posts').updateOne({

@@ -1,8 +1,8 @@
 import { FlexBox } from "components/styled/flexbox";
 import * as React from "react";
 import styled from "styled-components";
-import { MdThumbUp, MdThumbUpOffAlt } from "react-icons/md";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { MdThumbUpOffAlt } from "react-icons/md";
+import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useSession } from 'next-auth/client';
