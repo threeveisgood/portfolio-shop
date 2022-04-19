@@ -20,6 +20,7 @@ import { changeField, initialize } from "modules/comment";
 import { BiDownvote, BiUpvote } from "react-icons/bi";
 import AddReply from "./add-reply";
 import styled from 'styled-components';
+import ReplyRecommend from "./reply-recommend";
 
 interface IRepliesListProps {
   repliedId: any;
@@ -72,14 +73,8 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
             <CtRepliedName>@{data.repliedName}</CtRepliedName>
             <CtContents dangerouslySetInnerHTML={{ __html: data.comment }} />
             </div>
-            <CtSub>
-              <CtVoteButton className="up-vote">
-                <BiUpvote />
-              </CtVoteButton>
-              <CtVoteCount>{data.upVote}</CtVoteCount>
-              <CtVoteButton className="down-vote">
-                <BiDownvote />
-              </CtVoteButton>
+            <CtSub>           
+              <ReplyRecommend _id={data._id} postID={data.postID} upVote={data.upVote} likeUsers={data.likeUsers} />   
               <CtReplyButton onClick={onChangeToggle(data._id)}>
                 <CtReplyIcon />
                 &nbsp;답글

@@ -10,19 +10,20 @@ import {
   CtContents,
   CtDot,
   CtSub,
-  CtVoteButton,
-  CtVoteCount,
   CtReplyButton,
   CtReplyIcon,
   CtReply,
+  CtDeleteIcon,
 } from "components/styled/comments-list";
-import { BiUpvote, BiDownvote } from "react-icons/bi";
 import AddReply from "./add-reply";
 import RepliesList from "./replies-list";
 import { useDispatch, useSelector } from "react-redux";
 import { changeField, initialize } from "modules/comment";
 import AddComments from "./add-comment";
 import Recommend from "./recommend";
+import { useMutation, useQueryClient } from "react-query";
+import axios from "axios";
+import { useDeleteComments } from "hooks/useDeleteComment";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -43,6 +44,7 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({
   postID,
 }) => {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   const { replyToggle } = useSelector(({ comment }: any) => ({
     replyToggle: comment.replyToggle,
@@ -67,49 +69,74 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({
       });
   };
 
+  const { mutate } = useMutation(
+    (_id: string) => {
+      return axios.patch(`/api/comments/delete/${_id}`);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["getComments", postID]);
+      },
+    }
+  );
+
   if (isSuccess) {
     const list = data.comments;
 
     return (
-      <div>
+      <CommentCt>
         <ListBox>
           {list &&
             list.map((data: any) => {
               return (
-                <div key={data._id}>
-                  <CtCard>
-                    <CtInfo>
-                      <CtUsername>{data.username}</CtUsername>
-                      <CtDate>
-                        <CtDot>&#183;</CtDot>
-                        {dayjs().to(dayjs(data.date))}{" "}
-                      </CtDate>
-                    </CtInfo>
-                    <CtContents
-                      dangerouslySetInnerHTML={{ __html: data.comment }}
-                    />
-                    <CtSub>
-                      <Recommend _id={data._id} postID={data.postID} upVote={data.upVote} likeUsers={data.likeUsers} />
-                      <CtReplyButton onClick={onChangeToggle(data._id)}>
-                        <CtReplyIcon />
-                        &nbsp;답글
-                      </CtReplyButton>
-                    </CtSub>
-                    <CtReply>
-                      <AddReply
-                        _id={data._id}
-                        postID={data.postID}
-                        repliedName={data.username}
+                !data.isDeleted && (
+                  <div key={data._id}>
+                    <CtCard>
+                      <CtInfo>
+                        <CtUsername>{data.username}</CtUsername>
+                        <CtDate>
+                          <CtDot>&#183;</CtDot>
+                          {dayjs().to(dayjs(data.date))}{" "}
+                        </CtDate>
+                      </CtInfo>
+                      <CtContents
+                        dangerouslySetInnerHTML={{ __html: data.comment }}
                       />
-                    </CtReply>
-                    <RepliesList repliedId={data._id} replies={data.replies} />
-                  </CtCard>
-                </div>
+                      <CtSub>
+                        <Recommend
+                          _id={data._id}
+                          postID={data.postID}
+                          upVote={data.upVote}
+                          likeUsers={data.likeUsers}
+                        />
+                        <CtReplyButton onClick={onChangeToggle(data._id)}>
+                          <CtReplyIcon />
+                          &nbsp;답글
+                        </CtReplyButton>
+                        <CtReplyButton onClick={() => mutate(data._id)}>
+                          <CtDeleteIcon />
+                          &nbsp;삭제
+                        </CtReplyButton>
+                      </CtSub>
+                      <CtReply>
+                        <AddReply
+                          _id={data._id}
+                          postID={data.postID}
+                          repliedName={data.username}
+                        />
+                      </CtReply>
+                      <RepliesList
+                        repliedId={data._id}
+                        replies={data.replies}
+                      />
+                    </CtCard>
+                  </div>
+                )
               );
             })}
         </ListBox>
         <AddComments postID={postID} />
-      </div>
+      </CommentCt>
     );
   }
 
@@ -125,8 +152,14 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({
 
 export default Comments;
 
+const CommentCt = styled.div`
+  border-top: 1px solid ${(props) => props.theme.lowgray};
+  margin-top: 3rem;
+  padding-top: 1rem;
+`;
+
 const ListBox = styled.div`
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   font-size: 1.3rem;
 `;

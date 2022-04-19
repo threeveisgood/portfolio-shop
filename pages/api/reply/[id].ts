@@ -49,7 +49,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
            date: new Date(),   
            repliedName: repliedName,
            isDeleted: false,           
-           upVote: 0
+           upVote: 0,
+           likeUsers: []
         }} 
      }
     );

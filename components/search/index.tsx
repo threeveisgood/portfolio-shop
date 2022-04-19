@@ -85,7 +85,7 @@ const SearchInput = styled.input`
 
     @media only screen and (min-width: ${(props) => props.theme.responsive.phone}) {
     & + button {
-        right: 2%;
+        right: 3%;
     }
   }
     @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
@@ -101,13 +101,13 @@ const SearchButton = styled.button`
   background-color: inherit;
   color: #fff;
   cursor: pointer;
-  right: 5%;
+  right: 5.5%;
 
   &:focus {
-    outline: none;
+    outline: none;    
   }
 
   &:active {
-    transform: translateY(2px);
+    transform: translateY(2px);        
   }
 `;

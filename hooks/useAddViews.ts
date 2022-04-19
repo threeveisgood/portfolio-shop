@@ -7,6 +7,6 @@ const addViews = async (post: any) => {
     return data
 }
 
-export const useAddPost = () => {
+export const useAddViews = () => {
     return useMutation(addViews)
 }

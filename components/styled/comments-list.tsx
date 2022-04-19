@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { SubmitButton } from "components/styled/comment";
 import { VscComment } from "react-icons/vsc";
 import { BsReplyFill } from "react-icons/bs";
+import { RiDeleteBack2Line } from "react-icons/ri";
 
 export const CtCard = styled.div`
   display: flex;
@@ -75,6 +76,10 @@ export const CtReplyButton = styled(SubmitButton)`
 `;
 
 export const CtReplyIcon = styled(VscComment)`
+  font-size: 1.5rem;
+`;
+
+export const CtDeleteIcon = styled(RiDeleteBack2Line)`
   font-size: 1.5rem;
 `;
 
