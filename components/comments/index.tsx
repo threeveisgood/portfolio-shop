@@ -23,7 +23,6 @@ import AddComments from "./add-comment";
 import Recommend from "./recommend";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
-import { useDeleteComments } from "hooks/useDeleteComment";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -128,6 +127,7 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({
                       <RepliesList
                         repliedId={data._id}
                         replies={data.replies}
+                        postID={data.postID}
                       />
                     </CtCard>
                   </div>

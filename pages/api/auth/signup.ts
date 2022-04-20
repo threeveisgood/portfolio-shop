@@ -26,7 +26,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           "Invalid input - password should also be at least 7 characters long.",
       });
 
-      return
+      return;
   }
 
   const client: any = await connectToDatabase();

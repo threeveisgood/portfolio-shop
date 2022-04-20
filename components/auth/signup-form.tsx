@@ -8,7 +8,7 @@ import {
   FormSubmitLastButton,
   FormSubmitButton,
   FieldError,
-  FormTitle
+  FormTitle,
 } from "components/styled/form";
 import { useFormik } from "formik";
 import Container from "components/styled/container";
@@ -35,51 +35,48 @@ async function createUser(email: any, password: any, name: any) {
 const vadlidationSchema = yup.object({
   email: yup
     .string()
+    .email("이메일 형식으로 입력해주세요.")
     .required("반드시 입력해야하는 항목입니다."),
   password: yup
     .string()
+    .min(8, "최소 8글자 이상 입력해주세요.")
+    .required("반드시 입력해야하는 항목입니다."),
+  name: yup
+    .string()
+    .min(2, "최소 2글자 이상 입력해주세요.")
+    .max(12, "최대 12글자까지만 가능합니다.")
     .required("반드시 입력해야하는 항목입니다."),
 });
 
-function AuthForm() {
-  const [isLogin, setIsLogin] = useState(true);
+function SignUpForm() {
   const router = useRouter();
 
   function switchAuthModeHandler() {
-    setIsLogin((prevState) => !prevState);
+    router.push("/auth");
   }
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
-      name: ""
+      name: "",
     },
     validationSchema: vadlidationSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      const enteredEmail = values.email
-      const enteredPassword = values.password
-      const enteredname = values.name
+      const enteredEmail = values.email;
+      const enteredPassword = values.password;
+      const enteredname = values.name;
 
-      if (isLogin) {
-        const result: any = await signIn("credentials", {
-          redirect: false,
-          email: enteredEmail,
-          password: enteredPassword,
-        });
-
-        if (!result.error) {
-          router.replace("/");
-        }
-      } else {
-        try {
-          const result = await createUser(enteredEmail, enteredPassword, enteredname);
-          console.log(result);
-        } catch (error) {
-          console.log(error);
-        }
+      try {
+        const result = await createUser(
+          enteredEmail,
+          enteredPassword,
+          enteredname
+        );
+        console.log(result);
+      } catch (error) {
+        console.log(error);
       }
-
       setSubmitting(false);
     },
   });
@@ -87,7 +84,7 @@ function AuthForm() {
   return (
     <Container>
       <section>
-        <FormTitle>{isLogin ? "로그인" : "회원가입"}</FormTitle>
+        <FormTitle>회원가입</FormTitle>
         <form onSubmit={formik.handleSubmit}>
           <Field>
             <StyledInput
@@ -116,26 +113,25 @@ function AuthForm() {
             <StyledLabel htmlFor="password">비밀번호</StyledLabel>
           </Field>
 
-          {isLogin ? null : (
-            <Field>
-              <StyledInput
-                type="text"
-                id="name"
-                name="name"
-                placeholder="name"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-              />
-              <StyledLabel htmlFor="name">닉네임</StyledLabel>
-            </Field>
-          )}
+          <Field>
+            <StyledInput
+              type="text"
+              id="name"
+              name="name"
+              placeholder="name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+            />
+            <StyledLabel htmlFor="name">닉네임</StyledLabel>
+          </Field>
 
           <div>
-            <FormSubmitButton>
-              {isLogin ? "로그인" : "계정 만들기"}
-            </FormSubmitButton>
-            <FormSubmitLastButton type="button" onClick={switchAuthModeHandler}>
-              {isLogin ? "새 계정 만들기" : "계정이 이미 있으신가요?"}
+            <FormSubmitButton>계정 만들기</FormSubmitButton>
+            <FormSubmitLastButton
+              type="button"
+              onClick={() => switchAuthModeHandler}
+            >
+              계정이 이미 있으신가요?
             </FormSubmitLastButton>
           </div>
         </form>
@@ -144,4 +140,4 @@ function AuthForm() {
   );
 }
 
-export default AuthForm;
+export default SignUpForm;

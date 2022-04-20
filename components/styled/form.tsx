@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components";
 import { StyledButton } from "components/styled/button";
 
+export const FormTitle = styled.h1`
+  padding-bottom: 1.7rem;
+`
+
 export const Field = styled.div`
   position: relative;
   padding: 15px 0 0;
@@ -9,6 +13,12 @@ export const Field = styled.div`
     margin-top: 1rem;
   }
 `;
+
+export const FieldError = styled.span`
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: ${props => props.theme.primary};
+`
 
 export const StyledLabel = styled.label`
   position: absolute;
