@@ -3,7 +3,7 @@ import { StyledButton } from "components/styled/button";
 
 export const FormTitle = styled.h1`
   padding-bottom: 1.7rem;
-`
+`;
 
 export const Field = styled.div`
   position: relative;
@@ -17,8 +17,8 @@ export const Field = styled.div`
 export const FieldError = styled.span`
   font-size: 1.2rem;
   font-weight: 600;
-  color: ${props => props.theme.primary};
-`
+  color: ${(props) => props.theme.primary};
+`;
 
 export const StyledLabel = styled.label`
   position: absolute;
@@ -70,7 +70,7 @@ export const InputStyle = css`
     border-width: 2px;
     border-image-slice: 1;
   }
-`
+`;
 
 export const StyledInput = styled.input`
   ${InputStyle}
@@ -80,9 +80,18 @@ export const FormSubmitButton = styled(StyledButton)`
   font-size: 1.3rem;
   margin-top: 3rem;
   background: ${(props) => props.theme.black};
+
+  &:last-child {
+    margin-left: 2rem;
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
 `;
 
-export const FormSubmitLastButton = styled(FormSubmitButton)`
-  margin-left: 2rem;
-`
-
+export const FormErrorMessage = styled.div`
+  padding-top: 0.5rem;
+  font-size: 1.3rem;
+  color: ${(props) => props.theme.black};
+`;

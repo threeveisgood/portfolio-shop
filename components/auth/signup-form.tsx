@@ -1,11 +1,8 @@
-import { useState, useRef } from "react";
-import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 import {
   Field,
   StyledInput,
   StyledLabel,
-  FormSubmitLastButton,
   FormSubmitButton,
   FieldError,
   FormTitle,
@@ -51,9 +48,9 @@ const vadlidationSchema = yup.object({
 function SignUpForm() {
   const router = useRouter();
 
-  function switchAuthModeHandler() {
+  const switchAuthModeHandler = () => {
     router.push("/auth");
-  }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -126,13 +123,10 @@ function SignUpForm() {
           </Field>
 
           <div>
-            <FormSubmitButton>계정 만들기</FormSubmitButton>
-            <FormSubmitLastButton
-              type="button"
-              onClick={() => switchAuthModeHandler}
-            >
+            <FormSubmitButton type="submit">계정 만들기</FormSubmitButton>
+            <FormSubmitButton type="button" onClick={switchAuthModeHandler}>
               계정이 이미 있으신가요?
-            </FormSubmitLastButton>
+            </FormSubmitButton>
           </div>
         </form>
       </section>
