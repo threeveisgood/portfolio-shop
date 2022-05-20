@@ -1,19 +1,19 @@
-import React from 'react';
-import { NextPage } from 'next';
+import React from "react";
+import { NextPage } from "next";
+import MainSlidesFavorite from "components/swiper/main-slides-favorite";
 
 const Index: NextPage = () => {
-
-
-  return <></>;
+  return (
+    <>
+      <MainSlidesFavorite />
+    </>
+  );
 };
 
 export async function getStaticProps() {
-
   return {
-    props: {
-
-    }
-  }
-};
+    props: {},
+  };
+}
 
 export default Index;

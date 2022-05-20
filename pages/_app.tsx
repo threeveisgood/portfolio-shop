@@ -10,6 +10,7 @@ import Layout from "components/layout";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider } from "next-auth/client";
+import "../public/static/fonts/style.css";
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = useState(() => new QueryClient());

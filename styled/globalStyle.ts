@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%;
     background: #F7F7F7; 
-    
+
     @media only screen and (max-width: ${device.laptop}) {
     font-size: 50%;
   }
@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: none;
-    font-family: "Roboto", sans-serif;    
+    font-family: 'NanumSquare_acR';
   }
 
   img {

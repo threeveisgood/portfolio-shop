@@ -133,7 +133,8 @@ const Title = styled.div`
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 
-  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
     font-size: 2rem;
   }
 `;
