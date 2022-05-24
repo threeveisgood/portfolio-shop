@@ -11,7 +11,7 @@ interface CardProps {
   price: string;
   shipping: string;
   store: string;
-  username: string;  
+  username: string;
   likeCount: any;
   repliesCount: any;
 }
@@ -25,12 +25,12 @@ export default function Card({
   store,
   username,
   likeCount,
-  repliesCount
+  repliesCount,
 }: CardProps): ReactElement {
   const router = useRouter();
 
   const handleClick = (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     router.push(`/post/${id}`);
   };
 
@@ -40,7 +40,7 @@ export default function Card({
         <Link href="/" passHref>
           <CardImageA>
             {imageLinks.length < 1 ? (
-              <CardImage src='/default.png' alt={title} />
+              <CardImage src="/default.png" alt={title} />
             ) : (
               <CardImage src={imageLinks[0]} alt={title} />
             )}
@@ -56,16 +56,10 @@ export default function Card({
           </CardPrice>
         </PriceContainer>
         <NoteContainer>
-          <CardNote>
-            배송비 <CardWeightFont>{shipping}</CardWeightFont>
-          </CardNote>
-          <CardNote>
-            <CardWeightFont>{store}</CardWeightFont>
-          </CardNote>
+          <CardNote>배송비: {shipping}</CardNote>
+          <CardNote>{store}</CardNote>
         </NoteContainer>
-        <CardNote>
-          파운더: <CardWeightFont>{username}</CardWeightFont>
-        </CardNote>
+        <CardNote>파운더: {username}</CardNote>
         <CardFooter>
           <CardFooterIcon>
             <MdThumbUp /> &nbsp;{likeCount}
@@ -102,6 +96,7 @@ const CardImageA = styled.a`
 `;
 
 const CardImage = styled.img`
+  border-radius: 1rem;
   width: 18rem;
   height: 18rem;
 `;
@@ -110,7 +105,7 @@ const CardTitleA = styled.a`
   color: ${(props) => props.theme.lowblack};
   min-height: 3.5rem;
   line-height: 1.5rem;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   overflow: hidden;
   margin-top: 1.3rem;
 
@@ -143,14 +138,14 @@ const CardBill = styled.span`
 
 const NoteContainer = styled.span`
   display: flex;
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
   justify-content: space-between;
 `;
 
 const CardNote = styled.div`
-  padding-top: 0.3rem;
+  padding-top: 0.5rem;
   color: #2e2828;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -158,7 +153,7 @@ const CardNote = styled.div`
 
 const CardFooter = styled.footer`
   display: flex;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
 `;
 
 const CardFooterIcon = styled.span`
