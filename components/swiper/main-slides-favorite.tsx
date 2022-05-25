@@ -34,7 +34,9 @@ const MainSlidesFavorite: React.FunctionComponent<IMainSlidesFavoriteProps> = (
               </ThumbBox>
               <ItemTitle>Mr. Morale and Big Steppers</ItemTitle>
               <ItemContent>
-                <ItemPrice>50000원</ItemPrice>
+                <ItemPrice>
+                  50000원<ShippingPrice>(2500원)</ShippingPrice>
+                </ItemPrice>
                 <ItemShop>11번가</ItemShop>
               </ItemContent>
             </ItemCt>
@@ -142,9 +144,20 @@ const ItemContent = styled.div`
   justify-content: space-between;
 `;
 
-const ItemPrice = styled.span``;
+const ItemPrice = styled.span`
+  font-weight: bold;
+  font-family: auto;
+`;
 
-const ItemShop = styled.span``;
+const ItemShop = styled.span`
+  font-family: auto;
+  font-weight: normal;
+  font-size: 1.3rem;
+`;
+
+const ShippingPrice = styled.span`
+  font-size: 1.2rem;
+`;
 
 const StyleSwiperSlide = styled(SwiperSlide)`
   text-align: center;

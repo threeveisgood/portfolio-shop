@@ -109,6 +109,7 @@ const CardTitleA = styled.a`
   overflow: hidden;
   margin-top: 1.3rem;
 
+  font-family: sans-serif;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
