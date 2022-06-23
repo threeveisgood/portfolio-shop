@@ -18,13 +18,44 @@ const MainSlidesFavorite: React.FunctionComponent<IMainSlidesFavoriteProps> = (
           <h2>뜨는 핫딜</h2>
         </CtTitle>
         <StyledSwiper
-          slidesPerView={4}
+          slidesPerView={6}
           spaceBetween={30}
-          slidesPerGroup={4}
+          slidesPerGroup={6}
           loop={true}
           loopFillGroupWithBlank={true}
           navigation={true}
           modules={[Navigation]}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              slidesPerGroup: 1,
+              spaceBetween: 0,
+            },
+            400: {
+              slidesPerView: 2,
+              slidesPerGroup: 2,
+              spaceBetween: 10,
+            },
+            660: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+              spaceBetween: 10,
+            },
+            780: {
+              slidesPerView: 4,
+              slidesPerGroup: 4,
+              spaceBetween: 15,
+            },
+            980: {
+              slidesPerView: 5,
+              slidesPerGroup: 5,
+              spaceBetween: 15,
+            },
+            1200: {
+              slidesPerView: 6,
+              slidesPerGroup: 6,
+            },
+          }}
           className="mySwiper"
         >
           <SwiperSlide>
@@ -58,7 +89,11 @@ const MainSlidesFavorite: React.FunctionComponent<IMainSlidesFavoriteProps> = (
               <ThumbBox>
                 <img src="/1.jpg" />
               </ThumbBox>
-              <ItemTitle>Mr. Morale and Big Steppers</ItemTitle>
+              <ItemTitle>아이패드 프로 5세대</ItemTitle>
+              <ItemContent>
+                <ItemPrice>50000원</ItemPrice>
+                <ItemShop>g마켓</ItemShop>
+              </ItemContent>
             </ItemCt>
           </SwiperSlide>
           <SwiperSlide>
@@ -66,11 +101,43 @@ const MainSlidesFavorite: React.FunctionComponent<IMainSlidesFavoriteProps> = (
               <ThumbBox>
                 <img src="/1.jpg" />
               </ThumbBox>
-              <ItemTitle>Mr. Morale and Big Steppers</ItemTitle>
+              <ItemTitle>아이패드 프로 5세대</ItemTitle>
+              <ItemContent>
+                <ItemPrice>
+                  50000원<ShippingPrice>(2500원)</ShippingPrice>
+                </ItemPrice>
+                <ItemShop>g마켓</ItemShop>
+              </ItemContent>
             </ItemCt>
           </SwiperSlide>
-          <SwiperSlide>5</SwiperSlide>
-          <SwiperSlide>6</SwiperSlide>
+          <SwiperSlide>
+            <ItemCt>
+              <ThumbBox>
+                <img src="/1.jpg" />
+              </ThumbBox>
+              <ItemTitle>아이패드 프로 5세대</ItemTitle>
+              <ItemContent>
+                <ItemPrice>
+                  50000원<ShippingPrice>(2500원)</ShippingPrice>
+                </ItemPrice>
+                <ItemShop>g마켓</ItemShop>
+              </ItemContent>
+            </ItemCt>
+          </SwiperSlide>
+          <SwiperSlide>
+            <ItemCt>
+              <ThumbBox>
+                <img src="/1.jpg" />
+              </ThumbBox>
+              <ItemTitle>아이패드 프로 5세대</ItemTitle>
+              <ItemContent>
+                <ItemPrice>
+                  50000원<ShippingPrice>(2500원)</ShippingPrice>
+                </ItemPrice>
+                <ItemShop>g마켓</ItemShop>
+              </ItemContent>
+            </ItemCt>
+          </SwiperSlide>
           <SwiperSlide>7</SwiperSlide>
           <SwiperSlide>8</SwiperSlide>
           <SwiperSlide>9</SwiperSlide>
@@ -83,17 +150,18 @@ const MainSlidesFavorite: React.FunctionComponent<IMainSlidesFavoriteProps> = (
 export default MainSlidesFavorite;
 
 const SlideCt = styled.div`
-  max-width: 90rem;
+  max-width: 1250px;
   margin: 0 auto;
+  padding: 0 2rem;
 `;
 
 const StyledSwiper = styled(Swiper)`
   & > .swiper-button-prev {
-    left: 0;
+    left: 0.1rem;
   }
 
   & > .swiper-button-next {
-    right: 0;
+    right: 0.1rem;
   }
 
   & > .swiper-button-prev,
@@ -101,7 +169,7 @@ const StyledSwiper = styled(Swiper)`
     background: ${(props) => props.theme.black};
     color: #ffff;
     border-radius: 0.3rem;
-    top: 43%;
+    top: 38%;
     padding: 0.2rem;
 
     &:after {
@@ -125,13 +193,13 @@ const ThumbBox = styled.div`
 `;
 
 const CtTitle = styled.div`
-  padding: 0 3rem 2rem;
+  padding: 0 1rem 2rem;
 `;
 
 const ItemTitle = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   padding-top: 1.2rem;
-  //text-align: center;
+  min-height: 3.2rem;
   display: flex;
   font-weight: bold;
 `;
@@ -146,17 +214,17 @@ const ItemContent = styled.div`
 
 const ItemPrice = styled.span`
   font-weight: bold;
-  font-family: auto;
+  font-size: 1.3rem;
 `;
 
 const ItemShop = styled.span`
-  font-family: auto;
   font-weight: normal;
   font-size: 1.3rem;
 `;
 
 const ShippingPrice = styled.span`
   font-size: 1.2rem;
+  color: ${(props) => props.theme.gray};
 `;
 
 const StyleSwiperSlide = styled(SwiperSlide)`

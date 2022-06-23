@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { usePosts } from "hooks/usePosts";
 import LoadingSpinner from "components/styled/loading-spinner";
 import { useCategory } from "hooks/useCategory";
+import ListTitle from "./list-title";
 
 interface ListProps {
   isSearch?: boolean;
@@ -45,6 +46,7 @@ function List({ isSearch, isCategory }: ListProps): ReactElement {
         <div>Error: {isError}</div>
       ) : (
         <MainContainer>
+          <ListTitle />
           <CardUl>
             {data.result &&
               data.result.map((data: any) => {
@@ -69,7 +71,7 @@ function List({ isSearch, isCategory }: ListProps): ReactElement {
               totalPosts={data.count}
               paginate={paginate}
               currentPage={currentPage}
-              pathName={isSearch ? 'search' : isCategory ? 'category' : ``}
+              pathName={isSearch ? "search" : isCategory ? "category" : ``}
               isSearch={isSearch}
               isCategory={isCategory}
             />
@@ -92,7 +94,7 @@ const CardUl = styled.ul`
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
-  gap: ${(props) => props.theme.gap.card};
+  gap: 0.3rem;
 
   justify-content: center;
 `;

@@ -105,7 +105,7 @@ const CardTitleA = styled.a`
   color: ${(props) => props.theme.lowblack};
   min-height: 3.5rem;
   line-height: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   overflow: hidden;
   margin-top: 1.3rem;
 
