@@ -21,8 +21,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const db: any = client.db();
-
   let count;
   let result;
 

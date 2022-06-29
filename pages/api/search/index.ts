@@ -11,7 +11,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const currentPage = Number(page);
   const index_last = currentPage * postsPerPage;
   const index_first = index_last - postsPerPage;
-  
 
   let client;
 
@@ -27,17 +26,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   let count: any;
   let result: any;
 
-  //const index: any = await db.collection("posts").createIndex({title:"text"});
-
   try {
     count = await db
-       .collection("posts")
-       .find({$text:{$search:value}})
-       .count();
-    
-    result = await getPosts(client, "posts",  postsPerPage, index_first, {$text:{$search:value}});    
+      .collection("posts")
+      .find({ $text: { $search: value } })
+      .count();
 
-
+    result = await getPosts(client, "posts", postsPerPage, index_first, {
+      $text: { $search: value },
+    });
 
     res.status(200).json({ result, count });
   } catch {

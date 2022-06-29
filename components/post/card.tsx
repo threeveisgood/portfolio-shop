@@ -87,8 +87,8 @@ const ThumbnailContainer = styled.div`
 `;
 
 const CardImageA = styled.a`
-  max-width: 18rem;
-  max-height: 18rem;
+  max-width: 180px;
+  max-height: 180px;
   justify-content: center;
   align-items: center;
   object-fit: fill;
@@ -97,8 +97,8 @@ const CardImageA = styled.a`
 
 const CardImage = styled.img`
   border-radius: 1rem;
-  width: 18rem;
-  height: 18rem;
+  width: 180px;
+  height: 180px;
 `;
 
 const CardTitleA = styled.a`

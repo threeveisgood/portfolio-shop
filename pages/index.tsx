@@ -10,7 +10,7 @@ const Index: NextPage = () => {
     <MainContainer>
       <>
         <MainSlidesFavorite />
-        <List isSearch={false} />
+        <List isSearch={false} listTitle="최신 핫딜" />
       </>
     </MainContainer>
   );

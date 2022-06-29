@@ -61,3 +61,22 @@ export async function getFindCount(client: any, collection: any, query: any) {
 
   return documents;
 }
+
+export async function getTrends(
+  client: any,
+  collection: any,
+  postsPerPage: any,
+  sort: any,
+  query?: any
+) {
+  const db = client.db();
+
+  const documents = await db
+    .collection(collection)
+    .find(query)
+    .limit(postsPerPage)
+    .sort(sort)
+    .toArray();
+
+  return documents;
+}

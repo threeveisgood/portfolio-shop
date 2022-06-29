@@ -12,9 +12,10 @@ import ListTitle from "./list-title";
 interface ListProps {
   isSearch?: boolean;
   isCategory?: boolean;
+  listTitle?: string;
 }
 
-function List({ isSearch, isCategory }: ListProps): ReactElement {
+function List({ isSearch, isCategory, listTitle }: ListProps): ReactElement {
   const router = useRouter();
   const { value } = router.query;
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,7 +47,7 @@ function List({ isSearch, isCategory }: ListProps): ReactElement {
         <div>Error: {isError}</div>
       ) : (
         <MainContainer>
-          <ListTitle />
+          <ListTitle title={listTitle} />
           <CardUl>
             {data.result &&
               data.result.map((data: any) => {

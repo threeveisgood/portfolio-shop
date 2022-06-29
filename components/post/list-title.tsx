@@ -1,13 +1,17 @@
 import * as React from "react";
 import styled from "styled-components";
 
-interface IListTitleProps {}
+interface IListTitleProps {
+  title?: string;
+}
 
-const ListTitle: React.FunctionComponent<IListTitleProps> = (props) => {
+const ListTitle: React.FunctionComponent<IListTitleProps> = ({
+  title,
+}: IListTitleProps) => {
   return (
     <>
       <CtTitle>
-        <h2>최신 핫딜</h2>
+        <h2> {title}</h2>
       </CtTitle>
     </>
   );
