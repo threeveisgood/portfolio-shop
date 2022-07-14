@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { AiOutlineSearch } from "react-icons/ai";
 
 interface SearchProps {
-  isMobile: boolean;
+  isMobile?: boolean;
   searchToggle?: boolean;
 }
 

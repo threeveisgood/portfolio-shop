@@ -1,3 +1,4 @@
+import Link from "next/link";
 import * as React from "react";
 import styled from "styled-components";
 
@@ -34,7 +35,18 @@ const NavBar: React.FunctionComponent = () => {
       <Nav>
         <InformationUl>
           {navbarInformation.map((info) => {
-            return <InformationLi key={info.id}>{info.name}</InformationLi>;
+            return (
+              <InformationLi key={info.id}>
+                <Link
+                  href={{
+                    pathname: "category",
+                    query: { value: info.name },
+                  }}
+                >
+                  <InformationA>{info.name}</InformationA>
+                </Link>
+              </InformationLi>
+            );
           })}
         </InformationUl>
       </Nav>
@@ -70,7 +82,12 @@ const InformationUl = styled.ul`
 
 const InformationLi = styled.li`
   font-size: 1.6rem;
+  cursor: pointer;
   &:not(:last-child) {
     margin-right: 2.4rem;
   }
+`;
+
+const InformationA = styled.a`
+  color: #fff;
 `;

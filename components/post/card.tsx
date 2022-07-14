@@ -37,7 +37,7 @@ export default function Card({
   return (
     <CardLi>
       <ThumbnailContainer onClick={handleClick}>
-        <Link href="/" passHref>
+        <Link href={`/post/${id}`} passHref>
           <CardImageA>
             {imageLinks.length < 1 ? (
               <CardImage src="/default.png" alt={title} />
@@ -46,7 +46,7 @@ export default function Card({
             )}
           </CardImageA>
         </Link>
-        <Link href="/" passHref>
+        <Link href={`/post/${id}`} passHref>
           <CardTitleA>{title}</CardTitleA>
         </Link>
         <PriceContainer>

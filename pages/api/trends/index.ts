@@ -23,7 +23,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     result = await getTrends(client, "posts", postsPerPage, {
-      likeCount: 1,
+      likeCount: -1,
     });
 
     res.status(200).json({ result });

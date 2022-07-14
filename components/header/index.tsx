@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useSession, signOut } from "next-auth/client";
+import router from "next/router";
 import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
 import { HiOutlineLogout } from "react-icons/hi";
@@ -14,6 +15,7 @@ import {
 } from "components/styled/dropdown";
 import { UserProfileIcon } from "components/styled/icons";
 import { AiOutlineSearch } from "react-icons/ai";
+import { BsPencilSquare } from "react-icons/bs";
 
 const Header: React.FunctionComponent = () => {
   const [session, loading] = useSession();
@@ -26,6 +28,12 @@ const Header: React.FunctionComponent = () => {
 
   const handleSerachToggleClick = () => {
     setSearchToggle(!searchToggle);
+  };
+
+  const moveToWrite = () => {
+    router.push({
+      pathname: `/write/add-post`,
+    });
   };
 
   const logoutHandler = () => {
@@ -41,28 +49,23 @@ const Header: React.FunctionComponent = () => {
           </a>
         </Link>
 
-        <Search isMobile={false} />
+        <Search />
         <UserNav>
-          {/* {session && (
-            <UserProfileIcon>
-              <Link href="/cart">
-                <a>
-                  <IoCartOutline />
-                </a>
-              </Link>
-            </UserProfileIcon>
-          )} */}
           {
-            <UserProfileIcon isMobile={true} onClick={handleSerachToggleClick}>
+            <UserProfileIcon isMobile onClick={handleSerachToggleClick}>
               <AiOutlineSearch />
             </UserProfileIcon>
           }
+          {session && (
+            <UserProfileIcon>
+              <BsPencilSquare onClick={moveToWrite} />
+            </UserProfileIcon>
+          )}
           {session && (
             <UserProfileIcon
               className="dropdown last"
               onClick={handleProfileClick}
               isProfileClick={isProfileClick}
-              isMobile={false}
             >
               <CgProfile />
               {isProfileClick && (
@@ -102,7 +105,7 @@ const Header: React.FunctionComponent = () => {
         </UserNav>
       </StyledHeader>
       <div>
-        <Search isMobile={true} searchToggle={searchToggle} />
+        <Search isMobile searchToggle={searchToggle} />
       </div>
     </>
   );
