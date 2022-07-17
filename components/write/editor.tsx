@@ -50,6 +50,7 @@ const Editor: React.FunctionComponent = () => {
       shipping: write.shipping,
       store: write.store,
       category: write.category,
+      originalPostId: write.originalPostId,
     }));
 
   const onChangeField = useCallback(
@@ -66,8 +67,8 @@ const Editor: React.FunctionComponent = () => {
   };
 
   const onChangeCategory = (category: any) => {
-    onChangeField({ key: "category", value: category.value })
-  }
+    onChangeField({ key: "category", value: category.value });
+  };
 
   const modules = {
     toolbar: [
@@ -77,6 +78,12 @@ const Editor: React.FunctionComponent = () => {
       ["blockquote", "code-block", "link"],
     ],
   };
+
+  // useEffect(() => {
+  //   if() {
+
+  //   }
+  // }, [])
 
   useEffect(() => {
     return () => {
@@ -175,7 +182,7 @@ const Editor: React.FunctionComponent = () => {
 export default Editor;
 
 const EditorBlock = styled(Responsive)`
-  padding: 3rem 0 1rem;  
+  padding: 3rem 0 1rem;
 `;
 
 const TitleInput = styled.input`
@@ -184,16 +191,16 @@ const TitleInput = styled.input`
   outline: none;
   padding-bottom: 0.5rem;
   border: none;
-  border-bottom: 1px solid ${props => props.theme.black};
+  border-bottom: 1px solid ${(props) => props.theme.black};
   margin-bottom: 1rem;
   width: 100%;
-  
+
   ::placeholder {
-    color: ${props => props.theme.black};
+    color: ${(props) => props.theme.black};
   }
 `;
 
-const QuillWrapper = styled.div`  
+const QuillWrapper = styled.div`
   margin-top: 3rem;
   .ql-editor {
     padding: 0;
@@ -209,13 +216,13 @@ const QuillWrapper = styled.div`
 const CategorySelect = styled(Select)`
   width: 30rem;
   font-weight: 700;
-  border-color: ${props => props.theme.black};
-    
+  border-color: ${(props) => props.theme.black};
+
   & > div {
     font-size: 1.2rem;
   }
 
   & > div > div > div {
-    color: ${props => props.theme.black};
+    color: ${(props) => props.theme.black};
   }
-`
+`;

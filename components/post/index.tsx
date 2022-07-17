@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -17,6 +17,10 @@ import { fetchComments } from "hooks/useComments";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 import Recommend from "./recommend";
+import DeleteEdit from "./delete-edit";
+import { useDispatch } from "react-redux";
+import { setOriginalPost } from "modules/write";
+import { useSession } from "next-auth/client";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -25,18 +29,18 @@ interface PostProps {}
 
 const Post: React.FunctionComponent<PostProps> = ({}) => {
   const router = useRouter();
+  const [session, loading] = useSession();
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
+  const dispatch = useDispatch();
 
-  const mutation = useMutation(
-    () => axios.patch(`/api/views/${postID}`)
-  )
+  const mutation = useMutation(() => axios.patch(`/api/views/${postID}`));
 
   useEffect(() => {
     mutation.mutate();
-  }, [])
+  }, []);
 
   const { isSuccess, data, isLoading, isError } = usePost(postID);
-  
+
   const {
     isSuccess: commentsIsSuccess,
     data: commentsData,
@@ -47,7 +51,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
     staleTime: Infinity,
   });
 
-  if (isSuccess) {    
+  if (isSuccess) {
     const {
       title,
       price,
@@ -62,8 +66,36 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
       viewsCount,
       likeCount,
       likeUsers,
-      repliesCount
-    } = data.result;    
+      repliesCount,
+      email,
+      _id,
+    } = data.result;
+
+    const onEdit = () => {
+      dispatch(
+        setOriginalPost({
+          title,
+          price,
+          category,
+          shipping,
+          store,
+          date,
+          username,
+          productURL,
+          imageLinks,
+          body,
+          viewsCount,
+          likeCount,
+          likeUsers,
+          repliesCount,
+          email,
+          _id,
+        })
+      );
+      router.push("/write/add-post");
+    };
+
+    const ownPost = (session && session.user?.email) === email;
 
     const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
     const mobileDate = dayjs().to(dayjs(date));
@@ -134,12 +166,16 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
             <PostContent dangerouslySetInnerHTML={{ __html: body }} />
 
             <Recommend likeCount={likeCount} likeUsers={likeUsers} />
-            <Comments              
+
+            {/* {ownPost && <DeleteEdit onEdit={onEdit} />} */}
+            {<DeleteEdit onEdit={onEdit} />}
+
+            <Comments
               data={commentsData}
               isLoading={commentsIsLoading}
               isError={commentsIsError}
               isSuccess={commentsIsSuccess}
-              postID={postID}              
+              postID={postID}
             />
           </DetailContainer>
         </ContentsLayout>
@@ -168,9 +204,9 @@ const ContentsContianer = styled.div`
 `;
 
 const ContentsLayout = styled.div`
-  border-radius: 0.4rem;  
+  border-radius: 0.4rem;
   margin: 1rem 0 0;
-  border-top: 6px solid ${props => props.theme.black};
+  border-top: 6px solid ${(props) => props.theme.black};
   color: ${(props) => props.theme.black};
 `;
 
@@ -179,7 +215,8 @@ const TitleContainer = styled.div`
   padding: 2.5rem 4rem 0px;
   overflow: hidden;
 
-  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
     padding: 2.5rem 2rem 0px;
   }
 `;
@@ -192,7 +229,8 @@ const Title = styled.h1`
 const DetailContainer = styled.div`
   padding: 2rem 4rem;
 
-  @media only screen and (max-width: ${(props) => props.theme.responsive.phone}) {    
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
     padding: 2rem 2rem;
   }
 `;
@@ -267,7 +305,7 @@ const InformationMidDot = styled.span`
 
 const ProductURLContainer = styled.div`
   display: flex;
-  //border-bottom: 1px solid ${props => props.theme.white};
+  //border-bottom: 1px solid ${(props) => props.theme.white};
   padding: 0.8rem 0;
   margin-bottom: 3rem;
   font-size: 1.4rem;

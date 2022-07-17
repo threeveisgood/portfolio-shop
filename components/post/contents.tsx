@@ -264,6 +264,6 @@ const DateInfo = styled.p`
 `;
 
 const PostContent = styled.div`
-  font-size: 1.3125rem;
+  font-size: 1.5rem;
   color: #333130;
 `;

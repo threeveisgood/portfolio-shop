@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
-const bson = require('bson');
+const bson = require("bson");
 
 interface AddCommentsProps {
   postID: string;
@@ -25,7 +25,7 @@ const CommentSchema = Yup.object().shape({
     .required("내용을 입력해주세요."),
 });
 
-const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {    
+const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
   const queryClient = useQueryClient();
   const _id = bson.ObjectId();
 
@@ -35,7 +35,7 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
       onError: () => {},
       onSuccess: () => {
         queryClient.invalidateQueries(["getComments", postID]);
-      }
+      },
     }
   );
 
@@ -47,13 +47,13 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
         }}
         validationSchema={CommentSchema}
         onSubmit={async (values: any, actions: any) => {
-          const comment = values.comment                    
-          mutation.mutate({ comment, postID, _id })
+          const comment = values.comment;
+          mutation.mutate({ comment, postID, _id });
 
           actions.resetForm({
             values: {
-              comment: '',
-            }
+              comment: "",
+            },
           });
         }}
       >
@@ -76,7 +76,7 @@ export default AddComments;
 
 const AddCommentContainer = styled.div`
   display: flex;
-  flex-direction: column;      
+  flex-direction: column;
 `;
 
 const ButtonBox = styled.div`
@@ -90,10 +90,11 @@ const SubmitButton = styled(LinearButton)`
   background-image: none;
   background: none;
   transition: all 0.3s ease;
+  font-size: 1.3rem;
 
   &:hover {
     color: #fff;
-    background: ${props => props.theme.black};
+    background: ${(props) => props.theme.black};
   }
 `;
 

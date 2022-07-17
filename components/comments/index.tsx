@@ -154,7 +154,7 @@ export default Comments;
 
 const CommentCt = styled.div`
   border-top: 1px solid ${(props) => props.theme.lowgray};
-  margin-top: 3rem;
+  margin-top: 1rem;
   padding-top: 1rem;
 `;
 
