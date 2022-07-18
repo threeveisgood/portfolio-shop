@@ -41,17 +41,25 @@ const Editor: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const quillRef = useRef<any>(null);
 
-  const { title, body, price, productURL, shipping, store, category } =
-    useSelector(({ write }: any) => ({
-      title: write.title,
-      body: write.body,
-      price: write.price,
-      productURL: write.productURL,
-      shipping: write.shipping,
-      store: write.store,
-      category: write.category,
-      originalPostId: write.originalPostId,
-    }));
+  const {
+    title,
+    body,
+    price,
+    productURL,
+    shipping,
+    store,
+    category,
+    originalPostId,
+  } = useSelector(({ write }: any) => ({
+    title: write.title,
+    body: write.body,
+    price: write.price,
+    productURL: write.productURL,
+    shipping: write.shipping,
+    store: write.store,
+    category: write.category,
+    originalPostId: write.originalPostId,
+  }));
 
   const onChangeField = useCallback(
     (payload) => dispatch(changeField(payload)),
@@ -80,10 +88,8 @@ const Editor: React.FunctionComponent = () => {
   };
 
   // useEffect(() => {
-  //   if() {
-
-  //   }
-  // }, [])
+  //   quillRef.current.root.innerHTML = body;
+  // }, []); /* eslint-disable-line */
 
   useEffect(() => {
     return () => {
@@ -102,7 +108,10 @@ const Editor: React.FunctionComponent = () => {
 
         <Field>
           <CategorySelect
-            defaultValue={category}
+            defaultValue={{
+              label: !!originalPostId ? category : "카테고리를 선택해주세요",
+              value: !!originalPostId ? category : "카테고리를 선택해주세요",
+            }}
             onChange={onChangeCategory}
             options={options}
             placeholder="카테고리 선택"
@@ -172,6 +181,7 @@ const Editor: React.FunctionComponent = () => {
             modules={modules}
             forwardedRef={quillRef}
             onChange={onChangeText}
+            defaultValue={!!originalPostId ? body : ``}
           />
         </QuillWrapper>
       </EditorBlock>

@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
 import { IoPersonCircleOutline } from "react-icons/io5";
-import { MdRemoveRedEye, MdThumbUp } from "react-icons/md";
+import { MdRemoveRedEye } from "react-icons/md";
 import { BiCommentDetail } from "react-icons/bi";
 import StyledCarousel from "components/styled/carousel";
 import Comments from "components/comments";
@@ -305,7 +305,6 @@ const InformationMidDot = styled.span`
 
 const ProductURLContainer = styled.div`
   display: flex;
-  //border-bottom: 1px solid ${(props) => props.theme.white};
   padding: 0.8rem 0;
   margin-bottom: 3rem;
   font-size: 1.4rem;
