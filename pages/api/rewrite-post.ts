@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") return;
+  if (req.method !== "PATCH") return;
 
   const session: any = await getSession({ req: req });
 
@@ -21,7 +21,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     store,
     shipping,
     category,
-    _id,
+    originalPostId,
   } = req.body;
 
   const username: any = session?.user?.name;
@@ -38,7 +38,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const result: any = await db.collection("posts").updateOne(
     {
-      _id: _id,
+      _id: originalPostId,
     },
     {
       $set: {
@@ -54,7 +54,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
   );
 
-  res.status(201).json({ message: "Added post!", data: username });
+  res.status(200).json({ message: "ReWrited post!" });
   client.close();
 }
 

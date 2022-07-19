@@ -19,11 +19,5 @@ const Layout = ({ children }: Props) => {
 export default Layout;
 
 const Container = styled.div`
-  padding: 3rem 0;  
+  padding: 3rem 0;
 `;
-
-// const IconName = styled.p`
-//   font-size: 1.5rem;
-//   margin-left: 0.3rem;
-//   align-items: center;
-// `;

@@ -20,5 +20,5 @@ const ListTitle: React.FunctionComponent<IListTitleProps> = ({
 export default ListTitle;
 
 const CtTitle = styled.div`
-  padding: 4rem 3rem 2rem;
+  padding: 2rem 3rem 2rem;
 `;

@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components";
 
+interface ButtonProps {
+  readonly blue?: any;
+}
+
 export const buttonStyle = css`
   border-radius: 0.2rem;
   background-image: ${(props) => props.theme.black};
@@ -16,7 +20,7 @@ export const buttonStyle = css`
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  background: ${props => props.theme.black};
+  background: ${(props) => props.theme.black};
 
   &:hover {
     box-shadow: none;
@@ -29,8 +33,17 @@ export const buttonStyle = css`
   }
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<ButtonProps>`
   ${buttonStyle}
+
+  ${(props) =>
+    props.blue &&
+    css`
+      background: #2757a1;
+      &:hover {
+        background: #102442;
+      }
+    `}
 `;
 
 export const NavButton = styled.button`
@@ -47,4 +60,4 @@ export const AuthButton = styled(StyledButton)`
 
 export const LinearButton = styled(StyledButton)`
   background-image: ${(props) => props.theme.black};
-`
+`;

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { StyledButton } from "components/styled/button";
 import { useSelector } from "react-redux";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/router";
 import axios from "axios";
 
@@ -13,6 +13,7 @@ interface IWriteActionButtonsProps {}
 const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
   () => {
     const router = useRouter();
+    const queryClient = useQueryClient();
     const _id = bson.ObjectId();
 
     const {
@@ -40,10 +41,17 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
     }));
 
     const mutation = useMutation(
-      (post: any) => axios.post("/api/add-post", post),
+      (post: any) =>
+        !!originalPostId
+          ? axios.patch("/api/rewrite-post", post)
+          : axios.post("/api/add-post", post),
       {
         onError: () => {},
         onSuccess: () => {
+          !!originalPostId
+            ? (queryClient.invalidateQueries(["getPost", originalPostId]),
+              router.back())
+            : null;
           router.push(`/post/${_id}`);
         },
       }
@@ -74,7 +82,7 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
         store,
         shipping,
         category,
-        _id,
+        originalPostId,
       });
     };
 
@@ -84,7 +92,7 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
 
     return (
       <WriteActionButtonsBlock>
-        <Button onClick={onPublish}>
+        <Button onClick={!!originalPostId ? onEdit : onPublish}>
           {!!originalPostId ? "수정" : "글쓰기"}
         </Button>
         <Button onClick={onCancel}>취소</Button>
