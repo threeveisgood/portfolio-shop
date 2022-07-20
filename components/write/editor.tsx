@@ -87,10 +87,6 @@ const Editor: React.FunctionComponent = () => {
     ],
   };
 
-  // useEffect(() => {
-  //   quillRef.current.root.innerHTML = body;
-  // }, []); /* eslint-disable-line */
-
   useEffect(() => {
     return () => {
       dispatch(initialize());

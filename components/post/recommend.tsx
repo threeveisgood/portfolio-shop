@@ -5,14 +5,17 @@ import { MdThumbUpOffAlt } from "react-icons/md";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useSession } from 'next-auth/client';
+import { useSession } from "next-auth/client";
 
 interface IRecommendProps {
   likeCount: any;
   likeUsers: any;
 }
 
-const Recommend: React.FunctionComponent<IRecommendProps> = ({ likeCount, likeUsers }) => {
+const Recommend: React.FunctionComponent<IRecommendProps> = ({
+  likeCount,
+  likeUsers,
+}) => {
   const queryClient = useQueryClient();
   const [session, loading] = useSession();
   const router = useRouter();
@@ -27,30 +30,30 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({ likeCount, likeUs
       },
     }
   );
-  
+
   const handleClick = (e: any) => {
     e.preventDefault();
 
-    if (session) {      
+    if (session) {
       if (likeUsers.indexOf(session?.user?.email) > -1) {
         isAlready = true;
         mutation.mutate({ isAlready });
       } else {
         isAlready = false;
         mutation.mutate({ isAlready });
-      }      
+      }
     } else {
-      alert('추천을 하시려면 로그인 해주세요!');
-    }    
+      alert("추천을 하시려면 로그인 해주세요!");
+    }
   };
-    
+
   return (
     <FlexBoxColumn>
       <RcButton onClick={handleClick}>
-      <RcLikeCount>{likeCount}</RcLikeCount>
+        <RcLikeCount>{likeCount}</RcLikeCount>
         <RcIcon>
           <MdThumbUpOffAlt />
-        </RcIcon>        
+        </RcIcon>
       </RcButton>
     </FlexBoxColumn>
   );
@@ -60,6 +63,7 @@ export default Recommend;
 
 const FlexBoxColumn = styled(FlexBox)`
   margin-top: 5rem;
+  padding-bottom: 2.2rem;
 `;
 
 const RcButton = styled.button`

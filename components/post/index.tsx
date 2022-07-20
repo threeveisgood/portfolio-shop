@@ -34,6 +34,9 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
   const dispatch = useDispatch();
 
   const mutation = useMutation(() => axios.patch(`/api/views/${postID}`));
+  const deleteMutation = useMutation(() =>
+    axios.delete(`/api/delete-post/${postID}`)
+  );
 
   useEffect(() => {
     mutation.mutate();
@@ -71,8 +74,8 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
       _id,
     } = data.result;
 
-    const onEdit = () => {
-      dispatch(
+    const onEdit = async () => {
+      await dispatch(
         setOriginalPost({
           title,
           price,
@@ -93,6 +96,15 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
         })
       );
       router.push("/write/add-post");
+    };
+
+    const onRemove = async () => {
+      try {
+        await deleteMutation.mutate();
+        router.push(`/`);
+      } catch (e: any) {
+        console.log(e);
+      }
     };
 
     const ownPost = (session && session.user?.email) === email;
@@ -167,8 +179,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
 
             <Recommend likeCount={likeCount} likeUsers={likeUsers} />
 
-            {/* {ownPost && <DeleteEdit onEdit={onEdit} />} */}
-            {<DeleteEdit onEdit={onEdit} />}
+            {ownPost && <DeleteEdit onEdit={onEdit} onRemove={onRemove} />}
 
             <Comments
               data={commentsData}
