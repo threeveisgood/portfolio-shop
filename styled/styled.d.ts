@@ -11,7 +11,7 @@ declare module "styled-components" {
     black: string;
     lowblack: string;
     gold: string;
-    
+
     padding: string;
 
     fontSize: {
@@ -19,6 +19,13 @@ declare module "styled-components" {
       medium: string;
       small: string;
       micro: string;
+    };
+
+    media: {
+      phone: string;
+      phoneLg: string;
+      tabPort: string;
+      tabLand: string;
     };
 
     responsive: {

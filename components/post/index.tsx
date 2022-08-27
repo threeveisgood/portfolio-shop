@@ -343,6 +343,7 @@ const DateInfo = styled.p`
 `;
 
 const PostContent = styled.div`
+  font-family: auto;
   font-size: 1.3125rem;
   color: #333130;
 `;

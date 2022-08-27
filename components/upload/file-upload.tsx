@@ -4,7 +4,7 @@ import { UiFileInputButton } from "components/upload/ui-file-input-button";
 
 const IndexPage = () => {
   const [thumb, setThumb] = useState<string[]>([]);
-  const [progress, setProgress] = useState<number>(0);
+  const [progress, setProgress] = useState(0);
   const onChange = useCallback(
     async (formData: FormData) => {
       const config = {

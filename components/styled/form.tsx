@@ -78,14 +78,16 @@ export const StyledInput = styled.input`
 
 export const FormSubmitButton = styled(StyledButton)`
   font-size: 1.3rem;
-  margin-top: 3rem;
+  width: 100%;
   background: ${(props) => props.theme.black};
+  border-radius: 2rem;
 
   &:last-child {
-    margin-left: 2rem;
+    margin-top: 1.5rem;
   }
 
   &:first-child {
+    margin-top: 3rem;
     margin-left: 0;
   }
 `;

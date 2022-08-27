@@ -1,13 +1,13 @@
 import { DefaultTheme } from "styled-components";
 
-export const theme: DefaultTheme = {  
+export const theme: DefaultTheme = {
   primary: "#5B42F3",
-  purple: "#AF40FF",
+  purple: "#621296",
   cyan: "#00DDEB",
   white: "#e9e9e9",
   black: "#474747",
-  lowblack: "#222222",  
-  gray: "#737373",
+  lowblack: "#222222",
+  gray: "#5c5b5b",
   lowgray: "#d6d6d6",
   gold: "#a6946d",
   padding: "12px",
@@ -16,6 +16,12 @@ export const theme: DefaultTheme = {
     medium: "14px",
     small: "12px",
     micro: "10px",
+  },
+  media: {
+    phone: "@media only screen and (max-width: 480px)",
+    phoneLg: "@media only screen and (max-width: 600px)",
+    tabPort: "@media only screen and (max-width: 768px)",
+    tabLand: "@media only screen and (max-width: 1080px)",
   },
   responsive: {
     phone: "37.5em",

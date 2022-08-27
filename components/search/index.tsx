@@ -75,7 +75,7 @@ const SearchInput = styled.input`
   font-size: inherit;
   color: #fff;
   border: none;
-  width: 90%;
+  width: 100%;
   transition: all 0.2s;
   padding: 1rem;
   border-radius: 2.6rem;
@@ -83,18 +83,6 @@ const SearchInput = styled.input`
 
   &:focus {
     outline: none;
-    width: 100%;
-
-    @media only screen and (min-width: ${(props) =>
-        props.theme.responsive.phone}) {
-      & + button {
-        right: 3%;
-      }
-    }
-    @media only screen and (max-width: ${(props) =>
-        props.theme.responsive.phone}) {
-      width: 90%;
-    }
   }
 `;
 
@@ -105,7 +93,7 @@ const SearchButton = styled.button`
   background-color: inherit;
   color: #fff;
   cursor: pointer;
-  right: 5.5%;
+  right: 1.5rem;
 
   &:focus {
     outline: none;
