@@ -87,13 +87,15 @@ const CardLi = styled.li`
   box-shadow: none;
   padding: 1.2rem;
   width: 18rem;
+  justify-content: center;
 
   ${({ theme }) => theme.media.phoneLg} {
     width: 100%;
     padding: 0 2rem;
 
     &:not(:first-child) {
-      margin-top: 4rem;
+      margin-top: 3rem;
+      justify-content: center;
     }
   }
 `;
@@ -149,10 +151,9 @@ const CardTitleA = styled.a`
   color: ${(props) => props.theme.gray};
   font-weight: bold;
   min-height: 3.5rem;
-  line-height: 1.8rem;
+  line-height: 1.9rem;
   font-size: 1.4rem;
-  overflow: hidden;
-  margin-top: 1.3rem;
+  margin: 1rem auto;
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -161,8 +162,7 @@ const CardTitleA = styled.a`
 
   ${({ theme }) => theme.media.phoneLg} {
     min-height: auto;
-    margin-bottom: 1rem;
-    margin-top: 0;
+    margin: 0 0 1rem 0;
     width: 180px;
   }
 `;
@@ -187,7 +187,7 @@ const NoteContainer = styled.span`
 const CardNote = styled.div`
   padding-top: 0.3rem;
   color: ${(props) => props.theme.black};
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
