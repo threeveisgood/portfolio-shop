@@ -1,7 +1,6 @@
 import { connectToDatabase } from "lib/db-utils";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
 
@@ -15,7 +14,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const db: any = client.db();
-  
+
   const result: any = await db.collection("posts").updateOne(
     {
       _id: id,
@@ -27,7 +26,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
   );
 
-  res.status(201).json({ message: "Added views!" });
+  res.status(201).json({ message: "Increased views!" });
   client.close();
 }
 

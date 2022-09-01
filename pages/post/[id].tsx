@@ -5,17 +5,16 @@ import React from "react";
 import { dehydrate, QueryClient } from "react-query";
 
 const Index: React.FunctionComponent = () => {
-
-    return (
-      <>
-        <Post />
-      </>
-    );
+  return (
+    <>
+      <Post />
+    </>
+  );
 };
 
 export default Index;
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params?.id as string;
   const queryClient = new QueryClient();
 

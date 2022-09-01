@@ -21,6 +21,9 @@ import DeleteEdit from "./delete-edit";
 import { useDispatch } from "react-redux";
 import { setOriginalPost } from "modules/write";
 import { useSession } from "next-auth/client";
+import useDeletePost from "hooks/useDeletePost";
+import useIncreaseViews from "hooks/useIncreaseViews";
+import useGetComments from "hooks/useGetComments";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -33,13 +36,11 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
   const dispatch = useDispatch();
 
-  const mutation = useMutation(() => axios.patch(`/api/views/${postID}`));
-  const deleteMutation = useMutation(() =>
-    axios.delete(`/api/delete-post/${postID}`)
-  );
+  const { mutate } = useIncreaseViews();
+  const deleteMutation = useDeletePost(postID);
 
   useEffect(() => {
-    mutation.mutate();
+    mutate({ id: postID });
   }, []);
 
   const { isSuccess, data, isLoading, isError } = usePost(postID);
@@ -49,10 +50,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
     data: commentsData,
     isLoading: commentsIsLoading,
     isError: commentsIsError,
-  } = useQuery(["getComments", postID], () => fetchComments(postID), {
-    enabled: postID.length > 0,
-    staleTime: Infinity,
-  });
+  } = useGetComments(postID);
 
   if (isSuccess) {
     const {

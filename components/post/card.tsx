@@ -117,27 +117,27 @@ const CardImageBox = styled.div`
 `;
 
 const CardImageA = styled.a`
-  max-width: 160px;
-  max-height: 160px;
+  max-width: 16rem;
+  max-height: 16rem;
   justify-content: center;
   align-items: center;
   object-fit: fill;
   gap: 3rem 0;
 
   ${({ theme }) => theme.media.phoneLg} {
-    width: 120px;
-    height: 120px;
+    width: 12rem;
+    height: 12rem;
   }
 `;
 
 const CardImage = styled.img`
   border-radius: 1rem;
-  width: 160px;
-  height: 160px;
+  width: 16rem;
+  height: 16rem;
 
   ${({ theme }) => theme.media.phoneLg} {
-    width: 120px;
-    height: 120px;
+    width: 12rem;
+    height: 12rem;
   }
 `;
 
@@ -163,7 +163,7 @@ const CardTitleA = styled.a`
   ${({ theme }) => theme.media.phoneLg} {
     min-height: auto;
     margin: 0 0 1rem 0;
-    width: 180px;
+    width: 18rem;
   }
 `;
 const PriceContainer = styled.span`

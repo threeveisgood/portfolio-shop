@@ -7,13 +7,30 @@ import { GlobalStyle } from "styled/globalStyle";
 import { theme } from "styled/theme";
 import { wrapper } from "store";
 import Layout from "components/layout";
-import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import {
+  Hydrate,
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider } from "next-auth/client";
 import "../public/static/fonts/style.css";
+import { toast } from "react-hot-toast";
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        queryCache: new QueryCache({
+          onError: (error, query) => {
+            if (query.state.data !== undefined) {
+              toast.error(`백그라운드 에러가 발생하였습니다: ${error}`);
+            }
+          },
+        }),
+      })
+  );
 
   return (
     <>
