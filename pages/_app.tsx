@@ -23,10 +23,8 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
     () =>
       new QueryClient({
         queryCache: new QueryCache({
-          onError: (error, query) => {
-            if (query.state.data !== undefined) {
-              toast.error(`백그라운드 에러가 발생하였습니다: ${error}`);
-            }
+          onError: (error) => {
+            toast.error(`에러가 발생하였습니다: ${error}`);
           },
         }),
       })

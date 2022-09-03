@@ -1,21 +1,10 @@
 import * as React from "react";
 import { useEffect } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import "dayjs/locale/ko";
-import { IoPersonCircleOutline } from "react-icons/io5";
-import { MdRemoveRedEye } from "react-icons/md";
-import { BiCommentDetail } from "react-icons/bi";
-import StyledCarousel from "components/styled/carousel";
 import Comments from "components/comments";
 import LoadingSpinner from "components/styled/loading-spinner";
-import { usePost } from "hooks/usePost";
-import { fetchComments } from "hooks/useComments";
-import { useMutation, useQuery } from "react-query";
-import axios from "axios";
+import usePost from "hooks/usePost";
 import Recommend from "./recommend";
 import DeleteEdit from "./delete-edit";
 import { useDispatch } from "react-redux";
@@ -23,10 +12,8 @@ import { setOriginalPost } from "modules/write";
 import { useSession } from "next-auth/client";
 import useDeletePost from "hooks/useDeletePost";
 import useIncreaseViews from "hooks/useIncreaseViews";
-import useGetComments from "hooks/useGetComments";
-
-dayjs.extend(relativeTime);
-dayjs.locale("ko");
+import useComments from "hooks/useComments";
+import Content from "./content";
 
 interface PostProps {}
 
@@ -50,7 +37,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
     data: commentsData,
     isLoading: commentsIsLoading,
     isError: commentsIsError,
-  } = useGetComments(postID);
+  } = useComments(postID);
 
   if (isSuccess) {
     const {
@@ -107,9 +94,6 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
 
     const ownPost = (session && session.user?.email) === email;
 
-    const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
-    const mobileDate = dayjs().to(dayjs(date));
-
     return (
       <ContentsContianer>
         <ContentsLayout>
@@ -118,62 +102,19 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
           </TitleContainer>
 
           <DetailContainer>
-            <PriceAndCategoryContainer>
-              <Price>{price}</Price>
-              <Category>{category}</Category>
-            </PriceAndCategoryContainer>
-
-            <InformationContainer>
-              <Count className="no-padding-left">
-                <Feature>
-                  배송비: <LightWeight>{shipping}</LightWeight>
-                </Feature>
-                <StoreName>
-                  쇼핑몰: <LightWeight>{store}</LightWeight>
-                </StoreName>
-              </Count>
-              <Count>
-                <CountNumber>
-                  <DateInfo>{postDate}</DateInfo>
-                </CountNumber>
-                <CountNumber>
-                  <MobileDateInfo>{mobileDate}</MobileDateInfo>
-                </CountNumber>
-              </Count>
-            </InformationContainer>
-
-            <InformationContainer>
-              <FlexContainer>
-                <IoPersonCircleOutline />
-                <UserNameInformation>{username}</UserNameInformation>
-              </FlexContainer>
-              <FlexContainer>
-                <Count>
-                  <MdRemoveRedEye />
-                  <CountNumber>{viewsCount}</CountNumber>
-                </Count>
-                <InformationMidDot>&#183;</InformationMidDot>
-                <Count>
-                  <BiCommentDetail />
-                  <CountNumber>{repliesCount}</CountNumber>
-                </Count>
-              </FlexContainer>
-            </InformationContainer>
-
-            <ProductURLContainer>
-              URL :&nbsp;
-              <Link href="/">
-                <a>
-                  <LightWeight>{productURL}</LightWeight>
-                </a>
-              </Link>
-            </ProductURLContainer>
-
-            {imageLinks && imageLinks.length != 0 ? (
-              <StyledCarousel imageLinks={imageLinks} />
-            ) : null}
-
-            <PostContent dangerouslySetInnerHTML={{ __html: body }} />
+            <Content
+              price={price}
+              category={category}
+              shipping={shipping}
+              store={store}
+              date={date}
+              username={username}
+              viewsCount={viewsCount}
+              repliesCount={repliesCount}
+              productURL={productURL}
+              imageLinks={imageLinks}
+              body={body}
+            />
 
             <Recommend likeCount={likeCount} likeUsers={likeUsers} />
 

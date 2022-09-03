@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import NavBar from "./header/navBar";
 import Header from "./header";
+import { Toaster } from "react-hot-toast";
 
 type Props = {
   children: JSX.Element;
@@ -12,6 +13,14 @@ const Layout = ({ children }: Props) => {
       <Header />
       <NavBar />
       <Container>{children}</Container>
+      <Toaster
+        toastOptions={{
+          style: {
+            fontSize: "1.5rem",
+            background: "#F5F5DC",
+          },
+        }}
+      />
     </>
   );
 };

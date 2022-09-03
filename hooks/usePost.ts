@@ -1,19 +1,9 @@
 import { useQuery } from "react-query";
-import axios from "axios";
+import { getPost } from "api/getPost";
 
-const fetchPost: any = async (id: string) => {
-  const { data } = await axios.get(`/api/post/${id}`);
-
-  return data;
-};
-
-const usePost: any = (postID: string) => {
-  return useQuery(["getPost", postID], 
-  () => fetchPost(postID), 
-  {
+export default function usePost(postID: string) {
+  return useQuery(["getPost", postID], () => getPost(postID), {
     enabled: postID.length > 0,
     staleTime: Infinity,
   });
-};
-
-export { fetchPost, usePost }
+}

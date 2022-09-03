@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
+import { toast, Toaster } from "react-hot-toast";
 
 interface IRecommendProps {
   likeCount: any;
@@ -43,7 +44,7 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
         mutation.mutate({ isAlready });
       }
     } else {
-      alert("추천을 하시려면 로그인 해주세요!");
+      toast("추천을 하시려면 로그인 해주세요!");
     }
   };
 
