@@ -8,6 +8,7 @@ interface Comment {
   isDeleted: boolean;
   upVote: number;
   likeUsers: string[];
+  replies: replies;
 }
 
 interface replies extends Comment {
@@ -15,7 +16,16 @@ interface replies extends Comment {
 }
 [];
 
-export interface Comments extends Comment {
-  replies: replies;
+export interface Comments {
+  comments: ReadonlyArray<Comment>;
 }
-[];
+
+export interface CommentState {
+  comment: {
+    contents: string;
+    replyToggle: {
+      _id: string;
+      toggle: boolean;
+    };
+  };
+}

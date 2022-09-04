@@ -23,31 +23,26 @@ import AddComments from "./add-comment";
 import Recommend from "./recommend";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
+import useComments from "hooks/useComments";
+import useCommentState from "hooks/state/useCommentState";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
 interface CommentsListProps {
-  data: any;
-  isLoading: any;
-  isError: any;
-  isSuccess: any;
-  postID: any;
+  postID: string;
 }
 
-const Comments: React.FunctionComponent<CommentsListProps> = ({
-  data,
-  isLoading,
-  isError,
-  isSuccess,
-  postID,
-}) => {
+const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
-
-  const { replyToggle } = useSelector(({ comment }: any) => ({
-    replyToggle: comment.replyToggle,
-  }));
+  const {
+    isSuccess,
+    data: commentsData,
+    isLoading,
+    isError,
+  } = useComments(postID);
+  const { replyToggle } = useCommentState();
 
   useEffect(() => {
     return () => {
@@ -79,14 +74,16 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({
     }
   );
 
-  if (isSuccess) {
-    const list = data.comments;
+  if (isLoading) {
+    return <div></div>;
+  }
 
+  if (isSuccess) {
     return (
       <CommentCt>
         <ListBox>
-          {list &&
-            list.map((data: any) => {
+          {commentsData &&
+            commentsData.comments.map((data) => {
               return (
                 !data.isDeleted && (
                   <div key={data._id}>
@@ -138,10 +135,6 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({
         <AddComments postID={postID} />
       </CommentCt>
     );
-  }
-
-  if (isLoading) {
-    return <div></div>;
   }
 
   if (isError) {

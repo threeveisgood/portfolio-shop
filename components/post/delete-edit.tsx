@@ -2,17 +2,83 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import AskRemoveModal from "components/post/AskRemoveModal";
 import { buttonStyle } from "components/styled/button";
+import { useRouter } from "next/router";
+import useDeletePost from "hooks/useDeletePost";
+import useOnEdit from "hooks/state/useOnEdit";
 
 interface IDeleteEditProps {
-  onEdit: () => void;
-  onRemove: () => void;
+  postID: string;
+  title: string;
+  price: string;
+  category: string;
+  shipping: string;
+  store: string;
+  date: Date;
+  username: string;
+  productURL: string;
+  imageLinks: string[] | undefined;
+  body: string;
+  viewsCount: number;
+  likeCount: number;
+  likeUsers: string[];
+  repliesCount: number;
+  email: string;
+  _id: string;
 }
 
 const DeleteEdit: React.FunctionComponent<IDeleteEditProps> = ({
-  onEdit,
-  onRemove,
+  postID,
+  title,
+  price,
+  category,
+  shipping,
+  store,
+  date,
+  username,
+  productURL,
+  imageLinks,
+  body,
+  viewsCount,
+  likeCount,
+  likeUsers,
+  repliesCount,
+  email,
+  _id,
 }: IDeleteEditProps) => {
+  const router = useRouter();
   const [modal, setModal] = useState(false);
+  const { mutate: deleteMutate } = useDeletePost(postID);
+  const { setOriginalPost } = useOnEdit();
+
+  const onEdit = () => {
+    setOriginalPost({
+      title,
+      price,
+      category,
+      shipping,
+      store,
+      date,
+      username,
+      productURL,
+      imageLinks,
+      body,
+      viewsCount,
+      likeCount,
+      likeUsers,
+      repliesCount,
+      email,
+      _id,
+    });
+    router.push("/write/add-post");
+  };
+
+  const onRemove = () => {
+    deleteMutate(undefined, {
+      onSuccess: () => {
+        router.push(`/`);
+      },
+    });
+  };
 
   const onRemoveClick = () => {
     setModal(true);
