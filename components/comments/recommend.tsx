@@ -3,6 +3,7 @@ import { CtVoteButton, CtVoteCount } from "components/styled/comments-list";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
 import { useSession } from "next-auth/client";
 import useCommentRecommend from "hooks/useCommentRecommend";
+import { toast } from "react-hot-toast";
 
 interface IRecommendProps {
   _id: string;
@@ -37,7 +38,7 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
         mutate({ id: _id, isAlready, isPlus });
       }
     } else {
-      alert("추천을 하시려면 로그인 해주세요!");
+      toast("추천을 하시려면 로그인 해주세요!");
     }
   };
 
@@ -55,7 +56,7 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
         mutate({ id: _id, isAlready, isPlus });
       }
     } else {
-      alert("추천을 하시려면 로그인 해주세요!");
+      toast("추천을 하시려면 로그인 해주세요!");
     }
   };
 

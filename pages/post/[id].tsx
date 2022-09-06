@@ -1,5 +1,5 @@
+import { getPost } from "api/getPost";
 import Post from "components/post";
-import usePost from "hooks/usePost";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
 import { dehydrate, QueryClient } from "react-query";
@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params?.id as string;
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(["getPost", id], () => usePost(id));
+  await queryClient.prefetchQuery(["getPost", id], () => getPost(id));
 
   return {
     props: {
