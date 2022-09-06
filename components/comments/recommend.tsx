@@ -1,67 +1,63 @@
 import * as React from "react";
 import { CtVoteButton, CtVoteCount } from "components/styled/comments-list";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
-import { useMutation, useQueryClient } from "react-query";
-import { useSession } from 'next-auth/client';
-import axios from "axios";
+import { useSession } from "next-auth/client";
+import useCommentRecommend from "hooks/useCommentRecommend";
 
 interface IRecommendProps {
-  _id: any;
-  postID: any;
-  upVote: any;
+  _id: string;
+  postID: string;
+  upVote: number;
   likeUsers: any;
 }
 
-const Recommend: React.FunctionComponent<IRecommendProps> = ({ upVote, likeUsers, _id, postID }) => {
-  const queryClient = useQueryClient();
+const Recommend: React.FunctionComponent<IRecommendProps> = ({
+  upVote,
+  likeUsers,
+  _id,
+  postID,
+}) => {
   const [session, loading] = useSession();
   let isAlready;
   let isPlus;
 
-  const mutation = useMutation(
-    (mutate: any) => axios.patch(`/api/recommend/comments/${_id}`, mutate),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["getComments", postID]);
-      },
-    }
-  );
+  const { mutate } = useCommentRecommend(postID);
 
   const handleUpVoteClick = (e: any) => {
     e.preventDefault();
 
-    if (session) {      
-        if (likeUsers.indexOf(session?.user?.email) > -1) {          
-          isPlus = true;
-          isAlready = true;
-          mutation.mutate({ isAlready, isPlus });
-        } else {
-          isPlus = true;
-          isAlready = false;
-          mutation.mutate({ isAlready, isPlus });
-        }      
+    if (session) {
+      if (likeUsers.indexOf(session?.user?.email) > -1) {
+        isPlus = true;
+        isAlready = true;
+        mutate({ id: _id, isAlready, isPlus });
       } else {
-        alert('추천을 하시려면 로그인 해주세요!');
-      }    
-  }
+        isPlus = true;
+        isAlready = false;
+        mutate({ id: _id, isAlready, isPlus });
+      }
+    } else {
+      alert("추천을 하시려면 로그인 해주세요!");
+    }
+  };
 
   const handleDownVoteClick = (e: any) => {
     e.preventDefault();
 
-    if (session) {      
-        if (likeUsers.indexOf(session?.user?.email) > -1) {
-          isPlus = false;
-          isAlready = true;
-          mutation.mutate({ isAlready, isPlus });
-        } else {
-          isPlus = false;
-          isAlready = false;
-          mutation.mutate({ isAlready, isPlus });
-        }      
+    if (session) {
+      if (likeUsers.indexOf(session?.user?.email) > -1) {
+        isPlus = false;
+        isAlready = true;
+        mutate({ id: _id, isAlready, isPlus });
       } else {
-        alert('추천을 하시려면 로그인 해주세요!');
-      }    
-  }
+        isPlus = false;
+        isAlready = false;
+        mutate({ id: _id, isAlready, isPlus });
+      }
+    } else {
+      alert("추천을 하시려면 로그인 해주세요!");
+    }
+  };
 
   return (
     <>

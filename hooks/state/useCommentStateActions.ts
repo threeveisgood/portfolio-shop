@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { setOriginalPost } from "modules/write";
+import { initialize, changeField } from "modules/comment";
 
-export default function useOnEdit() {
+export default function useCommentStateActions() {
   const dispatch = useDispatch();
 
   return useMemo(
-    () => bindActionCreators({ setOriginalPost }, dispatch),
+    () => bindActionCreators({ initialize, changeField }, dispatch),
     [dispatch]
   );
 }

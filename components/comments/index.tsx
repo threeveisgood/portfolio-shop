@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -17,14 +17,12 @@ import {
 } from "components/styled/comments-list";
 import AddReply from "./add-reply";
 import RepliesList from "./replies-list";
-import { useDispatch, useSelector } from "react-redux";
-import { changeField, initialize } from "modules/comment";
 import AddComments from "./add-comment";
 import Recommend from "./recommend";
-import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
 import useComments from "hooks/useComments";
 import useCommentState from "hooks/state/useCommentState";
+import useCommentStateActions from "hooks/state/useCommentStateActions";
+import useDeleteComment from "hooks/useDeleteComment";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -34,8 +32,6 @@ interface CommentsListProps {
 }
 
 const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
   const {
     isSuccess,
     data: commentsData,
@@ -43,36 +39,23 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
     isError,
   } = useComments(postID);
   const { replyToggle } = useCommentState();
+  const { initialize, changeField } = useCommentStateActions();
 
   useEffect(() => {
     return () => {
-      dispatch(initialize());
+      initialize();
     };
-  }, [dispatch]);
+  }, [initialize]);
 
-  const onChangeField = useCallback(
-    (payload) => dispatch(changeField(payload)),
-    [dispatch]
-  );
-
-  const onChangeToggle = (id: any) => {
-    return (e: any) =>
-      onChangeField({
+  const onChangeToggle = (id: string) => {
+    return () =>
+      changeField({
         key: "replyToggle",
         value: { _id: id, toggle: !replyToggle.toggle },
       });
   };
 
-  const { mutate } = useMutation(
-    (_id: string) => {
-      return axios.patch(`/api/comments/delete/${_id}`);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["getComments", postID]);
-      },
-    }
-  );
+  const { mutate } = useDeleteComment(postID);
 
   if (isLoading) {
     return <div></div>;

@@ -43,10 +43,6 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
   shipping,
   category,
   postID,
-  commentsData,
-  commentsIsLoading,
-  commentsIsError,
-  commentsIsSuccess,
 }) => {
   const postDate = dayjs(date).format("YYYY-MM-DD HH:mm");
   const mobileDate = dayjs().to(dayjs(date));
@@ -120,13 +116,7 @@ const Contents: React.FunctionComponent<IContentsProps> = ({
           ) : null}
 
           <PostContent dangerouslySetInnerHTML={{ __html: body }} />
-          <Comments
-            data={commentsData}
-            postID={postID}
-            isLoading={commentsIsLoading}
-            isError={commentsIsError}
-            isSuccess={commentsIsSuccess}
-          />
+          <Comments postID={postID} />
         </DetailContainer>
       </ContentsLayout>
     </ContentsContianer>

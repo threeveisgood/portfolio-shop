@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signIn } from "next-auth/client";
+import { signIn, SignInResponse } from "next-auth/client";
 import { useRouter } from "next/router";
 import {
   Field,
@@ -12,12 +12,7 @@ import {
 } from "components/styled/form";
 import { useFormik } from "formik";
 import Container from "components/styled/container";
-import * as yup from "yup";
-
-const vadlidationSchema = yup.object({
-  email: yup.string().required("반드시 입력해야하는 항목입니다."),
-  password: yup.string().required("반드시 입력해야하는 항목입니다."),
-});
+import { authFormValidationSchemna } from "lib/yup";
 
 function AuthForm() {
   const router = useRouter();
@@ -30,18 +25,18 @@ function AuthForm() {
       password: "",
       name: "",
     },
-    validationSchema: vadlidationSchema,
+    validationSchema: authFormValidationSchemna,
     onSubmit: async (values, { setSubmitting }) => {
       const enteredEmail = values.email;
       const enteredPassword = values.password;
 
-      const result: any = await signIn("credentials", {
+      const result: SignInResponse | undefined = await signIn("credentials", {
         redirect: false,
         email: enteredEmail,
         password: enteredPassword,
       });
 
-      if (!result.error) {
+      if (!result?.error) {
         router.replace("/");
       } else {
         setErrorMessage("아이디 혹은 비밀번호가 틀립니다.");

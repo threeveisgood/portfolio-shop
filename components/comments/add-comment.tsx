@@ -1,16 +1,11 @@
 import { LinearButton } from "components/styled/button";
-import {
-  Field,
-  InputStyle,
-  StyledInput,
-  StyledLabel,
-} from "components/styled/form";
+import { Field, InputStyle, StyledLabel } from "components/styled/form";
 import React from "react";
 import { Formik, Field as FormikField, Form } from "formik";
-import * as Yup from "yup";
 import styled from "styled-components";
-import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import useAddComment from "hooks/useAddComment";
+import { addCommentSchema } from "lib/yup";
+import { CommentFormData } from "types/comments";
 
 const bson = require("bson");
 
@@ -18,26 +13,10 @@ interface AddCommentsProps {
   postID: string;
 }
 
-const CommentSchema = Yup.object().shape({
-  comment: Yup.string()
-    .min(2, "2글자 이상 입력해주세요.")
-    .max(500, "500자 제한을 초과하였습니다.")
-    .required("내용을 입력해주세요."),
-});
-
 const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
-  const queryClient = useQueryClient();
   const _id = bson.ObjectId();
 
-  const mutation = useMutation(
-    (comment: any) => axios.post(`/api/comments/${_id}`, comment),
-    {
-      onError: () => {},
-      onSuccess: () => {
-        queryClient.invalidateQueries(["getComments", postID]);
-      },
-    }
-  );
+  const { mutate } = useAddComment(postID);
 
   return (
     <AddCommentContainer>
@@ -45,10 +24,10 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
         initialValues={{
           comment: "",
         }}
-        validationSchema={CommentSchema}
-        onSubmit={async (values: any, actions: any) => {
+        validationSchema={addCommentSchema}
+        onSubmit={async (values: CommentFormData, actions) => {
           const comment = values.comment;
-          mutation.mutate({ comment, postID, _id });
+          mutate({ comment, postID, _id });
 
           actions.resetForm({
             values: {

@@ -9,44 +9,15 @@ import {
 } from "components/styled/form";
 import { useFormik } from "formik";
 import Container from "components/styled/container";
-import * as yup from "yup";
-
-async function createUser(email: any, password: any, name: any) {
-  const response = await fetch("/api/auth/signup", {
-    method: "POST",
-    body: JSON.stringify({ email, password, name }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Something went wrong!");
-  }
-
-  return data;
-}
-
-const vadlidationSchema = yup.object({
-  email: yup
-    .string()
-    .email("이메일 형식으로 입력해주세요.")
-    .required("반드시 입력해야하는 항목입니다."),
-  password: yup
-    .string()
-    .min(8, "최소 8글자 이상 입력해주세요.")
-    .required("반드시 입력해야하는 항목입니다."),
-  name: yup
-    .string()
-    .min(2, "최소 2글자 이상 입력해주세요.")
-    .max(12, "최대 12글자까지만 가능합니다.")
-    .required("반드시 입력해야하는 항목입니다."),
-});
+import useCreateUser from "hooks/useCreateUser";
+import LoadingSpinner from "components/styled/loading-spinner";
+import { createUserVadlidationSchema } from "lib/yup";
 
 function SignUpForm() {
   const router = useRouter();
+
+  const { mutate: createUser, isLoading: createUserIsLoading } =
+    useCreateUser();
 
   const switchAuthModeHandler = () => {
     router.push("/auth");
@@ -58,22 +29,29 @@ function SignUpForm() {
       password: "",
       name: "",
     },
-    validationSchema: vadlidationSchema,
+    validationSchema: createUserVadlidationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       const enteredEmail = values.email;
       const enteredPassword = values.password;
       const enteredname = values.name;
 
-      try {
-        const result = await createUser(
-          enteredEmail,
-          enteredPassword,
-          enteredname
-        );
-        console.log(result);
-      } catch (error) {
-        console.log(error);
+      if (createUserIsLoading) {
+        return <LoadingSpinner />;
       }
+
+      createUser(
+        {
+          email: enteredEmail,
+          password: enteredPassword,
+          name: enteredname,
+        },
+        {
+          onSuccess: () => {
+            router.push("/auth");
+          },
+        }
+      );
+
       setSubmitting(false);
     },
   });

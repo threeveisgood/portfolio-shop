@@ -1,4 +1,4 @@
-interface Comment {
+export interface Comment {
   _id: string;
   comment: string;
   postID: string;
@@ -8,12 +8,21 @@ interface Comment {
   isDeleted: boolean;
   upVote: number;
   likeUsers: string[];
-  replies: replies;
+  replies: Replies;
 }
 
-interface replies extends Comment {
+export interface Reply {
+  _id: string;
+  comment: string;
+  postID: string;
+  username: string;
+  email: string;
+  date: Date;
+  isDeleted: boolean;
   repliedName: string;
 }
+
+export interface Replies extends Reply {}
 [];
 
 export interface Comments {
@@ -28,4 +37,16 @@ export interface CommentState {
       toggle: boolean;
     };
   };
+}
+
+export interface CommentFormData {
+  comment: string;
+}
+
+export interface AddReply {
+  _id: string;
+  comment: string;
+  postID: string;
+  repliedName?: string;
+  replyID: string;
 }

@@ -4,7 +4,7 @@ import AskRemoveModal from "components/post/AskRemoveModal";
 import { buttonStyle } from "components/styled/button";
 import { useRouter } from "next/router";
 import useDeletePost from "hooks/useDeletePost";
-import useOnEdit from "hooks/state/useOnEdit";
+import useWriteStateActions from "hooks/state/useWriteStateActions";
 
 interface IDeleteEditProps {
   postID: string;
@@ -48,7 +48,7 @@ const DeleteEdit: React.FunctionComponent<IDeleteEditProps> = ({
   const router = useRouter();
   const [modal, setModal] = useState(false);
   const { mutate: deleteMutate } = useDeletePost(postID);
-  const { setOriginalPost } = useOnEdit();
+  const { setOriginalPost } = useWriteStateActions();
 
   const onEdit = () => {
     setOriginalPost({
