@@ -1,5 +1,5 @@
-import React, { ReactElement, useState, useEffect, useCallback } from "react";
-import { dehydrate, QueryClient, useQuery } from "react-query";
+import React, { ReactElement } from "react";
+import { dehydrate, QueryClient } from "react-query";
 import { GetStaticProps } from "next";
 import { fetchPosts } from "hooks/usePosts";
 import List from "components/post/list";
@@ -7,7 +7,7 @@ import List from "components/post/list";
 export default function posts(): ReactElement | string {
   return (
     <>
-     <List isSearch={false}/>
+      <List isSearch={false} />
     </>
   );
 }

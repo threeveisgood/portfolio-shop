@@ -4,12 +4,14 @@ import { BiUpvote, BiDownvote } from "react-icons/bi";
 import { useSession } from "next-auth/client";
 import useCommentRecommend from "hooks/useCommentRecommend";
 import { toast } from "react-hot-toast";
+import useReplyRecommend from "hooks/useReplyRecommend";
 
 interface IRecommendProps {
   _id: string;
   postID: string;
   upVote: number;
-  likeUsers: any;
+  likeUsers: string[];
+  isReply: boolean;
 }
 
 const Recommend: React.FunctionComponent<IRecommendProps> = ({
@@ -17,18 +19,21 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
   likeUsers,
   _id,
   postID,
+  isReply,
 }) => {
   const [session, loading] = useSession();
   let isAlready;
   let isPlus;
 
-  const { mutate } = useCommentRecommend(postID);
+  const { mutate } = isReply
+    ? useReplyRecommend(postID)
+    : useCommentRecommend(postID);
 
-  const handleUpVoteClick = (e: any) => {
+  const handleUpVoteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (session) {
-      if (likeUsers.indexOf(session?.user?.email) > -1) {
+      if (likeUsers.indexOf(String(session?.user?.email)) > -1) {
         isPlus = true;
         isAlready = true;
         mutate({ id: _id, isAlready, isPlus });
@@ -42,11 +47,11 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
     }
   };
 
-  const handleDownVoteClick = (e: any) => {
+  const handleDownVoteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (session) {
-      if (likeUsers.indexOf(session?.user?.email) > -1) {
+      if (likeUsers.indexOf(String(session?.user?.email)) > -1) {
         isPlus = false;
         isAlready = true;
         mutate({ id: _id, isAlready, isPlus });
@@ -56,7 +61,7 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
         mutate({ id: _id, isAlready, isPlus });
       }
     } else {
-      toast("추천을 하시려면 로그인 해주세요!");
+      toast("비추천을 하시려면 로그인 해주세요!");
     }
   };
 

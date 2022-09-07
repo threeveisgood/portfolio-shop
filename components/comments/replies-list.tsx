@@ -13,13 +13,12 @@ import {
   CtDeleteIcon,
 } from "components/styled/comments-list";
 import dayjs from "dayjs";
-import { useDispatch, useSelector } from "react-redux";
-import { changeField, initialize } from "modules/comment";
 import AddReply from "./add-reply";
 import styled from "styled-components";
-import { useMutation, useQueryClient } from "react-query";
-import ReplyRecommend from "./reply-recommend";
-import axios from "axios";
+import Recommend from "./recommend";
+import useCommentState from "hooks/state/useCommentState";
+import useCommentStateActions from "hooks/state/useCommentStateActions";
+import useDeleteReply from "hooks/useDeleteReply";
 
 interface IRepliesListProps {
   repliedId: any;
@@ -30,44 +29,26 @@ interface IRepliesListProps {
 const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
   repliedId,
   replies,
-  postID
+  postID,
 }) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-
-  const { replyToggle } = useSelector(({ comment }: any) => ({
-    replyToggle: comment.replyToggle,
-  }));
+  const { replyToggle } = useCommentState();
+  const { initialize, changeField } = useCommentStateActions();
 
   useEffect(() => {
     return () => {
-      dispatch(initialize());
+      initialize();
     };
-  }, [dispatch]);
+  }, [initialize]);
 
-  const onChangeField = useCallback(
-    (payload) => dispatch(changeField(payload)),
-    [dispatch]
-  );
-
-  const onChangeToggle = (id: any) => {
-    return (e: any) =>
-      onChangeField({
+  const onChangeToggle = (id: string) => {
+    return () =>
+      changeField({
         key: "replyToggle",
         value: { _id: id, toggle: !replyToggle.toggle },
       });
   };
 
-  const { mutate } = useMutation(
-    (_id: string) => {
-      return axios.patch(`/api/reply/delete/${_id}`);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["getComments", postID]);
-      },
-    }
-  );
+  const { mutate } = useDeleteReply(postID);
 
   return (
     <>
@@ -75,47 +56,48 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
         replies.map((data: any) => {
           return (
             !data.isDeleted && (
-            <RepliesBox>
-              <CtCard key={data._id}>
-                <CtInfo>
-                  <CtUsername>{data.username}</CtUsername>
-                  <CtDate>
-                    <CtDot>&#183;</CtDot>
-                    {dayjs().to(dayjs(data.date))}{" "}
-                  </CtDate>
-                </CtInfo>
-                <div>
-                  <CtRepliedName>@{data.repliedName}</CtRepliedName>
-                  <CtContents
-                    dangerouslySetInnerHTML={{ __html: data.comment }}
-                  />
-                </div>
-                <CtSub>
-                  <ReplyRecommend
-                    _id={data._id}
-                    postID={data.postID}
-                    upVote={data.upVote}
-                    likeUsers={data.likeUsers}
-                  />
-                  <CtReplyButton onClick={onChangeToggle(data._id)}>
-                    <CtReplyIcon />
-                    &nbsp;답글
-                  </CtReplyButton>
-                  <CtReplyButton onClick={() => mutate(data._id)}>
-                    <CtDeleteIcon />
-                    &nbsp;삭제
-                  </CtReplyButton>
-                </CtSub>
-                <CtReply>
-                  <AddReply
-                    _id={repliedId}
-                    toggleID={data._id}
-                    postID={data.postID}
-                    repliedName={data.username}
-                  />
-                </CtReply>
-              </CtCard>
-            </RepliesBox>
+              <RepliesBox>
+                <CtCard key={data._id}>
+                  <CtInfo>
+                    <CtUsername>{data.username}</CtUsername>
+                    <CtDate>
+                      <CtDot>&#183;</CtDot>
+                      {dayjs().to(dayjs(data.date))}{" "}
+                    </CtDate>
+                  </CtInfo>
+                  <div>
+                    <CtRepliedName>@{data.repliedName}</CtRepliedName>
+                    <CtContents
+                      dangerouslySetInnerHTML={{ __html: data.comment }}
+                    />
+                  </div>
+                  <CtSub>
+                    <Recommend
+                      _id={data._id}
+                      postID={data.postID}
+                      upVote={data.upVote}
+                      likeUsers={data.likeUsers}
+                      isReply={true}
+                    />
+                    <CtReplyButton onClick={onChangeToggle(data._id)}>
+                      <CtReplyIcon />
+                      &nbsp;답글
+                    </CtReplyButton>
+                    <CtReplyButton onClick={() => mutate(data._id)}>
+                      <CtDeleteIcon />
+                      &nbsp;삭제
+                    </CtReplyButton>
+                  </CtSub>
+                  <CtReply>
+                    <AddReply
+                      _id={repliedId}
+                      toggleID={data._id}
+                      postID={data.postID}
+                      repliedName={data.username}
+                    />
+                  </CtReply>
+                </CtCard>
+              </RepliesBox>
             )
           );
         })}

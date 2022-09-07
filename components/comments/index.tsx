@@ -87,6 +87,7 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
                           postID={data.postID}
                           upVote={data.upVote}
                           likeUsers={data.likeUsers}
+                          isReply={false}
                         />
                         <CtReplyButton onClick={onChangeToggle(data._id)}>
                           <CtReplyIcon />
