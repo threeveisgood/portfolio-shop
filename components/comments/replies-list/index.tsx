@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import {
   CtCard,
   CtContents,
@@ -13,16 +13,17 @@ import {
   CtDeleteIcon,
 } from "components/styled/comments-list";
 import dayjs from "dayjs";
-import AddReply from "./add-reply";
-import styled from "styled-components";
-import Recommend from "./recommend";
+import AddReply from "components/comments/add-reply";
+import { RepliesBox, CtRepliedName } from "./replies-list.styled";
+import Recommend from "components/comments/recommend";
 import useCommentState from "hooks/state/useCommentState";
 import useCommentStateActions from "hooks/state/useCommentStateActions";
 import useDeleteReply from "hooks/useDeleteReply";
+import { Replies, Reply } from "types/comments";
 
 interface IRepliesListProps {
-  repliedId: any;
-  replies: any;
+  repliedId: string;
+  replies: Replies;
   postID: string;
 }
 
@@ -53,7 +54,8 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
   return (
     <>
       {replies &&
-        replies.map((data: any) => {
+        replies instanceof Array &&
+        replies.map((data: Reply) => {
           return (
             !data.isDeleted && (
               <RepliesBox>
@@ -106,14 +108,3 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
 };
 
 export default RepliesList;
-
-const RepliesBox = styled.div`
-  margin-left: 2.2rem;
-`;
-
-const CtRepliedName = styled.span`
-  margin-right: 0.5rem;
-  font-size: 1.2rem;
-  color: ${(props) => props.theme.gold};
-  font-weight: 700;
-`;
