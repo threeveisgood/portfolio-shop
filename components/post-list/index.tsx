@@ -1,4 +1,4 @@
-import Card from "components/post/card";
+import Card from "components/post-list/card";
 import React, { ReactElement, useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import Pagination from "components/pagination";
@@ -15,7 +15,11 @@ interface ListProps {
   listTitle?: string;
 }
 
-function List({ isSearch, isCategory, listTitle }: ListProps): ReactElement {
+function PostList({
+  isSearch,
+  isCategory,
+  listTitle,
+}: ListProps): ReactElement {
   const router = useRouter();
   const { value } = router.query;
   const [currentPage, setCurrentPage] = useState(1);
@@ -84,7 +88,7 @@ function List({ isSearch, isCategory, listTitle }: ListProps): ReactElement {
   );
 }
 
-export default List;
+export default PostList;
 
 const MainContainer = styled.div`
   max-width: 1330px;

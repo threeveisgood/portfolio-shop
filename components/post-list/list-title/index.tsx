@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import { CtTitle } from "./list-title.styled";
 
 interface IListTitleProps {
   title?: string;
@@ -18,7 +18,3 @@ const ListTitle: React.FunctionComponent<IListTitleProps> = ({
 };
 
 export default ListTitle;
-
-const CtTitle = styled.div`
-  padding: 2rem 3rem 2rem;
-`;

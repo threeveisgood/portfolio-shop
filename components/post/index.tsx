@@ -9,7 +9,7 @@ import Recommend from "components/post/recommend";
 import DeleteEdit from "./delete-edit";
 import { useSession } from "next-auth/client";
 import useIncreaseViews from "hooks/useIncreaseViews";
-import Content from "components/post/content";
+import Contents from "components/post/contents";
 
 interface PostProps {}
 
@@ -56,7 +56,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
           </TitleContainer>
 
           <DetailContainer>
-            <Content
+            <Contents
               price={price}
               category={category}
               shipping={shipping}

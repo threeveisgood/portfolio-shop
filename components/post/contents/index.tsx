@@ -29,7 +29,7 @@ import {
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
-interface ContentProps {
+interface ContentsProps {
   price: string;
   category: string;
   shipping: string;
@@ -43,7 +43,7 @@ interface ContentProps {
   body: string;
 }
 
-const Content: React.FunctionComponent<ContentProps> = ({
+const Contents: React.FunctionComponent<ContentsProps> = ({
   price,
   category,
   shipping,
@@ -120,4 +120,4 @@ const Content: React.FunctionComponent<ContentProps> = ({
   );
 };
 
-export default Content;
+export default Contents;

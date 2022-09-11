@@ -1,28 +1,27 @@
 import * as React from "react";
 import { useRouter } from "next/router";
-import styled, { css } from "styled-components";
 import {
   FiChevronLeft,
   FiChevronRight,
   FiChevronsLeft,
   FiChevronsRight,
 } from "react-icons/fi";
+import {
+  PaginateUl,
+  PaginateLi,
+  PaginateArrowButton,
+} from "./pagination.styled";
 
-interface PaginationProps {  
+interface PaginationProps {
   totalPosts: number;
-  paginate: any;
+  paginate: (pageNumber: number) => void;
   currentPage: number;
   pathName: string;
   isSearch?: boolean;
   isCategory?: boolean;
 }
 
-interface PaginateLiProps {
-  readonly page?: any;
-  readonly currentPage?: any;
-}
-
-const Pagination: React.FunctionComponent<PaginationProps> = ({  
+const Pagination: React.FunctionComponent<PaginationProps> = ({
   totalPosts,
   paginate,
   currentPage,
@@ -31,7 +30,7 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
   isCategory,
 }) => {
   const router = useRouter();
-  const { value } = router.query; 
+  const { value } = router.query;
   const pageNumbers = [];
   const postsPerPage = 20;
 
@@ -61,18 +60,18 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
           onClick={() => {
             if (currentPage != 1) {
               paginate(1);
-              
-              if(isSearch || isCategory) {
+
+              if (isSearch || isCategory) {
                 router.push({
                   pathname: pathName,
-                  query: { page: 1, value: value},
+                  query: { page: 1, value: value },
                 });
               } else {
                 router.push({
                   pathname: pathName,
-                  query: { page: 1}
+                  query: { page: 1 },
                 });
-              }     
+              }
             }
           }}
           page={null}
@@ -85,17 +84,17 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
             if (currentPage != 1) {
               paginate(currentPage - 1);
 
-              if(isSearch || isCategory) {
+              if (isSearch || isCategory) {
                 router.push({
                   pathname: pathName,
-                  query: { page: currentPage - 1, value: value},
+                  query: { page: currentPage - 1, value: value },
                 });
               } else {
                 router.push({
                   pathname: pathName,
-                  query: { page: currentPage - 1 }
+                  query: { page: currentPage - 1 },
                 });
-              }   
+              }
             }
           }}
           page={null}
@@ -109,17 +108,17 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
             onClick={() => {
               paginate(number);
 
-              if(isSearch || isCategory) {
+              if (isSearch || isCategory) {
                 router.push({
                   pathname: pathName,
-                  query: { page: number, value: value},
+                  query: { page: number, value: value },
                 });
               } else {
                 router.push({
                   pathname: pathName,
-                  query: { page: number }
+                  query: { page: number },
                 });
-              }   
+              }
             }}
             page={number}
             currentPage={currentPage}
@@ -133,17 +132,17 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
             if (currentPage < pageNumbersLastValue) {
               paginate(currentPage + 1);
 
-              if(isSearch || isCategory) {
+              if (isSearch || isCategory) {
                 router.push({
                   pathname: pathName,
-                  query: { page: currentPage + 1, value: value},
+                  query: { page: currentPage + 1, value: value },
                 });
               } else {
                 router.push({
                   pathname: pathName,
-                  query: { page: currentPage + 1 }
+                  query: { page: currentPage + 1 },
                 });
-              }   
+              }
             }
           }}
           page={null}
@@ -155,17 +154,17 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
           onClick={() => {
             paginate(pageDivider);
 
-            if(isSearch || isCategory) {
+            if (isSearch || isCategory) {
               router.push({
                 pathname: pathName,
-                query: { page: pageDivider, value: value},
+                query: { page: pageDivider, value: value },
               });
             } else {
               router.push({
                 pathname: pathName,
-                query: { page: pageDivider }
+                query: { page: pageDivider },
               });
-            }   
+            }
           }}
           page={null}
         >
@@ -177,34 +176,3 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
 };
 
 export default Pagination;
-
-const PaginateUl = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 3rem;
-`;
-
-const PaginateLi = styled.li<PaginateLiProps>`
-  color: ${(props) => props.theme.black};
-  cursor: pointer;
-  font-size: 1.5rem;
-  padding: 0.1rem 0.6rem;
-  margin: 0.1rem 0.3rem;
-  text-align: center;
-  ${(props) =>
-    props.page === props.currentPage &&
-    css`
-      border-bottom: 1px solid gray;      
-      pointer-events: none;
-      border-radius: 2px;
-      background: ${(props) => props.theme.black};
-      color: white;
-    `}
-`;
-
-const PaginateArrowButton = styled(PaginateLi)`
-  padding-top: 0.35rem;
-`;
