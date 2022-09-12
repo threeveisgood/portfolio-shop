@@ -18,7 +18,7 @@ import { BsPencilSquare } from "react-icons/bs";
 import { StyledHeader, Title, UserNav } from "./header.styled";
 
 const Header: React.FunctionComponent = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const [isProfileClick, setIsProfileClick] = useState(false);
   const [searchToggle, setSearchToggle] = useState(false);
 

@@ -1,8 +1,13 @@
-import { Field, FieldError, StyledInput, StyledLabel } from "components/styled/form";
+import {
+  Field,
+  FieldError,
+  StyledInput,
+  StyledLabel,
+} from "components/styled/form";
 import { FormSubmitButton } from "components/styled/form";
-import { useFormik, Formik, Form, Field as FormikField   } from "formik";
+import { useFormik } from "formik";
 import Container from "components/styled/container";
-import * as yup from "yup";
+import { profileFormValidationSchema } from "lib/yup";
 
 async function changePasswordHandler(passwordData: any) {
   const response = await fetch("/api/user/change-password", {
@@ -15,21 +20,8 @@ async function changePasswordHandler(passwordData: any) {
 
   const data = await response.json();
 
-  console.log(data)
+  console.log(data);
 }
-
-const vadlidationSchema = yup.object({
-  oldPassword: yup
-    .string()
-    .min(8, "8글자 이상 입력하세요")
-    .max(50, "비밀번호 길이를 줄여주세요")
-    .required("반드시 입력해야하는 항목입니다."),
-  newPassword: yup
-    .string()
-    .min(8, "8글자 이상 입력하세요")
-    .max(50, "비밀번호 길이를 줄여주세요")
-    .required("반드시 입력해야하는 항목입니다."),
-});
 
 function ProfileForm() {
   const formik = useFormik({
@@ -37,7 +29,7 @@ function ProfileForm() {
       oldPassword: "",
       newPassword: "",
     },
-    validationSchema: vadlidationSchema,
+    validationSchema: profileFormValidationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       const enteredOldPassword = values.oldPassword;
       const enteredNewPassword = values.newPassword;
@@ -54,7 +46,6 @@ function ProfileForm() {
   return (
     <Container>
       <section>
-
         <form onSubmit={formik.handleSubmit}>
           <h1>비밀번호 변경</h1>
           <Field>
