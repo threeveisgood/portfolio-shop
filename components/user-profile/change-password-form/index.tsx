@@ -1,4 +1,7 @@
+<<<<<<< HEAD:components/user-profile/change-password-form/index.tsx
 import { ReactElement } from "react";
+=======
+>>>>>>> 7bcc2b05bbb443d2a1e6e358326b07897b5440b2:components/profile/profile-form.tsx
 import {
   Field,
   FieldError,
@@ -9,11 +12,23 @@ import { FormSubmitButton } from "components/styled/form";
 import { useFormik } from "formik";
 import Container from "components/styled/container";
 import { profileFormValidationSchema } from "lib/yup";
+<<<<<<< HEAD:components/user-profile/change-password-form/index.tsx
 import useChangePassword from "hooks/useChangePassword";
+=======
+>>>>>>> 7bcc2b05bbb443d2a1e6e358326b07897b5440b2:components/profile/profile-form.tsx
 
 function ChangePasswordForm(): ReactElement {
   const { mutate } = useChangePassword();
 
+<<<<<<< HEAD:components/user-profile/change-password-form/index.tsx
+=======
+  const data = await response.json();
+
+  console.log(data);
+}
+
+function ProfileForm() {
+>>>>>>> 7bcc2b05bbb443d2a1e6e358326b07897b5440b2:components/profile/profile-form.tsx
   const formik = useFormik({
     initialValues: {
       oldPassword: "",
