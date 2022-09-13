@@ -20,7 +20,8 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: none;
-    font-family: 'NanumSquare_acR';
+    //font-family: 'NanumSquare_acR';
+    font-family: 'Quicksand';
   }
 
   img {

@@ -16,9 +16,10 @@ import {
   CtDeleteIcon,
 } from "components/styled/comments-list";
 import AddReply from "./add-reply";
-import RepliesList from "./replies-list";
-import AddComments from "./add-comment";
-import Recommend from "./recommend";
+import { CommentCt, ListBox } from "components/comments/comments.styled";
+import RepliesList from "components/comments/replies-list";
+import AddComments from "components/comments/add-comment";
+import Recommend from "components/comments/recommend";
 import useComments from "hooks/useComments";
 import useCommentState from "hooks/state/useCommentState";
 import useCommentStateActions from "hooks/state/useCommentStateActions";
@@ -128,15 +129,3 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
 };
 
 export default Comments;
-
-const CommentCt = styled.div`
-  border-top: 1px solid ${(props) => props.theme.lowgray};
-  margin-top: 1rem;
-  padding-top: 1rem;
-`;
-
-const ListBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 1.3rem;
-`;

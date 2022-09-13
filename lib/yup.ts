@@ -16,7 +16,7 @@ export const createUserVadlidationSchema = yup.object({
     .required("반드시 입력해야하는 항목입니다."),
 });
 
-export const authFormValidationSchemna = yup.object({
+export const authFormValidationSchema = yup.object({
   email: yup.string().required("반드시 입력해야하는 항목입니다."),
   password: yup.string().required("반드시 입력해야하는 항목입니다."),
 });
@@ -27,4 +27,17 @@ export const addCommentSchema = yup.object().shape({
     .min(2, "2글자 이상 입력해주세요.")
     .max(500, "500자 제한을 초과하였습니다.")
     .required("내용을 입력해주세요."),
+});
+
+export const profileFormValidationSchema = yup.object({
+  oldPassword: yup
+    .string()
+    .min(8, "8글자 이상 입력하세요")
+    .max(50, "비밀번호 길이를 줄여주세요")
+    .required("반드시 입력해야하는 항목입니다."),
+  newPassword: yup
+    .string()
+    .min(8, "8글자 이상 입력하세요")
+    .max(50, "비밀번호 길이를 줄여주세요")
+    .required("반드시 입력해야하는 항목입니다."),
 });

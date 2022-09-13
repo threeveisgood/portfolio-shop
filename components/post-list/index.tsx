@@ -1,6 +1,5 @@
-import Card from "components/post/card";
+import Card from "components/post-list/card";
 import React, { ReactElement, useState, useEffect, useCallback } from "react";
-import styled from "styled-components";
 import Pagination from "components/pagination";
 import { useSearch } from "hooks/useSearch";
 import { useRouter } from "next/router";
@@ -8,6 +7,7 @@ import { usePosts } from "hooks/usePosts";
 import LoadingSpinner from "components/styled/loading-spinner";
 import { useCategory } from "hooks/useCategory";
 import ListTitle from "./list-title";
+import { MainContainer, CardUl } from "./post-list.styled";
 
 interface ListProps {
   isSearch?: boolean;
@@ -15,7 +15,11 @@ interface ListProps {
   listTitle?: string;
 }
 
-function List({ isSearch, isCategory, listTitle }: ListProps): ReactElement {
+function PostList({
+  isSearch,
+  isCategory,
+  listTitle,
+}: ListProps): ReactElement {
   const router = useRouter();
   const { value } = router.query;
   const [currentPage, setCurrentPage] = useState(1);
@@ -84,18 +88,4 @@ function List({ isSearch, isCategory, listTitle }: ListProps): ReactElement {
   );
 }
 
-export default List;
-
-const MainContainer = styled.div`
-  max-width: 1330px;
-  margin: 0 auto;
-`;
-
-const CardUl = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  gap: 0.3rem;
-
-  justify-content: center;
-`;
+export default PostList;

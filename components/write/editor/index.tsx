@@ -1,9 +1,6 @@
-import React, { useRef, useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
-import Responsive from "components/styled/responsive";
 import "react-quill/dist/quill.snow.css";
-import styled from "styled-components";
-import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import { changeField, initialize } from "modules/write";
 import Container from "components/styled/container";
@@ -14,6 +11,13 @@ import {
   FieldContainer,
 } from "components/styled/form";
 import FilesUpload from "components/upload/files-upload";
+import {
+  EditorBlock,
+  TitleInput,
+  QuillWrapper,
+  CategorySelect,
+} from "./editor.styled";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const options = [
   { value: "식품", label: "식품" },
@@ -24,22 +28,8 @@ const options = [
   { value: "패션", label: "패션" },
 ];
 
-const ReactQuill = dynamic(
-  async () => {
-    const { default: RQ } = await import("react-quill");
-
-    return ({ forwardedRef, ...props }: any) => (
-      <RQ ref={forwardedRef} {...props} />
-    );
-  },
-  {
-    ssr: false,
-  }
-);
-
 const Editor: React.FunctionComponent = () => {
   const dispatch = useDispatch();
-  const quillRef = useRef<any>(null);
 
   const {
     title,
@@ -66,6 +56,8 @@ const Editor: React.FunctionComponent = () => {
     [dispatch]
   );
 
+  const onChangeFiel = (payload: string) => changeField(payload);
+
   const handleChange = (key: string) => {
     return (e: any) => onChangeField({ key: key, value: e.target.value });
   };
@@ -89,9 +81,9 @@ const Editor: React.FunctionComponent = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(initialize());
+      initialize();
     };
-  }, [dispatch]);
+  }, [initialize]);
 
   return (
     <Container>
@@ -175,7 +167,6 @@ const Editor: React.FunctionComponent = () => {
             theme="snow"
             placeholder="내용을 입력하세요"
             modules={modules}
-            forwardedRef={quillRef}
             onChange={onChangeText}
             defaultValue={!!originalPostId ? body : ``}
           />
@@ -186,49 +177,3 @@ const Editor: React.FunctionComponent = () => {
 };
 
 export default Editor;
-
-const EditorBlock = styled(Responsive)`
-  padding: 3rem 0 1rem;
-`;
-
-const TitleInput = styled.input`
-  background: inherit;
-  font-size: 2.3rem;
-  outline: none;
-  padding-bottom: 0.5rem;
-  border: none;
-  border-bottom: 1px solid ${(props) => props.theme.black};
-  margin-bottom: 1rem;
-  width: 100%;
-
-  ::placeholder {
-    color: ${(props) => props.theme.black};
-  }
-`;
-
-const QuillWrapper = styled.div`
-  margin-top: 3rem;
-  .ql-editor {
-    padding: 0;
-    min-height: 320px;
-    font-size: 1.125;
-    line-height: 1.5;
-  }
-  .ql-editor.ql-blank::before {
-    left: 0px;
-  }
-`;
-
-const CategorySelect = styled(Select)`
-  width: 30rem;
-  font-weight: 700;
-  border-color: ${(props) => props.theme.black};
-
-  & > div {
-    font-size: 1.2rem;
-  }
-
-  & > div > div > div {
-    color: ${(props) => props.theme.black};
-  }
-`;

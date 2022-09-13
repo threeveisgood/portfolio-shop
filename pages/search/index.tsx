@@ -2,12 +2,12 @@ import React, { ReactElement } from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { GetStaticProps } from "next";
 import { fetchSearch } from "hooks/useSearch";
-import List from "components/post/list";
+import PostList from "components/post-list";
 
 export default function search(): ReactElement | string {
   return (
     <>
-     <List isSearch={true} />
+      <PostList isSearch={true} />
     </>
   );
 }

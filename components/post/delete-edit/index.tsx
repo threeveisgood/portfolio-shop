@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import AskRemoveModal from "components/post/AskRemoveModal";
-import { buttonStyle } from "components/styled/button";
+import AskRemoveModal from "components/post/ask-remove-modal";
 import { useRouter } from "next/router";
 import useDeletePost from "hooks/useDeletePost";
 import useWriteStateActions from "hooks/state/useWriteStateActions";
+import { DeleteEditCt, ButtonCt, Button } from "./delete-edit.styled";
 
 interface IDeleteEditProps {
   postID: string;
@@ -20,7 +19,7 @@ interface IDeleteEditProps {
   body: string;
   viewsCount: number;
   likeCount: number;
-  likeUsers: string[];
+  likeUsers: string[] | undefined;
   repliesCount: number;
   email: string;
   _id: string;
@@ -109,24 +108,3 @@ const DeleteEdit: React.FunctionComponent<IDeleteEditProps> = ({
 };
 
 export default DeleteEdit;
-
-const DeleteEditCt = styled.div`
-  margin-top: -2.2rem;
-`;
-const ButtonCt = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const Button = styled.button`
-  ${buttonStyle}
-  background: transparent;
-  color: ${(props) => props.theme.black};
-  transition: 0.3s;
-  font-size: 1.2rem;
-
-  &:hover {
-    color: #fff;
-    background: ${(props) => props.theme.black};
-  }
-`;

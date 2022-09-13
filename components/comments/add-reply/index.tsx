@@ -1,7 +1,6 @@
 import { Field } from "components/styled/form";
 import React, { useEffect, useRef } from "react";
 import { Formik, Form } from "formik";
-import styled from "styled-components";
 import {
   ButtonBox,
   SubmitButton,
@@ -54,7 +53,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
     (replyToggle._id === "" ||
       replyToggle._id === (toggleID ? toggleID : _id)) &&
     replyToggle.toggle === true ? (
-    <ReplyBox>
+    <div>
       <Formik
         initialValues={{
           comment: "",
@@ -94,12 +93,10 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
           </ButtonBox>
         </Form>
       </Formik>
-    </ReplyBox>
+    </div>
   ) : (
     <div></div>
   );
 };
 
 export default AddReply;
-
-const ReplyBox = styled.div``;

@@ -12,7 +12,7 @@ import {
 } from "components/styled/form";
 import { useFormik } from "formik";
 import Container from "components/styled/container";
-import { authFormValidationSchemna } from "lib/yup";
+import { authFormValidationSchema } from "lib/yup";
 
 function AuthForm() {
   const router = useRouter();
@@ -25,7 +25,7 @@ function AuthForm() {
       password: "",
       name: "",
     },
-    validationSchema: authFormValidationSchemna,
+    validationSchema: authFormValidationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       const enteredEmail = values.email;
       const enteredPassword = values.password;

@@ -1,7 +1,7 @@
 import { getSession } from "next-auth/client";
 import React, { ReactElement } from "react";
 
-import UserProfile from "components/profile/user-profile";
+import UserProfile from "components/user-profile";
 
 export default function Profile(): ReactElement {
   return <UserProfile />;

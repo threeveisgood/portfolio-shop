@@ -1,10 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-import { StyledButton } from "components/styled/button";
 import { useSelector } from "react-redux";
 import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { WriteActionButtonsBlock, Button } from "./write-action-buttons-styled";
 
 const bson = require("bson");
 
@@ -103,19 +102,3 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
   };
 
 export default WriteActionButtons;
-
-const WriteActionButtonsBlock = styled.div`
-  display: flex;
-  margin: 1rem 0 3rem;
-  button + button {
-    margin-left: 0.5rem;
-  }
-  justify-content: center;
-`;
-
-const Button = styled(StyledButton)`
-  font-size: 1.5rem;
-  & + & {
-    margin-left: 0.8rem;
-  }
-`;

@@ -7,7 +7,7 @@ export const theme: DefaultTheme = {
   white: "#e9e9e9",
   black: "#474747",
   lowblack: "#222222",
-  gray: "#5c5b5b",
+  gray: "#2F4F4F",
   lowgray: "#d6d6d6",
   gold: "#a6946d",
   padding: "12px",

@@ -1,7 +1,12 @@
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changeField, setImageLinks, setOriginalPost } from "modules/write";
+import {
+  initialize,
+  changeField,
+  setImageLinks,
+  setOriginalPost,
+} from "modules/write";
 
 export default function useWriteStateActions() {
   const dispatch = useDispatch();
@@ -9,7 +14,7 @@ export default function useWriteStateActions() {
   return useMemo(
     () =>
       bindActionCreators(
-        { changeField, setImageLinks, setOriginalPost },
+        { initialize, changeField, setImageLinks, setOriginalPost },
         dispatch
       ),
     [dispatch]

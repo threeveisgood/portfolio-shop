@@ -1,13 +1,13 @@
 import React, { ReactElement } from "react";
 import { dehydrate, QueryClient } from "react-query";
 import { GetStaticProps } from "next";
-import List from "components/post/list";
+import PostList from "components/post-list";
 import { fetchCategory } from "hooks/useCategory";
 
 export default function category(): ReactElement | string {
   return (
     <>
-      <List isCategory={true} />
+      <PostList isCategory={true} />
     </>
   );
 }

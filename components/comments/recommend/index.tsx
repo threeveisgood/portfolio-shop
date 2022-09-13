@@ -21,7 +21,7 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
   postID,
   isReply,
 }) => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
   let isAlready;
   let isPlus;
 
