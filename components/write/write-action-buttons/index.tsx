@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { WriteActionButtonsBlock, Button } from "./write-action-buttons-styled";
+import useWriteState from "hooks/state/useWriteState";
 
 const bson = require("bson");
 
@@ -26,18 +27,7 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
       shipping,
       category,
       originalPostId,
-    } = useSelector(({ write }: any) => ({
-      title: write.title,
-      body: write.body,
-      price: write.price,
-      productURL: write.productURL,
-      imageLinks: write.imageLinks,
-      username: write.username,
-      store: write.store,
-      shipping: write.shipping,
-      category: write.category,
-      originalPostId: write.originalPostId,
-    }));
+    } = useWriteState();
 
     const mutation = useMutation(
       (post: any) =>

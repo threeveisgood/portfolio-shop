@@ -1,8 +1,7 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
-import { useDispatch, useSelector } from "react-redux";
-import { changeField, initialize } from "modules/write";
+import { useSelector } from "react-redux";
 import Container from "components/styled/container";
 import {
   Field,
@@ -17,6 +16,9 @@ import {
   QuillWrapper,
   CategorySelect,
 } from "./editor.styled";
+import useWriteStateActions from "hooks/state/useWriteStateActions";
+import { Payload } from "types/redux-state";
+import useWriteState from "hooks/state/useWriteState";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const options = [
@@ -29,7 +31,7 @@ const options = [
 ];
 
 const Editor: React.FunctionComponent = () => {
-  const dispatch = useDispatch();
+  const { initialize, changeField } = useWriteStateActions();
 
   const {
     title,
@@ -40,32 +42,20 @@ const Editor: React.FunctionComponent = () => {
     store,
     category,
     originalPostId,
-  } = useSelector(({ write }: any) => ({
-    title: write.title,
-    body: write.body,
-    price: write.price,
-    productURL: write.productURL,
-    shipping: write.shipping,
-    store: write.store,
-    category: write.category,
-    originalPostId: write.originalPostId,
-  }));
+  } = useWriteState();
 
-  const onChangeField = useCallback(
-    (payload) => dispatch(changeField(payload)),
-    [dispatch]
-  );
-
-  const onChangeFiel = (payload: string) => changeField(payload);
+  const onChangeField = (payload: Payload) => changeField(payload);
 
   const handleChange = (key: string) => {
-    return (e: any) => onChangeField({ key: key, value: e.target.value });
+    return (e: React.ChangeEvent<HTMLInputElement>) =>
+      onChangeField({ key: key, value: e.target.value });
   };
 
-  const onChangeText = (text: any) => {
+  const onChangeQuill = (text: string) => {
     onChangeField({ key: "body", value: text });
   };
 
+  //라이브러리에 가져다 쓸 타입이 없음 (any로 선언되있음),확인 후 수정 필요
   const onChangeCategory = (category: any) => {
     onChangeField({ key: "category", value: category.value });
   };
@@ -167,7 +157,7 @@ const Editor: React.FunctionComponent = () => {
             theme="snow"
             placeholder="내용을 입력하세요"
             modules={modules}
-            onChange={onChangeText}
+            onChange={onChangeQuill}
             defaultValue={!!originalPostId ? body : ``}
           />
         </QuillWrapper>
