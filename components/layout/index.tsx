@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import NavBar from "./header/nav-bar";
-import Header from "./header";
+import NavBar from "../header/nav-bar";
+import Header from "../header";
 import { Toaster } from "react-hot-toast";
 
 type Props = {

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { StyledButton } from "components/styled/button";
+import { StyledButton } from "components/common/button";
 
 export const FormTitle = styled.h1`
   padding-bottom: 1.7rem;

@@ -41,3 +41,7 @@ export const profileFormValidationSchema = yup.object({
     .max(50, "비밀번호 길이를 줄여주세요")
     .required("반드시 입력해야하는 항목입니다."),
 });
+
+export const searchValidationSchema = yup.object({
+  search: yup.string().max(50).required("Required"),
+});

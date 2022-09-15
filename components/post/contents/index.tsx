@@ -3,7 +3,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { MdRemoveRedEye } from "react-icons/md";
 import { BiCommentDetail } from "react-icons/bi";
 import Link from "next/link";
-import StyledCarousel from "components/styled/carousel";
+import StyledCarousel from "components/common/carousel";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";

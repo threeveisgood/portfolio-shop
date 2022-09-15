@@ -6,13 +6,13 @@ import { CgProfile } from "react-icons/cg";
 import { HiOutlineLogout } from "react-icons/hi";
 import { AiOutlineUser } from "react-icons/ai";
 import { Search } from "components/search";
-import { AuthButton } from "components/styled/button";
+import { AuthButton } from "components/common/button";
 import {
   DropdownText,
   ProfileDropdown,
   ProfileDropdownMenu,
-} from "components/styled/dropdown";
-import { UserProfileIcon } from "components/styled/icons";
+} from "components/common/dropdown";
+import { UserProfileIcon } from "components/common/icons";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 import { StyledHeader, Title, UserNav } from "./header.styled";

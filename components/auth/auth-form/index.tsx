@@ -9,9 +9,9 @@ import {
   FieldError,
   FormTitle,
   FormErrorMessage,
-} from "components/styled/form";
+} from "components/common/form";
 import { useFormik } from "formik";
-import Container from "components/styled/container";
+import Container from "components/common/container";
 import { authFormValidationSchema } from "lib/yup";
 
 function AuthForm() {

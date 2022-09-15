@@ -1,4 +1,4 @@
-import { Field } from "components/styled/form";
+import { Field } from "components/common/form";
 import React from "react";
 import { Formik, Field as FormikField, Form } from "formik";
 import useAddComment from "hooks/useAddComment";

@@ -4,10 +4,10 @@ import {
   FieldError,
   StyledInput,
   StyledLabel,
-} from "components/styled/form";
-import { FormSubmitButton } from "components/styled/form";
+} from "components/common/form";
+import { FormSubmitButton } from "components/common/form";
 import { useFormik } from "formik";
-import Container from "components/styled/container";
+import Container from "components/common/container";
 import { profileFormValidationSchema } from "lib/yup";
 import useChangePassword from "hooks/useChangePassword";
 

@@ -6,11 +6,11 @@ import {
   FormSubmitButton,
   FieldError,
   FormTitle,
-} from "components/styled/form";
+} from "components/common/form";
 import { useFormik } from "formik";
-import Container from "components/styled/container";
+import Container from "components/common/container";
 import useCreateUser from "hooks/useCreateUser";
-import LoadingSpinner from "components/styled/loading-spinner";
+import LoadingSpinner from "components/common/loading-spinner";
 import { createUserVadlidationSchema } from "lib/yup";
 
 function SignUpForm() {

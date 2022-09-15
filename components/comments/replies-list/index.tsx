@@ -11,7 +11,7 @@ import {
   CtReplyIcon,
   CtReply,
   CtDeleteIcon,
-} from "components/styled/comments-list";
+} from "components/common/comments-list";
 import dayjs from "dayjs";
 import AddReply from "components/comments/add-reply";
 import { RepliesBox, CtRepliedName } from "./replies-list.styled";

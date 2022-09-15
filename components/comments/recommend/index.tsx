@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CtVoteButton, CtVoteCount } from "components/styled/comments-list";
+import { CtVoteButton, CtVoteCount } from "components/common/comments-list";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
 import { useSession } from "next-auth/client";
 import useCommentRecommend from "hooks/useCommentRecommend";

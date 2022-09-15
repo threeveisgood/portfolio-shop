@@ -12,7 +12,7 @@ export default function search(): ReactElement | string {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const page = (context.params?.page as string) || "1";
   const value = context.params?.value;
 

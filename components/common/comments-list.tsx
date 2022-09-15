@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SubmitButton } from "components/styled/comment";
+import { SubmitButton } from "components/common/comment";
 import { VscComment } from "react-icons/vsc";
 import { BsReplyFill } from "react-icons/bs";
 import { RiDeleteBack2Line } from "react-icons/ri";
@@ -10,7 +10,7 @@ export const CtCard = styled.div`
   padding: 1rem 0rem;
 `;
 
-export const CtInfo = styled.div` 
+export const CtInfo = styled.div`
   display: flex;
   margin-bottom: 1.1rem;
 `;
@@ -86,6 +86,6 @@ export const CtDeleteIcon = styled(RiDeleteBack2Line)`
 export const CtReply = styled.div``;
 
 export const CtReplyTailIcon = styled(BsReplyFill)`
-  transform: rotate( 180deg );
+  transform: rotate(180deg);
   font-size: 1.7rem;
-`
+`;

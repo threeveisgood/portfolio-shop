@@ -1,4 +1,4 @@
-import { StyledButton } from "components/styled/button";
+import { StyledButton } from "components/common/button";
 import * as React from "react";
 import styled from "styled-components";
 

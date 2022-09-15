@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledButton } from "components/styled/button";
+import { StyledButton } from "components/common/button";
 
 export const WriteActionButtonsBlock = styled.div`
   display: flex;

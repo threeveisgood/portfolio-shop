@@ -14,7 +14,7 @@ import {
   CtReplyIcon,
   CtReply,
   CtDeleteIcon,
-} from "components/styled/comments-list";
+} from "components/common/comments-list";
 import AddReply from "./add-reply";
 import { CommentCt, ListBox } from "components/comments/comments.styled";
 import RepliesList from "components/comments/replies-list";

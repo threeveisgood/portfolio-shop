@@ -1,4 +1,4 @@
-import { Field } from "components/styled/form";
+import { Field } from "components/common/form";
 import React, { useEffect, useRef } from "react";
 import { Formik, Form } from "formik";
 import {
@@ -6,7 +6,7 @@ import {
   SubmitButton,
   CommentTextArea,
   CommentLabel,
-} from "components/styled/comment";
+} from "components/common/comment";
 import { addCommentSchema } from "lib/yup";
 import useAddReply from "hooks/useAddReply";
 import { CommentFormData } from "types/comments";

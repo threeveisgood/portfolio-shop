@@ -1,8 +1,9 @@
 import React, { ReactElement } from "react";
-import Responsive from "components/styled/responsive";
+import Responsive from "components/common/responsive";
 import Editor from "components/write/editor";
 import WriteActionButtons from "components/write/write-action-buttons";
 import { getSession } from "next-auth/client";
+import { GetServerSideProps } from "next";
 
 export default function addPost(): ReactElement {
   return (
@@ -13,7 +14,7 @@ export default function addPost(): ReactElement {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
 
   if (!session) {
@@ -28,4 +29,4 @@ export async function getServerSideProps(context: any) {
   return {
     props: { session },
   };
-}
+};

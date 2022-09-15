@@ -1,3 +1,14 @@
+interface Write {
+  title: string;
+  body: string;
+  price: string;
+  productURL: string;
+  imageLinks: string[];
+  store: string;
+  shipping: string;
+  category: string;
+}
+
 export interface WriteState {
   write: {
     title: string;
@@ -13,15 +24,11 @@ export interface WriteState {
   };
 }
 
-export interface Write {
-  title: string;
-  body: string;
-  price: string;
-  productURL: string;
-  imageLinks: string[];
+export interface WritePublish extends Write {
   username: string;
-  shipping: string;
-  store: string;
-  category: string;
   _id: string;
+}
+
+export interface writeEdit extends Write {
+  originalPostId: string;
 }

@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import { Field as FormikField } from "formik";
-import {    
-    InputStyle,    
-    StyledLabel,
-  } from "components/styled/form";
-import { LinearButton } from "components/styled/button";
+import { InputStyle, StyledLabel } from "components/common/form";
+import { LinearButton } from "components/common/button";
 
 export const AddCommentContainer = styled.div`
   display: flex;
-  flex-direction: column;      
+  flex-direction: column;
 `;
 
 export const ButtonBox = styled.div`

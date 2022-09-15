@@ -4,7 +4,7 @@ import Pagination from "components/pagination";
 import { useSearch } from "hooks/useSearch";
 import { useRouter } from "next/router";
 import { usePosts } from "hooks/usePosts";
-import LoadingSpinner from "components/styled/loading-spinner";
+import LoadingSpinner from "components/common/loading-spinner";
 import { useCategory } from "hooks/useCategory";
 import ListTitle from "./list-title";
 import { MainContainer, CardUl } from "./post-list.styled";

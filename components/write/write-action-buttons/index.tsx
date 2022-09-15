@@ -1,10 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/router";
-import axios from "axios";
 import { WriteActionButtonsBlock, Button } from "./write-action-buttons-styled";
 import useWriteState from "hooks/state/useWriteState";
+import useRewritePost from "hooks/useRewritePost";
+import useWritePost from "hooks/useWritePost";
 
 const bson = require("bson");
 
@@ -13,7 +12,6 @@ interface IWriteActionButtonsProps {}
 const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
   () => {
     const router = useRouter();
-    const queryClient = useQueryClient();
     const _id = bson.ObjectId();
 
     const {
@@ -29,50 +27,50 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
       originalPostId,
     } = useWriteState();
 
-    const mutation = useMutation(
-      (post: any) =>
-        !!originalPostId
-          ? axios.patch("/api/rewrite-post", post)
-          : axios.post("/api/add-post", post),
-      {
-        onError: () => {},
-        onSuccess: () => {
-          !!originalPostId
-            ? (queryClient.invalidateQueries(["getPost", originalPostId]),
-              router.back())
-            : null;
-          router.push(`/post/${_id}`);
-        },
-      }
-    );
+    const { mutate: write } = useWritePost();
+    const { mutate: rewrite } = useRewritePost(originalPostId);
 
-    const onPublish = (e: any) => {
-      mutation.mutate({
-        title,
-        body,
-        price,
-        productURL,
-        imageLinks,
-        username,
-        store,
-        shipping,
-        category,
-        _id,
-      });
+    const onPublish = () => {
+      write(
+        {
+          title,
+          body,
+          price,
+          productURL,
+          imageLinks,
+          username,
+          store,
+          shipping,
+          category,
+          _id,
+        },
+        {
+          onSuccess: () => {
+            router.push(`/post/${_id}`);
+          },
+        }
+      );
     };
 
-    const onEdit = (e: any) => {
-      mutation.mutate({
-        title,
-        body,
-        price,
-        productURL,
-        imageLinks,
-        store,
-        shipping,
-        category,
-        originalPostId,
-      });
+    const onEdit = () => {
+      rewrite(
+        {
+          title,
+          body,
+          price,
+          productURL,
+          imageLinks,
+          store,
+          shipping,
+          category,
+          originalPostId,
+        },
+        {
+          onSuccess: () => {
+            router.back();
+          },
+        }
+      );
     };
 
     const onCancel = () => {

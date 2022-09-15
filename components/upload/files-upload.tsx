@@ -3,18 +3,16 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { UiFileInputButton } from "components/upload/ui-file-input-button";
 import { ChangeToThumbnail, ChangeToFrontURL } from "lib/change-to-thumbnail";
-import { setImageLinks } from "modules/write";
 import styled from "styled-components";
+import useWriteStateActions from "hooks/state/useWriteStateActions";
 
 const FilesUpload = () => {
   const dispatch = useDispatch();
   const [thumb, setThumb] = useState<string[]>([]);
-  const [progress, setProgress] = useState<number>(0);
+  const [progress, setProgress] = useState(0);
+  const { setImageLinks } = useWriteStateActions();
 
-  const addImageLinks: any = useCallback(
-    (link: string) => dispatch(setImageLinks(link)),
-    [dispatch]
-  );
+  const addImageLinks = (links: string[]) => dispatch(setImageLinks(links));
 
   const onChange = useCallback(
     async (formData: FormData) => {
@@ -24,12 +22,12 @@ const FilesUpload = () => {
           setProgress(Math.round((event.loaded * 100) / event.total));
         },
       };
-      axios.post<any>("/api/upload-files", formData, config).then((res) => {
+      axios.post("/api/upload-files", formData, config).then((res) => {
         const url = ChangeToFrontURL(res.data);
         setThumb([...thumb, ...res.data]);
-        
+
         addImageLinks(url);
-      })
+      });
     },
     [thumb]
   );
@@ -52,7 +50,6 @@ const FilesUpload = () => {
           thumb.map((item: string, i: number) => {
             const changedItem = ChangeToThumbnail(item);
 
-            console.log("item", item);
             return (
               <ThumbnailLi key={i}>
                 <img src={changedItem} width="100" alt="Uploaded Image" />
@@ -66,9 +63,7 @@ const FilesUpload = () => {
 
 export default React.memo(FilesUpload);
 
-export const ThumbnailUl = styled.ul`
- 
-`;
+export const ThumbnailUl = styled.ul``;
 
 export const ThumbnailLi = styled.li`
   display: inline;
@@ -76,7 +71,7 @@ export const ThumbnailLi = styled.li`
 `;
 
 const PrimaryP = styled.p`
-  ${props => props.theme.black};
+  ${(props) => props.theme.black};
   font-size: 1.2rem;
   margin-bottom: 1rem;
-`
+`;

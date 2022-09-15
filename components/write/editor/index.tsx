@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import { useSelector } from "react-redux";
-import Container from "components/styled/container";
+import Container from "components/common/container";
 import {
   Field,
   StyledInput,
   StyledLabel,
   FieldContainer,
-} from "components/styled/form";
+} from "components/common/form";
 import FilesUpload from "components/upload/files-upload";
 import {
   EditorBlock,

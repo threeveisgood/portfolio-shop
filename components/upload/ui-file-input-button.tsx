@@ -1,4 +1,4 @@
-import { StyledButton } from "components/styled/button";
+import { StyledButton } from "components/common/button";
 import React from "react";
 import styled from "styled-components";
 
@@ -52,17 +52,12 @@ export const UiFileInputButton: React.FC<IProps> = (props) => {
   );
 };
 
-UiFileInputButton.defaultProps = {
-  acceptedFileTypes: "",
-  allowMultipleFiles: false,
-};
-
 const UploadButton = styled(StyledButton)`
   margin-top: 1rem;
-  font-size: 1.2rem;  
-  background: ${props => props.theme.black};
-`
+  font-size: 1.2rem;
+  background: ${(props) => props.theme.black};
+`;
 
 const UploadForm = styled.form`
   margin-bottom: 2rem;
-`
+`;

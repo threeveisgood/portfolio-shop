@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexBox } from "components/styled/flexbox";
+import { FlexBox } from "components/common/flexbox";
 
 export const FlexBoxColumn = styled(FlexBox)`
   margin-top: 5rem;

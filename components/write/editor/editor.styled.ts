@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Responsive from "components/styled/responsive";
+import Responsive from "components/common/responsive";
 import Select from "react-select";
 
 export const EditorBlock = styled(Responsive)`

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { buttonStyle } from "components/styled/button";
+import { buttonStyle } from "components/common/button";
 
 export const DeleteEditCt = styled.div`
   margin-top: -2.2rem;
