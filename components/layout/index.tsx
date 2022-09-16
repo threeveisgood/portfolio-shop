@@ -1,7 +1,7 @@
-import styled from "styled-components";
 import NavBar from "../header/nav-bar";
 import Header from "../header";
 import { Toaster } from "react-hot-toast";
+import { Container } from "./layout.styled";
 
 type Props = {
   children: JSX.Element;
@@ -26,7 +26,3 @@ const Layout = ({ children }: Props) => {
 };
 
 export default Layout;
-
-const Container = styled.div`
-  padding: 3rem 0;
-`;

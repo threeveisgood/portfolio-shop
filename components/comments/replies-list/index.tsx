@@ -20,6 +20,8 @@ import useCommentState from "hooks/state/useCommentState";
 import useCommentStateActions from "hooks/state/useCommentStateActions";
 import useDeleteReply from "hooks/useDeleteReply";
 import { Replies, Reply } from "types/comments";
+import { useSession } from "next-auth/client";
+import { toast } from "react-hot-toast";
 
 interface IRepliesListProps {
   repliedId: string;
@@ -32,8 +34,10 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
   replies,
   postID,
 }) => {
+  const [session] = useSession();
   const { replyToggle } = useCommentState();
   const { initialize, changeField } = useCommentStateActions();
+  const isOwnReply = session && session.user?.email;
 
   useEffect(() => {
     return () => {
@@ -42,11 +46,14 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
   }, [initialize]);
 
   const onChangeToggle = (id: string) => {
-    return () =>
+    if (session) {
       changeField({
         key: "replyToggle",
         value: { _id: id, toggle: !replyToggle.toggle },
       });
+    } else {
+      toast("답글을 입력하시려면 로그인 해주세요!");
+    }
   };
 
   const { mutate } = useDeleteReply(postID);
@@ -81,14 +88,16 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
                       likeUsers={data.likeUsers}
                       isReply={true}
                     />
-                    <CtReplyButton onClick={onChangeToggle(data._id)}>
+                    <CtReplyButton onClick={() => onChangeToggle(data._id)}>
                       <CtReplyIcon />
                       &nbsp;답글
                     </CtReplyButton>
-                    <CtReplyButton onClick={() => mutate(data._id)}>
-                      <CtDeleteIcon />
-                      &nbsp;삭제
-                    </CtReplyButton>
+                    {isOwnReply === data.email && (
+                      <CtReplyButton onClick={() => mutate(data._id)}>
+                        <CtDeleteIcon />
+                        &nbsp;삭제
+                      </CtReplyButton>
+                    )}
                   </CtSub>
                   <CtReply>
                     <AddReply

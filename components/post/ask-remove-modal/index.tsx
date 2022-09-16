@@ -1,4 +1,4 @@
-import AskModal from "components/common/askModal";
+import AskModal from "components/common/ask-modal";
 import * as React from "react";
 
 interface IAskRemoveModalProps {

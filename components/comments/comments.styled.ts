@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const CommentCt = styled.div`
+  font-family: auto;
   border-top: 1px solid ${(props) => props.theme.lowgray};
   margin-top: 1rem;
   padding-top: 1rem;

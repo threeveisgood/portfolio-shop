@@ -1,16 +1,4 @@
 import styled from "styled-components";
-import * as React from "react";
-
-const LoadingSpinner: React.FunctionComponent = () => {
-  return (
-    <LoadingCt>
-      <Spinner />
-    </LoadingCt>
-  );
-};
-
-export default LoadingSpinner;
-
 export const LoadingCt = styled.div`
   width: 100%;
   height: 50vh;

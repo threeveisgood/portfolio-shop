@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import { LayoutContainer } from "./container.styled";
 
 interface ContainerProps {
   children: JSX.Element;
@@ -12,9 +12,3 @@ const Container: React.FunctionComponent<ContainerProps> = ({
 };
 
 export default Container;
-
-const LayoutContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-`;

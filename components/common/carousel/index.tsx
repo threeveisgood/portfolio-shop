@@ -1,8 +1,6 @@
-import styled from "styled-components";
-
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
 import { Carousel } from "react-responsive-carousel";
+import { CarouselContainer } from "./carousel.styled";
 
 interface Props {
   [imageLinks: string]: any;
@@ -26,10 +24,3 @@ const StyledCarousel: React.FunctionComponent<Props> = ({ imageLinks }) => {
 };
 
 export default StyledCarousel;
-
-const CarouselContainer = styled.div`
-  display: flex;
-  max-width: 60rem;
-  align-items: center;
-  margin: 0 auto;
-`;

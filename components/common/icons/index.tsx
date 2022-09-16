@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { ProfileDropdown, ProfileDropdownMenu } from "./dropdown";
+import { ProfileDropdown, ProfileDropdownMenu } from "../dropdown";
 
 interface ProfileMenuProps {
   readonly isProfileClick?: boolean;

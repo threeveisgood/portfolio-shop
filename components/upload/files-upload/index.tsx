@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { UiFileInputButton } from "components/upload/ui-file-input-button";
 import { ChangeToThumbnail, ChangeToFrontURL } from "lib/change-to-thumbnail";

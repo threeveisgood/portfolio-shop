@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
@@ -24,6 +23,8 @@ import useComments from "hooks/useComments";
 import useCommentState from "hooks/state/useCommentState";
 import useCommentStateActions from "hooks/state/useCommentStateActions";
 import useDeleteComment from "hooks/useDeleteComment";
+import { useSession } from "next-auth/client";
+import { toast } from "react-hot-toast";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -33,6 +34,7 @@ interface CommentsListProps {
 }
 
 const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
+  const [session] = useSession();
   const {
     isSuccess,
     data: commentsData,
@@ -41,6 +43,7 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
   } = useComments(postID);
   const { replyToggle } = useCommentState();
   const { initialize, changeField } = useCommentStateActions();
+  const isOwnComment = session && session.user?.email;
 
   useEffect(() => {
     return () => {
@@ -49,11 +52,14 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
   }, [initialize]);
 
   const onChangeToggle = (id: string) => {
-    return () =>
+    if (session) {
       changeField({
         key: "replyToggle",
         value: { _id: id, toggle: !replyToggle.toggle },
       });
+    } else {
+      toast("답글을 입력하시려면 로그인 해주세요!");
+    }
   };
 
   const { mutate } = useDeleteComment(postID);
@@ -90,14 +96,16 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
                           likeUsers={data.likeUsers}
                           isReply={false}
                         />
-                        <CtReplyButton onClick={onChangeToggle(data._id)}>
+                        <CtReplyButton onClick={() => onChangeToggle(data._id)}>
                           <CtReplyIcon />
                           &nbsp;답글
                         </CtReplyButton>
-                        <CtReplyButton onClick={() => mutate(data._id)}>
-                          <CtDeleteIcon />
-                          &nbsp;삭제
-                        </CtReplyButton>
+                        {isOwnComment === data.email && (
+                          <CtReplyButton onClick={() => mutate(data._id)}>
+                            <CtDeleteIcon />
+                            &nbsp;삭제
+                          </CtReplyButton>
+                        )}
                       </CtSub>
                       <CtReply>
                         <AddReply

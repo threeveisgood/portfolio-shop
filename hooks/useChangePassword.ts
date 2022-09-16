@@ -5,7 +5,6 @@ import { changePassword } from "api/changePassword";
 export default function useChangePassword() {
   const mutation = useMutation(changePassword, {
     onSuccess: (data) => {
-      console.log(data);
       toast("비밀번호가 변경되었습니다.");
     },
   });

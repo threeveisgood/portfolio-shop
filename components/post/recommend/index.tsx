@@ -1,8 +1,5 @@
 import * as React from "react";
-
 import { MdThumbUpOffAlt } from "react-icons/md";
-import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
 import { toast } from "react-hot-toast";
