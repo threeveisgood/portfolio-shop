@@ -7,7 +7,7 @@ export default function useRewritePost(originalPostId: string) {
 
   const mutation = useMutation(rewritePost, {
     onSuccess: () => {
-      queryClient.invalidateQueries(["getPost", originalPostId]);
+      return queryClient.invalidateQueries(["getPost", originalPostId]);
     },
   });
 

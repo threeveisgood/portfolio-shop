@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
-import { useSelector } from "react-redux";
 import Container from "components/common/container";
 import {
   Field,

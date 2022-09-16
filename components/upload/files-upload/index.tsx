@@ -3,31 +3,39 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { UiFileInputButton } from "components/upload/ui-file-input-button";
 import { ChangeToThumbnail, ChangeToFrontURL } from "lib/change-to-thumbnail";
-import styled from "styled-components";
 import useWriteStateActions from "hooks/state/useWriteStateActions";
+import useUploadFiles from "hooks/useUploadFiles";
+import { PrimaryP, ThumbnailLi } from "./files-upload.styled";
 
 const FilesUpload = () => {
   const dispatch = useDispatch();
   const [thumb, setThumb] = useState<string[]>([]);
   const [progress, setProgress] = useState(0);
   const { setImageLinks } = useWriteStateActions();
+  const { mutate } = useUploadFiles();
 
   const addImageLinks = (links: string[]) => dispatch(setImageLinks(links));
 
+  const config = {
+    headers: { "content-type": "multipart/form-data" },
+    onUploadProgress: (event: { loaded: number; total: number }) => {
+      setProgress(Math.round((event.loaded * 100) / event.total));
+    },
+  };
+
   const onChange = useCallback(
     async (formData: FormData) => {
-      const config = {
-        headers: { "content-type": "multipart/form-data" },
-        onUploadProgress: (event: { loaded: number; total: number }) => {
-          setProgress(Math.round((event.loaded * 100) / event.total));
-        },
-      };
-      axios.post("/api/upload-files", formData, config).then((res) => {
-        const url = ChangeToFrontURL(res.data);
-        setThumb([...thumb, ...res.data]);
+      mutate(
+        { formData, config },
+        {
+          onSuccess: (data) => {
+            const url = ChangeToFrontURL(data);
+            setThumb([...thumb, ...data]);
 
-        addImageLinks(url);
-      });
+            addImageLinks(url);
+          },
+        }
+      );
     },
     [thumb]
   );
@@ -45,7 +53,7 @@ const FilesUpload = () => {
         <span>이미지 업로드 (10MB 미만)&nbsp;</span>
         {progress < 100 && <span>{progress}%</span>}
       </PrimaryP>
-      <ThumbnailUl>
+      <ul>
         {thumb &&
           thumb.map((item: string, i: number) => {
             const changedItem = ChangeToThumbnail(item);
@@ -56,22 +64,9 @@ const FilesUpload = () => {
               </ThumbnailLi>
             );
           })}
-      </ThumbnailUl>
+      </ul>
     </>
   );
 };
 
 export default React.memo(FilesUpload);
-
-export const ThumbnailUl = styled.ul``;
-
-export const ThumbnailLi = styled.li`
-  display: inline;
-  margin-right: 0.8rem;
-`;
-
-const PrimaryP = styled.p`
-  ${(props) => props.theme.black};
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-`;
