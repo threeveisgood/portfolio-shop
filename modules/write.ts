@@ -60,7 +60,7 @@ const initialState = {
 const write = handleActions(
   {
     [HYDRATE]: (state: any, { payload: hydrate }) => ({ ...state, hydrate }),
-    [INITIALIZE]: (state: any) => initialState,
+    [INITIALIZE]: () => initialState,
     [CHANGE_FIELD]: (state: any, { payload: { key, value } }: any) => ({
       ...state,
       [key]: value,

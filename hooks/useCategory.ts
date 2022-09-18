@@ -1,18 +1,11 @@
 import { useQuery } from "react-query";
-import axios from "axios";
+import { fetchCategory } from "api/fetchCategory";
 
-const fetchCategory: any = async (value: any, page: any) => {
-  const { data } = await axios.get("api/category", {
-    params: { value: value, page: page },
-  });
-
-  return data;
-};
-
-const useCategory: any = (value: any, page: any) => {
+export default function useCategory(
+  value: string | string[] | undefined,
+  page: number
+) {
   return useQuery(["category", value, page], () => fetchCategory(value, page), {
     keepPreviousData: true,
   });
-};
-
-export { useCategory, fetchCategory };
+}

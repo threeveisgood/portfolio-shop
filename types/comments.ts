@@ -16,12 +16,10 @@ export interface Comments {
 }
 
 export interface CommentState {
-  comment: {
-    contents: string;
-    replyToggle: {
-      _id: string;
-      toggle: boolean;
-    };
+  contents: string;
+  replyToggle: {
+    _id: string;
+    toggle: boolean;
   };
 }
 

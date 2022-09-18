@@ -1,6 +1,6 @@
 import { Field } from "components/common/form";
 import React from "react";
-import { Formik, Field as FormikField, Form } from "formik";
+import { Formik, Form } from "formik";
 import useAddComment from "hooks/useAddComment";
 import { addCommentSchema } from "lib/yup";
 import { CommentFormData } from "types/comments";

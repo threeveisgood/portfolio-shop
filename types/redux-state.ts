@@ -1,4 +1,7 @@
-export interface Payload {
+export interface PayloadComment {
   key: string;
-  value: string;
+  value: {
+    _id: string;
+    toggle: boolean;
+  };
 }

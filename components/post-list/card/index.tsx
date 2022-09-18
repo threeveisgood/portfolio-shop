@@ -50,7 +50,7 @@ function Card({
 
   return (
     <CardLi>
-      <ThumbnailContainer onClick={handleClick}>
+      <ThumbnailContainer onClick={() => handleClick}>
         <CardImageBox>
           <Link href={`/post/${id}`} passHref>
             <CardImageA>
