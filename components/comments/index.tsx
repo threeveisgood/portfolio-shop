@@ -42,7 +42,7 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
     isError,
   } = useComments(postID);
   const { replyToggle } = useCommentState();
-  const { initialize, changeField } = useCommentStateActions();
+  const { initialize, changeReplyToggle } = useCommentStateActions();
   const isOwnComment = session && session.user?.email;
 
   useEffect(() => {
@@ -53,9 +53,9 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
 
   const onChangeToggle = (id: string) => {
     if (session) {
-      changeField({
-        key: "replyToggle",
-        value: { _id: id, toggle: !replyToggle.toggle },
+      changeReplyToggle({
+        _id: id,
+        toggle: !replyToggle.toggle,
       });
     } else {
       toast("답글을 입력하시려면 로그인 해주세요!");

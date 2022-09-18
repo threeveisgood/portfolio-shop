@@ -16,7 +16,6 @@ import {
   CategorySelect,
 } from "./editor.styled";
 import useWriteStateActions from "hooks/state/useWriteStateActions";
-import { Payload } from "types/redux-state";
 import useWriteState from "hooks/state/useWriteState";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -43,7 +42,7 @@ const Editor: React.FunctionComponent = () => {
     originalPostId,
   } = useWriteState();
 
-  const onChangeField = (payload: Payload) => changeField(payload);
+  const onChangeField = (payload: any) => changeField(payload);
 
   const handleChange = (key: string) => {
     return (e: React.ChangeEvent<HTMLInputElement>) =>

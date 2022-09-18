@@ -31,7 +31,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
   const replyID = bson.ObjectId();
   const cancelRef = useRef<HTMLButtonElement>(null);
   const { replyToggle } = useCommentState();
-  const { initialize, changeField } = useCommentStateActions();
+  const { initialize, changeReplyToggle } = useCommentStateActions();
 
   const { mutate } = useAddReply(postID);
 
@@ -43,9 +43,9 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
 
   const onChangeToggle = (id: string) => {
     return () =>
-      changeField({
-        key: "replyToggle",
-        value: { _id: id, toggle: !replyToggle.toggle },
+      changeReplyToggle({
+        _id: id,
+        toggle: !replyToggle.toggle,
       });
   };
 
