@@ -1,13 +1,13 @@
 import { getSession } from "next-auth/client";
 import React, { ReactElement } from "react";
-
+import { GetServerSideProps } from "next";
 import UserProfile from "components/user-profile";
 
 export default function Profile(): ReactElement {
   return <UserProfile />;
 }
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
 
   if (!session) {
@@ -22,4 +22,4 @@ export async function getServerSideProps(context: any) {
   return {
     props: { session },
   };
-}
+};

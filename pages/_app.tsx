@@ -41,9 +41,9 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <AuthProvider session={pageProps.session}>
-        <Provider store={store}>
-          <QueryClientProvider client={queryClient}>
-            <Hydrate state={pageProps.dehydratedState}>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <Provider store={store}>
               <ReactQueryDevtools initialIsOpen={false} />
               <ThemeProvider theme={theme}>
                 <GlobalStyle />
@@ -51,9 +51,9 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
                   <Component {...pageProps} />
                 </Layout>
               </ThemeProvider>
-            </Hydrate>
-          </QueryClientProvider>
-        </Provider>
+            </Provider>
+          </Hydrate>
+        </QueryClientProvider>
       </AuthProvider>
     </>
   );

@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { GetStaticProps } from "next";
-import { fetchSearch } from "hooks/useSearch";
+import { fetchSearch } from "api/fetchSearch";
 import PostList from "components/post-list";
 
 export default function search(): ReactElement | string {
@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(["search", value, page], () =>
-    fetchSearch(value, page)
+    fetchSearch(value, Number(page))
   );
 
   return {
