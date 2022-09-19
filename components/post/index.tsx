@@ -86,16 +86,9 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
                 category={category}
                 shipping={shipping}
                 store={store}
-                date={date}
-                username={username}
                 productURL={productURL}
                 imageLinks={imageLinks}
                 body={body}
-                viewsCount={viewsCount}
-                likeCount={likeCount}
-                likeUsers={likeUsers}
-                repliesCount={repliesCount}
-                email={email}
                 _id={_id}
               />
             )}

@@ -7,7 +7,7 @@ export interface Post {
     title: string;
     price: string;
     productURL: string;
-    imageLinks?: string[];
+    imageLinks: string[];
     username: string;
     store: string;
     shipping: string;
@@ -18,4 +18,16 @@ export interface Post {
     viewsCount: number;
     repliesCount: number;
   };
+}
+
+export interface OriginalPost {
+  title: string;
+  body: string;
+  price: string;
+  productURL: string;
+  imageLinks: string[];
+  shipping: string;
+  store: string;
+  category: string;
+  originalPostId: string;
 }

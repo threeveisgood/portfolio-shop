@@ -107,8 +107,10 @@ const Editor: React.FunctionComponent = () => {
         <Field>
           <CategorySelect
             defaultValue={{
-              label: !!originalPostId ? category : "카테고리를 선택해주세요",
-              value: !!originalPostId ? category : "카테고리를 선택해주세요",
+              label:
+                originalPostId != "" ? category : "카테고리를 선택해주세요",
+              value:
+                originalPostId != "" ? category : "카테고리를 선택해주세요",
             }}
             onChange={handleChangeCategory}
             options={options}
@@ -178,7 +180,7 @@ const Editor: React.FunctionComponent = () => {
             placeholder="내용을 입력하세요"
             modules={modules}
             onChange={handleChangeQuillBody}
-            defaultValue={!!originalPostId ? body : ``}
+            defaultValue={originalPostId != "" ? body : ``}
           />
         </QuillWrapper>
       </EditorBlock>

@@ -80,8 +80,8 @@ const WriteActionButtons: React.FunctionComponent<IWriteActionButtonsProps> =
     return (
       <>
         <WriteActionButtonsBlock>
-          <Button onClick={!!originalPostId ? onEdit : onPublish}>
-            {!!originalPostId ? "수정" : "글쓰기"}
+          <Button onClick={originalPostId != "" ? onEdit : onPublish}>
+            {originalPostId != "" ? "수정" : "글쓰기"}
           </Button>
           <Button onClick={onCancel}>취소</Button>
         </WriteActionButtonsBlock>

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { OriginalPost } from "types/post";
 
 export interface WriteState {
   title: string;
@@ -55,13 +56,12 @@ const writeSlice = createSlice({
     setQuillBody(state, action: PayloadAction<string>) {
       state.body = action.payload;
     },
-    setOriginalPost(state, action: PayloadAction<WriteState>) {
+    setOriginalPost(state, action: PayloadAction<OriginalPost>) {
       state.title = action.payload.title;
       state.body = action.payload.body;
       state.price = action.payload.price;
       state.productURL = action.payload.productURL;
       state.imageLinks = action.payload.imageLinks;
-      state.username = action.payload.username;
       state.shipping = action.payload.shipping;
       state.store = action.payload.store;
       state.category = action.payload.category;

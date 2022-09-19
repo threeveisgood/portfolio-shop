@@ -12,16 +12,9 @@ interface IDeleteEditProps {
   category: string;
   shipping: string;
   store: string;
-  date: Date;
-  username: string;
   productURL: string;
-  imageLinks: string[] | undefined;
+  imageLinks: string[];
   body: string;
-  viewsCount: number;
-  likeCount: number;
-  likeUsers: string[] | undefined;
-  repliesCount: number;
-  email: string;
   _id: string;
 }
 
@@ -32,16 +25,9 @@ const DeleteEdit: React.FunctionComponent<IDeleteEditProps> = ({
   category,
   shipping,
   store,
-  date,
-  username,
   productURL,
   imageLinks,
   body,
-  viewsCount,
-  likeCount,
-  likeUsers,
-  repliesCount,
-  email,
   _id,
 }: IDeleteEditProps) => {
   const router = useRouter();
@@ -52,21 +38,14 @@ const DeleteEdit: React.FunctionComponent<IDeleteEditProps> = ({
   const onEdit = () => {
     setOriginalPost({
       title,
+      body,
       price,
-      category,
-      shipping,
-      store,
-      date,
-      username,
       productURL,
       imageLinks,
-      body,
-      viewsCount,
-      likeCount,
-      likeUsers,
-      repliesCount,
-      email,
-      _id,
+      store,
+      shipping,
+      category,
+      originalPostId: _id,
     });
     router.push("/write/add-post");
   };
