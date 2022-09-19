@@ -49,7 +49,7 @@ const RepliesList: React.FunctionComponent<IRepliesListProps> = ({
     if (session) {
       changeReplyToggle({
         _id: id,
-        toggle: !replyToggle.toggle,
+        toggle: replyToggle.toggle,
       });
     } else {
       toast("답글을 입력하시려면 로그인 해주세요!");

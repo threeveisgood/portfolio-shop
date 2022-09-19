@@ -1,15 +1,37 @@
 import { useMemo } from "react";
-import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { initialize, setImageLinks, setOriginalPost } from "slices/write";
+import {
+  initialize,
+  setTitle,
+  setCategory,
+  setPrice,
+  setProductURL,
+  setStore,
+  setShipping,
+  setImageLinks,
+  setQuillBody,
+  setOriginalPost,
+} from "slices/write";
+import { useAppDispatch } from "./useReduxFunctions";
 
 export default function useWriteStateActions() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return useMemo(
     () =>
       bindActionCreators(
-        { initialize, setImageLinks, setOriginalPost },
+        {
+          initialize,
+          setTitle,
+          setCategory,
+          setPrice,
+          setProductURL,
+          setStore,
+          setShipping,
+          setImageLinks,
+          setQuillBody,
+          setOriginalPost,
+        },
         dispatch
       ),
     [dispatch]

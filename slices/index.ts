@@ -1,10 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import commentReducer from "slices/comment";
-import writeReducer from "slices/write";
+import comment from "slices/comment";
+import write from "slices/write";
 
 const rootReducer = combineReducers({
-  commentReducer,
-  writeReducer,
+  comment,
+  write,
 });
 
 export default rootReducer;

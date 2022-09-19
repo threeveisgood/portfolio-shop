@@ -29,7 +29,16 @@ const options = [
 ];
 
 const Editor: React.FunctionComponent = () => {
-  const { initialize, changeField } = useWriteStateActions();
+  const {
+    initialize,
+    setTitle,
+    setCategory,
+    setPrice,
+    setProductURL,
+    setStore,
+    setShipping,
+    setQuillBody,
+  } = useWriteStateActions();
 
   const {
     title,
@@ -42,20 +51,33 @@ const Editor: React.FunctionComponent = () => {
     originalPostId,
   } = useWriteState();
 
-  const onChangeField = (payload: any) => changeField(payload);
-
-  const handleChange = (key: string) => {
-    return (e: React.ChangeEvent<HTMLInputElement>) =>
-      onChangeField({ key: key, value: e.target.value });
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
   };
 
-  const onChangeQuill = (text: string) => {
-    onChangeField({ key: "body", value: text });
+  // //react-select에서 가져다 쓸 타입을 아직 모릅니다.(any로 선언되있음), 확인 후 수정 필요
+  const handleChangeCategory = (category: any) => {
+    setCategory(category.value);
   };
 
-  //라이브러리에 가져다 쓸 타입이 없음 (any로 선언되있음),확인 후 수정 필요
-  const onChangeCategory = (category: any) => {
-    onChangeField({ key: "category", value: category.value });
+  const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrice(e.target.value);
+  };
+
+  const handleChangeProductURL = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductURL(e.target.value);
+  };
+
+  const handleChangeStore = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStore(e.target.value);
+  };
+
+  const handleChangeShipping = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShipping(e.target.value);
+  };
+
+  const handleChangeQuillBody = (text: string) => {
+    setQuillBody(text);
   };
 
   const modules = {
@@ -78,7 +100,7 @@ const Editor: React.FunctionComponent = () => {
       <EditorBlock>
         <TitleInput
           placeholder="제목을 입력하세요"
-          onChange={handleChange("title")}
+          onChange={handleChangeTitle}
           value={title}
         />
 
@@ -88,7 +110,7 @@ const Editor: React.FunctionComponent = () => {
               label: !!originalPostId ? category : "카테고리를 선택해주세요",
               value: !!originalPostId ? category : "카테고리를 선택해주세요",
             }}
-            onChange={onChangeCategory}
+            onChange={handleChangeCategory}
             options={options}
             placeholder="카테고리 선택"
           />
@@ -102,7 +124,7 @@ const Editor: React.FunctionComponent = () => {
             placeholder="가격"
             autoComplete="off"
             value={price}
-            onChange={handleChange("price")}
+            onChange={handleChangePrice}
           />
           <StyledLabel htmlFor="price">가격</StyledLabel>
         </Field>
@@ -115,7 +137,7 @@ const Editor: React.FunctionComponent = () => {
             placeholder="상품 관련 URL"
             autoComplete="off"
             value={productURL}
-            onChange={handleChange("productURL")}
+            onChange={handleChangeProductURL}
           />
           <StyledLabel htmlFor="realtedURL">상품 관련 URL</StyledLabel>
         </Field>
@@ -128,7 +150,7 @@ const Editor: React.FunctionComponent = () => {
             placeholder="쇼핑몰"
             autoComplete="off"
             value={store}
-            onChange={handleChange("store")}
+            onChange={handleChangeStore}
           />
           <StyledLabel htmlFor="realtedURL">쇼핑몰</StyledLabel>
         </Field>
@@ -141,7 +163,7 @@ const Editor: React.FunctionComponent = () => {
             placeholder="배송비"
             autoComplete="off"
             value={shipping}
-            onChange={handleChange("shipping")}
+            onChange={handleChangeShipping}
           />
           <StyledLabel htmlFor="realtedURL">배송비</StyledLabel>
         </Field>
@@ -155,7 +177,7 @@ const Editor: React.FunctionComponent = () => {
             theme="snow"
             placeholder="내용을 입력하세요"
             modules={modules}
-            onChange={onChangeQuill}
+            onChange={handleChangeQuillBody}
             defaultValue={!!originalPostId ? body : ``}
           />
         </QuillWrapper>

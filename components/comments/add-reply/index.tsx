@@ -45,7 +45,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
     return () =>
       changeReplyToggle({
         _id: id,
-        toggle: !replyToggle.toggle,
+        toggle: replyToggle.toggle,
       });
   };
 

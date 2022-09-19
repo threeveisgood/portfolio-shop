@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
-import { WriteState } from "types/write";
+import { useAppSelector } from "./useReduxFunctions";
 
 export default function useWriteState() {
-  return useSelector(({ write }: WriteState) => ({
+  return useAppSelector(({ write }) => ({
     title: write.title,
     body: write.body,
     price: write.price,

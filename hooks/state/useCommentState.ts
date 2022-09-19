@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
-import { CommentState } from "types/comments";
+import { useAppSelector } from "./useReduxFunctions";
 
 export default function useCommentState() {
-  return useSelector(({ replyToggle }: CommentState) => ({
-    replyToggle: replyToggle,
+  return useAppSelector(({ comment }) => ({
+    replyToggle: comment.replyToggle,
   }));
 }

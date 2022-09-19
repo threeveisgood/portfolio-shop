@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { initialize, changeReplyToggle } from "slices/comment";
+import { useAppDispatch } from "./useReduxFunctions";
 
 export default function useCommentStateActions() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return useMemo(
     () => bindActionCreators({ initialize, changeReplyToggle }, dispatch),
