@@ -22,6 +22,7 @@ function PostList({
 }: ListProps): ReactElement {
   const router = useRouter();
   const { value } = router.query;
+  const valueString = String(value);
   const [currentPage, setCurrentPage] = useState(1);
 
   const paginate = useCallback(
@@ -38,9 +39,9 @@ function PostList({
   }, []);
 
   const { isLoading, isError, data, isFetching } = isSearch
-    ? useSearch(value, currentPage)
+    ? useSearch(valueString, currentPage)
     : isCategory
-    ? useCategory(value, currentPage)
+    ? useCategory(valueString, currentPage)
     : usePosts(currentPage);
 
   return (

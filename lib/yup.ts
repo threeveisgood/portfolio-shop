@@ -9,6 +9,11 @@ export const createUserVadlidationSchema = yup.object({
     .string()
     .min(8, "최소 8글자 이상 입력해주세요.")
     .required("반드시 입력해야하는 항목입니다."),
+  passwordsecond: yup
+    .string()
+    .min(8, "최소 8글자 이상 입력해주세요.")
+    .required("반드시 입력해야하는 항목입니다.")
+    .oneOf([yup.ref("password"), null], "패스워드가 다릅니다."),
   name: yup
     .string()
     .min(2, "최소 2글자 이상 입력해주세요.")

@@ -27,6 +27,7 @@ function SignUpForm() {
     initialValues: {
       email: "",
       password: "",
+      passwordsecond: "",
       name: "",
     },
     validationSchema: createUserVadlidationSchema,
@@ -87,6 +88,24 @@ function SignUpForm() {
             />
             <StyledLabel htmlFor="password">비밀번호</StyledLabel>
           </Field>
+          {formik.touched.password && formik.errors.password ? (
+            <FieldError>{formik.errors.password}</FieldError>
+          ) : null}
+
+          <Field>
+            <StyledInput
+              type="password"
+              id="passwordsecond"
+              name="passwordsecond"
+              placeholder="passwordsecond"
+              value={formik.values.passwordsecond}
+              onChange={formik.handleChange}
+            />
+            <StyledLabel htmlFor="passwordConfirm">비밀번호 확인</StyledLabel>
+          </Field>
+          {formik.touched.passwordsecond && formik.errors.passwordsecond ? (
+            <FieldError>{formik.errors.passwordsecond}</FieldError>
+          ) : null}
 
           <Field>
             <StyledInput
@@ -99,6 +118,9 @@ function SignUpForm() {
             />
             <StyledLabel htmlFor="name">닉네임</StyledLabel>
           </Field>
+          {formik.touched.name && formik.errors.name ? (
+            <FieldError>{formik.errors.name}</FieldError>
+          ) : null}
 
           <div>
             <FormSubmitButton type="submit">계정 만들기</FormSubmitButton>

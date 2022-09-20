@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { fetchPosts } from "api/fetchPosts";
 import PostList from "components/post-list";
 
-export default function posts(): ReactElement | string {
+export default function posts(): ReactElement {
   return (
     <>
       <PostList isSearch={false} />
@@ -14,10 +14,11 @@ export default function posts(): ReactElement | string {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const page = (context.params?.page as string) || "1";
+  const pageNumber = Number(page);
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(["posts", page], () =>
+  await queryClient.prefetchQuery(["posts", pageNumber], () =>
     fetchPosts(Number(page))
   );
 
