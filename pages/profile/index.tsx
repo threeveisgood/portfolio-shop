@@ -2,9 +2,14 @@ import { getSession } from "next-auth/client";
 import React, { ReactElement } from "react";
 import { GetServerSideProps } from "next";
 import UserProfile from "components/user-profile";
+import { Session } from "next-auth";
 
-export default function Profile(): ReactElement {
-  return <UserProfile />;
+interface ProfileProps {
+  session: Session;
+}
+
+export default function Profile({ session }: ProfileProps): ReactElement {
+  return <UserProfile session={session} />;
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

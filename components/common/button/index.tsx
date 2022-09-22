@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 interface ButtonProps {
-  readonly blue?: any;
+  readonly red?: boolean;
 }
 
 export const buttonStyle = css`
@@ -37,11 +37,11 @@ export const StyledButton = styled.button<ButtonProps>`
   ${buttonStyle}
 
   ${(props) =>
-    props.blue &&
+    props.red &&
     css`
-      background: #2757a1;
+      background: #a83a3a;
       &:hover {
-        background: #102442;
+        background: #ec1616;
       }
     `}
 `;

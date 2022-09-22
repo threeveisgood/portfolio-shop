@@ -97,7 +97,7 @@ function SignUpForm() {
               type="password"
               id="passwordsecond"
               name="passwordsecond"
-              placeholder="passwordsecond"
+              placeholder="password second"
               value={formik.values.passwordsecond}
               onChange={formik.handleChange}
             />

@@ -10,12 +10,13 @@ export const FullScreen = styled.div`
   background: rgba(0, 0, 0, 0.25);
   display: flex;
   justify-content: center;
-  align-items: center;
   z-index: 5;
 `;
 
 export const AskModalBlock = styled.div`
+  margin-top: 10%;
   width: 42rem;
+  height: 12rem;
   background: #fff;
   padding: 2rem;
   font-size: 1.3rem;

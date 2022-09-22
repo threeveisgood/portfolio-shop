@@ -27,8 +27,7 @@ export const GlobalStyle = createGlobalStyle`
    border-style: none;
   }
 
-  a {
-   
+  a {   
    text-decoration: none;
   }
 

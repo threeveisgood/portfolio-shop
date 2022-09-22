@@ -18,6 +18,7 @@ function ChangePasswordForm(): ReactElement {
     initialValues: {
       oldPassword: "",
       newPassword: "",
+      newPasswordConfirm: "",
     },
     validationSchema: profileFormValidationSchema,
     onSubmit: async (values, { setSubmitting }) => {
@@ -52,6 +53,25 @@ function ChangePasswordForm(): ReactElement {
           {formik.touched.newPassword && formik.errors.newPassword ? (
             <FieldError>{formik.errors.newPassword}</FieldError>
           ) : null}
+
+          <Field>
+            <StyledInput
+              type="password"
+              id="newPasswordConfirm"
+              name="newPasswordConfirm"
+              placeholder="new password confirm"
+              value={formik.values.newPasswordConfirm}
+              onChange={formik.handleChange}
+            />
+            <StyledLabel htmlFor="new-password-confirm">
+              새 비밀번호 확인
+            </StyledLabel>
+          </Field>
+          {formik.touched.newPasswordConfirm &&
+          formik.errors.newPasswordConfirm ? (
+            <FieldError>{formik.errors.newPasswordConfirm}</FieldError>
+          ) : null}
+
           <Field>
             <StyledInput
               type="password"

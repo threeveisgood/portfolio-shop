@@ -28,7 +28,7 @@ const AskModal: React.FunctionComponent<IAskModalProps> = ({
         <p>{description}</p>
         <div className="buttons">
           <Button onClick={onCancel}>{cancelText}</Button>
-          <Button blue onClick={onConfirm}>
+          <Button red onClick={onConfirm}>
             {confirmText}
           </Button>
         </div>
