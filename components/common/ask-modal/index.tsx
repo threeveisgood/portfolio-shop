@@ -1,25 +1,39 @@
-import * as React from "react";
+import useModalState from "hooks/state/useModalState";
+import useModalStateActions from "hooks/state/useModalStateActions";
+import React, { useEffect } from "react";
+import { initialize } from "slices/modal";
 import { FullScreen, AskModalBlock, Button } from "./ask-modal.styled";
 
 interface IAskModalProps {
-  visible: boolean;
   title: string;
   description: string;
   confirmText?: string;
   cancelText?: string;
   onConfirm: () => void;
-  onCancel: () => void;
 }
 
 const AskModal: React.FunctionComponent<IAskModalProps> = ({
-  visible,
   title,
   description,
   confirmText = "확인",
   cancelText = "취소",
   onConfirm,
-  onCancel,
 }) => {
+  const { visible } = useModalState();
+  const { visibleToggle } = useModalStateActions();
+
+  const onCancel = () => {
+    visibleToggle({
+      visible: visible,
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      initialize();
+    };
+  }, [initialize]);
+
   if (!visible) return null;
   return (
     <FullScreen>

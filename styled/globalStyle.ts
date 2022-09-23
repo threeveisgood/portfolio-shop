@@ -19,8 +19,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: none;
-    font-family: 'Quicksand';
+    background-color: none;    
   }
 
   img {

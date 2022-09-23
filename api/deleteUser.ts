@@ -1,7 +1,7 @@
 import client from "./client";
 
-export async function deletePost(id: string) {
-  await client.delete<null>(`/delete-post/${id}`);
+export async function deleteUser() {
+  await client.delete<null>(`/auth/delete-user`);
 
   return null;
 }

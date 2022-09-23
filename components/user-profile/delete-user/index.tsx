@@ -1,33 +1,47 @@
 import AskModal from "components/common/ask-modal";
-import React, { useState } from "react";
+import useModalState from "hooks/state/useModalState";
+import useModalStateActions from "hooks/state/useModalStateActions";
+import useDeleteUser from "hooks/useDeleteUser";
+import { signOut } from "next-auth/client";
+import { useRouter } from "next/router";
+import React from "react";
 import { DeleteUserCt, DeleteUserTitle } from "./delete-user.styled";
 interface IDeleteUserProps {}
 
 const DeleteUser: React.FunctionComponent<IDeleteUserProps> = (props) => {
-  const [modal, setModal] = useState(false);
+  const router = useRouter();
+  const { visible } = useModalState();
+  const { visibleToggle } = useModalStateActions();
+  const { mutate } = useDeleteUser();
 
-  const onDelete = () => {
-    setModal(true);
-  };
-
-  const onModalCancel = () => {
-    setModal(false);
+  const onDeleteModal = () => {
+    visibleToggle({
+      visible: visible,
+    });
   };
 
   const onModalConfirm = () => {
-    setModal(false);
+    signOut();
+
+    mutate(undefined, {
+      onSuccess: () => {
+        router.push("/");
+      },
+    });
+
+    visibleToggle({
+      visible: visible,
+    });
   };
 
   return (
     <DeleteUserCt>
-      <DeleteUserTitle onClick={onDelete}>탈퇴하기</DeleteUserTitle>
+      <DeleteUserTitle onClick={onDeleteModal}>탈퇴하기</DeleteUserTitle>
       <AskModal
-        visible={modal}
         title="탈퇴하기"
         description="정말 탈퇴하시겠습니까?"
         confirmText="탈퇴"
         onConfirm={onModalConfirm}
-        onCancel={onModalCancel}
       />
     </DeleteUserCt>
   );

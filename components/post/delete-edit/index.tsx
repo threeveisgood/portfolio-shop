@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import AskRemoveModal from "components/post/ask-remove-modal";
 import { useRouter } from "next/router";
 import useDeletePost from "hooks/useDeletePost";
+import useModalState from "hooks/state/useModalState";
+import useModalStateActions from "hooks/state/useModalStateActions";
 import useWriteStateActions from "hooks/state/useWriteStateActions";
 import { DeleteEditCt, ButtonCt, Button } from "./delete-edit.styled";
 
@@ -31,8 +33,9 @@ const DeleteEdit: React.FunctionComponent<IDeleteEditProps> = ({
   _id,
 }: IDeleteEditProps) => {
   const router = useRouter();
-  const [modal, setModal] = useState(false);
   const { mutate: deleteMutate } = useDeletePost(postID);
+  const { visible } = useModalState();
+  const { visibleToggle } = useModalStateActions();
   const { setOriginalPost } = useWriteStateActions();
 
   const onEdit = () => {
@@ -50,25 +53,22 @@ const DeleteEdit: React.FunctionComponent<IDeleteEditProps> = ({
     router.push("/write/add-post");
   };
 
-  const onRemove = () => {
+  const onRemoveClick = () => {
+    visibleToggle({
+      visible: visible,
+    });
+  };
+
+  const onModalConfirm = () => {
+    visibleToggle({
+      visible: visible,
+    });
+
     deleteMutate(undefined, {
       onSuccess: () => {
         router.push(`/`);
       },
     });
-  };
-
-  const onRemoveClick = () => {
-    setModal(true);
-  };
-
-  const onModalCancel = () => {
-    setModal(false);
-  };
-
-  const onModalConfirm = () => {
-    setModal(false);
-    onRemove();
   };
 
   return (
@@ -77,11 +77,7 @@ const DeleteEdit: React.FunctionComponent<IDeleteEditProps> = ({
         <Button onClick={onEdit}>수정</Button>
         <Button onClick={onRemoveClick}>삭제</Button>
       </ButtonCt>
-      <AskRemoveModal
-        visible={modal}
-        onConfirm={onModalConfirm}
-        onCancel={onModalCancel}
-      />
+      <AskRemoveModal onConfirm={onModalConfirm} />
     </DeleteEditCt>
   );
 };
