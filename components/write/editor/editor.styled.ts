@@ -23,8 +23,22 @@ export const TitleInput = styled.input`
 
 export const QuillWrapper = styled.div`
   margin-top: 3rem;
+  border-radius: 1rem;
+
+  .ql-toolbar.ql-snow {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border: 1px solid ${(props) => props.theme.gray};
+  }
+
+  .ql-container.ql-snow {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border: 1px solid ${(props) => props.theme.gray};
+  }
+
   .ql-editor {
-    padding: 0;
+    padding: 1rem;
     min-height: 320px;
     font-size: 1.125;
     line-height: 1.5;

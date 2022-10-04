@@ -27,9 +27,10 @@ export const SearchInput = styled.input`
   font-size: inherit;
   color: #fff;
   border: none;
+  box-sizing: border-box;
+  padding: 2rem;
   width: 100%;
   transition: all 0.2s;
-  padding: 1rem;
   border-radius: 2.6rem;
   height: 1.5rem;
 

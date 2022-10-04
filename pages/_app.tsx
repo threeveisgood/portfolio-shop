@@ -15,7 +15,6 @@ import {
 } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider as AuthProvider } from "next-auth/client";
-import "../public/static/fonts/style.css";
 import { toast } from "react-hot-toast";
 import store from "lib/store";
 

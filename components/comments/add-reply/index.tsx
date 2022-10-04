@@ -5,7 +5,6 @@ import {
   ButtonBox,
   SubmitButton,
   CommentTextArea,
-  CommentLabel,
 } from "components/common/comment";
 import { addCommentSchema } from "lib/yup";
 import useAddReply from "hooks/useAddReply";
@@ -80,7 +79,6 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
         <Form>
           <Field>
             <CommentTextArea id="comment" name="comment" component="textarea" />
-            <CommentLabel>답글 입력</CommentLabel>
           </Field>
           <ButtonBox>
             <SubmitButton

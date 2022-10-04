@@ -46,6 +46,7 @@ const NavBar: React.FunctionComponent = () => {
                     pathname: "category",
                     query: { value: info.name },
                   }}
+                  passHref
                 >
                   <InformationA>{info.name}</InformationA>
                 </Link>

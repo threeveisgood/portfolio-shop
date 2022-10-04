@@ -27,24 +27,15 @@ export const SubmitButton = styled(LinearButton)`
 `;
 
 export const CommentTextArea = styled(FormikField)`
-  ${InputStyle}
   width: 100%;
+  height: 70px;
   resize: none;
-  border-bottom: 1px solid ${(props) => props.theme.black};
+  box-sizing: border-box;
+  padding: 1.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid #778899;
 
   &:focus {
-    ~ ${StyledLabel} {
-      position: absolute;
-      top: 0;
-      display: block;
-      color: ${(props) => props.theme.black};
-    }
-    border-width: 2px;
+    outline: none;
   }
-`;
-
-export const CommentLabel = styled(StyledLabel)`
-  top: 3.7rem;
-  font-size: 1.4rem;
-  color: ${(props) => props.theme.black};
 `;

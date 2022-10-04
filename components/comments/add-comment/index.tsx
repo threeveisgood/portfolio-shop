@@ -6,11 +6,11 @@ import { addCommentSchema } from "lib/yup";
 import { CommentFormData } from "types/comments";
 import {
   AddCommentContainer,
+  AddCommentTitle,
   ButtonBox,
   SubmitButton,
-  CommentTextArea,
-  CommentLabel,
 } from "./add-comment.styled";
+import { CommentTextArea } from "components/common/comment";
 
 const bson = require("bson");
 
@@ -25,6 +25,7 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
 
   return (
     <AddCommentContainer>
+      <AddCommentTitle>댓글 입력</AddCommentTitle>
       <Formik
         initialValues={{
           comment: "",
@@ -44,7 +45,6 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
         <Form>
           <Field>
             <CommentTextArea id="comment" name="comment" component="textarea" />
-            <CommentLabel>댓글 입력</CommentLabel>
           </Field>
           <ButtonBox>
             <SubmitButton type="reset">취소</SubmitButton>
