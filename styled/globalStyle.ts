@@ -43,4 +43,8 @@ export const GlobalStyle = createGlobalStyle`
     justify-content: center;
     align-items: center;
   }  
+  
+  .swiper-pagination-bullet {
+    background: ${({ theme }) => theme.black};
+  }
 `;
