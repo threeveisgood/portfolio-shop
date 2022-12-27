@@ -18,7 +18,6 @@ const StyledCarousel: React.FunctionComponent<Props> = ({ imageLinks }) => {
         id="main"
         tag="section"
         wrapperTag="ul"
-        //navigation
         pagination={{ clickable: true }}
         spaceBetween={0}
         slidesPerView={1}
