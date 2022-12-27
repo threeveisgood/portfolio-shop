@@ -25,9 +25,7 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
   let isAlready;
   let isPlus;
 
-  const { mutate } = isReply
-    ? useReplyRecommend(postID)
-    : useCommentRecommend(postID);
+  const { mutate } = useCommentRecommend(postID);
 
   const handleUpVoteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -36,11 +34,11 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
       if (likeUsers.indexOf(String(session?.user?.email)) > -1) {
         isPlus = true;
         isAlready = true;
-        mutate({ id: _id, isAlready, isPlus });
+        mutate({ id: _id, isAlready, isPlus, isReply });
       } else {
         isPlus = true;
         isAlready = false;
-        mutate({ id: _id, isAlready, isPlus });
+        mutate({ id: _id, isAlready, isPlus, isReply });
       }
     } else {
       toast("추천을 하시려면 로그인 해주세요!");
@@ -54,11 +52,11 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
       if (likeUsers.indexOf(String(session?.user?.email)) > -1) {
         isPlus = false;
         isAlready = true;
-        mutate({ id: _id, isAlready, isPlus });
+        mutate({ id: _id, isAlready, isPlus, isReply });
       } else {
         isPlus = false;
         isAlready = false;
-        mutate({ id: _id, isAlready, isPlus });
+        mutate({ id: _id, isAlready, isPlus, isReply });
       }
     } else {
       toast("비추천을 하시려면 로그인 해주세요!");

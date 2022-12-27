@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
-import { replyRecommend } from "api/replyRecommend";
+import { commentRecommend } from "api/commentRecommend";
 
 export default function useReplyRecommend(postID: string) {
   const queryClient = useQueryClient();
-  const mutation = useMutation(replyRecommend, {
+  const mutation = useMutation(commentRecommend, {
     onSuccess: () => {
       queryClient.invalidateQueries(["getComments", postID]);
     },

@@ -1,6 +1,4 @@
-import {
-  connectToDatabase,
-} from "lib/db-utils";
+import { connectToDatabase } from "lib/db-utils";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 
@@ -44,14 +42,16 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       likeUsers: [],
     });
 
-    const increaseCount = await db.collection('posts').updateOne({
-      _id: postID
-    }, 
-    {
-      $inc: {
-        repliesCount: 1,
+    const increaseCount = await db.collection("posts").updateOne(
+      {
+        _id: postID,
       },
-    });
+      {
+        $inc: {
+          repliesCount: 1,
+        },
+      }
+    );
 
     res.status(201).json({ message: "Added comment!" });
   }
@@ -65,11 +65,36 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         .find({ postID: id })
         .sort({ _id: -1 })
         .toArray();
-      
-        res.status(200).json({ comments: result });
+
+      res.status(200).json({ comments: result });
     } catch {
-      res.status(500).json({ message: 'Getting comments failed.' });
+      res.status(500).json({ message: "Getting comments failed." });
     }
+  }
+
+  if (req.method === "PATCH") {
+    if (!session) {
+      res.status(401).json({ message: "Not authenticated!" });
+      return;
+    }
+
+    const usersCollection: any = client.db().collection("users");
+    const commentCollection: any = client.db().collection("comments");
+
+    const user: any = await usersCollection.findOne({ email: email });
+
+    if (!user) {
+      res.status(404).json({ message: "User not found." });
+      client.close();
+      return;
+    }
+
+    const result: any = await commentCollection.updateOne(
+      { _id: id },
+      { $set: { isDeleted: true } }
+    );
+
+    res.status(200).json({ message: "Comment Deleted!" });
   }
 
   client.close();

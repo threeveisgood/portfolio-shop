@@ -24,6 +24,7 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
   const router = useRouter();
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
   let isAlready;
+  const isPost = true;
 
   const { mutate } = usePostRecommend(postID);
 
@@ -33,10 +34,10 @@ const Recommend: React.FunctionComponent<IRecommendProps> = ({
     if (session) {
       if (likeUsers.indexOf(String(session?.user?.email)) > -1) {
         isAlready = true;
-        mutate({ id: postID, isAlready });
+        mutate({ id: postID, isAlready, isPost });
       } else {
         isAlready = false;
-        mutate({ id: postID, isAlready });
+        mutate({ id: postID, isAlready, isPost });
       }
     } else {
       toast("추천을 하시려면 로그인 해주세요!");

@@ -25,30 +25,96 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const db: any = client.db();
 
-  const { isAlready } = req.body;
+  const { isAlready, isReply, isPlus, isPost } = req.body;
 
-  if (isAlready) {
-    const decreaseLikeCount: any = await db.collection("posts").updateOne(
+  if (isPost) {
+    if (isAlready) {
+      const decreaseLikeCount: any = await db.collection("posts").updateOne(
+        {
+          _id: id,
+        },
+        {
+          $inc: {
+            likeCount: -1,
+          },
+          $pull: {
+            likeUsers: email,
+          },
+        }
+      );
+    } else {
+      const increaseLikeCount: any = await db.collection("posts").updateOne(
+        {
+          _id: id,
+        },
+        {
+          $inc: {
+            likeCount: 1,
+          },
+          $addToSet: {
+            likeUsers: email,
+          },
+        }
+      );
+    }
+    res.status(201).json({ message: "Added LikeCount!" });
+  }
+
+  //comments
+  if (isAlready && !isPlus && !isReply) {
+    const alreadyDecreaseupVote: any = await db
+      .collection("comments")
+      .updateOne(
+        {
+          _id: id,
+        },
+        {
+          $inc: {
+            upVote: 1,
+          },
+          $pull: {
+            likeUsers: email,
+          },
+        }
+      );
+  } else if (isAlready && isPlus && !isReply) {
+    const alreadyIncreaseupVote: any = await db
+      .collection("comments")
+      .updateOne(
+        {
+          _id: id,
+        },
+        {
+          $inc: {
+            upVote: -1,
+          },
+          $pull: {
+            likeUsers: email,
+          },
+        }
+      );
+  } else if (!isAlready && !isPlus && !isReply) {
+    const decreaseupVote: any = await db.collection("comments").updateOne(
       {
         _id: id,
       },
       {
         $inc: {
-          likeCount: -1,
+          upVote: -1,
         },
-        $pull: {
+        $addToSet: {
           likeUsers: email,
         },
       }
     );
-  } else {
-    const increaseLikeCount: any = await db.collection("posts").updateOne(
+  } else if (!isAlready && isPlus && !isReply) {
+    const increaseupVote: any = await db.collection("comments").updateOne(
       {
         _id: id,
       },
       {
         $inc: {
-          likeCount: 1,
+          upVote: 1,
         },
         $addToSet: {
           likeUsers: email,
@@ -57,7 +123,71 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     );
   }
 
-  res.status(201).json({ message: "Added LikeCount!" });
+  //reply
+  if (isAlready && !isPlus && isReply) {
+    const alreadyDecreaseupVote: any = await db
+      .collection("comments")
+      .updateOne(
+        {
+          replies: { $elemMatch: { _id: id } },
+        },
+        {
+          $inc: {
+            "replies.$.upVote": 1,
+          },
+          $pull: {
+            "replies.$.likeUsers": email,
+          },
+        }
+      );
+  } else if (isAlready && isPlus && isReply) {
+    const alreadyIncreaseupVote: any = await db
+      .collection("comments")
+      .updateOne(
+        {
+          replies: { $elemMatch: { _id: id } },
+        },
+        {
+          $inc: {
+            "replies.$.upVote": -1,
+          },
+          $pull: {
+            "replies.$.likeUsers": email,
+          },
+        }
+      );
+  } else if (!isAlready && !isPlus && isReply) {
+    const decreaseupVote: any = await db.collection("comments").updateOne(
+      {
+        replies: { $elemMatch: { _id: id } },
+      },
+      {
+        $inc: {
+          "replies.$.upVote": -1,
+        },
+        $addToSet: {
+          "replies.$.likeUsers": email,
+        },
+      }
+    );
+  } else if (!isAlready && isPlus && isReply) {
+    const increaseupVote: any = await db.collection("comments").updateOne(
+      {
+        replies: { $elemMatch: { _id: id } },
+      },
+      {
+        $inc: {
+          "replies.$.upVote": 1,
+        },
+        $addToSet: {
+          "replies.$.likeUsers": email,
+        },
+      }
+    );
+  }
+
+  res.status(201).json({ message: "Added upVote!" });
+
   client.close();
 }
 
