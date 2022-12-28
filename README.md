@@ -158,17 +158,11 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
 │  │  ├─ auth
 │  │  ├─ category
 │  │  ├─ comments
-│  │  │  └─ delete
-│  │  ├─ delete-post
 │  │  ├─ post
 │  │  ├─ posts
 │  │  ├─ recommend
-│  │  │  ├─ comments
-│  │  │  └─ reply
 │  │  ├─ reply
-│  │  │  └─ delete
 │  │  ├─ search
-│  │  ├─ trends
 │  │  ├─ user
 │  │  └─ views
 │  ├─ auth
