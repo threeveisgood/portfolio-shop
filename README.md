@@ -155,6 +155,7 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
 ├─ lib
 ├─ pages
 │  ├─ api
+│  │  ├─ add-post
 │  │  ├─ auth
 │  │  ├─ category
 │  │  ├─ comments
@@ -172,7 +173,7 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
 │  ├─ posts
 │  ├─ profile
 │  ├─ search
-│  └─ write
+│  └─ upload-files
 ├─ public
 ├─ slices
 ├─ styled

@@ -7,7 +7,6 @@ import usePost from "hooks/usePost";
 import Recommend from "components/post/recommend";
 import DeleteEdit from "./delete-edit";
 import { useSession } from "next-auth/client";
-import useIncreaseViews from "hooks/useIncreaseViews";
 import Contents from "components/post/contents";
 import {
   ContentsContianer,
@@ -23,12 +22,6 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
   const router = useRouter();
   const [session] = useSession();
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
-
-  const { mutate } = useIncreaseViews();
-
-  useEffect(() => {
-    mutate({ id: postID });
-  }, []);
 
   const { isSuccess, data, isLoading, isError } = usePost(postID);
 

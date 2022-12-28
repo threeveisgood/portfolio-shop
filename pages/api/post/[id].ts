@@ -19,6 +19,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     const result: any = await db.collection("posts").findOne({ _id: id });
 
+    const views: any = await db.collection("posts").updateOne(
+      {
+        _id: id,
+      },
+      {
+        $inc: {
+          viewsCount: 1,
+        },
+      }
+    );
+
     const comments: any = await db
       .collection("comments")
       .find({ postID: id })
