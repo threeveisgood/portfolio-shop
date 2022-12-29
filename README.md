@@ -16,6 +16,10 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
 
 - Next.js
 
+- Redux
+
+- React Query (v3)
+
 # 백엔드
 
 - Next API Routes
