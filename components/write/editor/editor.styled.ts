@@ -35,6 +35,7 @@ export const QuillWrapper = styled.div`
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     border: 1px solid ${(props) => props.theme.gray};
+    background-color: #fff;
   }
 
   .ql-editor {

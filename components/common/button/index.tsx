@@ -14,7 +14,7 @@ export const buttonStyle = css`
   color: #fff;
   cursor: pointer;
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 300;
   padding: 1rem 1.25rem;
   text-align: center;
   user-select: none;

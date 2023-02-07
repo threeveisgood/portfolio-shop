@@ -8,6 +8,7 @@ export const CarouselContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  margin-bottom: 2rem;
 `;
 
 export const StyledSwiperSlide = styled(SwiperSlide)`

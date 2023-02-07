@@ -55,7 +55,6 @@ const Editor: React.FunctionComponent = () => {
     setTitle(e.target.value);
   };
 
-  // //react-select에서 가져다 쓸 타입을 아직 모릅니다.(any로 선언되있음), 확인 후 수정 필요
   const handleChangeCategory = (category: any) => {
     setCategory(category.value);
   };
@@ -177,7 +176,6 @@ const Editor: React.FunctionComponent = () => {
         <QuillWrapper>
           <ReactQuill
             theme="snow"
-            placeholder="내용을 입력하세요"
             modules={modules}
             onChange={handleChangeQuillBody}
             defaultValue={originalPostId != "" ? body : ``}

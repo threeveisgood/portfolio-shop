@@ -103,7 +103,7 @@ const Contents: React.FunctionComponent<ContentsProps> = ({
       </InformationContainer>
 
       <ProductURLContainer>
-        URL :&nbsp;
+        URL:&nbsp;
         <Link href="/">
           <a>
             <LightWeight>{productURL}</LightWeight>

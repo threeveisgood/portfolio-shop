@@ -66,11 +66,10 @@ export const CardDescription = styled.div`
 `;
 
 export const CardTitleA = styled.a`
-  color: ${(props) => props.theme.gray};
-  font-weight: bold;
+  color: ${(props) => props.theme.black};
   min-height: 3.5rem;
   line-height: 1.9rem;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   margin: 1rem auto;
 
   display: -webkit-box;
@@ -105,7 +104,7 @@ export const NoteContainer = styled.span`
 export const CardNote = styled.div`
   padding-top: 0.3rem;
   color: ${(props) => props.theme.black};
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

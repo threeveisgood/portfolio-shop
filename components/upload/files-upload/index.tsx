@@ -1,25 +1,20 @@
 import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
 import { UiFileInputButton } from "components/upload/ui-file-input-button";
 import { ChangeToThumbnail, ChangeToFrontURL } from "lib/change-to-thumbnail";
 import useWriteStateActions from "hooks/state/useWriteStateActions";
 import useUploadFiles from "hooks/useUploadFiles";
-import { PrimaryP, ThumbnailLi } from "./files-upload.styled";
+import { ThumbnailLi } from "./files-upload.styled";
 
 const FilesUpload = () => {
-  const dispatch = useDispatch();
   const [thumb, setThumb] = useState<string[]>([]);
-  const [progress, setProgress] = useState(0);
   const { setImageLinks } = useWriteStateActions();
   const { mutate } = useUploadFiles();
 
-  const addImageLinks = (links: string[]) => dispatch(setImageLinks(links));
+  const addImageLinks = (links: string[]) => setImageLinks(links);
 
   const config = {
     headers: { "content-type": "multipart/form-data" },
-    onUploadProgress: (event: { loaded: number; total: number }) => {
-      setProgress(Math.round((event.loaded * 100) / event.total));
-    },
+    onUploadProgress: (event: { loaded: number; total: number }) => {},
   };
 
   const onChange = useCallback(
@@ -48,10 +43,6 @@ const FilesUpload = () => {
         uploadFileName="file"
         onChange={onChange}
       />
-      <PrimaryP>
-        <span>이미지 업로드 (10MB 미만)&nbsp;</span>
-        {progress < 100 && <span>{progress}%</span>}
-      </PrimaryP>
       <ul>
         {thumb &&
           thumb.map((item: string, i: number) => {
@@ -68,4 +59,4 @@ const FilesUpload = () => {
   );
 };
 
-export default React.memo(FilesUpload);
+export default FilesUpload;

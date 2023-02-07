@@ -33,7 +33,9 @@ export const CommentTextArea = styled(FormikField)`
   box-sizing: border-box;
   padding: 1.5rem 1rem;
   border-radius: 0.5rem;
-  border: 2px solid #778899;
+  border: 0px solid ${(props) => props.theme.white};
+  background: ${(props) => props.theme.white};
+  color: ${(props) => props.theme.black};
 
   &:focus {
     outline: none;
