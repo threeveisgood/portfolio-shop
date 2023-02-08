@@ -78,6 +78,7 @@ export const ProductURLContainer = styled.div`
 
 export const LightWeight = styled.span`
   font-weight: 400;
+  font-size: 1.3rem;
 `;
 
 export const MobileDateInfo = styled.p`

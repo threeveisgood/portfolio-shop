@@ -51,7 +51,7 @@ export const CardImageA = styled.a`
 export const CardImage = styled.img`
   border-radius: 1rem;
   width: 16rem;
-  height: 16rem;
+  height: 12rem;
 
   ${({ theme }) => theme.media.phoneLg} {
     width: 12rem;
