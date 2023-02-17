@@ -1,4 +1,4 @@
-import { getPost } from "api/getPost";
+import { getPost } from "api-codes/getPost";
 import Post from "components/post";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";

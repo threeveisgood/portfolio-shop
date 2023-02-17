@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { dehydrate, QueryClient } from "react-query";
 import { GetStaticProps } from "next";
-import { fetchSearch } from "api/fetchSearch";
+import { fetchSearch } from "api-codes/fetchSearch";
 import PostList from "components/post-list";
 
 export default function search(): ReactElement | string {

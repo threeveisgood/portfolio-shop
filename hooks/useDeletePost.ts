@@ -1,4 +1,4 @@
-import { deletePost } from "api/deletePost";
+import { deletePost } from "api-codes/deletePost";
 import { useMutation, useQueryClient } from "react-query";
 
 export default function useDeletePost(id: string) {

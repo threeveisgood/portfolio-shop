@@ -1,4 +1,4 @@
-import { rewritePost } from "api/rewritePost";
+import { rewritePost } from "api-codes/rewritePost";
 import { useMutation, useQueryClient } from "react-query";
 
 // originalPostId는 글 수정시에 쓰이는 원래 글 id인 패러미터입니다.

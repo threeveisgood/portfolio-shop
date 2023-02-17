@@ -1,4 +1,4 @@
-import { uploadFiles } from "api/uploadFiles";
+import { uploadFiles } from "api-codes/uploadFiles";
 import { useMutation } from "react-query";
 
 export default function useUploadFiles() {

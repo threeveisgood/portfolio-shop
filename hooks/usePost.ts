@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { getPost } from "api/getPost";
+import { getPost } from "api-codes/getPost";
 
 export default function usePost(postID: string) {
   return useQuery(["getPost", postID], () => getPost(postID), {

@@ -1,4 +1,4 @@
-import { getComments } from "api/getComments";
+import { getComments } from "api-codes/getComments";
 import { useQuery } from "react-query";
 
 export default function useComments(id: string) {

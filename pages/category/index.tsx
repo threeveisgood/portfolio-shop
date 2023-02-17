@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import PostList from "components/post-list";
 import { dehydrate, QueryClient } from "react-query";
 import { GetStaticProps } from "next";
-import { fetchPosts } from "api/fetchPosts";
+import { fetchPosts } from "api-codes/fetchPosts";
 
 export default function category(): ReactElement {
   return (

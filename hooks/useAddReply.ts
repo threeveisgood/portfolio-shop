@@ -1,4 +1,4 @@
-import { addReply } from "api/addReply";
+import { addReply } from "api-codes/addReply";
 import { useMutation, useQueryClient } from "react-query";
 
 export default function useAddReply(postID: string) {

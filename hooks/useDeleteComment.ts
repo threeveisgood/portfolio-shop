@@ -1,4 +1,4 @@
-import { deleteComment } from "api/deleteComment";
+import { deleteComment } from "api-codes/deleteComment";
 import { useMutation, useQueryClient } from "react-query";
 
 export default function useDeleteComment(postID: string) {

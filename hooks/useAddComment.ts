@@ -1,4 +1,4 @@
-import { addComment } from "api/addComment";
+import { addComment } from "api-codes/addComment";
 import { useMutation, useQueryClient } from "react-query";
 
 export default function useAddComment(postID: string) {

@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { dehydrate, QueryClient } from "react-query";
 import { GetStaticProps } from "next";
-import { fetchPosts } from "api/fetchPosts";
+import { fetchPosts } from "api-codes/fetchPosts";
 import PostList from "components/post-list";
 
 export default function posts(): ReactElement {

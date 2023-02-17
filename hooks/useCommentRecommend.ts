@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { commentRecommend } from "api/commentRecommend";
+import { commentRecommend } from "api-codes/commentRecommend";
 
 export default function useCommentRecommend(postID: string) {
   const queryClient = useQueryClient();

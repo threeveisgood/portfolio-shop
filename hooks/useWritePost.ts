@@ -1,4 +1,4 @@
-import { writePost } from "api/writePost";
+import { writePost } from "api-codes/writePost";
 import { useMutation } from "react-query";
 
 export default function useWritePost() {
