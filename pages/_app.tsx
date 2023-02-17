@@ -38,6 +38,7 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
       <AuthProvider session={pageProps.session}>
         <QueryClientProvider client={queryClient}>
