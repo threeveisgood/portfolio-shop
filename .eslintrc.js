@@ -19,6 +19,7 @@ module.exports = {
     "plugin:prettier/recommended", // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
     "plugin:import/recommended",
     "plugin:react-hooks/recommended",
+    "next/core-web-vitals",
   ],
   rules: {
     "react/react-in-jsx-scope": 0,
