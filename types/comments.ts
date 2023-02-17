@@ -40,7 +40,7 @@ export interface Reply {
   likeUsers: string[];
 }
 
-export interface Replies extends Reply {}
+export type Replies = Reply;
 [];
 
 export interface AddReply {

@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
-import ChangePasswordForm from "./change-password-form";
 import { Session } from "next-auth";
 import Container from "components/common/container";
+import { FaUser } from "react-icons/fa";
+import ChangePasswordForm from "./change-password-form";
 import { UserNameCt } from "./user-profile.styled";
 import DeleteUser from "./delete-user";
-import { FaUser } from "react-icons/fa";
 
 interface ProfileProps {
   session: Session;

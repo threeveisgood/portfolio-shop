@@ -4,7 +4,7 @@ import router from "next/router";
 import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
 import { HiOutlineLogout } from "react-icons/hi";
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineUser, AiOutlineSearch } from "react-icons/ai";
 import { Search } from "components/search";
 import { AuthButton } from "components/common/button";
 import {
@@ -13,7 +13,6 @@ import {
   ProfileDropdownMenu,
 } from "components/common/dropdown";
 import { UserProfileIcon } from "components/common/icons";
-import { AiOutlineSearch } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 import { StyledHeader, Title, UserNav } from "./header.styled";
 

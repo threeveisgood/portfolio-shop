@@ -4,13 +4,13 @@ import { Formik, Form } from "formik";
 import useAddComment from "hooks/useAddComment";
 import { addCommentSchema } from "lib/yup";
 import { CommentFormData } from "types/comments";
+import { CommentTextArea } from "components/common/comment";
 import {
   AddCommentContainer,
   AddCommentTitle,
   ButtonBox,
   SubmitButton,
 } from "./add-comment.styled";
-import { CommentTextArea } from "components/common/comment";
 
 const bson = require("bson");
 

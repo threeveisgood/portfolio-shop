@@ -1,6 +1,6 @@
+import { Toaster } from "react-hot-toast";
 import NavBar from "../header/nav-bar";
 import Header from "../header";
-import { Toaster } from "react-hot-toast";
 import { Container } from "./layout.styled";
 
 type Props = {

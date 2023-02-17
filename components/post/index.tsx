@@ -5,9 +5,9 @@ import Comments from "components/comments";
 import LoadingSpinner from "components/common/loading-spinner";
 import usePost from "hooks/usePost";
 import Recommend from "components/post/recommend";
-import DeleteEdit from "./delete-edit";
 import { useSession } from "next-auth/client";
 import Contents from "components/post/contents";
+import DeleteEdit from "./delete-edit";
 import {
   ContentsContianer,
   ContentsLayout,

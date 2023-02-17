@@ -14,7 +14,6 @@ import {
   CtReply,
   CtDeleteIcon,
 } from "components/common/comments-list";
-import AddReply from "./add-reply";
 import { CommentCt, ListBox } from "components/comments/comments.styled";
 import RepliesList from "components/comments/replies-list";
 import AddComments from "components/comments/add-comment";
@@ -25,6 +24,7 @@ import useCommentStateActions from "hooks/state/useCommentStateActions";
 import useDeleteComment from "hooks/useDeleteComment";
 import { useSession } from "next-auth/client";
 import { toast } from "react-hot-toast";
+import AddReply from "./add-reply";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");

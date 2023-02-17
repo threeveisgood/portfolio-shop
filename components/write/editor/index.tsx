@@ -9,14 +9,14 @@ import {
   FieldContainer,
 } from "components/common/form";
 import FilesUpload from "components/upload/files-upload";
+import useWriteStateActions from "hooks/state/useWriteStateActions";
+import useWriteState from "hooks/state/useWriteState";
 import {
   EditorBlock,
   TitleInput,
   QuillWrapper,
   CategorySelect,
 } from "./editor.styled";
-import useWriteStateActions from "hooks/state/useWriteStateActions";
-import useWriteState from "hooks/state/useWriteState";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const options = [

@@ -4,8 +4,9 @@ import {
   FieldError,
   StyledInput,
   StyledLabel,
+  FormSubmitButton,
 } from "components/common/form";
-import { FormSubmitButton } from "components/common/form";
+
 import { useFormik } from "formik";
 import Container from "components/common/container";
 import { profileFormValidationSchema } from "lib/yup";

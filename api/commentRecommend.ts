@@ -1,6 +1,6 @@
-import client from "./client";
 import { Comment } from "types/comments";
 import { CommentRecommend } from "types/recommend";
+import client from "./client";
 
 export async function commentRecommend(
   params: CommentRecommend

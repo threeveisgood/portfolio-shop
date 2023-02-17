@@ -3,13 +3,13 @@ import { MdThumbUpOffAlt } from "react-icons/md";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
 import { toast } from "react-hot-toast";
+import usePostRecommend from "hooks/usePostRecommend";
 import {
   FlexBoxColumn,
   RcButton,
   RcIcon,
   RcLikeCount,
 } from "./recommend.styled";
-import usePostRecommend from "hooks/usePostRecommend";
 
 interface IRecommendProps {
   likeCount: number;

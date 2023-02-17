@@ -2,8 +2,8 @@ import { useFormik } from "formik";
 import router from "next/router";
 import * as yup from "yup";
 import { AiOutlineSearch } from "react-icons/ai";
-import { SearchForm, SearchInput, SearchButton } from "./search.styeld";
 import { searchValidationSchema } from "lib/yup";
+import { SearchForm, SearchInput, SearchButton } from "./search.styeld";
 
 interface SearchProps {
   isMobile?: boolean;

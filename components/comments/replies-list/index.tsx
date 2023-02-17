@@ -14,7 +14,6 @@ import {
 } from "components/common/comments-list";
 import dayjs from "dayjs";
 import AddReply from "components/comments/add-reply";
-import { RepliesBox, CtRepliedName } from "./replies-list.styled";
 import Recommend from "components/comments/recommend";
 import useCommentState from "hooks/state/useCommentState";
 import useCommentStateActions from "hooks/state/useCommentStateActions";
@@ -22,6 +21,7 @@ import useDeleteReply from "hooks/useDeleteReply";
 import { Replies, Reply } from "types/comments";
 import { useSession } from "next-auth/client";
 import { toast } from "react-hot-toast";
+import { RepliesBox, CtRepliedName } from "./replies-list.styled";
 
 interface IRepliesListProps {
   repliedId: string;
