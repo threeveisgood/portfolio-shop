@@ -26,6 +26,8 @@ module.exports = {
     "import/no-unresolved": 0,
     "import/named": 2,
     "import/order": 1,
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
   },
