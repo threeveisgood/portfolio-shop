@@ -28,6 +28,8 @@ export const ThumbnailContainer = styled.div`
 `;
 
 export const CardImageBox = styled.div`
+  display: flex;
+  justify-content: center;
   ${({ theme }) => theme.media.phoneLg} {
     display: flex;
     align-items: center;
@@ -35,6 +37,7 @@ export const CardImageBox = styled.div`
 `;
 
 export const CardImageA = styled.a`
+  display: flex;
   max-width: 16rem;
   max-height: 16rem;
   justify-content: center;
@@ -50,13 +53,8 @@ export const CardImageA = styled.a`
 
 export const CardImage = styled.img`
   border-radius: 1rem;
-  width: 16rem;
-  height: 12rem;
-
-  ${({ theme }) => theme.media.phoneLg} {
-    width: 12rem;
-    height: 12rem;
-  }
+  width: 12rem;
+  height: 9rem;
 `;
 
 export const CardDescription = styled.div`
