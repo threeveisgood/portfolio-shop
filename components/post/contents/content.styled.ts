@@ -70,10 +70,20 @@ export const InformationMidDot = styled.span`
 
 export const ProductURLContainer = styled.div`
   display: flex;
+  align-items: center;
   padding: 0.8rem 0;
   margin-bottom: 3rem;
   font-size: 1.4rem;
   font-weight: 600;
+`;
+
+export const UrlBox = styled.div`
+  //display: flex;
+  //align-items: center;
+  padding: 0.8rem 0;
+  font-size: 1.3rem;
+  margin-bottom: 3rem;
+  word-break: break-all;
 `;
 
 export const LightWeight = styled.span`

@@ -1,8 +1,12 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
 import { Swiper } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Controller, Thumbs } from "swiper";
-import { CarouselContainer, StyledSwiperSlide } from "./carousel.styled";
+import {
+  CarouselContainer,
+  StyledSwiper,
+  StyledSwiperSlide,
+  SwiperImage,
+} from "./carousel.styled";
 import "swiper/swiper-bundle.css";
 
 SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
@@ -14,20 +18,21 @@ interface Props {
 const StyledCarousel: React.FunctionComponent<Props> = ({ imageLinks }) => {
   return (
     <CarouselContainer>
-      <Swiper
+      <StyledSwiper
         id="main"
         tag="section"
         wrapperTag="ul"
+        navigation
         pagination={{ clickable: true }}
         spaceBetween={0}
         slidesPerView={1}
       >
         {imageLinks?.map((imageLink: string, index: number) => (
           <StyledSwiperSlide key={`slide-${index}`} tag="li">
-            <img alt={"slice" + index} src={imageLink} />
+            <SwiperImage alt={"slice" + index} src={imageLink + "?q=90"} />
           </StyledSwiperSlide>
         ))}
-      </Swiper>
+      </StyledSwiper>
     </CarouselContainer>
   );
 };

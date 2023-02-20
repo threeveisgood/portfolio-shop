@@ -57,7 +57,7 @@ function Card({
               {imageLinks.length < 1 ? (
                 <CardImage src="/default.png" alt={title} />
               ) : (
-                <CardImage src={imageLinks[0] + "?w=160&q=80"} alt={title} />
+                <CardImage src={imageLinks[0] + "?w=120&q=90"} alt={title} />
               )}
             </CardImageA>
           </Link>

@@ -19,7 +19,7 @@ import {
   Count,
   CountNumber,
   InformationMidDot,
-  ProductURLContainer,
+  UrlBox,
   LightWeight,
   MobileDateInfo,
   DateInfo,
@@ -102,14 +102,14 @@ const Contents: React.FunctionComponent<ContentsProps> = ({
         </FlexContainer>
       </InformationContainer>
 
-      <ProductURLContainer>
-        URL:&nbsp;
-        <Link href={productURL}>
-          <a target="_blank">
-            <LightWeight>{productURL}</LightWeight>
-          </a>
-        </Link>
-      </ProductURLContainer>
+      <div>
+        <UrlBox>
+          URL:&nbsp;
+          <Link href={productURL}>
+            <a target="_blank">{productURL}</a>
+          </Link>
+        </UrlBox>
+      </div>
 
       {imageLinks && imageLinks.length != 0 ? (
         <StyledCarousel imageLinks={imageLinks} />

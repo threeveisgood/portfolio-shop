@@ -69,6 +69,7 @@ export const CardTitleA = styled.a`
   line-height: 1.9rem;
   font-size: 1.5rem;
   margin: 1rem auto;
+  padding-top: 1.5rem;
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -86,7 +87,7 @@ export const PriceContainer = styled.span`
 `;
 
 export const CardPrice = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
