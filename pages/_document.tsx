@@ -36,6 +36,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap"
             rel="stylesheet"
           />
+          <meta
+            name="description"
+            content="빠르고 쉽게 볼 수 있는 핫딜 모음 사이트입니다."
+          />
         </Head>
         <body>
           <Main />
