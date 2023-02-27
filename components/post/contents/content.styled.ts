@@ -10,6 +10,7 @@ export const PriceAndCategoryContainer = styled.span`
 export const Price = styled.span`
   font-size: 2rem;
   font-weight: 600;
+  color: ${(props) => props.theme.priceColor};
 `;
 
 export const Category = styled.span`
