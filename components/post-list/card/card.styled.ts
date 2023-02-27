@@ -109,6 +109,7 @@ export const CardNote = styled.div`
   white-space: nowrap;
   overflow: hidden;
   font-family: auto;
+  font-weight: bold;
 
   ${({ theme }) => theme.media.phoneLg} {
     padding-top: 0.2rem;
