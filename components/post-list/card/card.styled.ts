@@ -90,6 +90,7 @@ export const CardPrice = styled.span`
   font-size: 1.4rem;
   font-weight: 700;
   overflow: hidden;
+  color: #c71585;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
