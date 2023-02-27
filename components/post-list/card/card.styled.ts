@@ -118,6 +118,7 @@ export const CardNote = styled.div`
 export const CardFooter = styled.footer`
   display: flex;
   margin-top: 1.2rem;
+  color: #7b68ee;
 `;
 
 export const CardFooterIcon = styled.span`
