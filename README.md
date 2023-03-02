@@ -2,7 +2,16 @@
 
 ## 프로젝트 비디오
 
+<img src="https://user-images.githubusercontent.com/41880220/222387583-44c3037c-06d8-462e-bc78-98e1a284c0fd.gif" />
+
 ## 설치, 환경설정 및 실행방법
+
+```
+git clone https://github.com/threeveisgood/portfolio-shop.git
+cd portfolio-shop
+yarn
+yarn dev
+```
 
 ## 프로젝트 소개, 기능
 
@@ -109,7 +118,7 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
 
 ```
 📦
-├─ api
+├─ api-codes
 ├─ components
 │  ├─ auth
 │  │  ├─ auth-form
@@ -163,15 +172,13 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
 │  ├─ api
 │  │  ├─ add-post
 │  │  ├─ auth
-│  │  ├─ category
 │  │  ├─ comments
 │  │  ├─ post
 │  │  ├─ posts
 │  │  ├─ recommend
 │  │  ├─ reply
 │  │  ├─ search
-│  │  ├─ user
-│  │  └─ views
+│  │  └─ upload-files
 │  ├─ auth
 │  ├─ category
 │  ├─ create-user
@@ -179,14 +186,14 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
 │  ├─ posts
 │  ├─ profile
 │  ├─ search
-│  └─ upload-files
+│  └─ write
 ├─ public
 ├─ slices
 ├─ styled
 ├─ types
 ```
 
-- api 폴더는 axios와 관련된 코드들을 정리하였습니다. 프로젝트 초기에 react-query의 query,mutation 코드와 묶어져있었지만 추후에 다른 라이브러리로 대체 될 수 있기 때문에 분리해두었습니다.
+- api-codes 폴더는 axios와 관련된 코드들을 정리하였습니다. 프로젝트 초기에 react-query의 query,mutation 코드와 묶어져있었지만 추후에 다른 라이브러리로 대체 될 수 있기 때문에 분리해두었습니다.
 
 - components 폴더는 기능들을 폴더별로 구분해서 코드를 작성했습니다. 예를 들어 components/comments/add-comments 폴더는 기본 컴포넌트 코드인 index.tsx, 스타일 코드만 정리한 add-comments.styled.tsx로 구성하여 작성하였습니다.
 

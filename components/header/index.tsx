@@ -44,7 +44,7 @@ const Header: React.FunctionComponent = () => {
       <StyledHeader>
         <Link href="/">
           <a>
-            <Title>SandoDeal</Title>
+            <Title>SandoShop</Title>
           </a>
         </Link>
 
