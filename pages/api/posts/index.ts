@@ -40,7 +40,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
       res.status(200).json({ count, result });
     } catch {
-      res.status(500).json({ message: "Getting Category Post Lists failed." });
+      res.status(500).json({ message: "Getting Category Post Lists failed.." });
     }
   } else {
     try {

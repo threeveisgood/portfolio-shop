@@ -108,7 +108,7 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
 
 - formik은 yup과 같이 쓰면 Form Validation, Error Handling이 매우 편리해지기 때문에 사용하게 되었습니다.
 
-- react-select, react-responsive-carousel은 빠르게 카테고리를 선택하는 select 기능과 이미지 .carousel 기능을 구현하기 위해 도입하였습니다. 이런 라이브러리들에 기대지 않고 직접 네이티브 코드로 구현해보기 위해 다음 프로젝트인 '직접 구현해보는 32가지 프론트엔드 ui 챌린지'로 코드가 대체될 예정입니다.
+- react-select, react-responsive-carousel은 빠르게 카테고리를 선택하는 select 기능과 이미지 캐러셀 기능을 구현하기 위해 도입하였습니다.
 
 - bcryptjs는 회원가입할 때 사용자 암호 보안을 위해 사용되었습니다.
 
