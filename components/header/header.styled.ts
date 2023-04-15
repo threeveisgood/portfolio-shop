@@ -12,7 +12,7 @@ export const StyledHeader = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
 

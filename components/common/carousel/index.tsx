@@ -8,6 +8,7 @@ import {
   SwiperImage,
 } from "./carousel.styled";
 import "swiper/swiper-bundle.css";
+import Skeleton from "react-loading-skeleton";
 
 SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
 
@@ -29,7 +30,7 @@ const StyledCarousel: React.FunctionComponent<Props> = ({ imageLinks }) => {
       >
         {imageLinks?.map((imageLink: string, index: number) => (
           <StyledSwiperSlide key={`slide-${index}`} tag="li">
-            <SwiperImage alt={"slice" + index} src={imageLink + "?q=90"} />
+            <SwiperImage alt={"slice" + index} src={imageLink + "?q=85"} />
           </StyledSwiperSlide>
         ))}
       </StyledSwiper>

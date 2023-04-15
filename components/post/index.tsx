@@ -7,6 +7,7 @@ import usePost from "hooks/usePost";
 import Recommend from "components/post/recommend";
 import { useSession } from "next-auth/client";
 import Contents from "components/post/contents";
+import useComments from "hooks/useComments";
 import DeleteEdit from "./delete-edit";
 import {
   ContentsContianer,
@@ -24,6 +25,12 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
   const postID = typeof router.query?.id === "string" ? router.query.id : "";
 
   const { isSuccess, data, isLoading, isError } = usePost(postID);
+  const {
+    isSuccess: commentsIsSuccess,
+    data: commentsData,
+    isLoading: commentsIsLoading,
+    isError: commentsIsError,
+  } = useComments(postID);
 
   if (isSuccess) {
     const {
@@ -86,7 +93,13 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
               />
             )}
 
-            <Comments postID={postID} />
+            <Comments
+              postID={postID}
+              isSuccess={commentsIsSuccess}
+              data={commentsData}
+              isLoading={commentsIsLoading}
+              isError={commentsIsError}
+            />
           </DetailContainer>
         </ContentsLayout>
       </ContentsContianer>

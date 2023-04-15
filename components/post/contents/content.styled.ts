@@ -14,8 +14,11 @@ export const Price = styled.span`
 `;
 
 export const Category = styled.span`
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
 `;
 
 export const Feature = styled(Category)``;
@@ -85,11 +88,19 @@ export const UrlBox = styled.div`
   font-size: 1.3rem;
   margin-bottom: 3rem;
   word-break: break-all;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const LightWeight = styled.span`
   font-weight: 400;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const MobileDateInfo = styled.p`
@@ -109,7 +120,10 @@ export const DateInfo = styled.p`
 `;
 
 export const PostContent = styled.div`
-  font-family: auto;
-  font-size: 1.3125rem;
+  font-size: 1.4rem;
   color: #333130;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
 `;

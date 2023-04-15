@@ -40,6 +40,7 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchButton = styled.button`
+  display: flex;
   position: absolute;
   font-size: 1.9rem;
   border: none;

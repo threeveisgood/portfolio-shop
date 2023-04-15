@@ -25,22 +25,27 @@ import useDeleteComment from "hooks/useDeleteComment";
 import { useSession } from "next-auth/client";
 import { toast } from "react-hot-toast";
 import AddReply from "./add-reply";
+import { IComments } from "types/comments";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
 interface CommentsListProps {
   postID: string;
+  isSuccess: boolean;
+  data: IComments | undefined;
+  isLoading: boolean;
+  isError: boolean;
 }
 
-const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
+const Comments: React.FunctionComponent<CommentsListProps> = ({
+  postID,
+  isSuccess,
+  data,
+  isLoading,
+  isError,
+}) => {
   const [session] = useSession();
-  const {
-    isSuccess,
-    data: commentsData,
-    isLoading,
-    isError,
-  } = useComments(postID);
   const { replyToggle } = useCommentState();
   const { initialize, changeReplyToggle } = useCommentStateActions();
   const isOwnComment = session && session.user?.email;
@@ -72,8 +77,8 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({ postID }) => {
     return (
       <CommentCt>
         <ListBox>
-          {commentsData &&
-            commentsData.comments.map((data) => {
+          {data &&
+            data.comments.map((data) => {
               return (
                 !data.isDeleted && (
                   <div key={data._id}>

@@ -52,10 +52,15 @@ export const NavButton = styled.button`
 `;
 
 export const AuthButton = styled(StyledButton)`
+  border-radius: 2rem;
   background: ${(props) => props.theme.black};
   font-weight: 500;
   color: #fff5f5;
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.8rem;
+
+  ${({ theme }) => theme.media.phoneLg} {
+    padding: 0.6rem 1.6rem;
+  }
 `;
 
 export const LinearButton = styled(StyledButton)`
