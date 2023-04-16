@@ -1,4 +1,3 @@
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import SwiperCore, { Navigation, Pagination, Controller, Thumbs } from "swiper";
 import {
   CarouselContainer,
