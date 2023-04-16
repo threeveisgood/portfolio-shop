@@ -1,7 +1,6 @@
 import * as React from "react";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
-import Comments from "components/comments";
+import CommentsFeature from "components/comments";
 import LoadingSpinner from "components/common/loading-spinner";
 import usePost from "hooks/usePost";
 import Recommend from "components/post/recommend";
@@ -93,7 +92,7 @@ const Post: React.FunctionComponent<PostProps> = ({}) => {
               />
             )}
 
-            <Comments
+            <CommentsFeature
               postID={postID}
               isSuccess={commentsIsSuccess}
               data={commentsData}

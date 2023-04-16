@@ -11,7 +11,7 @@ export interface Comment {
   replies: Replies;
 }
 
-export interface IComments {
+export interface Comments {
   comments: ReadonlyArray<Comment>;
 }
 

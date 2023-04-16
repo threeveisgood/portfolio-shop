@@ -18,14 +18,13 @@ import { CommentCt, ListBox } from "components/comments/comments.styled";
 import RepliesList from "components/comments/replies-list";
 import AddComments from "components/comments/add-comment";
 import Recommend from "components/comments/recommend";
-import useComments from "hooks/useComments";
 import useCommentState from "hooks/state/useCommentState";
 import useCommentStateActions from "hooks/state/useCommentStateActions";
 import useDeleteComment from "hooks/useDeleteComment";
 import { useSession } from "next-auth/client";
 import { toast } from "react-hot-toast";
 import AddReply from "./add-reply";
-import { IComments } from "types/comments";
+import { Comments } from "types/comments";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -33,12 +32,12 @@ dayjs.locale("ko");
 interface CommentsListProps {
   postID: string;
   isSuccess: boolean;
-  data: IComments | undefined;
+  data: Comments | undefined;
   isLoading: boolean;
   isError: boolean;
 }
 
-const Comments: React.FunctionComponent<CommentsListProps> = ({
+const CommentsFeature: React.FunctionComponent<CommentsListProps> = ({
   postID,
   isSuccess,
   data,
@@ -141,4 +140,4 @@ const Comments: React.FunctionComponent<CommentsListProps> = ({
   return <></>;
 };
 
-export default Comments;
+export default CommentsFeature;
