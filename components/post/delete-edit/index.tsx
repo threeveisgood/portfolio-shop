@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AskRemoveModal from "components/post/ask-remove-modal";
 import { useRouter } from "next/router";
 import useDeletePost from "hooks/useDeletePost";

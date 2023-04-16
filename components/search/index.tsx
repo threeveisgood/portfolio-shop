@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
 import router from "next/router";
-import * as yup from "yup";
 import { AiOutlineSearch } from "react-icons/ai";
 import { searchValidationSchema } from "lib/yup";
 import { SearchForm, SearchInput, SearchButton } from "./search.styeld";
@@ -37,7 +36,7 @@ export const Search = ({ isMobile, searchToggle }: SearchProps) => {
         value={formik.values.search}
         onChange={formik.handleChange}
       />
-      <SearchButton type="submit">
+      <SearchButton title="검색" type="submit">
         <AiOutlineSearch />
       </SearchButton>
     </SearchForm>

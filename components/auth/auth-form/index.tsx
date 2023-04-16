@@ -26,7 +26,7 @@ function AuthForm() {
       name: "",
     },
     validationSchema: authFormValidationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values, {}) => {
       const enteredEmail = values.email;
       const enteredPassword = values.password;
 

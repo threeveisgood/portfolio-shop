@@ -1,5 +1,4 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Swiper } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Controller, Thumbs } from "swiper";
 import {
   CarouselContainer,
@@ -8,7 +7,6 @@ import {
   SwiperImage,
 } from "./carousel.styled";
 import "swiper/swiper-bundle.css";
-import Skeleton from "react-loading-skeleton";
 
 SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
 
@@ -30,7 +28,10 @@ const StyledCarousel: React.FunctionComponent<Props> = ({ imageLinks }) => {
       >
         {imageLinks?.map((imageLink: string, index: number) => (
           <StyledSwiperSlide key={`slide-${index}`} tag="li">
-            <SwiperImage alt={"slice" + index} src={imageLink + "?q=85"} />
+            <SwiperImage
+              alt={"slice" + index}
+              src={imageLink + "?f=webp&q=85"}
+            />
           </StyledSwiperSlide>
         ))}
       </StyledSwiper>

@@ -12,8 +12,7 @@ export const StyledHeader = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 2.2rem;
-  font-family: "Quicksand", sans-serif;
+  font-size: 1.9rem;
   font-weight: 700;
 
   background: ${(props) => props.theme.black};
@@ -25,7 +24,7 @@ export const Title = styled.div`
 
   @media only screen and (max-width: ${(props) =>
       props.theme.responsive.phone}) {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 `;
 

@@ -4,7 +4,6 @@ import { BiUpvote, BiDownvote } from "react-icons/bi";
 import { useSession } from "next-auth/client";
 import useCommentRecommend from "hooks/useCommentRecommend";
 import { toast } from "react-hot-toast";
-import useReplyRecommend from "hooks/useReplyRecommend";
 
 interface IRecommendProps {
   _id: string;

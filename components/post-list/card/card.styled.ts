@@ -53,8 +53,8 @@ export const CardImageA = styled.a`
 
 export const CardImage = styled.img`
   border-radius: 1rem;
-  width: 12rem;
-  height: 9rem;
+  width: 120px;
+  height: 90px;
 `;
 
 export const CardDescription = styled.div`

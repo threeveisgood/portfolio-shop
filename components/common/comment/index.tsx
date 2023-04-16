@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Field as FormikField } from "formik";
-import { InputStyle, StyledLabel } from "components/common/form";
 import { LinearButton } from "components/common/button";
 
 export const AddCommentContainer = styled.div`
