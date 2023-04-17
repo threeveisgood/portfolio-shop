@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styled from "styled-components";
 
 export const CardLi = styled.li`
@@ -51,7 +52,7 @@ export const CardImageA = styled.a`
   }
 `;
 
-export const CardImage = styled.img`
+export const CardImage = styled(Image)`
   border-radius: 1rem;
   width: 120px;
   height: 90px;
@@ -87,7 +88,7 @@ export const PriceContainer = styled.span`
 `;
 
 export const CardPrice = styled.span`
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
   overflow: hidden;
   color: ${(props) => props.theme.priceColor};
@@ -104,7 +105,7 @@ export const NoteContainer = styled.span`
 export const CardNote = styled.div`
   padding-top: 0.3rem;
   color: ${(props) => props.theme.black};
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

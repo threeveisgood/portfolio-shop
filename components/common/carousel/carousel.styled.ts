@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styled from "styled-components";
 import { SwiperSlide } from "swiper/react";
 import { Swiper } from "swiper/react";
@@ -49,7 +50,7 @@ export const StyledSwiperSlide = styled(SwiperSlide)`
   justify-content: center;
 `;
 
-export const SwiperImage = styled.img`
+export const SwiperImage = styled(Image)`
   width: 100%;
   height: auto;
 `;

@@ -33,6 +33,7 @@ export const Search = ({ isMobile, searchToggle }: SearchProps) => {
       <SearchInput
         name="search"
         type="text"
+        aria-label="Search"
         value={formik.values.search}
         onChange={formik.handleChange}
       />

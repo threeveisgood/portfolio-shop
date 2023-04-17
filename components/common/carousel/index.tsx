@@ -28,8 +28,10 @@ const StyledCarousel: React.FunctionComponent<Props> = ({ imageLinks }) => {
         {imageLinks?.map((imageLink: string, index: number) => (
           <StyledSwiperSlide key={`slide-${index}`} tag="li">
             <SwiperImage
+              priority={true}
               alt={"slice" + index}
-              src={imageLink + "?f=webp&q=85"}
+              src={imageLink + "?f=webp&q=75"}
+              layout="fill"
             />
           </StyledSwiperSlide>
         ))}
