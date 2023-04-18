@@ -37,7 +37,7 @@ export const Search = ({ isMobile, searchToggle }: SearchProps) => {
         value={formik.values.search}
         onChange={formik.handleChange}
       />
-      <SearchButton title="검색" type="submit">
+      <SearchButton title="Search" type="submit">
         <AiOutlineSearch />
       </SearchButton>
     </SearchForm>

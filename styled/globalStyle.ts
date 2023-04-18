@@ -18,8 +18,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    font-size: 62.5%;
-    background: #F7F7F7; 
+    font-size: 62.5%;    
 
     font-family: 'GmarketSansMedium';
     

@@ -1,42 +1,24 @@
-import SwiperCore, { Navigation, Pagination, Controller, Thumbs } from "swiper";
-import {
-  CarouselContainer,
-  StyledSwiper,
-  StyledSwiperSlide,
-  SwiperImage,
-} from "./carousel.styled";
-import "swiper/swiper-bundle.css";
-
-SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
+import { StyledImage, UnsetContainer } from "./carousel.styled";
 
 interface Props {
-  [imageLinks: string]: any;
+  [imageLinks: string]: string[];
 }
 
 const StyledCarousel: React.FunctionComponent<Props> = ({ imageLinks }) => {
   return (
-    <CarouselContainer>
-      <StyledSwiper
-        id="main"
-        tag="section"
-        wrapperTag="ul"
-        navigation
-        pagination={{ clickable: true }}
-        spaceBetween={0}
-        slidesPerView={1}
-      >
+    <div>
+      <div>
         {imageLinks?.map((imageLink: string, index: number) => (
-          <StyledSwiperSlide key={`slide-${index}`} tag="li">
-            <SwiperImage
-              priority={true}
-              alt={"slice" + index}
-              src={imageLink + "?f=webp&q=75"}
-              layout="fill"
+          <UnsetContainer key={imageLink}>
+            <StyledImage
+              alt={"상품 이미지: " + (index + 1)}
+              src={imageLink + "?w=auto&f=webp&q=75"}
+              loading="eager"
             />
-          </StyledSwiperSlide>
+          </UnsetContainer>
         ))}
-      </StyledSwiper>
-    </CarouselContainer>
+      </div>
+    </div>
   );
 };
 

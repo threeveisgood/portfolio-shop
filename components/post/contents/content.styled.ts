@@ -120,7 +120,7 @@ export const DateInfo = styled.p`
 `;
 
 export const PostContent = styled.div`
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: #333130;
 
   @media (max-width: 768px) {

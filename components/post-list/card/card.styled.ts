@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styled from "styled-components";
 
 export const CardLi = styled.li`
@@ -52,7 +51,7 @@ export const CardImageA = styled.a`
   }
 `;
 
-export const CardImage = styled(Image)`
+export const CardImage = styled.img`
   border-radius: 1rem;
   width: 120px;
   height: 90px;
