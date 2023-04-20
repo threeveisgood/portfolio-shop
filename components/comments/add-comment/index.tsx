@@ -44,7 +44,12 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
       >
         <Form>
           <Field>
-            <CommentTextArea id="comment" name="comment" component="textarea" />
+            <CommentTextArea
+              id="comment"
+              aria-label="Comment"
+              name="comment"
+              component="textarea"
+            />
           </Field>
           <ButtonBox>
             <SubmitButton type="reset">취소</SubmitButton>

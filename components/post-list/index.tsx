@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import usePosts from "hooks/usePosts";
 import LoadingSpinner from "components/common/loading-spinner";
 import useCategory from "hooks/useCategory";
-import ListTitle from "./list-title";
 import { MainContainer, CardUl } from "./post-list.styled";
 
 interface ListProps {
@@ -15,11 +14,7 @@ interface ListProps {
   listTitle?: string;
 }
 
-function PostList({
-  isSearch,
-  isCategory,
-  listTitle,
-}: ListProps): ReactElement {
+function PostList({ isSearch, isCategory }: ListProps): ReactElement {
   const router = useRouter();
   const { value } = router.query;
   const valueString = String(value);
@@ -52,13 +47,13 @@ function PostList({
         <div>Error: {isError}</div>
       ) : (
         <MainContainer>
-          <ListTitle title={listTitle} />
           <CardUl>
             {data.result &&
               data.result.map((data: any) => {
                 return (
                   <Card
                     key={data._id}
+                    category={data.category}
                     id={data._id}
                     title={data.title}
                     imageLinks={data.imageLinks}
@@ -68,6 +63,8 @@ function PostList({
                     username={data.username}
                     likeCount={data.likeCount}
                     repliesCount={data.repliesCount}
+                    date={data.date}
+                    viewsCount={data.viewsCount}
                   />
                 );
               })}

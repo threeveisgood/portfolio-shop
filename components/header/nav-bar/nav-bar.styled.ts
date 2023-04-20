@@ -7,8 +7,11 @@ export const Nav = styled.nav`
   overflow-y: auto;
   text-align: center;
 
-  background: ${(props) => props.theme.black};
-  color: #fff;
+  max-width: 1250px;
+  justify-content: center;
+  margin: 0 auto;
+  //margin-top: 3rem;
+  border-radius: 2rem;
 
   @media only screen and (min-width: ${(props) =>
       props.theme.responsive.phone}) {
@@ -27,11 +30,12 @@ export const InformationUl = styled.ul`
 export const InformationLi = styled.li`
   font-size: 1.6rem;
   cursor: pointer;
+
   &:not(:last-child) {
     margin-right: 2.4rem;
   }
 `;
 
 export const InformationA = styled.a`
-  color: #fff;
+  color: ${(props) => props.theme.black};
 `;

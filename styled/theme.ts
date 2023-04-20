@@ -8,8 +8,8 @@ export const theme: DefaultTheme = {
   black: "#474747",
   lowblack: "#222222",
   gray: "#2F4F4F",
-  lowgray: "#d6d6d6",
-  gold: "#a6946d",
+  lowgray: "#787878",
+  gold: "#d16736",
   priceColor: "#c71585",
   padding: "12px",
   fontSize: {

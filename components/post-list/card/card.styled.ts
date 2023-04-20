@@ -1,11 +1,11 @@
+import Image from "next/image";
 import styled from "styled-components";
 
 export const CardLi = styled.li`
   display: flex;
   box-shadow: none;
   padding: 1.2rem;
-  width: 18rem;
-  justify-content: center;
+  width: 100%;
 
   ${({ theme }) => theme.media.phoneLg} {
     width: 100%;
@@ -20,16 +20,10 @@ export const CardLi = styled.li`
 
 export const ThumbnailContainer = styled.div`
   display: flex;
-  flex-direction: column;
-
-  ${({ theme }) => theme.media.phoneLg} {
-    flex-direction: row;
-  }
+  flex: 1 1 0;
 `;
 
 export const CardImageBox = styled.div`
-  display: flex;
-  justify-content: center;
   ${({ theme }) => theme.media.phoneLg} {
     display: flex;
     align-items: center;
@@ -51,25 +45,29 @@ export const CardImageA = styled.a`
   }
 `;
 
-export const CardImage = styled.img`
+export const CardImage = styled(Image)`
   border-radius: 1rem;
   width: 120px;
   height: 90px;
 `;
 
 export const CardDescription = styled.div`
-  ${({ theme }) => theme.media.phoneLg} {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  padding-left: 2rem;
+  /* ${({ theme }) => theme.media.phoneLg} {
     padding-left: 1.7rem;
-  }
+  } */
 `;
 
 export const CardTitleA = styled.a`
   color: ${(props) => props.theme.black};
   min-height: 3.5rem;
   line-height: 1.9rem;
-  font-size: 1.5rem;
-  margin: 1rem auto;
-  padding-top: 1.5rem;
+  font-size: 1.7rem;
+  padding-top: 1rem;
+  font-weight: bold;
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -82,8 +80,15 @@ export const CardTitleA = styled.a`
     width: 18rem;
   }
 `;
-export const PriceContainer = styled.span`
+export const PriceContainer = styled.div`
   padding-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const PriceShippingBox = styled.div`
+  display: flex;
 `;
 
 export const CardPrice = styled.span`
@@ -93,6 +98,31 @@ export const CardPrice = styled.span`
   color: ${(props) => props.theme.priceColor};
   text-overflow: ellipsis;
   white-space: nowrap;
+`;
+
+export const CardShipping = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.3rem;
+  color: ${(props) => props.theme.lowgray};
+`;
+
+export const CardLikeCount = styled.span`
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  padding-left: 1rem;
+  gap: 0.3rem;
+  color: ${(props) => props.theme.gray};
+`;
+
+export const CardUserInfo = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.4rem;
+  color: ${(props) => props.theme.lowgray};
 `;
 
 export const NoteContainer = styled.span`
@@ -114,6 +144,20 @@ export const CardNote = styled.div`
   ${({ theme }) => theme.media.phoneLg} {
     padding-top: 0.2rem;
   }
+`;
+
+export const CardStore = styled.span`
+  font-size: 1.3rem;
+  color: ${(props) => props.theme.white};
+  background-color: ${(props) => props.theme.primary};
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.6rem;
+`;
+
+export const CardCategory = styled.span`
+  font-size: 1.4rem;
+  padding-left: 0.8rem;
+  color: ${(props) => props.theme.gold};
 `;
 
 export const CardFooter = styled.footer`

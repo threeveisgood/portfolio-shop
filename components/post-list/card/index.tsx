@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import Link from "next/link";
-import { MdComment, MdThumbUp } from "react-icons/md";
+import { MdComment, MdLocalShipping, MdThumbUp } from "react-icons/md";
 import { useRouter } from "next/router";
 import {
   CardLi,
@@ -16,9 +16,23 @@ import {
   CardNote,
   CardFooter,
   CardFooterIcon,
+  CardStore,
+  CardCategory,
+  CardShipping,
+  PriceShippingBox,
+  CardUserInfo,
+  CardLikeCount,
 } from "./card.styled";
+import dayjs from "dayjs";
+import "dayjs/locale/ko";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { FaUser } from "react-icons/fa";
+
+dayjs.extend(relativeTime);
+dayjs.locale("ko");
 
 interface CardProps {
+  category: string;
   id: string;
   title: string;
   imageLinks: string[];
@@ -28,9 +42,12 @@ interface CardProps {
   username: string;
   likeCount: number;
   repliesCount: number;
+  date: Date;
+  viewsCount: number;
 }
 
 function Card({
+  category,
   id,
   title,
   imageLinks,
@@ -38,10 +55,13 @@ function Card({
   shipping,
   store,
   username,
+  date,
+  viewsCount,
   likeCount,
   repliesCount,
 }: CardProps): ReactElement {
   const router = useRouter();
+  const minimalizeDate = dayjs().to(dayjs(date));
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -64,10 +84,10 @@ function Card({
               ) : (
                 <CardImage
                   src={imageLinks[0] + "?w=120&h=90&f=webp&q=90"}
-                  loading="eager"
+                  priority={true}
                   alt={title}
-                  width="120"
-                  height="90"
+                  width={120}
+                  height={90}
                 />
               )}
             </CardImageA>
@@ -75,30 +95,35 @@ function Card({
         </CardImageBox>
         <CardDescription>
           <div>
+            <CardStore>{store}</CardStore>
+            <CardCategory>{category}</CardCategory>
+          </div>
+          <div>
             <Link href={`/post/${id}`} passHref>
               <CardTitleA>{title}</CardTitleA>
             </Link>
           </div>
           <PriceContainer>
-            <CardPrice>
-              {price}
-              &nbsp;
-            </CardPrice>
+            <PriceShippingBox>
+              <CardPrice>
+                {price}
+                &nbsp;
+              </CardPrice>
+              <CardShipping>
+                <MdLocalShipping />
+                {shipping}
+              </CardShipping>
+              <CardLikeCount>
+                <MdThumbUp /> 추천 {likeCount}
+              </CardLikeCount>
+            </PriceShippingBox>
+            <PriceShippingBox>
+              <CardUserInfo>
+                <FaUser />
+                {username} | {minimalizeDate} | 조회 {viewsCount}
+              </CardUserInfo>
+            </PriceShippingBox>
           </PriceContainer>
-          <NoteContainer>
-            <CardNote>배송비: {shipping}</CardNote>
-            <CardNote>{store}</CardNote>
-          </NoteContainer>
-          <CardNote>파운더: {username}</CardNote>
-          <CardFooter>
-            <CardFooterIcon>
-              <MdThumbUp /> &nbsp;{likeCount}
-            </CardFooterIcon>
-            <CardFooterIcon>
-              <MdComment />
-              &nbsp;{repliesCount}
-            </CardFooterIcon>
-          </CardFooter>
         </CardDescription>
       </ThumbnailContainer>
     </CardLi>
