@@ -11,6 +11,8 @@ export const WriteActionButtonsBlock = styled.div`
 `;
 
 export const Button = styled(StyledButton)`
+  border-radius: 2rem;
+  padding: 0.8rem 1.8rem;
   font-size: 1.5rem;
   & + & {
     margin-left: 0.8rem;

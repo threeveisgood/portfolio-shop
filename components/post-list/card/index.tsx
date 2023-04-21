@@ -12,16 +12,14 @@ import {
   CardTitleA,
   PriceContainer,
   CardPrice,
-  NoteContainer,
-  CardNote,
-  CardFooter,
-  CardFooterIcon,
   CardStore,
   CardCategory,
   CardShipping,
   PriceShippingBox,
   CardUserInfo,
   CardLikeCount,
+  CardRepliesCount,
+  CardViewsCount,
 } from "./card.styled";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
@@ -100,7 +98,9 @@ function Card({
           </div>
           <div>
             <Link href={`/post/${id}`} passHref>
-              <CardTitleA>{title}</CardTitleA>
+              <CardTitleA>
+                {title} <CardRepliesCount>[{repliesCount}]</CardRepliesCount>
+              </CardTitleA>
             </Link>
           </div>
           <PriceContainer>
@@ -111,16 +111,18 @@ function Card({
               </CardPrice>
               <CardShipping>
                 <MdLocalShipping />
-                {shipping}
+                {shipping} |
               </CardShipping>
               <CardLikeCount>
-                <MdThumbUp /> 추천 {likeCount}
+                {/* <MdThumbUp /> */}
+                <span>추천 {likeCount}</span>
               </CardLikeCount>
             </PriceShippingBox>
             <PriceShippingBox>
               <CardUserInfo>
                 <FaUser />
-                {username} | {minimalizeDate} | 조회 {viewsCount}
+                {username} | {minimalizeDate}{" "}
+                <CardViewsCount>| 조회 {viewsCount}</CardViewsCount>
               </CardUserInfo>
             </PriceShippingBox>
           </PriceContainer>

@@ -25,6 +25,10 @@ export const InformationUl = styled.ul`
   text-transform: uppercase;
   font-size: 1.6rem;
   line-height: 2.2;
+
+  ${({ theme }) => theme.media.phoneLg} {
+    font-size: 1.4rem;
+  }
 `;
 
 export const InformationLi = styled.li`
@@ -33,6 +37,10 @@ export const InformationLi = styled.li`
 
   &:not(:last-child) {
     margin-right: 2.4rem;
+  }
+
+  ${({ theme }) => theme.media.phoneLg} {
+    font-size: 1.4rem;
   }
 `;
 

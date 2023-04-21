@@ -5,6 +5,7 @@ export const ContentsContianer = styled.div`
   margin: 0 auto;
   box-sizing: border-box;
   background: #fff;
+  margin-bottom: 5rem;
 `;
 
 export const ContentsLayout = styled.div`

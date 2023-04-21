@@ -7,6 +7,7 @@ export const AddCommentContainer = styled.div`
 `;
 
 export const AddCommentTitle = styled.div`
+  font-family: "GmarketSansMedium";
   padding-top: 2rem;
   font-size: 1.4rem;
 `;

@@ -11,6 +11,7 @@ declare module "styled-components" {
     black: string;
     lowblack: string;
     gold: string;
+    darkred: string;
     priceColor: string;
 
     padding: string;

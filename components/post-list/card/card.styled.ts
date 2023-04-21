@@ -25,30 +25,21 @@ export const ThumbnailContainer = styled.div`
 
 export const CardImageBox = styled.div`
   ${({ theme }) => theme.media.phoneLg} {
-    display: flex;
-    align-items: center;
+    width: 80px;
+    height: 45px;
   }
 `;
 
 export const CardImageA = styled.a`
   display: flex;
-  max-width: 16rem;
-  max-height: 16rem;
   justify-content: center;
   align-items: center;
   object-fit: fill;
   gap: 3rem 0;
-
-  ${({ theme }) => theme.media.phoneLg} {
-    width: 12rem;
-    height: 12rem;
-  }
 `;
 
 export const CardImage = styled(Image)`
   border-radius: 1rem;
-  width: 120px;
-  height: 90px;
 `;
 
 export const CardDescription = styled.div`
@@ -56,16 +47,17 @@ export const CardDescription = styled.div`
   flex: 1 1 0;
   flex-direction: column;
   padding-left: 2rem;
-  /* ${({ theme }) => theme.media.phoneLg} {
-    padding-left: 1.7rem;
-  } */
+
+  ${({ theme }) => theme.media.phoneLg} {
+    padding-left: 1rem;
+  }
 `;
 
 export const CardTitleA = styled.a`
   color: ${(props) => props.theme.black};
   min-height: 3.5rem;
   line-height: 1.9rem;
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   padding-top: 1rem;
   font-weight: bold;
 
@@ -75,11 +67,19 @@ export const CardTitleA = styled.a`
   overflow: hidden;
 
   ${({ theme }) => theme.media.phoneLg} {
-    min-height: auto;
-    margin: 0 0 1rem 0;
-    width: 18rem;
+    font-size: 1.3rem;
+    min-height: 1.5rem;
   }
 `;
+
+export const CardRepliesCount = styled.span`
+  font-size: 1.4rem;
+
+  ${({ theme }) => theme.media.phoneLg} {
+    font-size: 1.1rem;
+  }
+`;
+
 export const PriceContainer = styled.div`
   padding-top: 0.5rem;
   display: flex;
@@ -92,12 +92,18 @@ export const PriceShippingBox = styled.div`
 `;
 
 export const CardPrice = styled.span`
+  display: flex;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: 700;
   overflow: hidden;
   color: ${(props) => props.theme.priceColor};
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  ${({ theme }) => theme.media.phoneLg} {
+    font-size: 1.2rem;
+  }
 `;
 
 export const CardShipping = styled.span`
@@ -106,15 +112,24 @@ export const CardShipping = styled.span`
   gap: 0.3rem;
   font-size: 1.3rem;
   color: ${(props) => props.theme.lowgray};
+
+  ${({ theme }) => theme.media.phoneLg} {
+    font-size: 1rem;
+  }
 `;
 
 export const CardLikeCount = styled.span`
   display: flex;
   align-items: center;
   font-size: 1.3rem;
-  padding-left: 1rem;
+  padding-left: 0.7rem;
   gap: 0.3rem;
   color: ${(props) => props.theme.gray};
+
+  ${({ theme }) => theme.media.phoneLg} {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
 `;
 
 export const CardUserInfo = styled.span`
@@ -123,26 +138,9 @@ export const CardUserInfo = styled.span`
   gap: 0.3rem;
   font-size: 1.4rem;
   color: ${(props) => props.theme.lowgray};
-`;
-
-export const NoteContainer = styled.span`
-  display: flex;
-  margin-top: 0.5rem;
-  justify-content: space-between;
-`;
-
-export const CardNote = styled.div`
-  padding-top: 0.3rem;
-  color: ${(props) => props.theme.black};
-  font-size: 1.15rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  font-family: auto;
-  font-weight: bold;
 
   ${({ theme }) => theme.media.phoneLg} {
-    padding-top: 0.2rem;
+    font-size: 1.1rem;
   }
 `;
 
@@ -152,24 +150,25 @@ export const CardStore = styled.span`
   background-color: ${(props) => props.theme.primary};
   padding: 0.5rem 0.9rem;
   border-radius: 0.6rem;
+
+  ${({ theme }) => theme.media.phoneLg} {
+    font-size: 1rem;
+    padding: 0.4rem 0.7rem;
+  }
 `;
 
 export const CardCategory = styled.span`
   font-size: 1.4rem;
   padding-left: 0.8rem;
   color: ${(props) => props.theme.gold};
+
+  ${({ theme }) => theme.media.phoneLg} {
+    font-size: 1.1rem;
+  }
 `;
 
-export const CardFooter = styled.footer`
-  display: flex;
-  margin-top: 1.2rem;
-  color: ${(props) => props.theme.primary};
-`;
-
-export const CardFooterIcon = styled.span`
-  flex-basis: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
+export const CardViewsCount = styled.span`
+  ${({ theme }) => theme.media.phoneLg} {
+    display: none;
+  }
 `;

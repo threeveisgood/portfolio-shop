@@ -10,6 +10,7 @@ export const theme: DefaultTheme = {
   gray: "#2F4F4F",
   lowgray: "#787878",
   gold: "#d16736",
+  darkred: "#9D0000",
   priceColor: "#c71585",
   padding: "12px",
   fontSize: {

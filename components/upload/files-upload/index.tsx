@@ -1,13 +1,23 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { UiFileInputButton } from "components/upload/ui-file-input-button";
 import { ChangeToThumbnail, ChangeToFrontURL } from "lib/change-to-thumbnail";
 import useWriteStateActions from "hooks/state/useWriteStateActions";
 import useUploadFiles from "hooks/useUploadFiles";
-import { ThumbnailLi } from "./files-upload.styled";
+import useWriteState from "hooks/state/useWriteState";
+import {
+  DeleteImageButton,
+  ThumbnailDiv,
+  ThumbnailLi,
+  ThumbnailUl,
+} from "./files-upload.styled";
+import { TiDelete } from "react-icons/ti";
 
 const FilesUpload = () => {
   const [thumb, setThumb] = useState<string[]>([]);
+
+  const { imageLinks } = useWriteState();
   const { setImageLinks } = useWriteStateActions();
+
   const { mutate } = useUploadFiles();
 
   const addImageLinks = (links: string[]) => setImageLinks(links);
@@ -34,6 +44,16 @@ const FilesUpload = () => {
     [thumb]
   );
 
+  const onDeleteImage = (index: number) => {
+    // const newThumb = thumb.filter((item, i) => i !== index);
+    // setThumb(() => newThumb);
+
+    return () => {
+      // const newImageLinks = imageLinks.filter((item, i) => i !== index);
+      // addImageLinks(newImageLinks);
+    };
+  };
+
   return (
     <>
       <UiFileInputButton
@@ -43,18 +63,23 @@ const FilesUpload = () => {
         uploadFileName="file"
         onChange={onChange}
       />
-      <ul>
+      <ThumbnailUl>
         {thumb &&
           thumb.map((item: string, i: number) => {
             const changedItem = ChangeToThumbnail(item);
 
             return (
               <ThumbnailLi key={i}>
-                <img src={changedItem} width="100" alt="Uploaded Image" />
+                <ThumbnailDiv>
+                  <img src={changedItem} width="60" alt="Uploaded Image" />
+                  <DeleteImageButton onClick={onDeleteImage(i)}>
+                    <TiDelete />
+                  </DeleteImageButton>
+                </ThumbnailDiv>
               </ThumbnailLi>
             );
           })}
-      </ul>
+      </ThumbnailUl>
     </>
   );
 };
