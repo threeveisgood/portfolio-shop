@@ -38,6 +38,11 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8538294001485513"
+          crossOrigin="anonymous"
+        ></script>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <AuthProvider session={pageProps.session}>

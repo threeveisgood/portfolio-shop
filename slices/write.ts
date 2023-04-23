@@ -53,6 +53,11 @@ const writeSlice = createSlice({
     setImageLinks(state, action: PayloadAction<string[]>) {
       state.imageLinks = [...state.imageLinks, ...action.payload];
     },
+    setDeleteImageLink(state, action: PayloadAction<string>) {
+      state.imageLinks = state.imageLinks.filter(
+        (imageLink) => imageLink !== action.payload
+      );
+    },
     setQuillBody(state, action: PayloadAction<string>) {
       state.body = action.payload;
     },
@@ -79,6 +84,7 @@ export const {
   setStore,
   setShipping,
   setImageLinks,
+  setDeleteImageLink,
   setQuillBody,
   setOriginalPost,
 } = writeSlice.actions;

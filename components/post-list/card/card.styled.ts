@@ -167,6 +167,10 @@ export const CardCategory = styled.span`
   }
 `;
 
+export const CardCategoryA = styled.a`
+  color: ${(props) => props.theme.gold};
+`;
+
 export const CardViewsCount = styled.span`
   ${({ theme }) => theme.media.phoneLg} {
     display: none;

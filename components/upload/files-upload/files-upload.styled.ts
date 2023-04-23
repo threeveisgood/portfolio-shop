@@ -33,5 +33,5 @@ export const DeleteImageButton = styled.button`
   border: none;
   cursor: pointer;
   color: ${(props) => props.theme.darkred};
-  font-size: 2.6rem;
+  font-size: 2.3rem;
 `;

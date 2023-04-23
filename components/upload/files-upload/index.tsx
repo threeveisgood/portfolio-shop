@@ -16,7 +16,7 @@ const FilesUpload = () => {
   const [thumb, setThumb] = useState<string[]>([]);
 
   const { imageLinks } = useWriteState();
-  const { setImageLinks } = useWriteStateActions();
+  const { setImageLinks, setDeleteImageLink } = useWriteStateActions();
 
   const { mutate } = useUploadFiles();
 
@@ -44,14 +44,12 @@ const FilesUpload = () => {
     [thumb]
   );
 
-  const onDeleteImage = (index: number) => {
-    // const newThumb = thumb.filter((item, i) => i !== index);
-    // setThumb(() => newThumb);
+  const onDeleteImage = (index: number) => () => {
+    const newThumb = thumb.filter((item, i) => i !== index);
+    setThumb([...newThumb]);
 
-    return () => {
-      // const newImageLinks = imageLinks.filter((item, i) => i !== index);
-      // addImageLinks(newImageLinks);
-    };
+    const deletedImageLink = imageLinks[index];
+    setDeleteImageLink(deletedImageLink);
   };
 
   return (

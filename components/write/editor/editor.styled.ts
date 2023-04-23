@@ -22,7 +22,6 @@ export const TitleInput = styled.input`
 `;
 
 export const QuillWrapper = styled.div`
-  margin-top: 3rem;
   border-radius: 1rem;
 
   .ql-toolbar.ql-snow {

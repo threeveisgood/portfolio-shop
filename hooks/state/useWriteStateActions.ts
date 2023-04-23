@@ -9,6 +9,7 @@ import {
   setStore,
   setShipping,
   setImageLinks,
+  setDeleteImageLink,
   setQuillBody,
   setOriginalPost,
 } from "slices/write";
@@ -29,6 +30,7 @@ export default function useWriteStateActions() {
           setStore,
           setShipping,
           setImageLinks,
+          setDeleteImageLink,
           setQuillBody,
           setOriginalPost,
         },

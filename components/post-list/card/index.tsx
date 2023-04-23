@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import Link from "next/link";
-import { MdComment, MdLocalShipping, MdThumbUp } from "react-icons/md";
+import { MdLocalShipping } from "react-icons/md";
 import { useRouter } from "next/router";
 import {
   CardLi,
@@ -20,6 +20,7 @@ import {
   CardLikeCount,
   CardRepliesCount,
   CardViewsCount,
+  CardCategoryA,
 } from "./card.styled";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
@@ -94,7 +95,17 @@ function Card({
         <CardDescription>
           <div>
             <CardStore>{store}</CardStore>
-            <CardCategory>{category}</CardCategory>
+            <CardCategory>
+              <Link
+                href={{
+                  pathname: "category",
+                  query: { value: category },
+                }}
+                passHref
+              >
+                <CardCategoryA>{category}</CardCategoryA>
+              </Link>
+            </CardCategory>
           </div>
           <div>
             <Link href={`/post/${id}`} passHref>
@@ -114,7 +125,6 @@ function Card({
                 {shipping} |
               </CardShipping>
               <CardLikeCount>
-                {/* <MdThumbUp /> */}
                 <span>추천 {likeCount}</span>
               </CardLikeCount>
             </PriceShippingBox>

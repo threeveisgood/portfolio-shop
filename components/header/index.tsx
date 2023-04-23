@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useReducer, useRef, useEffect } from "react";
 import { useSession, signOut } from "next-auth/client";
 import router from "next/router";
 import Link from "next/link";
@@ -17,16 +17,32 @@ import { BsPencilSquare } from "react-icons/bs";
 import { StyledHeader, Title, UserNav } from "./header.styled";
 
 const Header: React.FunctionComponent = () => {
+  const profileRef = useRef<HTMLDivElement>(null);
   const [session] = useSession();
-  const [isProfileClick, setIsProfileClick] = useState(false);
-  const [searchToggle, setSearchToggle] = useState(false);
+  const [isProfileClick, toggleProfileClick] = useReducer(
+    (previous: boolean) => !previous,
+    false
+  );
+  const [searchToggle, setSearchToggle] = useReducer(
+    (previous: boolean) => !previous,
+    false
+  );
 
-  const handleProfileClick = useCallback(() => {
-    setIsProfileClick(!isProfileClick);
-  }, [isProfileClick]);
+  const handleProfileClick = () => {
+    toggleProfileClick();
+  };
+
+  const handleProfileClickOutside = (e: MouseEvent) => {
+    if (
+      isProfileClick &&
+      profileRef.current &&
+      !profileRef.current.contains(e.target as HTMLDivElement)
+    )
+      toggleProfileClick();
+  };
 
   const handleSerachToggleClick = () => {
-    setSearchToggle(!searchToggle);
+    setSearchToggle();
   };
 
   const moveToWrite = () => {
@@ -38,6 +54,13 @@ const Header: React.FunctionComponent = () => {
   const logoutHandler = () => {
     signOut();
   };
+
+  useEffect(() => {
+    document.addEventListener("click", handleProfileClickOutside);
+    return () => {
+      document.removeEventListener("click", handleProfileClickOutside);
+    };
+  }, [isProfileClick]);
 
   return (
     <>
@@ -63,6 +86,7 @@ const Header: React.FunctionComponent = () => {
           {session && (
             <UserProfileIcon
               className="dropdown last"
+              ref={profileRef}
               onClick={handleProfileClick}
               isProfileClick={isProfileClick}
             >
