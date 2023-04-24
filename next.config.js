@@ -3,5 +3,6 @@ module.exports = {
   reactStrictMode: true,
   images: {
     domains: ["d3385fipldo8xb.cloudfront.net"],
+    minimumCacheTTL: 604800,
   },
 };
