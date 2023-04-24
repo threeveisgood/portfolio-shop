@@ -98,7 +98,7 @@ function Card({
             <CardCategory>
               <Link
                 href={{
-                  pathname: "category",
+                  pathname: "/category",
                   query: { value: category },
                 }}
                 passHref
