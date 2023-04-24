@@ -2,7 +2,7 @@
 
 ## 프로젝트 비디오
 
-<img src="https://user-images.githubusercontent.com/41880220/222387583-44c3037c-06d8-462e-bc78-98e1a284c0fd.gif" />
+<img src="https://user-images.githubusercontent.com/41880220/233977140-10c06cd1-35d9-4991-a6dd-0e032ce1547e.gif" />
 
 ## 설치, 환경설정 및 실행방법
 
@@ -27,7 +27,7 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
 
 - Redux
 
-- React Query (v3)
+- React Query (Tanstack)
 
 # 백엔드
 
@@ -80,7 +80,6 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
     "react-query": "^3.28.0",
     "react-quill": "^2.0.0-beta.4",
     "react-redux": "^7.2.5",
-    "react-responsive-carousel": "^3.2.22",
     "react-select": "^5.2.2",
     "reselect": "^4.0.0",
     "styled-components": "^5.3.1",
@@ -108,7 +107,7 @@ SandoShop은 핫딜 정보 공유를 위해 만들어진 사이트입니다.
 
 - formik은 yup과 같이 쓰면 Form Validation, Error Handling이 매우 편리해지기 때문에 사용하게 되었습니다.
 
-- react-select, react-responsive-carousel은 빠르게 카테고리를 선택하는 select 기능과 이미지 캐러셀 기능을 구현하기 위해 도입하였습니다.
+- react-select는 빠르게 카테고리를 선택하는 select 기능을 구현하기 위해 도입하였습니다.
 
 - bcryptjs는 회원가입할 때 사용자 암호 보안을 위해 사용되었습니다.
 
