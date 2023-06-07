@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import styled from "styled-components";
 
 export const CardLi = styled.li`
@@ -38,7 +38,7 @@ export const CardImageA = styled.a`
   gap: 3rem 0;
 `;
 
-export const CardImage = styled(Image)`
+export const CardImage = styled.img`
   border-radius: 1rem;
 `;
 

@@ -83,10 +83,9 @@ function Card({
               ) : (
                 <CardImage
                   src={imageLinks[0] + "?w=120&h=90&f=webp&q=90"}
-                  priority={true}
                   alt={title}
-                  width={120}
-                  height={90}
+                  width="120"
+                  height="90"
                 />
               )}
             </CardImageA>
