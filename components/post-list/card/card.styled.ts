@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 
 export const CardLi = styled.li`
@@ -21,12 +20,13 @@ export const CardLi = styled.li`
 export const ThumbnailContainer = styled.div`
   display: flex;
   flex: 1 1 0;
+  align-items: center;
 `;
 
 export const CardImageBox = styled.div`
   ${({ theme }) => theme.media.phoneLg} {
     width: 80px;
-    height: 45px;
+    height: 60px;
   }
 `;
 
@@ -39,6 +39,8 @@ export const CardImageA = styled.a`
 `;
 
 export const CardImage = styled.img`
+  width: 80px;
+  height: 60px;
   border-radius: 1rem;
 `;
 
@@ -85,6 +87,9 @@ export const PriceContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${({ theme }) => theme.media.phoneLg} {
+    justify-content: normal;
+  }
 `;
 
 export const PriceShippingBox = styled.div`
@@ -102,7 +107,7 @@ export const CardPrice = styled.span`
   white-space: nowrap;
 
   ${({ theme }) => theme.media.phoneLg} {
-    font-size: 1.2rem;
+    font-size: 0.5rem;
   }
 `;
 
@@ -140,7 +145,7 @@ export const CardUserInfo = styled.span`
   color: ${(props) => props.theme.lowgray};
 
   ${({ theme }) => theme.media.phoneLg} {
-    font-size: 1.1rem;
+    font-size: 0.7rem;
   }
 `;
 
