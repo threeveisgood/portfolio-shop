@@ -158,7 +158,7 @@ export const CardStore = styled.span`
 
   ${({ theme }) => theme.media.phoneLg} {
     font-size: 1rem;
-    padding: 0.4rem 0.7rem;
+    padding: 0.3rem 0.7rem;
   }
 `;
 
