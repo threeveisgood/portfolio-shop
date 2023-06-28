@@ -107,7 +107,7 @@ export const CardPrice = styled.span`
   white-space: nowrap;
 
   ${({ theme }) => theme.media.phoneLg} {
-    font-size: 0.5rem;
+    font-size: 1rem;
   }
 `;
 
@@ -119,7 +119,7 @@ export const CardShipping = styled.span`
   color: ${(props) => props.theme.lowgray};
 
   ${({ theme }) => theme.media.phoneLg} {
-    font-size: 1rem;
+    font-size: 0.7rem;
   }
 `;
 
@@ -132,7 +132,7 @@ export const CardLikeCount = styled.span`
   color: ${(props) => props.theme.gray};
 
   ${({ theme }) => theme.media.phoneLg} {
-    font-size: 1rem;
+    font-size: 0.7rem;
     padding: 0.6rem;
   }
 `;
@@ -157,7 +157,7 @@ export const CardStore = styled.span`
   border-radius: 0.6rem;
 
   ${({ theme }) => theme.media.phoneLg} {
-    font-size: 1rem;
+    font-size: 0.7rem;
     padding: 0.4rem 0.7rem;
   }
 `;
@@ -168,7 +168,7 @@ export const CardCategory = styled.span`
   color: ${(props) => props.theme.gold};
 
   ${({ theme }) => theme.media.phoneLg} {
-    font-size: 1.1rem;
+    font-size: 0.7rem;
   }
 `;
 
