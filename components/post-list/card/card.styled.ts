@@ -89,6 +89,8 @@ export const PriceContainer = styled.div`
   justify-content: space-between;
   ${({ theme }) => theme.media.phoneLg} {
     justify-content: normal;
+    flex-direction: column;
+    align-items: normal;
   }
 `;
 
