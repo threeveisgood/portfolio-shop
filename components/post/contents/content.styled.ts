@@ -11,6 +11,11 @@ export const Price = styled.span`
   font-size: 2rem;
   font-weight: 600;
   color: ${(props) => props.theme.priceColor};
+
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    font-size: 1.7rem;
+  }
 `;
 
 export const Category = styled.span`
@@ -44,6 +49,11 @@ export const InformationContainer = styled.div`
 export const UserNameInformation = styled.span`
   padding-left: 0.5rem;
   font-size: 1.4rem;
+
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const FlexContainer = styled.span`
@@ -66,6 +76,11 @@ export const Count = styled.span`
 export const CountNumber = styled.span`
   font-size: 1.4rem;
   padding-left: 0.2rem;
+
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const InformationMidDot = styled.span`
@@ -85,12 +100,13 @@ export const UrlBox = styled.div`
   //display: flex;
   //align-items: center;
   padding: 0.8rem 0;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-bottom: 3rem;
   word-break: break-all;
 
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    font-size: 1rem;
   }
 `;
 

@@ -10,6 +10,11 @@ export const AddCommentTitle = styled.div`
   font-family: "GmarketSansMedium";
   padding-top: 2rem;
   font-size: 1.4rem;
+
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const ButtonBox = styled.div`
@@ -28,5 +33,10 @@ export const SubmitButton = styled(LinearButton)`
   &:hover {
     color: #fff;
     background: ${(props) => props.theme.black};
+  }
+
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    font-size: 1.1rem;
   }
 `;

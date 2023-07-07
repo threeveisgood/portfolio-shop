@@ -29,6 +29,11 @@ export const TitleContainer = styled.div`
 export const Title = styled.h1`
   font-size: 2.3rem;
   font-weight: 600;
+
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    font-size: 1.9rem;
+  }
 `;
 
 export const DetailContainer = styled.div`
