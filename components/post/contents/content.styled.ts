@@ -21,8 +21,9 @@ export const Price = styled.span`
 export const Category = styled.span`
   font-size: 1.4rem;
 
-  @media (max-width: 768px) {
-    font-size: 1.3rem;
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    font-size: 1.1rem;
   }
 `;
 
