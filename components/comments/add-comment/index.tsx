@@ -11,6 +11,8 @@ import {
   ButtonBox,
   SubmitButton,
 } from "./add-comment.styled";
+import { useSession } from "next-auth/client";
+import { toast } from "react-hot-toast";
 
 const bson = require("bson");
 
@@ -19,6 +21,7 @@ interface AddCommentsProps {
 }
 
 const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
+  const [session] = useSession();
   const _id = bson.ObjectId();
 
   const { mutate } = useAddComment(postID);
@@ -33,6 +36,10 @@ const AddComments: React.FunctionComponent<AddCommentsProps> = ({ postID }) => {
         validationSchema={addCommentSchema}
         onSubmit={async (values: CommentFormData, actions) => {
           const comment = values.comment;
+          if (!session) {
+            toast("댓글을 입력하시려면 로그인 해주세요!");
+          }
+
           mutate({ comment, postID, _id });
 
           actions.resetForm({

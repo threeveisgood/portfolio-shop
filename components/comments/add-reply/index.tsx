@@ -11,6 +11,8 @@ import useAddReply from "hooks/useAddReply";
 import { CommentFormData } from "types/comments";
 import useCommentStateActions from "hooks/state/useCommentStateActions";
 import useCommentState from "hooks/state/useCommentState";
+import { useSession } from "next-auth/client";
+import { toast } from "react-hot-toast";
 
 const bson = require("bson");
 
@@ -31,6 +33,7 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
   const cancelRef = useRef<HTMLButtonElement>(null);
   const { replyToggle } = useCommentState();
   const { initialize, changeReplyToggle } = useCommentStateActions();
+  const [session] = useSession();
 
   const { mutate } = useAddReply(postID);
 
@@ -60,6 +63,11 @@ const AddReply: React.FunctionComponent<AddCommentsProps> = ({
         validationSchema={addCommentSchema}
         onSubmit={async (values: CommentFormData, actions) => {
           const comment = values.comment;
+
+          if (!session) {
+            toast("댓글을 입력하시려면 로그인 해주세요!");
+          }
+
           mutate(
             { _id, comment, postID, repliedName, replyID },
             {
