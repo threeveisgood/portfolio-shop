@@ -5,7 +5,12 @@ export const ContentsContianer = styled.div`
   margin: 0 auto;
   box-sizing: border-box;
   background: #fff;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
+
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    margin-bottom: 1.5rem;
+  }
 `;
 
 export const ContentsLayout = styled.div`
