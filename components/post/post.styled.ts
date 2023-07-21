@@ -10,8 +10,6 @@ export const ContentsContianer = styled.div`
 
 export const ContentsLayout = styled.div`
   border-radius: 0.4rem;
-  margin: 1rem 0 0;
-  border-top: 6px solid ${(props) => props.theme.black};
   color: ${(props) => props.theme.black};
 `;
 
