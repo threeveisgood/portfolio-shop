@@ -14,6 +14,7 @@ import {
 } from "components/common/dropdown";
 import { UserProfileIcon } from "components/common/icons";
 import { BsPencilSquare } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
 import { StyledHeader, Title, UserNav } from "./header.styled";
 
 const Header: React.FunctionComponent = () => {
@@ -73,11 +74,15 @@ const Header: React.FunctionComponent = () => {
 
         <Search />
         <UserNav>
-          {
+          {searchToggle ? (
+            <UserProfileIcon isMobile onClick={handleSerachToggleClick}>
+              <AiOutlineClose />
+            </UserProfileIcon>
+          ) : (
             <UserProfileIcon isMobile onClick={handleSerachToggleClick}>
               <AiOutlineSearch />
             </UserProfileIcon>
-          }
+          )}
           {session && (
             <UserProfileIcon>
               <BsPencilSquare onClick={moveToWrite} />

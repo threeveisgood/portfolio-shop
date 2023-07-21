@@ -16,6 +16,7 @@ export const SearchForm = styled.form<SearchStyledProps>`
       props.theme.responsive.phone}) {
     display: ${(props) => (props.isMobile ? "flex" : "none")};
     margin-bottom: 0.7rem;
+    padding: 0 1rem;
 
     display: ${(props) => (props.searchToggle ? "flex" : "none")};
   }
@@ -37,6 +38,11 @@ export const SearchInput = styled.input`
   &:focus {
     outline: none;
   }
+
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    padding: 1.8rem 1.5rem;
+  }
 `;
 
 export const SearchButton = styled.button`
@@ -55,5 +61,10 @@ export const SearchButton = styled.button`
 
   &:active {
     transform: translateY(2px);
+  }
+
+  @media only screen and (max-width: ${(props) =>
+      props.theme.responsive.phone}) {
+    right: 2.5rem;
   }
 `;
