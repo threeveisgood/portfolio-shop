@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 export const ContentsContianer = styled.div`
   max-width: 980px;
-  margin: 0 auto;
+  margin: -2.5rem auto 3rem;
   box-sizing: border-box;
   background: #fff;
-  margin-bottom: 3rem;
 
   @media only screen and (max-width: ${(props) =>
       props.theme.responsive.phone}) {
